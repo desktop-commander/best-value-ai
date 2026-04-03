@@ -138,13 +138,18 @@
       "aider_polyglot": {
         "score": 72.9,
         "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 34.6,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
       }
     },
     "api": {
       "inputPer1M": 1.25,
       "outputPer1M": 10,
-      "source": "https://ai.google.dev/pricing",
-      "provider": "Google"
+      "source": "https://artificialanalysis.ai/models/gemini-2-5-pro",
+      "provider": "Google",
+      "tokensPerSecAPI": 116.3
     },
     "local": null,
     "subscriptions": {
@@ -156,7 +161,8 @@
         "notes": "Estimated 100 prompts/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
         "source": "https://a16z.com/state-of-ai/"
       }
-    }
+    },
+    "_aa_synced": "2026-04-03"
   },
   "glm-4.7-flash": {
     "name": "GLM-4.7 Flash",
@@ -171,13 +177,18 @@
       "swe_bench": {
         "score": 59.2,
         "source": "https://huggingface.co/zai-org/GLM-4.7-Flash"
+      },
+      "aa_intelligence": {
+        "score": 30.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
       }
     },
     "api": {
       "inputPer1M": 0.07,
-      "outputPer1M": 0.40,
-      "source": "https://llm-stats.com/models/glm-4.7-flash",
-      "provider": "Z.ai"
+      "outputPer1M": 0.4,
+      "source": "https://artificialanalysis.ai/models/glm-4-7-flash",
+      "provider": "Z.ai",
+      "tokensPerSecAPI": 85.6
     },
     "local": {
       "mac_m4_48gb": {
@@ -188,7 +199,8 @@
         "source": "user-reported"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
   },
   "gpt-oss-120b": {
     "name": "GPT-OSS 120B",
@@ -421,8 +433,8 @@
       }
     },
     "api": {
-      "inputPer1M": 1.20,
-      "outputPer1M": 1.20,
+      "inputPer1M": 1.2,
+      "outputPer1M": 1.2,
       "source": "https://www.together.ai/pricing",
       "provider": "Together.ai"
     },
@@ -469,13 +481,18 @@
       "swe_bench": {
         "score": 80.9,
         "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 43.1,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
       }
     },
     "api": {
       "inputPer1M": 5,
       "outputPer1M": 25,
-      "source": "https://www.anthropic.com/pricing",
-      "provider": "Anthropic"
+      "source": "https://artificialanalysis.ai/models/claude-opus-4-5",
+      "provider": "Anthropic",
+      "tokensPerSecAPI": 50.6
     },
     "local": null,
     "subscriptions": {
@@ -495,7 +512,8 @@
         "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
-    }
+    },
+    "_aa_synced": "2026-04-03"
   },
   "gemini-3-pro": {
     "name": "Gemini 3 Pro",
@@ -591,13 +609,18 @@
       "swe_bench": {
         "score": 80,
         "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 51.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
       }
     },
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "source": "https://openai.com/api/pricing/",
-      "provider": "OpenAI"
+      "source": "https://artificialanalysis.ai/models/gpt-5-2",
+      "provider": "OpenAI",
+      "tokensPerSecAPI": 70.5
     },
     "local": null,
     "subscriptions": {
@@ -617,6 +640,465 @@
         "notes": "Unlimited access. Scaled 10x from Plus based on Deep Research query parity (25 vs 250).",
         "source": "https://openai.com/chatgpt/pricing/"
       }
-    }
+    },
+    "_aa_synced": "2026-04-03"
+  },
+  "claude-opus-4-6": {
+    "id": "claude-opus-4-6",
+    "name": "Claude Opus 4.6 (Non-reasoning, High Effort)",
+    "provider": "Anthropic",
+    "releaseDate": "2026-02-05",
+    "modelCard": "https://artificialanalysis.ai/models/claude-opus-4-6",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 46.5,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "gpqa_diamond": {
+        "score": 84,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      }
+    },
+    "api": {
+      "inputPer1M": 5,
+      "outputPer1M": 25,
+      "tokensPerSecAPI": 45.6,
+      "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "claude-sonnet-4-6": {
+    "id": "claude-sonnet-4-6",
+    "name": "Claude Sonnet 4.6 (Non-reasoning, High Effort)",
+    "provider": "Anthropic",
+    "releaseDate": "2026-02-17",
+    "modelCard": "https://artificialanalysis.ai/models/claude-sonnet-4-6",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 44.4,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "gpqa_diamond": {
+        "score": 79.9,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      }
+    },
+    "api": {
+      "inputPer1M": 3,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 47.2,
+      "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "claude-4-5-haiku": {
+    "id": "claude-4-5-haiku",
+    "name": "Claude 4.5 Haiku (Non-reasoning)",
+    "provider": "Anthropic",
+    "releaseDate": "2025-10-15",
+    "modelCard": "https://artificialanalysis.ai/models/claude-4-5-haiku",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 31.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "gpqa_diamond": {
+        "score": 64.6,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "livecodebench": {
+        "score": 51.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      }
+    },
+    "api": {
+      "inputPer1M": 1,
+      "outputPer1M": 5,
+      "tokensPerSecAPI": 98.7,
+      "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "claude-4-5-sonnet": {
+    "id": "claude-4-5-sonnet",
+    "name": "Claude 4.5 Sonnet (Non-reasoning)",
+    "provider": "Anthropic",
+    "releaseDate": "2025-09-29",
+    "modelCard": "https://artificialanalysis.ai/models/claude-4-5-sonnet",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "gpqa_diamond": {
+        "score": 72.7,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "livecodebench": {
+        "score": 59,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      }
+    },
+    "api": {
+      "inputPer1M": 3,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 46.3,
+      "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "gpt-5-4": {
+    "id": "gpt-5-4",
+    "name": "GPT-5.4 (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2026-03-05",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-4",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 57.2,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "gpqa_diamond": {
+        "score": 92,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      }
+    },
+    "api": {
+      "inputPer1M": 2.5,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 73.8,
+      "source": "https://artificialanalysis.ai/models/gpt-5-4"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "gpt-5-3-codex": {
+    "id": "gpt-5-3-codex",
+    "name": "GPT-5.3 Codex (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2026-02-05",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-3-codex",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 54,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "gpqa_diamond": {
+        "score": 91.5,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.75,
+      "outputPer1M": 14,
+      "tokensPerSecAPI": 65.3,
+      "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "gpt-5-2-codex": {
+    "id": "gpt-5-2-codex",
+    "name": "GPT-5.2 Codex (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2025-12-11",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-2-codex",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "gpqa_diamond": {
+        "score": 89.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.75,
+      "outputPer1M": 14,
+      "tokensPerSecAPI": 99.6,
+      "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "gemini-3-1-pro": {
+    "id": "gemini-3-1-pro",
+    "name": "Gemini 3.1 Pro Preview",
+    "provider": "Google",
+    "releaseDate": "2026-02-19",
+    "modelCard": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 57.2,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "gpqa_diamond": {
+        "score": 94.1,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      }
+    },
+    "api": {
+      "inputPer1M": 2,
+      "outputPer1M": 12,
+      "tokensPerSecAPI": 117.4,
+      "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "glm-5": {
+    "id": "glm-5",
+    "name": "GLM-5 (Reasoning)",
+    "provider": "Z AI",
+    "releaseDate": "2026-02-11",
+    "modelCard": "https://artificialanalysis.ai/models/glm-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49.8,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "gpqa_diamond": {
+        "score": 82,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      }
+    },
+    "api": {
+      "inputPer1M": 1,
+      "outputPer1M": 3.2,
+      "tokensPerSecAPI": 57.3,
+      "source": "https://artificialanalysis.ai/models/glm-5"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "glm-4.7": {
+    "id": "glm-4.7",
+    "name": "GLM-4.7 (Reasoning)",
+    "provider": "Z AI",
+    "releaseDate": "2025-12-22",
+    "modelCard": "https://artificialanalysis.ai/models/glm-4-7",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 42.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "gpqa_diamond": {
+        "score": 85.9,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "livecodebench": {
+        "score": 89.4,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.6,
+      "outputPer1M": 2.2,
+      "tokensPerSecAPI": 73.4,
+      "source": "https://artificialanalysis.ai/models/glm-4-7"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "minimax-m2.5": {
+    "id": "minimax-m2.5",
+    "name": "MiniMax-M2.5",
+    "provider": "MiniMax",
+    "releaseDate": "2026-02-12",
+    "modelCard": "https://artificialanalysis.ai/models/minimax-m2-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 41.9,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "gpqa_diamond": {
+        "score": 84.8,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 1.2,
+      "tokensPerSecAPI": 59.4,
+      "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "minimax-m2.7": {
+    "id": "minimax-m2.7",
+    "name": "MiniMax-M2.7",
+    "provider": "MiniMax",
+    "releaseDate": "2026-03-18",
+    "modelCard": "https://artificialanalysis.ai/models/minimax-m2-7",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49.6,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "gpqa_diamond": {
+        "score": 87.4,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 1.2,
+      "tokensPerSecAPI": 40.1,
+      "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "kimi-k2.5": {
+    "id": "kimi-k2.5",
+    "name": "Kimi K2.5 (Reasoning)",
+    "provider": "Kimi",
+    "releaseDate": "2026-01-27",
+    "modelCard": "https://artificialanalysis.ai/models/kimi-k2-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 46.8,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "gpqa_diamond": {
+        "score": 87.9,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.6,
+      "outputPer1M": 3,
+      "tokensPerSecAPI": 33.6,
+      "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "deepseek-v3.2": {
+    "id": "deepseek-v3.2",
+    "name": "DeepSeek V3.2 (Non-reasoning)",
+    "provider": "DeepSeek",
+    "releaseDate": "2025-12-01",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v3-2",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 32.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "gpqa_diamond": {
+        "score": 75.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "livecodebench": {
+        "score": 59.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.28,
+      "outputPer1M": 0.42,
+      "tokensPerSecAPI": 34.9,
+      "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "qwen3.5-35b-a3b": {
+    "id": "qwen3.5-35b-a3b",
+    "name": "Qwen3.5 35B A3B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "gpqa_diamond": {
+        "score": 84.5,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.25,
+      "outputPer1M": 2,
+      "tokensPerSecAPI": 115.3,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "qwen3.5-27b": {
+    "id": "qwen3.5-27b",
+    "name": "Qwen3.5 27B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-27b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 42.1,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "gpqa_diamond": {
+        "score": 85.8,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 2.4,
+      "tokensPerSecAPI": 87.7,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  },
+  "qwen3.5-122b-a10b": {
+    "id": "qwen3.5-122b-a10b",
+    "name": "Qwen3.5 122B A10B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 41.6,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "gpqa_diamond": {
+        "score": 85.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.4,
+      "outputPer1M": 3.2,
+      "tokensPerSecAPI": 131.4,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
   }
 }
