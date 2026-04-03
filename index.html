@@ -525,6 +525,27 @@
             from { opacity: 0; transform: translateY(6px); }
             to   { opacity: 1; transform: translateY(0); }
         }
+
+        /* ── WINNER DELTA BADGES ── */
+        .hero-stat-deltas {
+            display: flex; gap: 0.45rem; flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+        .delta-badge {
+            display: inline-flex; align-items: center; gap: 0.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 600;
+            padding: 0.2rem 0.55rem; border-radius: 5px;
+            border: 1px solid transparent;
+        }
+        .delta-badge.pos { background: var(--green-bg); color: var(--green); border-color: rgba(26,158,92,0.18); }
+        .delta-badge.neg { background: var(--red-bg);   color: var(--red);   border-color: rgba(214,59,47,0.18); }
+        .delta-badge.neu { background: var(--surface2); color: var(--muted); border-color: var(--border); }
+        .delta-badge .d-icon { font-style: normal; }
+        .delta-vs {
+            font-size: 0.6rem; color: var(--faint);
+            margin-top: 0.35rem; font-family: 'DM Sans', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -564,6 +585,8 @@
             <div class="hero-stat-detail" id="winLocalDetail"></div>
             <div class="hero-stat-num" id="winLocalScore">—</div>
             <div class="hero-stat-unit">quality-adjusted tokens per $</div>
+            <div class="hero-stat-deltas" id="winLocalDeltas"></div>
+            <div class="delta-vs" id="winLocalVs"></div>
         </div>
         <div class="hero-stat hs-sub" id="hsStat1">
             <div class="hero-stat-type">💳 Best subscription ⚠️</div>
@@ -571,6 +594,8 @@
             <div class="hero-stat-detail" id="winSubDetail"></div>
             <div class="hero-stat-num" id="winSubScore">—</div>
             <div class="hero-stat-unit">quality-adjusted tokens per $ · estimated</div>
+            <div class="hero-stat-deltas" id="winSubDeltas"></div>
+            <div class="delta-vs" id="winSubVs"></div>
         </div>
         <div class="hero-stat hs-api" id="hsStat2">
             <div class="hero-stat-type">🔌 Best API deal</div>
@@ -578,6 +603,8 @@
             <div class="hero-stat-detail" id="winApiDetail"></div>
             <div class="hero-stat-num" id="winApiScore">—</div>
             <div class="hero-stat-unit">quality-adjusted tokens per $</div>
+            <div class="hero-stat-deltas" id="winApiDeltas"></div>
+            <div class="delta-vs" id="winApiVs"></div>
         </div>
     </div>
 </div>
@@ -834,38 +861,83 @@ function animateCount(el, target, suffix='') {
 }
 
 function computeWinners(){
-  let bL=null, bS=null, bA=null;
+  // Collect top-2 per category, tracking quality score and effective price separately
+  let topLocal=[], topSub=[], topApi=[];
+
   Object.values(DATA.models).forEach(model=>{
     const score=getScore(model,'_combined'); if(!score) return;
+
     if(model.local) Object.entries(model.local).forEach(([hid,perf])=>{
       const h=DATA.hardware[hid]; if(!h||!perf.tokensPerSec) return;
       const val=(perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100))/h.price;
-      if(!bL||val>bL.val) bL={val,model:model.name,detail:`${h.name} · ${perf.tokensPerSec} tok/s`};
+      // effective price per 1M quality-tokens = hardware / total_quality_tokens
+      const totalQTok = perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100);
+      const pricePerMQTok = (h.price / totalQTok) * 1_000_000;
+      topLocal.push({val, score, pricePerMQTok, model:model.name, detail:`${h.name} · ${perf.tokensPerSec} tok/s`});
     });
+
     if(model.subscriptions) Object.values(model.subscriptions).forEach(sub=>{
       if(!sub.tokensPerDay) return;
       const val=(sub.tokensPerDay*365*YEARS_DEFAULT*(score/100))/(sub.monthlyPrice*12*YEARS_DEFAULT);
-      if(!bS||val>bS.val) bS={val,model:model.name,detail:`${sub.name} · $${sub.monthlyPrice}/mo`};
+      const totalCost = sub.monthlyPrice*12*YEARS_DEFAULT;
+      const totalQTok = sub.tokensPerDay*365*YEARS_DEFAULT*(score/100);
+      const pricePerMQTok = (totalCost / totalQTok) * 1_000_000;
+      topSub.push({val, score, pricePerMQTok, model:model.name, detail:`${sub.name} · $${sub.monthlyPrice}/mo`});
     });
+
     if(model.api&&model.api.inputPer1M>0){
-      const val=(1_000_000/wap(model.api))*(score/100);
-      if(!bA||val>bA.val) bA={val,model:model.name,detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M`};
+      const wp = wap(model.api);
+      const val=(1_000_000/wp)*(score/100);
+      // price per 1M quality-tokens
+      const pricePerMQTok = wp / (score/100);
+      topApi.push({val, score, pricePerMQTok, model:model.name, detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M`});
     }
   });
 
-  // reveal with stagger + count-up
-  [[bL,'winLocalModel','winLocalDetail','winLocalScore','hsStat0'],
-   [bS,'winSubModel','winSubDetail','winSubScore','hsStat1'],
-   [bA,'winApiModel','winApiDetail','winApiScore','hsStat2']
-  ].forEach(([b, mId, dId, sId, statId], i) => {
-    if(!b) return;
+  topLocal.sort((a,b)=>b.val-a.val);
+  topSub.sort((a,b)=>b.val-a.val);
+  topApi.sort((a,b)=>b.val-a.val);
+
+  function makeDeltaBadges(top, deltasId, vsId) {
+    if(top.length < 2) return;
+    const w = top[0], r = top[1]; // winner, runner-up
+    const qualDiff = w.score - r.score;
+    const priceDiff = ((r.pricePerMQTok - w.pricePerMQTok) / r.pricePerMQTok) * 100; // positive = winner is cheaper
+
+    const qualSign = qualDiff >= 0 ? '+' : '';
+    const qualClass = qualDiff > 1 ? 'pos' : qualDiff < -1 ? 'neg' : 'neu';
+    const qualLabel = Math.abs(qualDiff) < 0.5
+      ? '≈ same quality'
+      : `${qualSign}${qualDiff.toFixed(1)}% quality`;
+
+    const priceSign = priceDiff >= 0 ? '' : '';
+    const priceClass = priceDiff > 1 ? 'pos' : priceDiff < -1 ? 'neg' : 'neu';
+    const priceLabel = Math.abs(priceDiff) < 1
+      ? '≈ same price'
+      : priceDiff > 0
+        ? `${priceDiff.toFixed(0)}% cheaper`
+        : `${Math.abs(priceDiff).toFixed(0)}% pricier`;
+
+    document.getElementById(deltasId).innerHTML =
+      `<span class="delta-badge ${qualClass}"><em class="d-icon">🧠</em> ${qualLabel}</span>` +
+      `<span class="delta-badge ${priceClass}"><em class="d-icon">💰</em> ${priceLabel}</span>`;
+    document.getElementById(vsId).innerHTML =
+      `vs #2: ${r.model}`;
+  }
+
+  // reveal with stagger + count-up + deltas
+  [[topLocal,'winLocalModel','winLocalDetail','winLocalScore','hsStat0','winLocalDeltas','winLocalVs'],
+   [topSub,  'winSubModel',  'winSubDetail',  'winSubScore',  'hsStat1','winSubDeltas',  'winSubVs'],
+   [topApi,  'winApiModel',  'winApiDetail',  'winApiScore',  'hsStat2','winApiDeltas',  'winApiVs']
+  ].forEach(([top, mId, dId, sId, statId, deltasId, vsId], i) => {
+    if(!top.length) return;
+    const b = top[0];
     document.getElementById(mId).textContent = b.model;
     document.getElementById(dId).textContent = b.detail;
+    makeDeltaBadges(top, deltasId, vsId);
     setTimeout(() => {
-      const el = document.getElementById(statId);
-      el.classList.add('visible');
-      const scoreEl = document.getElementById(sId);
-      animateCount(scoreEl, b.val);
+      document.getElementById(statId).classList.add('visible');
+      animateCount(document.getElementById(sId), b.val);
     }, i * 160);
   });
 }
