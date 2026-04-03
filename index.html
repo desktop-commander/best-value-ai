@@ -546,6 +546,127 @@
             font-size: 0.6rem; color: var(--faint);
             margin-top: 0.35rem; font-family: 'DM Sans', sans-serif;
         }
+
+        /* ── COMPARE TAB ── */
+        .cmp-pickers {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 1rem; align-items: end; margin-bottom: 1.75rem;
+        }
+        @media (max-width: 700px) {
+            .cmp-pickers { grid-template-columns: 1fr; }
+            .cmp-vs { display: none; }
+        }
+        .cmp-picker-col label {
+            display: block; font-size: 0.62rem; font-weight: 600;
+            color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 0.4rem;
+        }
+        .cmp-picker-col select {
+            width: 100%; background: var(--surface); border: 1.5px solid var(--border);
+            color: var(--text); padding: 0.5rem 0.75rem;
+            border-radius: 9px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem; font-weight: 500; outline: none;
+            transition: border-color 0.15s;
+        }
+        .cmp-picker-col select:focus { border-color: var(--blue); }
+        .cmp-picker-col.side-a select { border-color: rgba(37,87,214,0.4); }
+        .cmp-picker-col.side-b select { border-color: rgba(112,51,216,0.4); }
+        .cmp-vs {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.75rem; font-weight: 800; color: var(--faint);
+            text-align: center; padding-bottom: 0.5rem;
+        }
+        /* verdict banner */
+        .cmp-verdict {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem; display: flex;
+            align-items: center; gap: 1rem;
+        }
+        .cmp-verdict-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .cmp-verdict-text {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            letter-spacing: -0.02em; color: var(--text);
+            line-height: 1.3;
+        }
+        .cmp-verdict-text em { font-style: normal; }
+        .cmp-verdict-text .cv-a { color: var(--blue); }
+        .cmp-verdict-text .cv-b { color: var(--purple); }
+        .cmp-verdict-text .cv-tie { color: var(--muted); }
+        .cmp-verdict-sub {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem; color: var(--muted);
+            margin-top: 0.2rem; font-weight: 400;
+        }
+        /* compare rows grid */
+        .cmp-grid {
+            display: flex; flex-direction: column; gap: 0.75rem;
+        }
+        .cmp-row {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
+        }
+        .cmp-row-label {
+            font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.07em; color: var(--muted);
+            padding: 0.55rem 1rem 0; display: flex; gap: 0.5rem;
+            align-items: center;
+        }
+        .cmp-row-label .crl-tag {
+            font-size: 0.58rem; padding: 0.1rem 0.4rem;
+            border-radius: 4px; font-weight: 700;
+        }
+        .crl-api    { background: var(--blue-bg);   color: var(--blue); }
+        .crl-sub    { background: var(--purple-bg); color: var(--purple); }
+        .crl-local  { background: var(--green-bg);  color: var(--green); }
+        .crl-qual   { background: var(--amber-bg);  color: var(--amber); }
+        .cmp-bars {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1rem 0.75rem;
+        }
+        /* left bar grows right-to-left */
+        .cmp-bar-wrap-a {
+            display: flex; align-items: center;
+            gap: 0.5rem; justify-content: flex-end;
+        }
+        .cmp-bar-wrap-b {
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .cmp-bar-track {
+            flex: 1; height: 22px; background: var(--bg);
+            border-radius: 5px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .cmp-bar-fill-a {
+            height: 100%; background: var(--blue); opacity: 0.85;
+            border-radius: 4px; margin-left: auto;
+            transition: width 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .cmp-bar-fill-b {
+            height: 100%; background: var(--purple); opacity: 0.85;
+            border-radius: 4px;
+            transition: width 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .cmp-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 700;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .cmp-val-a { color: var(--blue); }
+        .cmp-val-b { color: var(--purple); }
+        .cmp-mid-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 700;
+            text-align: center; white-space: nowrap;
+            flex-shrink: 0; padding: 0.15rem 0.4rem;
+            border-radius: 4px; min-width: 52px;
+        }
+        .cmp-mid-badge.a-wins { background: var(--blue-bg);   color: var(--blue); }
+        .cmp-mid-badge.b-wins { background: var(--purple-bg); color: var(--purple); }
+        .cmp-mid-badge.tie    { background: var(--surface2);  color: var(--faint); }
+        .cmp-na { font-size: 0.7rem; color: var(--faint); font-style: italic; }
     </style>
 </head>
 <body>
@@ -676,6 +797,7 @@
 
     <div class="tabs">
         <div class="tab active" data-tab="calculator">Calculator</div>
+        <div class="tab" data-tab="compare">⚔️ Compare</div>
         <div class="tab" data-tab="chart">Timeline</div>
         <div class="tab" data-tab="data">Raw data</div>
     </div>
@@ -741,6 +863,23 @@
             <h3>All options ranked</h3>
             <div class="rank-list" id="calculatorContent">Loading…</div>
         </div>
+    </div>
+
+    <!-- COMPARE -->
+    <div id="tab-compare" class="tab-content">
+        <div class="cmp-pickers">
+            <div class="cmp-picker-col side-a">
+                <label>Model A</label>
+                <select id="cmpA"></select>
+            </div>
+            <div class="cmp-vs">VS</div>
+            <div class="cmp-picker-col side-b">
+                <label>Model B</label>
+                <select id="cmpB"></select>
+            </div>
+        </div>
+        <div id="cmpVerdict" class="cmp-verdict" style="display:none"></div>
+        <div class="cmp-grid" id="cmpGrid"></div>
     </div>
 
     <!-- CHART -->
@@ -1002,6 +1141,7 @@ function init(){
       tab.classList.add('active');
       document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
       if(tab.dataset.tab==='chart') updateChart();
+      if(tab.dataset.tab==='compare') renderCompare();
     });
   });
   document.querySelectorAll('#tab-calculator select,#tab-calculator input').forEach(el=>{
@@ -1010,6 +1150,20 @@ function init(){
   document.getElementById('hardware').addEventListener('change',()=>{populateCalcDropdowns();updateAll();});
   ['chartBenchmark','chartType','chartProvider'].forEach(id=>document.getElementById(id).addEventListener('change',updateChart));
 
+  // Compare tab: populate model dropdowns
+  const modelIds = Object.keys(DATA.models);
+  ['cmpA','cmpB'].forEach((selId, i) => {
+    const sel = document.getElementById(selId);
+    modelIds.forEach(id => {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = DATA.models[id].name;
+      sel.appendChild(o);
+    });
+    // default: A = first, B = second
+    if(i === 1 && modelIds.length > 1) sel.value = modelIds[1];
+    sel.addEventListener('change', renderCompare);
+  });
   // scroll animations
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -1212,6 +1366,141 @@ function updateChart(){
       legend:{display:true,labels:{color:'#6b6b72',usePointStyle:true}}
     }
   }});
+}
+
+function renderCompare() {
+  const hwId = document.getElementById('hardware').value;
+  const hours = parseFloat(document.getElementById('hoursPerDay').value) || 16;
+  const years = parseInt(document.getElementById('periodYears').value) || 3;
+  const hw = DATA.hardware[hwId];
+
+  const idA = document.getElementById('cmpA').value;
+  const idB = document.getElementById('cmpB').value;
+  const mA = DATA.models[idA];
+  const mB = DATA.models[idB];
+  if (!mA || !mB) return;
+
+  const scoreA = getScore(mA, '_combined') || 0;
+  const scoreB = getScore(mB, '_combined') || 0;
+
+  // helpers
+  function barRow(label, tagCls, tagLabel, valA, valB, fmtFn, lowerIsBetter) {
+    if (valA == null && valB == null) return '';
+    const aNull = valA == null, bNull = valB == null;
+    const best = lowerIsBetter
+      ? (!aNull && !bNull ? (valA <= valB ? 'a' : 'b') : (aNull ? 'b' : 'a'))
+      : (!aNull && !bNull ? (valA >= valB ? 'a' : 'b') : (aNull ? 'b' : 'a'));
+    const tie = !aNull && !bNull && Math.abs(valA - valB) / Math.max(valA, valB) < 0.005;
+    const maxV = Math.max(valA||0, valB||0) || 1;
+    const pctA = aNull ? 0 : Math.max(2, (valA/maxV)*100);
+    const pctB = bNull ? 0 : Math.max(2, (valB/maxV)*100);
+    const midClass = tie ? 'tie' : best === 'a' ? 'a-wins' : 'b-wins';
+    const midText = tie ? '≈ tie'
+      : best === 'a'
+        ? `A +${(((valA-valB)/valB)*100).toFixed(0)}%`
+        : `B +${(((valB-valA)/valA)*100).toFixed(0)}%`;
+    const dispA = aNull ? '<span class="cmp-na">n/a</span>' : `<span class="cmp-val cmp-val-a">${fmtFn(valA)}</span>`;
+    const dispB = bNull ? '<span class="cmp-na">n/a</span>' : `<span class="cmp-val cmp-val-b">${fmtFn(valB)}</span>`;
+    return `<div class="cmp-row">
+      <div class="cmp-row-label"><span class="crl-tag ${tagCls}">${tagLabel}</span> ${label}</div>
+      <div class="cmp-bars">
+        <div class="cmp-bar-wrap-a">
+          ${dispA}
+          <div class="cmp-bar-track"><div class="cmp-bar-fill-a" style="width:${aNull?0:pctA}%"></div></div>
+        </div>
+        <div class="cmp-mid-badge ${midClass}">${midText}</div>
+        <div class="cmp-bar-wrap-b">
+          <div class="cmp-bar-track"><div class="cmp-bar-fill-b" style="width:${bNull?0:pctB}%"></div></div>
+          ${dispB}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Quality
+  const qualRow = barRow('Quality score', 'crl-qual', '🧠 Quality',
+    scoreA, scoreB, v => v.toFixed(1)+'%', false);
+
+  // API value
+  const apiValA = mA.api && mA.api.inputPer1M > 0 ? (1_000_000/wap(mA.api))*(scoreA/100) : null;
+  const apiValB = mB.api && mB.api.inputPer1M > 0 ? (1_000_000/wap(mB.api))*(scoreB/100) : null;
+  const apiPriceA = mA.api && mA.api.inputPer1M > 0 ? wap(mA.api) : null;
+  const apiPriceB = mB.api && mB.api.inputPer1M > 0 ? wap(mB.api) : null;
+  const apiRow = barRow('API · quality-adj tok/$', 'crl-api', '🔌 API value', apiValA, apiValB, fmt, false);
+  const apiPriceRow = barRow('API · blended $/M tokens', 'crl-api', '🔌 API price',
+    apiPriceA, apiPriceB, v => '$'+v.toFixed(3), true);
+
+  // Best subscription value
+  function bestSubVal(m) {
+    const sc = getScore(m, '_combined') || 0;
+    let best = null;
+    if (m.subscriptions) Object.values(m.subscriptions).forEach(sub => {
+      if (!sub.tokensPerDay) return;
+      const v = (sub.tokensPerDay*365*years*(sc/100))/(sub.monthlyPrice*12*years);
+      if (best == null || v > best.val) best = { val: v, name: sub.name, price: sub.monthlyPrice };
+    });
+    return best;
+  }
+  const subA = bestSubVal(mA), subB = bestSubVal(mB);
+  const subRow = barRow('Subscription · quality-adj tok/$', 'crl-sub', '💳 Sub value',
+    subA?.val, subB?.val, fmt, false);
+  const subPriceRow = barRow('Subscription · $/month', 'crl-sub', '💳 Sub price',
+    subA?.price, subB?.price, v => '$'+v, true);
+
+  // Best local value on selected hardware
+  function bestLocalVal(m) {
+    if (!hw || !m.local || !m.local[hwId]) return null;
+    const sc = getScore(m, '_combined') || 0;
+    const p = m.local[hwId];
+    return (p.tokensPerSec*3600*hours*365*years*(sc/100)) / hw.price;
+  }
+  function bestLocalTokS(m) {
+    if (!hw || !m.local || !m.local[hwId]) return null;
+    return m.local[hwId].tokensPerSec;
+  }
+  const localRow = barRow('Local · quality-adj tok/$ ('+((hw&&hw.name)||'—')+')', 'crl-local', '🖥️ Local value',
+    bestLocalVal(mA), bestLocalVal(mB), fmt, false);
+  const tokSRow = barRow('Local · tokens/sec', 'crl-local', '🖥️ Tok/s',
+    bestLocalTokS(mA), bestLocalTokS(mB), v => v+' t/s', false);
+
+  document.getElementById('cmpGrid').innerHTML = qualRow + apiRow + apiPriceRow + subRow + subPriceRow + localRow + tokSRow;
+
+  // Animate bars from 0
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.cmp-bar-fill-a,.cmp-bar-fill-b').forEach(bar => {
+      const target = bar.style.width;
+      bar.style.width = '0%';
+      setTimeout(() => { bar.style.width = target; }, 40);
+    });
+  });
+
+  // Verdict
+  const verdictEl = document.getElementById('cmpVerdict');
+  verdictEl.style.display = '';
+  const aName = mA.name, bName = mB.name;
+
+  // Find overall winner by most categories won (API val, sub val, local val, quality)
+  let aWins = 0, bWins = 0;
+  [[apiValA, apiValB],[subA?.val, subB?.val],[bestLocalVal(mA), bestLocalVal(mB)],[scoreA, scoreB]]
+    .forEach(([a,b]) => {
+      if(a != null && b != null) { if(a > b) aWins++; else if(b > a) bWins++; }
+    });
+
+  let icon, html;
+  if (aWins === bWins) {
+    icon = '🤝';
+    html = `<div class="cmp-verdict-text"><span class="cv-tie">${aName}</span> and <span class="cv-tie">${bName}</span> are roughly equal</div>
+            <div class="cmp-verdict-sub">Tied across quality + value metrics — choose based on availability or preference.</div>`;
+  } else {
+    const winner = aWins > bWins ? aName : bName;
+    const loser  = aWins > bWins ? bName : aName;
+    const wClass = aWins > bWins ? 'cv-a' : 'cv-b';
+    const cats = Math.max(aWins, bWins);
+    icon = '🏆';
+    html = `<div class="cmp-verdict-text"><span class="${wClass}">${winner}</span> wins <em>${cats}</em> of the compared categories</div>
+            <div class="cmp-verdict-sub">Better overall value than ${loser} across quality and cost metrics.</div>`;
+  }
+  verdictEl.innerHTML = `<div class="cmp-verdict-icon">${icon}</div><div>${html}</div>`;
 }
 
 loadData();
