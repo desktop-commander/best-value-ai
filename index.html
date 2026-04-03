@@ -4,299 +4,550 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is Your AI Subscription Worth It?</title>
-    <meta name="description" content="Quality-adjusted tokens per dollar across local hardware, subscriptions, and API — automatically updated from live benchmark data.">
+    <meta name="description" content="Quality-adjusted tokens per dollar across local hardware, subscriptions, and API.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
         :root {
-            --bg:        #f8f9fa;
-            --surface:   #ffffff;
-            --border:    #e8eaed;
-            --text:      #1a1a2e;
-            --muted:     #6b7280;
-            --accent:    #16a34a;   /* green */
-            --accent2:   #2563eb;   /* blue */
-            --purple:    #7c3aed;
-            --danger:    #dc2626;
-            --warn:      #d97706;
-            --accent-bg:  rgba(22,163,74,0.08);
-            --accent2-bg: rgba(37,99,235,0.08);
-            --purple-bg:  rgba(124,58,237,0.08);
-            --danger-bg:  rgba(220,38,38,0.08);
+            --bg:         #f5f4f0;
+            --surface:    #ffffff;
+            --surface2:   #fafaf8;
+            --border:     #e2e0da;
+            --border2:    #d0cdc5;
+            --text:       #18181a;
+            --muted:      #6b6b72;
+            --faint:      #9b9ba4;
+            --green:      #1a9e5c;
+            --green-bg:   rgba(26,158,92,0.08);
+            --blue:       #2557d6;
+            --blue-bg:    rgba(37,87,214,0.08);
+            --purple:     #7033d8;
+            --purple-bg:  rgba(112,51,216,0.08);
+            --red:        #d63b2f;
+            --red-bg:     rgba(214,59,47,0.08);
+            --amber:      #b45309;
+            --amber-bg:   rgba(180,83,9,0.07);
+            --dot-color:  rgba(0,0,0,0.07);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
 
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            font-family: 'DM Sans', sans-serif;
             font-size: 15px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* DOT GRID TEXTURE on hero area */
+        .dot-bg {
+            background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+            background-size: 22px 22px;
         }
 
         /* ── NAV ── */
         .nav {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(248,249,250,0.95);
-            backdrop-filter: blur(12px);
+            position: sticky; top: 0; z-index: 200;
+            background: rgba(245,244,240,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            height: 52px;
-            display: flex; align-items: center; gap: 2rem;
+            height: 54px;
+            display: flex; align-items: center;
+            padding: 0 2.5rem; gap: 2.5rem;
         }
-        .nav-brand { font-weight: 800; font-size: 0.9rem; color: var(--text); text-decoration: none; }
-        .nav-brand span { color: var(--accent); }
-        .nav-links { display: flex; gap: 1.5rem; }
-        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: color 0.15s; }
+        .nav-brand {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800; font-size: 1rem;
+            color: var(--text); text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-brand em { font-style: normal; color: var(--green); }
+        .nav-links { display: flex; gap: 1.75rem; }
+        .nav-links a {
+            color: var(--muted); text-decoration: none;
+            font-size: 0.8rem; font-weight: 500;
+            transition: color 0.15s;
+        }
         .nav-links a:hover { color: var(--text); }
+        .nav-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
         .nav-cta {
-            margin-left: auto; font-size: 0.75rem; font-weight: 600;
-            color: var(--accent2); border: 1.5px solid var(--accent2);
-            padding: 0.3rem 0.8rem; border-radius: 6px; text-decoration: none;
-            transition: all 0.15s;
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--blue); border: 1.5px solid var(--blue);
+            padding: 0.3rem 0.85rem; border-radius: 6px;
+            text-decoration: none; transition: all 0.15s;
+            white-space: nowrap;
         }
-        .nav-cta:hover { background: var(--accent2); color: #fff; }
+        .nav-cta:hover { background: var(--blue); color: #fff; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
 
         /* ── TAG PILL ── */
         .tag {
-            display: inline-flex; align-items: center; gap: 0.35rem;
-            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
-            text-transform: uppercase; padding: 0.25rem 0.65rem;
-            border-radius: 999px; margin-bottom: 0.75rem;
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            font-size: 0.67rem; font-weight: 600; letter-spacing: 0.07em;
+            text-transform: uppercase; padding: 0.22rem 0.6rem;
+            border-radius: 999px; margin-bottom: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
         }
-        .tag.green  { background: var(--accent-bg);  color: var(--accent); }
-        .tag.blue   { background: var(--accent2-bg); color: var(--accent2); }
-        .tag.purple { background: var(--purple-bg);  color: var(--purple); }
-        .tag.red    { background: var(--danger-bg);  color: var(--danger); }
+        .tag.green  { background: var(--green-bg);  color: var(--green); }
+        .tag.blue   { background: var(--blue-bg);   color: var(--blue); }
+        .tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .tag.amber  { background: var(--amber-bg);  color: var(--amber); }
+        .tag.red    { background: var(--red-bg);    color: var(--red); }
 
         /* ── HERO ── */
-        .hero { padding: 5rem 0 3.5rem; text-align: center; }
+        .hero-wrap {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 0 0;
+        }
+        .hero { text-align: center; }
         .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 800; letter-spacing: -0.03em;
-            color: var(--text); line-height: 1.1; margin-bottom: 1.25rem;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 800; letter-spacing: -0.04em;
+            line-height: 1.05; color: var(--text);
+            margin-bottom: 1.1rem;
         }
-        .hero h1 em { font-style: normal; color: var(--accent2); }
-        .hero p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto 1.5rem; }
-        .hero-sources { font-size: 0.72rem; color: #9ca3af; }
-        .hero-sources a { color: #9ca3af; text-decoration: none; border-bottom: 1px solid #d1d5db; }
-        .hero-sources a:hover { color: var(--muted); }
+        .hero h1 em { font-style: normal; color: var(--blue); }
+        .hero-sub {
+            font-size: 1.05rem; color: var(--muted);
+            max-width: 500px; margin: 0 auto 1.75rem;
+            font-weight: 400;
+        }
+        .hero-sources {
+            font-size: 0.7rem; color: var(--faint);
+            margin-bottom: 3rem;
+        }
+        .hero-sources a {
+            color: var(--faint); text-decoration: none;
+            border-bottom: 1px solid var(--border2);
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .hero-sources a:hover { color: var(--muted); border-color: var(--muted); }
 
-        /* ── DC ATTRIBUTION ── */
+        /* ── HERO STAT STRIP ── */
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--border);
+            margin-top: 0;
+        }
+        @media (max-width: 680px) { .hero-stats { grid-template-columns: 1fr; } }
+        .hero-stat {
+            padding: 1.75rem 2rem;
+            border-right: 1px solid var(--border);
+            opacity: 0; transform: translateY(12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat.visible { opacity: 1; transform: translateY(0); }
+        .hero-stat-type {
+            font-size: 0.65rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+        .hero-stat.hs-local .hero-stat-type  { color: var(--green); }
+        .hero-stat.hs-sub   .hero-stat-type  { color: var(--purple); }
+        .hero-stat.hs-api   .hero-stat-type  { color: var(--blue); }
+        .hero-stat-model {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.0rem; font-weight: 700;
+            color: var(--text); margin-bottom: 0.15rem;
+            letter-spacing: -0.02em;
+        }
+        .hero-stat-detail { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.9rem; }
+        .hero-stat-num {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.4rem; font-weight: 800;
+            letter-spacing: -0.04em; line-height: 1;
+            margin-bottom: 0.15rem;
+        }
+        .hero-stat.hs-local .hero-stat-num  { color: var(--green); }
+        .hero-stat.hs-sub   .hero-stat-num  { color: var(--purple); }
+        .hero-stat.hs-api   .hero-stat-num  { color: var(--blue); }
+        .hero-stat-unit { font-size: 0.62rem; color: var(--faint); font-weight: 500; }
+
+        /* ── DC BAR ── */
         .dc-bar {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 10px; padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            padding: 0.85rem 2rem;
             text-align: center; font-size: 0.78rem; color: var(--muted);
-            margin-bottom: 3.5rem;
+            background: var(--surface2);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-        .dc-bar a { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .dc-bar a { color: var(--green); font-weight: 600; text-decoration: none; }
         .dc-bar a:hover { text-decoration: underline; }
-
-        /* ── WINNER CARDS ── */
-        .winner-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-bottom: 4rem; }
-        @media (max-width: 750px) { .winner-grid { grid-template-columns: 1fr; } }
-
-        .winner-card {
-            background: var(--surface); border: 1.5px solid var(--border);
-            border-radius: 16px; padding: 1.5rem;
-            position: relative; overflow: hidden;
-            transition: box-shadow 0.2s, transform 0.2s;
+        .dc-badge {
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
+            text-transform: uppercase; padding: 0.15rem 0.5rem;
+            border-radius: 4px; background: var(--green-bg); color: var(--green);
         }
-        .winner-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
-        .winner-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+
+        /* ── SECTION WRAPPER ── */
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
         }
-        .winner-card.local::before  { background: var(--accent); }
-        .winner-card.sub::before    { background: var(--purple); }
-        .winner-card.api::before    { background: var(--accent2); }
+        .section-header { margin-bottom: 2rem; }
+        .section-header p {
+            font-size: 0.95rem; color: var(--muted);
+            max-width: 600px; line-height: 1.7; margin-top: 0.5rem;
+        }
 
-        .winner-type { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
-        .winner-card.local .winner-type  { color: var(--accent); }
-        .winner-card.sub   .winner-type  { color: var(--purple); }
-        .winner-card.api   .winner-type  { color: var(--accent2); }
-
-        .winner-model { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
-        .winner-detail { font-size: 0.75rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.5; }
-
-        .winner-score { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.2rem; }
-        .winner-card.local .winner-score  { color: var(--accent); }
-        .winner-card.sub   .winner-score  { color: var(--purple); }
-        .winner-card.api   .winner-score  { color: var(--accent2); }
-        .winner-score-label { font-size: 0.65rem; color: #9ca3af; font-weight: 500; }
-
-        /* ── SECTION ── */
-        .section { padding: 3rem 0; }
-        .section + .section { border-top: 1px solid var(--border); }
+        /* ── SECTION TITLE ── */
+        .section-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.03em; color: var(--text);
+        }
 
         /* ── HOW IT WORKS ── */
-        .formula-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 1.5rem; }
-        @media (max-width: 750px) { .formula-grid { grid-template-columns: 1fr; } }
-
-        .formula-card {
-            background: var(--surface); border: 1.5px solid var(--border);
-            border-radius: 14px; padding: 1.5rem;
+        .formula-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.25rem; margin-top: 1.75rem;
         }
-        .formula-card.local { border-top: 3px solid var(--accent); }
-        .formula-card.sub   { border-top: 3px solid var(--purple); }
-        .formula-card.api   { border-top: 3px solid var(--accent2); }
+        @media (max-width: 750px) { .formula-grid { grid-template-columns: 1fr; } }
+        .formula-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.5rem;
+            position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .formula-card.visible { opacity: 1; transform: translateY(0); }
+        .formula-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+        }
+        .formula-card.fc-local::after  { background: var(--green); }
+        .formula-card.fc-sub::after    { background: var(--purple); }
+        .formula-card.fc-api::after    { background: var(--blue); }
 
-        .formula-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 1.25rem; }
-        .formula-card.local h4 { color: var(--accent); }
-        .formula-card.sub   h4 { color: var(--purple); }
-        .formula-card.api   h4 { color: var(--accent2); }
+        .formula-card h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.95rem; font-weight: 700;
+            letter-spacing: -0.01em; margin-bottom: 1.25rem;
+        }
+        .formula-card.fc-local h4 { color: var(--green); }
+        .formula-card.fc-sub   h4 { color: var(--purple); }
+        .formula-card.fc-api   h4 { color: var(--blue); }
 
         .formula-box {
-            background: var(--bg); border-radius: 10px; padding: 1rem 1.25rem;
-            font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
-            line-height: 2.1; color: var(--muted);
+            background: var(--bg); border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; line-height: 2.2; color: var(--muted);
         }
         .fv-block { display: block; }
-        .fv-var { font-weight: 700; }
-        .fv-local  { color: var(--accent); }
+        .fv-var { font-weight: 600; }
+        .fv-local  { color: var(--green); }
         .fv-sub    { color: var(--purple); }
-        .fv-api    { color: var(--accent2); }
-        .fv-qual   { color: var(--warn); }
-        .fv-divider { border: none; border-top: 1.5px solid var(--border); margin: 0.5rem 0; }
-        .fv-result { font-weight: 700; font-size: 0.85rem; color: var(--text); }
-        .formula-note { font-size: 0.7rem; color: #9ca3af; margin-top: 0.75rem; line-height: 1.5; }
-
-        .method-note { font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem; }
-        .method-note a { color: var(--accent2); }
+        .fv-api    { color: var(--blue); }
+        .fv-qual   { color: var(--amber); }
+        .fv-divider {
+            display: block; border: none;
+            border-top: 1.5px solid var(--border2);
+            margin: 0.4rem 0;
+        }
+        .fv-result { font-weight: 700; color: var(--text); font-size: 0.82rem; }
+        .fv-op { color: var(--faint); font-size: 0.7rem; margin-right: 0.25rem; }
+        .formula-note {
+            font-size: 0.68rem; color: var(--faint);
+            margin-top: 0.85rem; line-height: 1.55;
+        }
+        .method-note {
+            font-size: 0.73rem; color: var(--muted);
+            margin-top: 1.5rem;
+        }
+        .method-note a { color: var(--blue); text-decoration: none; }
+        .method-note a:hover { text-decoration: underline; }
 
         /* ── TABS ── */
-        .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; }
+        .tabs {
+            display: flex; border-bottom: 1.5px solid var(--border);
+            margin-bottom: 1.75rem; gap: 0;
+        }
         .tab {
-            padding: 0.6rem 1.25rem; cursor: pointer; color: var(--muted);
-            border-bottom: 2px solid transparent; margin-bottom: -2px;
-            font-size: 0.82rem; font-weight: 500; transition: all 0.15s;
+            padding: 0.65rem 1.35rem; cursor: pointer;
+            color: var(--muted); border-bottom: 2px solid transparent;
+            margin-bottom: -1.5px; font-size: 0.82rem; font-weight: 500;
+            transition: all 0.15s; user-select: none;
         }
         .tab:hover { color: var(--text); }
-        .tab.active { color: var(--accent2); border-bottom-color: var(--accent2); font-weight: 600; }
+        .tab.active {
+            color: var(--blue); border-bottom-color: var(--blue);
+            font-weight: 600;
+        }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         /* ── SETTINGS BAR ── */
         .settings-bar {
-            background: #fffbeb; border: 1px solid #fde68a;
-            border-radius: 10px; padding: 0.75rem 1.25rem;
-            display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-end;
-            margin-bottom: 1.5rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1rem 1.5rem;
+            display: flex; gap: 2rem; flex-wrap: wrap;
+            align-items: flex-end; margin-bottom: 1.75rem;
+            border-left: 4px solid var(--blue);
         }
-        .setting-group label { display: block; font-size: 0.65rem; font-weight: 600; color: var(--muted); margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .setting-group label {
+            display: block; font-size: 0.62rem; font-weight: 600;
+            color: var(--muted); margin-bottom: 0.3rem;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
         .settings-bar select, .settings-bar input {
-            background: var(--surface); border: 1px solid #fde68a;
-            color: var(--text); padding: 0.35rem 0.7rem; border-radius: 6px;
-            font-family: inherit; font-size: 0.82rem;
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text); padding: 0.38rem 0.75rem;
+            border-radius: 7px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem; outline: none;
+            transition: border-color 0.15s;
+        }
+        .settings-bar select:focus, .settings-bar input:focus {
+            border-color: var(--blue);
         }
 
         /* ── WARNING BOX ── */
         .warning-box {
-            background: #fff7ed; border: 1px solid #fed7aa;
-            border-radius: 8px; padding: 0.6rem 1rem;
-            font-size: 0.75rem; color: #92400e; margin-bottom: 1.25rem;
+            background: var(--amber-bg); border: 1px solid #fde68a;
+            border-left: 4px solid var(--amber);
+            border-radius: 8px; padding: 0.65rem 1rem;
+            font-size: 0.74rem; color: var(--amber);
+            margin-bottom: 1.5rem;
         }
-        .warning-box a { color: #b45309; }
+        .warning-box a { color: var(--amber); font-weight: 600; }
 
         /* ── CALC CARDS ── */
-        .calc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 1.5rem; }
-        @media (max-width: 900px) { .calc-grid { grid-template-columns: 1fr; } }
+        .calc-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.1rem; margin-bottom: 2rem;
+        }
+        @media (max-width: 850px) { .calc-grid { grid-template-columns: 1fr; } }
         .calc-card {
-            background: var(--surface); border: 1.5px solid var(--border);
-            border-radius: 12px; padding: 1.25rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.35rem;
+            position: relative; overflow: hidden;
         }
-        .calc-card.local { border-top: 3px solid var(--accent); }
-        .calc-card.sub   { border-top: 3px solid var(--purple); }
-        .calc-card.api   { border-top: 3px solid var(--accent2); }
-        .calc-card h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .calc-card.local h4 { color: var(--accent); }
+        .calc-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+        }
+        .calc-card.local::after { background: var(--green); }
+        .calc-card.sub::after   { background: var(--purple); }
+        .calc-card.api::after   { background: var(--blue); }
+        .calc-card h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.88rem; font-weight: 700;
+            margin-bottom: 0.85rem; letter-spacing: -0.01em;
+        }
+        .calc-card.local h4 { color: var(--green); }
         .calc-card.sub   h4 { color: var(--purple); }
-        .calc-card.api   h4 { color: var(--accent2); }
+        .calc-card.api   h4 { color: var(--blue); }
         .calc-card select {
-            width: 100%; background: var(--bg); border: 1px solid var(--border);
-            color: var(--text); padding: 0.35rem; border-radius: 6px;
-            font-size: 0.75rem; margin-bottom: 0.75rem; font-family: inherit;
+            width: 100%; background: var(--bg);
+            border: 1px solid var(--border); color: var(--text);
+            padding: 0.38rem 0.5rem; border-radius: 7px;
+            font-size: 0.74rem; margin-bottom: 0.9rem;
+            font-family: 'DM Sans', sans-serif; outline: none;
         }
-        .calc-steps { font-size: 0.7rem; line-height: 2; font-family: 'JetBrains Mono', monospace; }
+        .calc-steps {
+            font-size: 0.68rem; line-height: 2.0;
+            font-family: 'JetBrains Mono', monospace;
+        }
         .calc-step { color: var(--muted); }
-        .calc-step .num { color: var(--warn); font-weight: 600; }
+        .calc-step .num { color: var(--amber); font-weight: 600; }
         .calc-step .result { color: var(--text); font-weight: 600; }
-        .calc-final { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border); text-align: center; }
-        .calc-final .value { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; }
-        .calc-card.local .calc-final .value { color: var(--accent); }
+        .calc-final {
+            margin-top: 0.9rem; padding-top: 0.9rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .calc-final .value {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.03em; line-height: 1;
+        }
+        .calc-card.local .calc-final .value { color: var(--green); }
         .calc-card.sub   .calc-final .value { color: var(--purple); }
-        .calc-card.api   .calc-final .value { color: var(--accent2); }
-        .calc-final .label { font-size: 0.6rem; color: #9ca3af; font-weight: 500; }
+        .calc-card.api   .calc-final .value { color: var(--blue); }
+        .calc-final .label {
+            font-size: 0.6rem; color: var(--faint);
+            font-weight: 500; margin-top: 0.15rem;
+        }
 
         /* ── RANKED LIST ── */
-        .results-section h3 { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        .calc-row { position: relative; }
-        .calc-row[data-tooltip]:hover::after {
-            content: attr(data-tooltip); position: absolute; left: 0; top: 100%; margin-top: 6px; z-index: 20;
-            max-width: 440px; padding: 0.65rem 0.85rem; border-radius: 10px;
-            background: var(--text); color: #f0f0f0;
-            font-size: 0.65rem; line-height: 1.6; white-space: pre-line;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.18); font-family: 'JetBrains Mono', monospace;
+        .results-section h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.8rem; font-weight: 700; color: var(--muted);
+            margin-bottom: 1.1rem; text-transform: uppercase;
+            letter-spacing: 0.06em;
         }
-        .calc-row[data-tooltip]:hover::before {
-            content: ''; position: absolute; left: 16px; top: 100%; margin-top: -4px;
-            border-width: 6px; border-style: solid;
-            border-color: transparent transparent var(--text) transparent; z-index: 21;
+        .rank-list { display: flex; flex-direction: column; gap: 0.45rem; }
+        .rank-row {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.55rem 0.75rem; border-radius: 9px;
+            background: var(--surface); border: 1px solid var(--border);
+            transition: background 0.12s;
+            position: relative; cursor: default;
+        }
+        .rank-row:hover { background: var(--surface2); }
+        .rank-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; font-weight: 600;
+            color: var(--faint); width: 22px; text-align: right;
+            flex-shrink: 0;
+        }
+        .rank-type {
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 0.07em; text-transform: uppercase;
+            width: 38px; flex-shrink: 0;
+        }
+        .rank-name {
+            font-size: 0.78rem; color: var(--text); font-weight: 500;
+            width: 195px; flex-shrink: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .rank-bar-wrap {
+            flex: 1; background: var(--bg); border-radius: 5px;
+            height: 26px; overflow: hidden; border: 1px solid var(--border);
+        }
+        .rank-bar {
+            height: 100%; border-radius: 4px;
+            display: flex; align-items: center;
+            justify-content: flex-end; padding-right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 700; color: #fff;
+            transition: width 0.8s cubic-bezier(0.23,1,0.32,1);
+        }
+        .rank-val-out {
+            width: 58px; font-size: 0.72rem; font-weight: 700;
+            text-align: right; flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .rank-detail {
+            width: 140px; font-size: 0.62rem;
+            color: var(--faint); flex-shrink: 0;
+        }
+        /* tooltip */
+        .rank-row[data-tip]:hover::after {
+            content: attr(data-tip);
+            position: absolute; left: 0; top: calc(100% + 6px);
+            z-index: 50; max-width: 420px;
+            padding: 0.65rem 0.9rem; border-radius: 10px;
+            background: #18181a; color: #e8e8ea;
+            font-size: 0.64rem; line-height: 1.7;
+            white-space: pre-line; font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+            pointer-events: none;
         }
 
         /* ── CHART ── */
-        .chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
-        .chart-section h2 { font-size: 1rem; font-weight: 700; text-align: center; margin-bottom: 1rem; }
-        .chart-controls { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
-        .chart-controls select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 0.35rem 0.7rem; border-radius: 6px; font-family: inherit; font-size: 0.8rem; }
+        .chart-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.75rem; margin-bottom: 2rem;
+        }
+        .chart-card h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            text-align: center; margin-bottom: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+        .chart-controls {
+            display: flex; gap: 0.75rem;
+            justify-content: center; margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .chart-controls select {
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text); padding: 0.38rem 0.75rem;
+            border-radius: 7px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem; outline: none;
+        }
         .chart-wrapper { position: relative; height: 460px; }
 
         /* ── DATA TABLES ── */
         .data-table-section { margin-bottom: 2.5rem; }
-        .data-table-section h3 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
-        .edit-link { font-size: 0.65rem; color: #9ca3af; font-weight: 400; text-decoration: none; }
-        .edit-link:hover { color: var(--accent2); }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-        .data-table th { background: var(--bg); padding: 0.65rem 0.85rem; text-align: left; color: var(--muted); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); }
-        .data-table td { padding: 0.55rem 0.85rem; border-bottom: 1px solid var(--border); color: var(--text); }
+        .data-table-section h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.88rem; font-weight: 700; color: var(--text);
+            margin-bottom: 0.75rem; display: flex;
+            align-items: center; gap: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .edit-link {
+            font-size: 0.62rem; color: var(--faint);
+            font-weight: 400; text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .edit-link:hover { color: var(--blue); }
+        .data-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.78rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 12px;
+            overflow: hidden;
+        }
+        .data-table th {
+            background: var(--surface2); padding: 0.65rem 0.9rem;
+            text-align: left; color: var(--muted); font-weight: 600;
+            font-size: 0.68rem; text-transform: uppercase;
+            letter-spacing: 0.05em; border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            padding: 0.55rem 0.9rem;
+            border-bottom: 1px solid var(--border); color: var(--text);
+        }
         .data-table tr:last-child td { border-bottom: none; }
-        .data-table tr:hover td { background: var(--bg); }
-        .data-table a { color: var(--accent2); text-decoration: none; }
+        .data-table tr:hover td { background: var(--surface2); }
+        .data-table a { color: var(--blue); text-decoration: none; }
         .data-table a:hover { text-decoration: underline; }
-        .confidence-low    { color: var(--danger); font-weight: 600; }
-        .confidence-medium { color: var(--warn); font-weight: 600; }
-        .confidence-high   { color: var(--accent); font-weight: 600; }
+        .conf-low    { color: var(--red);    font-weight: 600; }
+        .conf-medium { color: var(--amber);  font-weight: 600; }
+        .conf-high   { color: var(--green);  font-weight: 600; }
 
         /* ── FOOTER ── */
-        .footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; font-size: 0.72rem; color: #9ca3af; }
-        .footer a { color: #9ca3af; text-decoration: none; }
-        .footer a:hover { color: var(--accent2); }
+        .footer {
+            padding: 2.5rem 0; text-align: center;
+            font-size: 0.7rem; color: var(--faint);
+        }
+        .footer a { color: var(--faint); text-decoration: none; }
+        .footer a:hover { color: var(--blue); }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up {
+            opacity: 0; transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-    <a class="nav-brand" href="#">⚡ <span>LLM</span> Value</a>
+    <a class="nav-brand" href="#"><em>LLM</em> Value</a>
     <div class="nav-links">
         <a href="#winners">🏆 Winners</a>
         <a href="#how">📐 How it works</a>
         <a href="#explore">📊 Full data</a>
     </div>
-    <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute data ↗</a>
+    <div class="nav-right">
+        <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute data ↗</a>
+    </div>
 </nav>
 
+<!-- HERO -->
+<div class="hero-wrap dot-bg">
 <div class="container">
-
-    <!-- HERO -->
     <div class="hero">
         <div class="tag blue">Updated automatically · April 2026</div>
-        <h1>Is your AI subscription<br><em>worth it?</em></h1>
-        <p>We calculated quality-adjusted tokens per dollar across every major model — local hardware, subscriptions, and API.</p>
+        <h1>Is your AI<br><em>subscription worth it?</em></h1>
+        <p class="hero-sub">Quality-adjusted tokens per dollar — local hardware, subscriptions, and API in one number.</p>
         <p class="hero-sources">
             Data from <a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> ·
             <a href="https://arena.ai/leaderboard" target="_blank">Arena AI</a> ·
@@ -305,234 +556,220 @@
         </p>
     </div>
 
-    <!-- DC BAR -->
-    <div class="dc-bar">
-        Built by <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a> — model-agnostic AI that supports local models, API keys, and subscriptions.
-        Our users ask "what should I use?" every day. This is our answer.
-    </div>
-
-    <!-- WINNERS -->
-    <div id="winners" style="scroll-margin-top:60px"></div>
-    <div class="tag green">🏆 Best value right now</div>
-    <div class="winner-grid">
-        <div class="winner-card local">
-            <div class="winner-type">🖥️ Best local setup</div>
-            <div class="winner-model" id="winLocalModel">Calculating…</div>
-            <div class="winner-detail" id="winLocalDetail"></div>
-            <div class="winner-score" id="winLocalScore">—</div>
-            <div class="winner-score-label">quality-adjusted tokens per $</div>
+    <!-- LIVE WINNER STRIP -->
+    <div id="winners" style="scroll-margin-top:60px" class="hero-stats">
+        <div class="hero-stat hs-local" id="hsStat0">
+            <div class="hero-stat-type">🖥️ Best local setup</div>
+            <div class="hero-stat-model" id="winLocalModel">—</div>
+            <div class="hero-stat-detail" id="winLocalDetail"></div>
+            <div class="hero-stat-num" id="winLocalScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $</div>
         </div>
-        <div class="winner-card sub">
-            <div class="winner-type">💳 Best subscription</div>
-            <div class="winner-model" id="winSubModel">Calculating…</div>
-            <div class="winner-detail" id="winSubDetail"></div>
-            <div class="winner-score" id="winSubScore">—</div>
-            <div class="winner-score-label">quality-adjusted tokens per $ · ⚠️ estimated</div>
+        <div class="hero-stat hs-sub" id="hsStat1">
+            <div class="hero-stat-type">💳 Best subscription ⚠️</div>
+            <div class="hero-stat-model" id="winSubModel">—</div>
+            <div class="hero-stat-detail" id="winSubDetail"></div>
+            <div class="hero-stat-num" id="winSubScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $ · estimated</div>
         </div>
-        <div class="winner-card api">
-            <div class="winner-type">🔌 Best API deal</div>
-            <div class="winner-model" id="winApiModel">Calculating…</div>
-            <div class="winner-detail" id="winApiDetail"></div>
-            <div class="winner-score" id="winApiScore">—</div>
-            <div class="winner-score-label">quality-adjusted tokens per $</div>
+        <div class="hero-stat hs-api" id="hsStat2">
+            <div class="hero-stat-type">🔌 Best API deal</div>
+            <div class="hero-stat-model" id="winApiModel">—</div>
+            <div class="hero-stat-detail" id="winApiDetail"></div>
+            <div class="hero-stat-num" id="winApiScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $</div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- HOW IT WORKS -->
-    <div class="section" id="how" style="scroll-margin-top:60px">
+<!-- DC BAR -->
+<div class="dc-bar">
+    <span class="dc-badge">Built by</span>
+    <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a>
+    — model-agnostic AI for local models, API keys, and subscriptions. Our users ask "what should I use?" every day. This is our answer.
+</div>
+
+<div class="container">
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
         <div class="tag purple">📐 How we calculate this</div>
-        <p style="font-size:1rem;color:var(--muted);max-width:640px;margin-bottom:1.5rem">
-            Not all tokens are equal — a token from a smarter model is worth more.
-            We multiply raw token volume by model quality score, then divide by total cost.
-            The result: <strong style="color:var(--text)">quality-adjusted tokens per dollar</strong> —
-            one number that compares a $3,500 GPU, a $20/month plan, and a $0.07/M API directly.
-        </p>
-        <div class="formula-grid">
-            <div class="formula-card local">
-                <h4>🖥️ Local Hardware</h4>
-                <div class="formula-box">
-                    <span class="fv-block"><span class="fv-var fv-local">tok/s</span> × hours/day × 365 × years</span>
-                    <span class="fv-block" style="padding-left:1rem">× <span class="fv-var fv-qual">quality %</span></span>
-                    <hr class="fv-divider">
-                    <span class="fv-block">hardware cost ($)</span>
-                    <span class="fv-block" style="margin-top:0.4rem">= <span class="fv-result">quality tokens / $</span></span>
-                </div>
-                <p class="formula-note">One-time hardware cost amortized over 3 years of use. tok/s measured per model + hardware combo.</p>
-            </div>
-            <div class="formula-card sub">
-                <h4>💳 Subscription</h4>
-                <div class="formula-box">
-                    <span class="fv-block"><span class="fv-var fv-sub">tokens/day limit</span> × 365 × years</span>
-                    <span class="fv-block" style="padding-left:1rem">× <span class="fv-var fv-qual">quality %</span></span>
-                    <hr class="fv-divider">
-                    <span class="fv-block">$/mo × 12 × years</span>
-                    <span class="fv-block" style="margin-top:0.4rem">= <span class="fv-result">quality tokens / $</span></span>
-                </div>
-                <p class="formula-note">⚠️ Token limits are estimated — providers don't publish exact numbers. Treat as directional.</p>
-            </div>
-            <div class="formula-card api">
-                <h4>🔌 API (pay per token)</h4>
-                <div class="formula-box">
-                    <span class="fv-block">1,000,000</span>
-                    <hr class="fv-divider">
-                    <span class="fv-block"><span class="fv-var fv-api">price/M</span> (75% in + 25% out)</span>
-                    <span class="fv-block" style="padding-left:1rem">× <span class="fv-var fv-qual">quality %</span></span>
-                    <span class="fv-block" style="margin-top:0.4rem">= <span class="fv-result">quality tokens / $</span></span>
-                </div>
-                <p class="formula-note">75/25 input/output ratio reflects typical real-world usage. No time horizon needed.</p>
-            </div>
-        </div>
-        <p class="method-note">
-            Quality scores: <a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> Intelligence Index (0–100)
-            + Arena ELO normalized to 0–100 (1000 ELO = 0%, 1500 ELO = 100%). Combined score averages all available benchmarks per model.
-        </p>
+        <div class="section-title">One number. Three categories.</div>
+        <p>Not all tokens are equal — a token from a smarter model is worth more. We multiply raw token volume by quality score and divide by cost. The result: <strong>quality-adjusted tokens per dollar</strong> — one metric that puts a $3,500 GPU, a $20/month plan, and a $0.07/M API on the same axis.</p>
     </div>
+    <div class="formula-grid">
+        <div class="formula-card fc-local">
+            <h4>🖥️ Local Hardware</h4>
+            <div class="formula-box">
+                <span class="fv-block"><span class="fv-var fv-local">tok/s</span> × hours/day × 365 × years</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block">hardware cost ($)</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">One-time hardware cost amortized over 3 years. tok/s measured per model + hardware combo.</p>
+        </div>
+        <div class="formula-card fc-sub">
+            <h4>💳 Subscription</h4>
+            <div class="formula-box">
+                <span class="fv-block"><span class="fv-var fv-sub">tokens/day limit</span> × 365 × years</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block">$/mo × 12 × years</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">⚠️ Token limits are estimated — providers don't publish exact numbers. Treat as directional.</p>
+        </div>
+        <div class="formula-card fc-api">
+            <h4>🔌 API (pay per token)</h4>
+            <div class="formula-box">
+                <span class="fv-block">1,000,000 tokens</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block"><span class="fv-var fv-api">price/M</span> (75% in + 25% out)</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">75/25 input/output ratio reflects typical real-world usage. No time horizon needed.</p>
+        </div>
+    </div>
+    <p class="method-note fade-up">
+        Quality scores: <a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> Intelligence Index (0–100)
+        + Arena ELO normalized to 0–100. Combined score averages all available benchmarks per model.
+    </p>
+</section>
 
-    <!-- FULL DATA -->
-    <div class="section" id="explore" style="scroll-margin-top:60px">
+<!-- FULL DATA -->
+<section class="section" id="explore" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
         <div class="tag blue">📊 Full data</div>
+        <div class="section-title">Compare everything</div>
+    </div>
 
-        <div class="tabs">
-            <div class="tab active" data-tab="calculator">Calculator</div>
-            <div class="tab" data-tab="chart">Timeline chart</div>
-            <div class="tab" data-tab="data">Raw data</div>
+    <div class="tabs">
+        <div class="tab active" data-tab="calculator">Calculator</div>
+        <div class="tab" data-tab="chart">Timeline</div>
+        <div class="tab" data-tab="data">Raw data</div>
+    </div>
+
+    <!-- CALCULATOR -->
+    <div id="tab-calculator" class="tab-content active">
+        <div class="warning-box">
+            ⚠️ <strong>Subscription token limits are estimated</strong> — providers don't publish exact numbers.
         </div>
-
-        <!-- CALCULATOR TAB -->
-        <div id="tab-calculator" class="tab-content active">
-            <div class="warning-box">
-                ⚠️ <strong>Subscription token limits are estimated</strong> — providers don't publish exact numbers.
-                <a href="data/methodology.html" target="_blank">See methodology →</a>
+        <div class="settings-bar">
+            <div class="setting-group">
+                <label>Hardware (local)</label>
+                <select id="hardware"></select>
             </div>
-            <div class="settings-bar">
-                <div class="setting-group">
-                    <label>Hardware (for local)</label>
-                    <select id="hardware"></select>
-                </div>
-                <div class="setting-group">
-                    <label>Hours / day</label>
-                    <input type="number" id="hoursPerDay" value="16" min="1" max="24" style="width:60px">
-                </div>
-                <div class="setting-group">
-                    <label>Period</label>
-                    <select id="periodYears">
-                        <option value="1">1 year</option>
-                        <option value="2">2 years</option>
-                        <option value="3" selected>3 years</option>
-                        <option value="5">5 years</option>
-                    </select>
-                </div>
-                <div class="setting-group">
-                    <label>Benchmark</label>
-                    <select id="benchmark"></select>
-                </div>
+            <div class="setting-group">
+                <label>Hours / day</label>
+                <input type="number" id="hoursPerDay" value="16" min="1" max="24" style="width:64px">
             </div>
-            <div class="calc-grid">
-                <div class="calc-card local">
-                    <h4>🖥️ Local</h4>
-                    <select id="calcLocal"></select>
-                    <div class="calc-steps" id="calcLocalSteps"></div>
-                    <div class="calc-final">
-                        <div class="value" id="calcLocalValue">—</div>
-                        <div class="label">quality-adjusted tokens per $</div>
-                    </div>
-                </div>
-                <div class="calc-card sub">
-                    <h4>💳 Subscription ⚠️</h4>
-                    <select id="calcSub"></select>
-                    <div class="calc-steps" id="calcSubSteps"></div>
-                    <div class="calc-final">
-                        <div class="value" id="calcSubValue">—</div>
-                        <div class="label">quality-adjusted tokens per $</div>
-                    </div>
-                </div>
-                <div class="calc-card api">
-                    <h4>🔌 API</h4>
-                    <select id="calcApi"></select>
-                    <div class="calc-steps" id="calcApiSteps"></div>
-                    <div class="calc-final">
-                        <div class="value" id="calcApiValue">—</div>
-                        <div class="label">quality-adjusted tokens per $</div>
-                    </div>
-                </div>
+            <div class="setting-group">
+                <label>Period</label>
+                <select id="periodYears">
+                    <option value="1">1 year</option>
+                    <option value="2">2 years</option>
+                    <option value="3" selected>3 years</option>
+                    <option value="5">5 years</option>
+                </select>
             </div>
-            <div class="results-section">
-                <h3>All options ranked</h3>
-                <div id="calculatorContent">Loading…</div>
+            <div class="setting-group">
+                <label>Benchmark</label>
+                <select id="benchmark"></select>
             </div>
         </div>
-
-        <!-- CHART TAB -->
-        <div id="tab-chart" class="tab-content">
-            <div class="chart-section">
-                <h2>Value over time by provider</h2>
-                <div class="chart-controls">
-                    <select id="chartBenchmark"></select>
-                    <select id="chartType">
-                        <option value="all">All types</option>
-                        <option value="api">API only</option>
-                        <option value="local">Local only</option>
-                        <option value="subscription">Subscription only</option>
-                    </select>
-                    <select id="chartProvider"><option value="all">All providers</option></select>
+        <div class="calc-grid">
+            <div class="calc-card local">
+                <h4>🖥️ Local</h4>
+                <select id="calcLocal"></select>
+                <div class="calc-steps" id="calcLocalSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcLocalValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
                 </div>
-                <div class="chart-wrapper"><canvas id="valueChart"></canvas></div>
+            </div>
+            <div class="calc-card sub">
+                <h4>💳 Subscription ⚠️</h4>
+                <select id="calcSub"></select>
+                <div class="calc-steps" id="calcSubSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcSubValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
+                </div>
+            </div>
+            <div class="calc-card api">
+                <h4>🔌 API</h4>
+                <select id="calcApi"></select>
+                <div class="calc-steps" id="calcApiSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcApiValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
+                </div>
             </div>
         </div>
-
-        <!-- DATA TAB -->
-        <div id="tab-data" class="tab-content">
-            <div class="data-table-section">
-                <h3>🤖 Models <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableModels">
-                    <thead><tr><th>Model</th><th>Provider</th><th>Release</th><th>Card</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="data-table-section">
-                <h3>📊 Benchmarks <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableBenchmarks">
-                    <thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="data-table-section">
-                <h3>🔌 API Pricing <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableApi">
-                    <thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>API tok/s</th><th>Source</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="data-table-section">
-                <h3>🖥️ Local Performance <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableLocal">
-                    <thead><tr><th>Model</th><th>Hardware</th><th>Tok/s</th><th>Quant</th><th>VRAM</th><th>Source</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="data-table-section">
-                <h3>💳 Subscriptions <span style="color:var(--danger);font-size:0.72rem;font-weight:400">(⚠️ Estimated)</span> <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableSubs">
-                    <thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/day</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="data-table-section">
-                <h3>🔧 Hardware <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" class="edit-link" target="_blank">Edit on GitHub ↗</a></h3>
-                <table class="data-table" id="tableHardware">
-                    <thead><tr><th>Hardware</th><th>Price</th><th>VRAM</th><th>Year</th><th>Source</th></tr></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+        <div class="results-section">
+            <h3>All options ranked</h3>
+            <div class="rank-list" id="calculatorContent">Loading…</div>
         </div>
     </div>
 
-    <div class="footer">
-        <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a> ·
-        <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">GitHub</a> ·
-        <a href="https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7" target="_blank">Original article</a> ·
-        MIT License
+    <!-- CHART -->
+    <div id="tab-chart" class="tab-content">
+        <div class="chart-card">
+            <h2>Value over time by provider</h2>
+            <div class="chart-controls">
+                <select id="chartBenchmark"></select>
+                <select id="chartType">
+                    <option value="all">All types</option>
+                    <option value="api">API only</option>
+                    <option value="local">Local only</option>
+                    <option value="subscription">Subscription only</option>
+                </select>
+                <select id="chartProvider"><option value="all">All providers</option></select>
+            </div>
+            <div class="chart-wrapper"><canvas id="valueChart"></canvas></div>
+        </div>
     </div>
+
+    <!-- RAW DATA -->
+    <div id="tab-data" class="tab-content">
+        <div class="data-table-section">
+            <h3>🤖 Models <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableModels"><thead><tr><th>Model</th><th>Provider</th><th>Release</th><th>Card</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableApi"><thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>tok/s</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🖥️ Local Performance <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableLocal"><thead><tr><th>Model</th><th>Hardware</th><th>Tok/s</th><th>Quant</th><th>VRAM</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>💳 Subscriptions <span style="color:var(--red);font-size:0.7rem;font-weight:400">(⚠️ Estimated)</span> <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/day</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔧 Hardware <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableHardware"><thead><tr><th>Hardware</th><th>Price</th><th>VRAM</th><th>Year</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+    </div>
+</section>
+
+</div><!-- /container -->
+
+<div class="footer container">
+    <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a> ·
+    <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">GitHub</a> ·
+    <a href="https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7" target="_blank">Original article</a> ·
+    MIT License
 </div>
 
 <script>
@@ -541,28 +778,31 @@ let chart = null;
 const HOURS_DEFAULT=16, YEARS_DEFAULT=3;
 
 const PROVIDER_COLORS = {
-  'OpenAI':'#10a37f','Anthropic':'#d4a574','Google':'#4285f4','DeepSeek':'#dc2626',
+  'OpenAI':'#10a37f','Anthropic':'#c47c3a','Google':'#4285f4','DeepSeek':'#dc2626',
   'Meta':'#0668E1','Alibaba':'#ff6a00','Mistral':'#ff7000','Z.ai':'#0ea5e9','Z AI':'#0ea5e9',
-  'MiniMax':'#7c3aed','Kimi':'#dc2626',
+  'MiniMax':'#7033d8','Kimi':'#dc2626',
 };
+const COL = { api:'var(--blue)', local:'var(--green)', subscription:'var(--purple)' };
+const ICON = { api:'🔌', local:'🖥️', subscription:'💳' };
+const LBL  = { api:'API', local:'Local', subscription:'Sub' };
 
-function formatNum(n) {
+function fmt(n) {
   if(n==null) return '—';
   if(n>=1e9) return (n/1e9).toFixed(1)+'B';
   if(n>=1e6) return (n/1e6).toFixed(1)+'M';
   if(n>=1e3) return (n/1e3).toFixed(0)+'K';
   return n.toFixed(0);
 }
-function escapeAttr(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function getWeightedApiPrice(api){ return api.inputPer1M*0.75+api.outputPer1M*0.25; }
-function normalizeScore(score,bmId){
+function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function wap(api){ return api.inputPer1M*0.75+api.outputPer1M*0.25; }
+function norm(score,bmId){
   if(bmId==='_combined') return score;
   const bm=DATA.benchmarks[bmId]; if(!bm) return score;
   if(bm.type==='elo') return Math.max(0,Math.min(100,(score-1000)/5));
   return score;
 }
-function getDisplayScore(score,bmId){
-  if(bmId==='_combined') return score.toFixed(1)+'% avg';
+function disp(score,bmId){
+  if(bmId==='_combined') return score.toFixed(1)+'%';
   const bm=DATA.benchmarks[bmId]; if(!bm) return String(score);
   return bm.type==='elo' ? score+' ELO' : score+'%';
 }
@@ -571,38 +811,63 @@ function getScore(model,bmId){
   if(bmId==='_combined'){
     const rec=Object.entries(DATA.benchmarks).filter(([,b])=>b.recommended).map(([id])=>id);
     let t=0,c=0;
-    rec.forEach(id=>{ if(model.benchmarks[id]){t+=normalizeScore(model.benchmarks[id].score,id);c++;} });
+    rec.forEach(id=>{ if(model.benchmarks[id]){t+=norm(model.benchmarks[id].score,id);c++;} });
     return c>0?t/c:null;
   }
   return model.benchmarks[bmId]?model.benchmarks[bmId].score:null;
 }
 
+/* ── COUNT-UP ANIMATION ── */
+function animateCount(el, target, suffix='') {
+  const duration = 1200;
+  const start = performance.now();
+  const isLarge = target >= 1000;
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const cur = target * ease;
+    el.textContent = fmt(cur) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = fmt(target);
+  }
+  requestAnimationFrame(step);
+}
+
 function computeWinners(){
-  let bestLocal=null,bestSub=null,bestApi=null;
+  let bL=null, bS=null, bA=null;
   Object.values(DATA.models).forEach(model=>{
     const score=getScore(model,'_combined'); if(!score) return;
-    if(model.local){
-      Object.entries(model.local).forEach(([hid,perf])=>{
-        const h=DATA.hardware[hid]; if(!h||!perf.tokensPerSec) return;
-        const val=(perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100))/h.price;
-        if(!bestLocal||val>bestLocal.val) bestLocal={val,model:model.name,detail:`${h.name} · ${perf.tokensPerSec} tok/s · $${h.price.toLocaleString()}`};
-      });
-    }
-    if(model.subscriptions){
-      Object.values(model.subscriptions).forEach(sub=>{
-        if(!sub.tokensPerDay) return;
-        const val=(sub.tokensPerDay*365*YEARS_DEFAULT*(score/100))/(sub.monthlyPrice*12*YEARS_DEFAULT);
-        if(!bestSub||val>bestSub.val) bestSub={val,model:model.name,detail:`${sub.name} · $${sub.monthlyPrice}/mo`};
-      });
-    }
+    if(model.local) Object.entries(model.local).forEach(([hid,perf])=>{
+      const h=DATA.hardware[hid]; if(!h||!perf.tokensPerSec) return;
+      const val=(perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100))/h.price;
+      if(!bL||val>bL.val) bL={val,model:model.name,detail:`${h.name} · ${perf.tokensPerSec} tok/s`};
+    });
+    if(model.subscriptions) Object.values(model.subscriptions).forEach(sub=>{
+      if(!sub.tokensPerDay) return;
+      const val=(sub.tokensPerDay*365*YEARS_DEFAULT*(score/100))/(sub.monthlyPrice*12*YEARS_DEFAULT);
+      if(!bS||val>bS.val) bS={val,model:model.name,detail:`${sub.name} · $${sub.monthlyPrice}/mo`};
+    });
     if(model.api&&model.api.inputPer1M>0){
-      const val=(1_000_000/getWeightedApiPrice(model.api))*(score/100);
-      if(!bestApi||val>bestApi.val) bestApi={val,model:model.name,detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M tokens`};
+      const val=(1_000_000/wap(model.api))*(score/100);
+      if(!bA||val>bA.val) bA={val,model:model.name,detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M`};
     }
   });
-  if(bestLocal){document.getElementById('winLocalModel').textContent=bestLocal.model;document.getElementById('winLocalDetail').textContent=bestLocal.detail;document.getElementById('winLocalScore').textContent=formatNum(bestLocal.val);}
-  if(bestSub){document.getElementById('winSubModel').textContent=bestSub.model;document.getElementById('winSubDetail').textContent=bestSub.detail;document.getElementById('winSubScore').textContent=formatNum(bestSub.val);}
-  if(bestApi){document.getElementById('winApiModel').textContent=bestApi.model;document.getElementById('winApiDetail').textContent=bestApi.detail;document.getElementById('winApiScore').textContent=formatNum(bestApi.val);}
+
+  // reveal with stagger + count-up
+  [[bL,'winLocalModel','winLocalDetail','winLocalScore','hsStat0'],
+   [bS,'winSubModel','winSubDetail','winSubScore','hsStat1'],
+   [bA,'winApiModel','winApiDetail','winApiScore','hsStat2']
+  ].forEach(([b, mId, dId, sId, statId], i) => {
+    if(!b) return;
+    document.getElementById(mId).textContent = b.model;
+    document.getElementById(dId).textContent = b.detail;
+    setTimeout(() => {
+      const el = document.getElementById(statId);
+      el.classList.add('visible');
+      const scoreEl = document.getElementById(sId);
+      animateCount(scoreEl, b.val);
+    }, i * 160);
+  });
 }
 
 async function loadData(){
@@ -610,44 +875,188 @@ async function loadData(){
     const [mR,hR,bR]=await Promise.all([fetch('data/models.json'),fetch('data/hardware.json'),fetch('data/benchmarks.json')]);
     DATA.models=await mR.json(); DATA.hardware=await hR.json(); DATA.benchmarks=await bR.json();
     init();
-  }catch(err){document.getElementById('calculatorContent').innerHTML=`<div class="warning-box">Error loading data: ${err.message}</div>`;}
+  } catch(err) {
+    document.getElementById('calculatorContent').innerHTML=`<div class="warning-box">Error loading data: ${err.message}</div>`;
+  }
 }
 
-function init(){
-  computeWinners();
+function initSelects(){
   const hwSel=document.getElementById('hardware');
-  Object.entries(DATA.hardware).forEach(([id,hw])=>{const o=document.createElement('option');o.value=id;o.textContent=`${hw.name} ($${hw.price.toLocaleString()})`;hwSel.appendChild(o);});
-  ['benchmark','chartBenchmark'].forEach(selId=>{
-    const sel=document.getElementById(selId);
-    const o=document.createElement('option');o.value='_combined';o.textContent='⚡ Combined (Average All)';sel.appendChild(o);
-    Object.entries(DATA.benchmarks).filter(([,b])=>b.recommended).forEach(([id,bm])=>{const o2=document.createElement('option');o2.value=id;o2.textContent=bm.name;sel.appendChild(o2);});
+  Object.entries(DATA.hardware).forEach(([id,hw])=>{
+    const o=document.createElement('option');o.value=id;
+    o.textContent=`${hw.name} ($${hw.price.toLocaleString()})`;hwSel.appendChild(o);
   });
-  populateCalcDropdowns();
-  const provs=new Set(Object.values(DATA.models).map(m=>m.provider));
-  const pSel=document.getElementById('chartProvider');
-  provs.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;pSel.appendChild(o);});
-  renderDataTables();
-  document.querySelectorAll('.tab').forEach(tab=>{
-    tab.addEventListener('click',()=>{
-      document.querySelectorAll('.tab,.tab-content').forEach(el=>el.classList.remove('active'));
-      tab.classList.add('active'); document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
-      if(tab.dataset.tab==='chart') updateChart();
+  ['benchmark','chartBenchmark'].forEach(sid=>{
+    const sel=document.getElementById(sid);
+    const o=document.createElement('option');o.value='_combined';o.textContent='⚡ Combined';sel.appendChild(o);
+    Object.entries(DATA.benchmarks).filter(([,b])=>b.recommended).forEach(([id,bm])=>{
+      const o2=document.createElement('option');o2.value=id;o2.textContent=bm.name;sel.appendChild(o2);
     });
   });
-  document.querySelectorAll('#tab-calculator select, #tab-calculator input').forEach(el=>{el.addEventListener('change',updateAll);el.addEventListener('input',updateAll);});
-  document.getElementById('hardware').addEventListener('change',()=>{populateCalcDropdowns();updateAll();});
-  ['chartBenchmark','chartType','chartProvider'].forEach(id=>document.getElementById(id).addEventListener('change',updateChart));
-  updateAll();
+  const pSel=document.getElementById('chartProvider');
+  new Set(Object.values(DATA.models).map(m=>m.provider)).forEach(p=>{
+    const o=document.createElement('option');o.value=p;o.textContent=p;pSel.appendChild(o);
+  });
 }
 
 function populateCalcDropdowns(){
   const hwId=document.getElementById('hardware').value;
   const lSel=document.getElementById('calcLocal'); lSel.innerHTML='';
-  Object.entries(DATA.models).forEach(([id,m])=>{if(m.local&&m.local[hwId]){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} (${m.local[hwId].tokensPerSec} tok/s)`;lSel.appendChild(o);}});
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.local&&m.local[hwId]){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} (${m.local[hwId].tokensPerSec} tok/s)`;lSel.appendChild(o);}
+  });
   const sSel=document.getElementById('calcSub'); sSel.innerHTML='';
-  Object.entries(DATA.models).forEach(([id,m])=>{if(m.subscriptions)Object.entries(m.subscriptions).forEach(([sid,sub])=>{const o=document.createElement('option');o.value=`${id}|${sid}`;o.textContent=`${sub.name} → ${m.name} ($${sub.monthlyPrice}/mo)`;sSel.appendChild(o);});});
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.subscriptions) Object.entries(m.subscriptions).forEach(([sid,sub])=>{
+      const o=document.createElement('option');o.value=`${id}|${sid}`;
+      o.textContent=`${sub.name} → ${m.name} ($${sub.monthlyPrice}/mo)`;sSel.appendChild(o);
+    });
+  });
   const aSel=document.getElementById('calcApi'); aSel.innerHTML='';
-  Object.entries(DATA.models).forEach(([id,m])=>{if(m.api&&m.api.inputPer1M>0){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} ($${m.api.inputPer1M}/M)`;aSel.appendChild(o);}});
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.api&&m.api.inputPer1M>0){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} ($${m.api.inputPer1M}/M)`;aSel.appendChild(o);}
+  });
+}
+
+function init(){
+  computeWinners();
+  initSelects();
+  populateCalcDropdowns();
+  renderDataTables();
+
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.tab,.tab-content').forEach(el=>el.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+      if(tab.dataset.tab==='chart') updateChart();
+    });
+  });
+  document.querySelectorAll('#tab-calculator select,#tab-calculator input').forEach(el=>{
+    el.addEventListener('change',updateAll); el.addEventListener('input',updateAll);
+  });
+  document.getElementById('hardware').addEventListener('change',()=>{populateCalcDropdowns();updateAll();});
+  ['chartBenchmark','chartType','chartProvider'].forEach(id=>document.getElementById(id).addEventListener('change',updateChart));
+
+  // scroll animations
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.12});
+  document.querySelectorAll('.fade-up,.formula-card').forEach(el=>obs.observe(el));
+  // stagger formula cards
+  document.querySelectorAll('.formula-card').forEach((el,i)=>{
+    el.style.transitionDelay = (i*100)+'ms';
+  });
+
+  updateAll();
+}
+
+function updateAll(){ updateCalcCards(); renderRankedList(); }
+
+function updateCalcCards(){
+  const hwId=document.getElementById('hardware').value;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('benchmark').value;
+  const hw=DATA.hardware[hwId]; if(!hw) return;
+
+  const lId=document.getElementById('calcLocal').value, lm=DATA.models[lId];
+  if(lm&&lm.local&&lm.local[hwId]){
+    const p=lm.local[hwId],sc=getScore(lm,bmId)||0,
+      tpd=p.tokensPerSec*3600*hours,tot=tpd*365*years,
+      adj=tot*(norm(sc,bmId)/100), val=adj/hw.price;
+    document.getElementById('calcLocalSteps').innerHTML=
+      `<div class="calc-step"><span class="num">${p.tokensPerSec}</span> tok/s × 3600 × <span class="num">${hours}</span>h = <span class="result">${fmt(tpd)}</span>/day</div>`+
+      `<div class="calc-step">× 365 × <span class="num">${years}</span>y = <span class="result">${fmt(tot)}</span></div>`+
+      `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(adj)}</span></div>`+
+      `<div class="calc-step">÷ $<span class="num">${hw.price.toLocaleString()}</span> = <span class="result">${fmt(val)}</span></div>`;
+    document.getElementById('calcLocalValue').textContent=fmt(val);
+  }
+
+  const sv=document.getElementById('calcSub').value;
+  if(sv){
+    const [mid,sid]=sv.split('|'), m=DATA.models[mid], sub=m?.subscriptions?.[sid];
+    if(sub&&sub.tokensPerDay){
+      const sc=getScore(m,bmId)||0, tot=sub.tokensPerDay*365*years,
+        cost=sub.monthlyPrice*12*years, adj=tot*(norm(sc,bmId)/100), val=adj/cost;
+      document.getElementById('calcSubSteps').innerHTML=
+        `<div class="calc-step"><span class="num">${fmt(sub.tokensPerDay)}</span> tok/day × 365 × <span class="num">${years}</span>y = <span class="result">${fmt(tot)}</span></div>`+
+        `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(adj)}</span></div>`+
+        `<div class="calc-step">$<span class="num">${sub.monthlyPrice}</span>/mo × 12 × <span class="num">${years}</span>y = $<span class="result">${cost}</span></div>`+
+        `<div class="calc-step">÷ $<span class="num">${cost}</span> = <span class="result">${fmt(val)}</span></div>`;
+      document.getElementById('calcSubValue').textContent=fmt(val);
+    }
+  }
+
+  const aId=document.getElementById('calcApi').value, am=DATA.models[aId];
+  if(am&&am.api){
+    const sc=getScore(am,bmId)||0, wp=wap(am.api), tpd=1_000_000/wp, val=tpd*(norm(sc,bmId)/100);
+    document.getElementById('calcApiSteps').innerHTML=
+      `<div class="calc-step">$<span class="num">${am.api.inputPer1M}</span>×75% + $<span class="num">${am.api.outputPer1M}</span>×25% = $<span class="result">${wp.toFixed(3)}</span>/M</div>`+
+      `<div class="calc-step">1M ÷ $<span class="num">${wp.toFixed(3)}</span> = <span class="result">${fmt(tpd)}</span> tok/$</div>`+
+      `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(val)}</span></div>`;
+    document.getElementById('calcApiValue').textContent=fmt(val);
+  }
+}
+
+function renderRankedList(){
+  const hwId=document.getElementById('hardware').value, hw=DATA.hardware[hwId]; if(!hw) return;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('benchmark').value;
+  let results=[];
+  Object.values(DATA.models).forEach(model=>{
+    const score=getScore(model,bmId); if(!score) return;
+    const np=norm(score,bmId), ds=disp(score,bmId);
+    if(model.api&&model.api.inputPer1M>0){
+      const wp=wap(model.api), tpd=1_000_000/wp, val=tpd*(np/100);
+      results.push({model:model.name,type:'api',val,ds,details:`$${wp.toFixed(3)}/M avg`,
+        tip:`$${model.api.inputPer1M}×75% + $${model.api.outputPer1M}×25% = $${wp.toFixed(3)}/M\n1M ÷ $${wp.toFixed(3)} = ${fmt(tpd)} tok/$\n× ${np.toFixed(1)}% = ${fmt(val)} tok/$`});
+    }
+    if(model.local&&model.local[hwId]){
+      const p=model.local[hwId], tpd=p.tokensPerSec*3600*hours, tot=tpd*365*years, val=(tot/hw.price)*(np/100);
+      results.push({model:model.name,type:'local',val,ds,details:`${p.tokensPerSec} tok/s · ${hw.name}`,
+        tip:`${p.tokensPerSec} tok/s × ${hours}h = ${fmt(tpd)}/day\n× 365 × ${years}y = ${fmt(tot)}\n× ${np.toFixed(1)}% ÷ $${hw.price.toLocaleString()} = ${fmt(val)} tok/$`});
+    }
+    if(model.subscriptions) Object.values(model.subscriptions).forEach(sub=>{
+      if(!sub.tokensPerDay) return;
+      const tot=sub.tokensPerDay*365*years, cost=sub.monthlyPrice*12*years, val=(tot/cost)*(np/100);
+      results.push({model:model.name,type:'subscription',subName:sub.name,val,ds,confidence:sub.confidence,
+        details:`$${sub.monthlyPrice}/mo`,
+        tip:`${fmt(sub.tokensPerDay)} tok/day × 365 × ${years}y = ${fmt(tot)}\n$${sub.monthlyPrice}/mo × 12 × ${years}y = $${cost}\n× ${np.toFixed(1)}% ÷ $${cost} = ${fmt(val)} tok/$`});
+    });
+  });
+  results.sort((a,b)=>b.val-a.val);
+  const maxVal=results[0]?.val||1;
+  let html='';
+  results.forEach((r,i)=>{
+    const pct=Math.max(2,(r.val/maxVal)*100);
+    const col=COL[r.type], icon=ICON[r.type], lbl=LBL[r.type];
+    const warn=r.confidence==='low'?' ⚠️':'';
+    const name=(r.subName?`${r.subName} → ${r.model}`:r.model)+warn;
+    const rankColor = i===0?'var(--green)':i===1?'var(--blue)':i===2?'var(--purple)':'var(--faint)';
+    html+=`<div class="rank-row" ${r.tip?`data-tip="${esc(r.tip)}"`:''}>
+      <span class="rank-num" style="color:${rankColor}">#${i+1}</span>
+      <span class="rank-type" style="color:${col}">${icon} ${lbl}</span>
+      <span class="rank-name">${name}</span>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar" style="width:${pct}%;background:${col};opacity:0.9">
+          ${pct>18?fmt(r.val):''}
+        </div>
+      </div>
+      <span class="rank-val-out" style="color:${col}">${pct<=18?fmt(r.val):''}</span>
+      <span class="rank-detail">${r.details} (${r.ds})</span>
+    </div>`;
+  });
+  const el=document.getElementById('calculatorContent');
+  el.innerHTML=html;
+  // animate bars in after paint
+  requestAnimationFrame(()=>{
+    el.querySelectorAll('.rank-bar').forEach((bar,i)=>{
+      const target=bar.style.width; bar.style.width='0%';
+      setTimeout(()=>{ bar.style.width=target; }, i*18);
+    });
+  });
 }
 
 function renderDataTables(){
@@ -655,95 +1064,58 @@ function renderDataTables(){
   Object.values(DATA.models).forEach(m=>{h+=`<tr><td><strong>${m.name}</strong></td><td>${m.provider}</td><td>${m.releaseDate||'—'}</td><td><a href="${m.modelCard||'#'}" target="_blank">↗</a></td></tr>`;});
   document.querySelector('#tableModels tbody').innerHTML=h;
   h='';
-  Object.values(DATA.models).forEach(m=>{const bm=m.benchmarks||{};const aa=bm.aa_intelligence;const elo=bm.arena_elo;const swe=bm.swe_bench;const aider=bm.aider_polyglot;
-    h+=`<tr><td>${m.name}</td><td>${aa?`<a href="${aa.source}" target="_blank">${aa.score}</a>`:'—'}</td><td>${elo?`<a href="${elo.source}" target="_blank">${elo.score}</a>`:'—'}</td><td>${swe?`<a href="${swe.source}" target="_blank">${swe.score}%</a>`:'—'}</td><td>${aider?`<a href="${aider.source}" target="_blank">${aider.score}%</a>`:'—'}</td></tr>`;});
+  Object.values(DATA.models).forEach(m=>{
+    const bm=m.benchmarks||{},aa=bm.aa_intelligence,elo=bm.arena_elo,swe=bm.swe_bench,aider=bm.aider_polyglot;
+    h+=`<tr><td>${m.name}</td><td>${aa?`<a href="${aa.source}" target="_blank">${aa.score}</a>`:'—'}</td><td>${elo?`<a href="${elo.source}" target="_blank">${elo.score}</a>`:'—'}</td><td>${swe?`<a href="${swe.source}" target="_blank">${swe.score}%</a>`:'—'}</td><td>${aider?`<a href="${aider.source}" target="_blank">${aider.score}%</a>`:'—'}</td></tr>`;
+  });
   document.querySelector('#tableBenchmarks tbody').innerHTML=h;
   h='';
   Object.values(DATA.models).filter(m=>m.api&&m.api.inputPer1M>0).forEach(m=>{h+=`<tr><td>${m.name}</td><td>$${m.api.inputPer1M}</td><td>$${m.api.outputPer1M}</td><td>${m.api.tokensPerSecAPI||'—'}</td><td><a href="${m.api.source}" target="_blank">↗</a></td></tr>`;});
   document.querySelector('#tableApi tbody').innerHTML=h;
   h='';
-  Object.values(DATA.models).filter(m=>m.local).forEach(m=>{Object.entries(m.local).forEach(([hwId,perf])=>{const hw=DATA.hardware[hwId];h+=`<tr><td>${m.name}</td><td>${hw?hw.name:hwId}</td><td>${perf.tokensPerSec}</td><td>${perf.quantization||'—'}</td><td>${perf.vramRequired||'?'}GB</td><td><a href="${perf.source}" target="_blank">↗</a></td></tr>`;});});
+  Object.values(DATA.models).filter(m=>m.local).forEach(m=>{
+    Object.entries(m.local).forEach(([hwId,perf])=>{
+      const hw=DATA.hardware[hwId];
+      h+=`<tr><td>${m.name}</td><td>${hw?hw.name:hwId}</td><td>${perf.tokensPerSec}</td><td>${perf.quantization||'—'}</td><td>${perf.vramRequired||'?'}GB</td><td><a href="${perf.source}" target="_blank">↗</a></td></tr>`;
+    });
+  });
   document.querySelector('#tableLocal tbody').innerHTML=h;
   h='';
-  Object.values(DATA.models).filter(m=>m.subscriptions).forEach(m=>{Object.entries(m.subscriptions).forEach(([,sub])=>{const cc=sub.confidence==='low'?'confidence-low':sub.confidence==='medium'?'confidence-medium':'confidence-high';h+=`<tr><td>${m.name}</td><td>${sub.name}</td><td>$${sub.monthlyPrice}</td><td>${sub.tokensPerDay?formatNum(sub.tokensPerDay):'?'}</td><td class="${cc}">${sub.confidence||'low'}</td><td style="max-width:180px;font-size:0.7rem">${sub.notes||''}</td><td><a href="${sub.source}" target="_blank">↗</a></td></tr>`;});});
+  Object.values(DATA.models).filter(m=>m.subscriptions).forEach(m=>{
+    Object.entries(m.subscriptions).forEach(([,sub])=>{
+      const cc=sub.confidence==='low'?'conf-low':sub.confidence==='medium'?'conf-medium':'conf-high';
+      h+=`<tr><td>${m.name}</td><td>${sub.name}</td><td>$${sub.monthlyPrice}</td><td>${sub.tokensPerDay?fmt(sub.tokensPerDay):'?'}</td><td class="${cc}">${sub.confidence||'low'}</td><td style="max-width:170px;font-size:0.7rem">${sub.notes||''}</td><td><a href="${sub.source}" target="_blank">↗</a></td></tr>`;
+    });
+  });
   document.querySelector('#tableSubs tbody').innerHTML=h;
   h='';
   Object.entries(DATA.hardware).forEach(([,hw])=>{h+=`<tr><td>${hw.name}</td><td>$${hw.price.toLocaleString()}</td><td>${hw.vram}GB</td><td>${hw.year}</td><td><a href="${hw.source}" target="_blank">↗</a></td></tr>`;});
   document.querySelector('#tableHardware tbody').innerHTML=h;
 }
 
-function updateAll(){ updateCalcCards(); renderCalculator(); }
-
-function updateCalcCards(){
-  const hwId=document.getElementById('hardware').value,hours=parseFloat(document.getElementById('hoursPerDay').value)||16,years=parseInt(document.getElementById('periodYears').value),bmId=document.getElementById('benchmark').value,hw=DATA.hardware[hwId];
-  if(!hw) return;
-  const lId=document.getElementById('calcLocal').value,lm=DATA.models[lId];
-  if(lm&&lm.local&&lm.local[hwId]){const p=lm.local[hwId],sc=getScore(lm,bmId)||0,tpd=p.tokensPerSec*3600*hours,tot=tpd*365*years,adj=tot*(normalizeScore(sc,bmId)/100),val=adj/hw.price;
-    document.getElementById('calcLocalSteps').innerHTML=`<div class="calc-step"><span class="num">${p.tokensPerSec}</span> tok/s × 3600 × <span class="num">${hours}</span>h = <span class="result">${formatNum(tpd)}</span>/day</div><div class="calc-step">× 365 × <span class="num">${years}</span>y = <span class="result">${formatNum(tot)}</span></div><div class="calc-step">× quality <span class="num">${getDisplayScore(sc,bmId)}</span> = <span class="result">${formatNum(adj)}</span></div><div class="calc-step">÷ $<span class="num">${hw.price.toLocaleString()}</span> = <span class="result">${formatNum(val)}</span></div>`;
-    document.getElementById('calcLocalValue').textContent=formatNum(val);
-  }
-  const sv=document.getElementById('calcSub').value;
-  if(sv){const [mid,sid]=sv.split('|'),m=DATA.models[mid],sub=m?.subscriptions?.[sid];
-    if(sub&&sub.tokensPerDay){const sc=getScore(m,bmId)||0,tot=sub.tokensPerDay*365*years,cost=sub.monthlyPrice*12*years,adj=tot*(normalizeScore(sc,bmId)/100),val=adj/cost;
-      document.getElementById('calcSubSteps').innerHTML=`<div class="calc-step"><span class="num">${formatNum(sub.tokensPerDay)}</span> tok/day × 365 × <span class="num">${years}</span>y = <span class="result">${formatNum(tot)}</span></div><div class="calc-step">× quality <span class="num">${getDisplayScore(sc,bmId)}</span> = <span class="result">${formatNum(adj)}</span></div><div class="calc-step">$<span class="num">${sub.monthlyPrice}</span>/mo × 12 × <span class="num">${years}</span>y = $<span class="result">${cost}</span></div><div class="calc-step">÷ $<span class="num">${cost}</span> = <span class="result">${formatNum(val)}</span></div>`;
-      document.getElementById('calcSubValue').textContent=formatNum(val);
-    }
-  }
-  const aId=document.getElementById('calcApi').value,am=DATA.models[aId];
-  if(am&&am.api){const sc=getScore(am,bmId)||0,wp=getWeightedApiPrice(am.api),tpd=1_000_000/wp,val=tpd*(normalizeScore(sc,bmId)/100);
-    document.getElementById('calcApiSteps').innerHTML=`<div class="calc-step">$<span class="num">${am.api.inputPer1M}</span>×75% + $<span class="num">${am.api.outputPer1M}</span>×25% = $<span class="result">${wp.toFixed(3)}</span>/M</div><div class="calc-step">1M ÷ $<span class="num">${wp.toFixed(3)}</span> = <span class="result">${formatNum(tpd)}</span> tok/$</div><div class="calc-step">× quality <span class="num">${getDisplayScore(sc,bmId)}</span> = <span class="result">${formatNum(val)}</span></div>`;
-    document.getElementById('calcApiValue').textContent=formatNum(val);
-  }
-}
-
-function renderCalculator(){
-  const hwId=document.getElementById('hardware').value,hw=DATA.hardware[hwId];if(!hw)return;
-  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16,years=parseInt(document.getElementById('periodYears').value),bmId=document.getElementById('benchmark').value;
-  let results=[];
-  Object.values(DATA.models).forEach(model=>{
-    const score=getScore(model,bmId);if(!score)return;
-    const np=normalizeScore(score,bmId),ds=getDisplayScore(score,bmId);
-    if(model.api&&model.api.inputPer1M>0){const wp=getWeightedApiPrice(model.api),tpd=1_000_000/wp,val=tpd*(np/100);results.push({model:model.name,type:'api',val,ds,details:`$${wp.toFixed(3)}/M avg`,tooltip:`$${model.api.inputPer1M}×75% + $${model.api.outputPer1M}×25% = $${wp.toFixed(3)}/M\n1M ÷ $${wp.toFixed(3)} = ${formatNum(tpd)} tok/$\n× ${np.toFixed(1)}% = ${formatNum(val)} tok/$`});}
-    if(model.local&&model.local[hwId]){const p=model.local[hwId],tpd=p.tokensPerSec*3600*hours,tot=tpd*365*years,val=(tot/hw.price)*(np/100);results.push({model:model.name,type:'local',val,ds,details:`${p.tokensPerSec} tok/s on ${hw.name}`,tooltip:`${p.tokensPerSec} tok/s × ${hours}h = ${formatNum(tpd)}/day\n× 365 × ${years}y = ${formatNum(tot)}\n× ${np.toFixed(1)}% ÷ $${hw.price.toLocaleString()} = ${formatNum(val)} tok/$`});}
-    if(model.subscriptions)Object.values(model.subscriptions).forEach(sub=>{if(!sub.tokensPerDay)return;const tot=sub.tokensPerDay*365*years,cost=sub.monthlyPrice*12*years,val=(tot/cost)*(np/100);results.push({model:model.name,type:'subscription',subName:sub.name,val,ds,confidence:sub.confidence,details:`$${sub.monthlyPrice}/mo`,tooltip:`${formatNum(sub.tokensPerDay)} tok/day × 365 × ${years}y = ${formatNum(tot)}\n$${sub.monthlyPrice}/mo × 12 × ${years}y = $${cost}\n× ${np.toFixed(1)}% ÷ $${cost} = ${formatNum(val)} tok/$`});});
-  });
-  results.sort((a,b)=>b.val-a.val);
-  const maxVal=results[0]?.val||1;
-  const colMap={api:'var(--accent2)',local:'var(--accent)',subscription:'var(--purple)'};
-  const iconMap={api:'🔌',local:'🖥️',subscription:'💳'};
-  const lblMap={api:'API',local:'Local',subscription:'Sub'};
-  let html='<div style="display:flex;flex-direction:column;gap:0.35rem">';
-  results.forEach(r=>{
-    const pct=(r.val/maxVal)*100,col=colMap[r.type],icon=iconMap[r.type],lbl=lblMap[r.type];
-    const warn=r.confidence==='low'?' ⚠️':'';
-    const name=r.subName?`${r.subName} → ${r.model}`:r.model;
-    const tt=r.tooltip?` data-tooltip="${escapeAttr(r.tooltip)}"`:'' ;
-    html+=`<div class="calc-row"${tt} style="display:flex;align-items:center;gap:0.75rem;padding:0.2rem 0">
-      <div style="width:52px;font-size:0.62rem;font-weight:700;color:${col}">${icon} ${lbl}</div>
-      <div style="width:200px;font-size:0.75rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${name}${warn}</div>
-      <div style="flex:1;background:var(--bg);border-radius:4px;height:22px;overflow:hidden;border:1px solid var(--border)">
-        <div style="width:${pct}%;height:100%;background:${col};opacity:0.85;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:0.63rem;font-weight:700;color:#fff">${pct>15?formatNum(r.val):''}</div>
-      </div>
-      <div style="width:50px;font-size:0.72rem;font-weight:700;color:${col};text-align:right">${pct<=15?formatNum(r.val):''}</div>
-      <div style="width:130px;font-size:0.62rem;color:var(--muted)">${r.details} (${r.ds})</div>
-    </div>`;
-  });
-  html+='</div>';
-  document.getElementById('calculatorContent').innerHTML=html;
-}
-
 function updateChart(){
-  const hwId=document.getElementById('hardware').value,hw=DATA.hardware[hwId];if(!hw)return;
-  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16,years=parseInt(document.getElementById('periodYears').value);
-  const bmId=document.getElementById('chartBenchmark').value,typeFilter=document.getElementById('chartType').value,provFilter=document.getElementById('chartProvider').value;
+  const hwId=document.getElementById('hardware').value, hw=DATA.hardware[hwId]; if(!hw) return;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('chartBenchmark').value;
+  const typeFilter=document.getElementById('chartType').value;
+  const provFilter=document.getElementById('chartProvider').value;
   let pts=[];
   Object.values(DATA.models).forEach(model=>{
-    if(provFilter!=='all'&&model.provider!==provFilter)return;
-    const score=getScore(model,bmId);if(!score)return;
-    const np=normalizeScore(score,bmId),date=new Date(model.releaseDate||'2025-01-01');
-    if(model.api&&model.api.inputPer1M>0&&(typeFilter==='all'||typeFilter==='api')) pts.push({name:model.name,provider:model.provider,type:'api',date,value:(1_000_000/getWeightedApiPrice(model.api))*(np/100)});
-    if(model.local&&model.local[hwId]&&(typeFilter==='all'||typeFilter==='local')){const p=model.local[hwId];pts.push({name:model.name+' (local)',provider:model.provider,type:'local',date,value:(p.tokensPerSec*3600*hours*365*years/hw.price)*(np/100)});}
-    if(model.subscriptions&&(typeFilter==='all'||typeFilter==='subscription'))Object.values(model.subscriptions).forEach(sub=>{if(!sub.tokensPerDay)return;pts.push({name:sub.name+'→'+model.name,provider:model.provider,type:'subscription',date,value:(sub.tokensPerDay*365*years/(sub.monthlyPrice*12*years))*(np/100),estimated:sub.confidence==='low'});});
+    if(provFilter!=='all'&&model.provider!==provFilter) return;
+    const score=getScore(model,bmId); if(!score) return;
+    const np=norm(score,bmId), date=new Date(model.releaseDate||'2025-01-01');
+    if(model.api&&model.api.inputPer1M>0&&(typeFilter==='all'||typeFilter==='api'))
+      pts.push({name:model.name,provider:model.provider,type:'api',date,value:(1_000_000/wap(model.api))*(np/100)});
+    if(model.local&&model.local[hwId]&&(typeFilter==='all'||typeFilter==='local')){
+      const p=model.local[hwId];
+      pts.push({name:model.name+' (local)',provider:model.provider,type:'local',date,value:(p.tokensPerSec*3600*hours*365*years/hw.price)*(np/100)});
+    }
+    if(model.subscriptions&&(typeFilter==='all'||typeFilter==='subscription'))
+      Object.values(model.subscriptions).forEach(sub=>{
+        if(!sub.tokensPerDay) return;
+        pts.push({name:sub.name+'→'+model.name,provider:model.provider,type:'subscription',date,value:(sub.tokensPerDay*365*years/(sub.monthlyPrice*12*years))*(np/100)});
+      });
   });
   const groups={};
   pts.forEach(d=>{const k=`${d.provider}-${d.type}`;if(!groups[k])groups[k]={provider:d.provider,type:d.type,points:[]};groups[k].points.push(d);});
@@ -756,15 +1128,16 @@ function updateChart(){
       borderDash:g.type==='subscription'?[4,4]:[],
       pointStyle:g.type==='local'?'rect':g.type==='subscription'?'triangle':'circle'};
   });
-  if(chart)chart.destroy();
-  chart=new Chart(document.getElementById('valueChart'),{type:'scatter',data:{datasets},options:{responsive:true,maintainAspectRatio:false,
+  if(chart) chart.destroy();
+  chart=new Chart(document.getElementById('valueChart'),{type:'scatter',data:{datasets},options:{
+    responsive:true,maintainAspectRatio:false,
     scales:{
-      x:{type:'time',time:{unit:'quarter'},title:{display:true,text:'Release Date',color:'#6b7280'},ticks:{color:'#6b7280'},grid:{color:'rgba(0,0,0,0.06)'}},
-      y:{type:'logarithmic',title:{display:true,text:'Quality-Adjusted Tokens per $',color:'#6b7280'},ticks:{color:'#6b7280',callback:v=>formatNum(v)},grid:{color:'rgba(0,0,0,0.06)'}}
+      x:{type:'time',time:{unit:'quarter'},title:{display:true,text:'Release Date',color:'#6b6b72'},ticks:{color:'#6b6b72'},grid:{color:'rgba(0,0,0,0.05)'}},
+      y:{type:'logarithmic',title:{display:true,text:'Quality-Adj Tokens / $',color:'#6b6b72'},ticks:{color:'#6b6b72',callback:v=>fmt(v)},grid:{color:'rgba(0,0,0,0.05)'}}
     },
     plugins:{
-      tooltip:{callbacks:{title:ctx=>`${ctx[0].raw.type==='api'?'🔌':ctx[0].raw.type==='local'?'🖥️':'💳'} ${ctx[0].raw.name}`,label:ctx=>[`Value: ${formatNum(ctx.raw.y)} tok/$`]}},
-      legend:{display:true,labels:{color:'#6b7280',usePointStyle:true}}
+      tooltip:{callbacks:{title:ctx=>`${ctx[0].raw.type==='api'?'🔌':ctx[0].raw.type==='local'?'🖥️':'💳'} ${ctx[0].raw.name}`,label:ctx=>[`Value: ${fmt(ctx.raw.y)} tok/$`]}},
+      legend:{display:true,labels:{color:'#6b6b72',usePointStyle:true}}
     }
   }});
 }
