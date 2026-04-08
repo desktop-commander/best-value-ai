@@ -1,21 +1,33 @@
 {
   "arena_text": {
     "name": "Arena Text",
-    "description": "LMArena Text Arena - human preference for general chat, writing, creativity.",
+    "description": "LMArena Text Arena — human preference for general chat, writing, creativity. ELO-based, continuously updated, stable across model generations.",
     "maxScore": null,
     "type": "elo",
     "higherIsBetter": true,
     "source": "https://lmarena.ai/leaderboard",
-    "recommended": true
+    "recommended": true,
+    "stable": true
   },
   "arena_code": {
     "name": "Arena Code (WebDev)",
-    "description": "LMArena WebDev Arena - human preference for coding and web development tasks.",
+    "description": "LMArena WebDev Arena — human preference for coding and web development. ELO-based, stable across generations.",
     "maxScore": null,
     "type": "elo",
     "higherIsBetter": true,
     "source": "https://lmarena.ai/leaderboard/code",
-    "recommended": true
+    "recommended": true,
+    "stable": true
+  },
+  "aa_intelligence": {
+    "name": "AA Intelligence Index",
+    "description": "Artificial Analysis composite intelligence score. Aggregates multiple benchmarks into one normalized 0–100 score. Maintained continuously with consistent methodology.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
   },
   "aider_polyglot": {
     "name": "Aider Polyglot",
@@ -24,16 +36,18 @@
     "type": "percentage",
     "higherIsBetter": true,
     "source": "https://aider.chat/docs/leaderboards/",
-    "recommended": true
+    "recommended": true,
+    "stable": false
   },
   "swe_bench": {
     "name": "SWE-bench Verified",
-    "description": "Real GitHub issues - tests ability to fix actual bugs in production codebases.",
+    "description": "Real GitHub issues — tests ability to fix actual bugs in production codebases.",
     "maxScore": 100,
     "type": "percentage",
     "higherIsBetter": true,
     "source": "https://www.swebench.com/",
-    "recommended": true
+    "recommended": true,
+    "stable": false
   },
   "livebench": {
     "name": "LiveBench",
@@ -42,27 +56,8 @@
     "type": "percentage",
     "higherIsBetter": true,
     "source": "https://livebench.ai/",
-    "recommended": true
-  },
-  "mmlu": {
-    "name": "MMLU",
-    "description": "Massive Multitask Language Understanding. SATURATED - top models cluster within 2-4%.",
-    "maxScore": 100,
-    "type": "percentage",
-    "higherIsBetter": true,
-    "source": "https://huggingface.co/spaces/open-llm-leaderboard",
-    "recommended": false,
-    "warning": "Saturated benchmark - no longer differentiates frontier models"
-  },
-  "humaneval": {
-    "name": "HumanEval",
-    "description": "Code generation benchmark. SATURATED - SOTA at 99.4%.",
-    "maxScore": 100,
-    "type": "percentage",
-    "higherIsBetter": true,
-    "source": "https://github.com/openai/human-eval",
-    "recommended": false,
-    "warning": "Saturated benchmark"
+    "recommended": true,
+    "stable": false
   },
   "bigcodebench": {
     "name": "BigCodeBench",
@@ -71,7 +66,8 @@
     "type": "percentage",
     "higherIsBetter": true,
     "source": "https://bigcode-bench.github.io/",
-    "recommended": true
+    "recommended": true,
+    "stable": false
   },
   "gpqa_diamond": {
     "name": "GPQA Diamond",
@@ -80,6 +76,29 @@
     "type": "percentage",
     "higherIsBetter": true,
     "source": "https://github.com/idavidrein/gpqa",
-    "recommended": true
+    "recommended": true,
+    "stable": false
+  },
+  "mmlu": {
+    "name": "MMLU",
+    "description": "Massive Multitask Language Understanding. SATURATED — top models cluster within 2–4%.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://huggingface.co/spaces/open-llm-leaderboard",
+    "recommended": false,
+    "stable": false,
+    "warning": "Saturated benchmark — no longer differentiates frontier models"
+  },
+  "humaneval": {
+    "name": "HumanEval",
+    "description": "Code generation benchmark. SATURATED — SOTA at 99.4%.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://github.com/openai/human-eval",
+    "recommended": false,
+    "stable": false,
+    "warning": "Saturated benchmark"
   }
 }

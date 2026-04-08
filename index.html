@@ -1,11 +1,1722 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://desktop-commander.github.io/llm-value-comparison/">
-  <title>LLM Value Comparison — Moved</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Your AI Subscription Worth It?</title>
+    <meta name="description" content="Quality-adjusted tokens per dollar across local hardware, subscriptions, and API.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:         #f5f4f0;
+            --surface:    #ffffff;
+            --surface2:   #fafaf8;
+            --border:     #e2e0da;
+            --border2:    #d0cdc5;
+            --text:       #18181a;
+            --muted:      #6b6b72;
+            --faint:      #9b9ba4;
+            --green:      #1a9e5c;
+            --green-bg:   rgba(26,158,92,0.08);
+            --blue:       #2557d6;
+            --blue-bg:    rgba(37,87,214,0.08);
+            --purple:     #7033d8;
+            --purple-bg:  rgba(112,51,216,0.08);
+            --red:        #d63b2f;
+            --red-bg:     rgba(214,59,47,0.08);
+            --amber:      #b45309;
+            --amber-bg:   rgba(180,83,9,0.07);
+            --dot-color:  rgba(0,0,0,0.07);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* DOT GRID TEXTURE on hero area */
+        .dot-bg {
+            background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+
+        /* ── NAV ── */
+        .nav {
+            position: sticky; top: 0; z-index: 200;
+            background: rgba(245,244,240,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            height: 54px;
+            display: flex; align-items: center;
+            padding: 0 2.5rem; gap: 2.5rem;
+        }
+        .nav-brand {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800; font-size: 1rem;
+            color: var(--text); text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .nav-brand em { font-style: normal; color: var(--green); }
+        .nav-links { display: flex; gap: 1.75rem; }
+        .nav-links a {
+            color: var(--muted); text-decoration: none;
+            font-size: 0.8rem; font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
+        .nav-cta {
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--blue); border: 1.5px solid var(--blue);
+            padding: 0.3rem 0.85rem; border-radius: 6px;
+            text-decoration: none; transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .nav-cta:hover { background: var(--blue); color: #fff; }
+
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── TAG PILL ── */
+        .tag {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            font-size: 0.67rem; font-weight: 600; letter-spacing: 0.07em;
+            text-transform: uppercase; padding: 0.22rem 0.6rem;
+            border-radius: 999px; margin-bottom: 0.9rem;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .tag.green  { background: var(--green-bg);  color: var(--green); }
+        .tag.blue   { background: var(--blue-bg);   color: var(--blue); }
+        .tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .tag.amber  { background: var(--amber-bg);  color: var(--amber); }
+        .tag.red    { background: var(--red-bg);    color: var(--red); }
+
+        /* ── HERO ── */
+        .hero-wrap {
+            border-bottom: 1px solid var(--border);
+            padding: 5rem 0 0;
+        }
+        .hero { text-align: center; }
+        .hero h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 800; letter-spacing: -0.04em;
+            line-height: 1.05; color: var(--text);
+            margin-bottom: 1.1rem;
+        }
+        .hero h1 em { font-style: normal; color: var(--blue); }
+        .hero-sub {
+            font-size: 1.05rem; color: var(--muted);
+            max-width: 500px; margin: 0 auto 1.75rem;
+            font-weight: 400;
+        }
+        .hero-sources {
+            font-size: 0.7rem; color: var(--faint);
+            margin-bottom: 3rem;
+        }
+        .hero-sources a {
+            color: var(--faint); text-decoration: none;
+            border-bottom: 1px solid var(--border2);
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .hero-sources a:hover { color: var(--muted); border-color: var(--muted); }
+
+        /* ── HERO STAT STRIP ── */
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--border);
+            margin-top: 0;
+        }
+        @media (max-width: 680px) { .hero-stats { grid-template-columns: 1fr; } }
+        .hero-stat {
+            padding: 1.75rem 2rem;
+            border-right: 1px solid var(--border);
+            opacity: 0; transform: translateY(12px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .hero-stat:last-child { border-right: none; }
+        .hero-stat.visible { opacity: 1; transform: translateY(0); }
+        .hero-stat-type {
+            font-size: 0.65rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+        .hero-stat.hs-local .hero-stat-type  { color: var(--green); }
+        .hero-stat.hs-sub   .hero-stat-type  { color: var(--purple); }
+        .hero-stat.hs-api   .hero-stat-type  { color: var(--blue); }
+        .hero-stat-model {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.0rem; font-weight: 700;
+            color: var(--text); margin-bottom: 0.15rem;
+            letter-spacing: -0.02em;
+        }
+        .hero-stat-detail { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.9rem; }
+        .hero-stat-num {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 2.4rem; font-weight: 800;
+            letter-spacing: -0.04em; line-height: 1;
+            margin-bottom: 0.15rem;
+        }
+        .hero-stat.hs-local .hero-stat-num  { color: var(--green); }
+        .hero-stat.hs-sub   .hero-stat-num  { color: var(--purple); }
+        .hero-stat.hs-api   .hero-stat-num  { color: var(--blue); }
+        .hero-stat-unit { font-size: 0.62rem; color: var(--faint); font-weight: 500; }
+
+        /* ── DC BAR ── */
+        .dc-bar {
+            border-bottom: 1px solid var(--border);
+            padding: 0.85rem 2rem;
+            text-align: center; font-size: 0.78rem; color: var(--muted);
+            background: var(--surface2);
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .dc-bar a { color: var(--green); font-weight: 600; text-decoration: none; }
+        .dc-bar a:hover { text-decoration: underline; }
+        .dc-badge {
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em;
+            text-transform: uppercase; padding: 0.15rem 0.5rem;
+            border-radius: 4px; background: var(--green-bg); color: var(--green);
+        }
+
+        /* ── SECTION WRAPPER ── */
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header { margin-bottom: 2rem; }
+        .section-header p {
+            font-size: 0.95rem; color: var(--muted);
+            max-width: 600px; line-height: 1.7; margin-top: 0.5rem;
+        }
+
+        /* ── SECTION TITLE ── */
+        .section-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.03em; color: var(--text);
+        }
+
+        /* ── HOW IT WORKS ── */
+        .formula-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.25rem; margin-top: 1.75rem;
+        }
+        @media (max-width: 750px) { .formula-grid { grid-template-columns: 1fr; } }
+        .formula-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.5rem;
+            position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .formula-card.visible { opacity: 1; transform: translateY(0); }
+        .formula-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+        }
+        .formula-card.fc-local::after  { background: var(--green); }
+        .formula-card.fc-sub::after    { background: var(--purple); }
+        .formula-card.fc-api::after    { background: var(--blue); }
+
+        .formula-card h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.95rem; font-weight: 700;
+            letter-spacing: -0.01em; margin-bottom: 1.25rem;
+        }
+        .formula-card.fc-local h4 { color: var(--green); }
+        .formula-card.fc-sub   h4 { color: var(--purple); }
+        .formula-card.fc-api   h4 { color: var(--blue); }
+
+        .formula-box {
+            background: var(--bg); border-radius: 10px;
+            padding: 1rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; line-height: 2.2; color: var(--muted);
+        }
+        .fv-block { display: block; }
+        .fv-var { font-weight: 600; }
+        .fv-local  { color: var(--green); }
+        .fv-sub    { color: var(--purple); }
+        .fv-api    { color: var(--blue); }
+        .fv-qual   { color: var(--amber); }
+        .fv-divider {
+            display: block; border: none;
+            border-top: 1.5px solid var(--border2);
+            margin: 0.4rem 0;
+        }
+        .fv-result { font-weight: 700; color: var(--text); font-size: 0.82rem; }
+        .fv-op { color: var(--faint); font-size: 0.7rem; margin-right: 0.25rem; }
+        .formula-note {
+            font-size: 0.68rem; color: var(--faint);
+            margin-top: 0.85rem; line-height: 1.55;
+        }
+        .method-note {
+            font-size: 0.73rem; color: var(--muted);
+            margin-top: 1.5rem;
+        }
+        .method-note a { color: var(--blue); text-decoration: none; }
+        .method-note a:hover { text-decoration: underline; }
+
+        /* ── TABS ── */
+        .tabs {
+            display: flex; border-bottom: 1.5px solid var(--border);
+            margin-bottom: 1.75rem; gap: 0;
+        }
+        .tab {
+            padding: 0.65rem 1.35rem; cursor: pointer;
+            color: var(--muted); border-bottom: 2px solid transparent;
+            margin-bottom: -1.5px; font-size: 0.82rem; font-weight: 500;
+            transition: all 0.15s; user-select: none;
+        }
+        .tab:hover { color: var(--text); }
+        .tab.active {
+            color: var(--blue); border-bottom-color: var(--blue);
+            font-weight: 600;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ── SETTINGS BAR ── */
+        .settings-bar {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1rem 1.5rem;
+            display: flex; gap: 2rem; flex-wrap: wrap;
+            align-items: flex-end; margin-bottom: 1.75rem;
+            border-left: 4px solid var(--blue);
+        }
+        .setting-group label {
+            display: block; font-size: 0.62rem; font-weight: 600;
+            color: var(--muted); margin-bottom: 0.3rem;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .settings-bar select, .settings-bar input {
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text); padding: 0.38rem 0.75rem;
+            border-radius: 7px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem; outline: none;
+            transition: border-color 0.15s;
+        }
+        .settings-bar select:focus, .settings-bar input:focus {
+            border-color: var(--blue);
+        }
+
+        /* ── WARNING BOX ── */
+        .warning-box {
+            background: var(--amber-bg); border: 1px solid #fde68a;
+            border-left: 4px solid var(--amber);
+            border-radius: 8px; padding: 0.65rem 1rem;
+            font-size: 0.74rem; color: var(--amber);
+            margin-bottom: 1.5rem;
+        }
+        .warning-box a { color: var(--amber); font-weight: 600; }
+
+        /* ── CALC CARDS ── */
+        .calc-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.1rem; margin-bottom: 2rem;
+        }
+        @media (max-width: 850px) { .calc-grid { grid-template-columns: 1fr; } }
+        .calc-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.35rem;
+            position: relative; overflow: hidden;
+        }
+        .calc-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+        }
+        .calc-card.local::after { background: var(--green); }
+        .calc-card.sub::after   { background: var(--purple); }
+        .calc-card.api::after   { background: var(--blue); }
+        .calc-card h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.88rem; font-weight: 700;
+            margin-bottom: 0.85rem; letter-spacing: -0.01em;
+        }
+        .calc-card.local h4 { color: var(--green); }
+        .calc-card.sub   h4 { color: var(--purple); }
+        .calc-card.api   h4 { color: var(--blue); }
+        .calc-card select {
+            width: 100%; background: var(--bg);
+            border: 1px solid var(--border); color: var(--text);
+            padding: 0.38rem 0.5rem; border-radius: 7px;
+            font-size: 0.74rem; margin-bottom: 0.9rem;
+            font-family: 'DM Sans', sans-serif; outline: none;
+        }
+        .calc-steps {
+            font-size: 0.68rem; line-height: 2.0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .calc-step { color: var(--muted); }
+        .calc-step .num { color: var(--amber); font-weight: 600; }
+        .calc-step .result { color: var(--text); font-weight: 600; }
+        .calc-final {
+            margin-top: 0.9rem; padding-top: 0.9rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .calc-final .value {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.03em; line-height: 1;
+        }
+        .calc-card.local .calc-final .value { color: var(--green); }
+        .calc-card.sub   .calc-final .value { color: var(--purple); }
+        .calc-card.api   .calc-final .value { color: var(--blue); }
+        .calc-final .label {
+            font-size: 0.6rem; color: var(--faint);
+            font-weight: 500; margin-top: 0.15rem;
+        }
+
+        /* ── RANKED LIST ── */
+        .results-section h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.8rem; font-weight: 700; color: var(--muted);
+            margin-bottom: 1.1rem; text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .rank-list { display: flex; flex-direction: column; gap: 0.45rem; }
+        .rank-row {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.55rem 0.75rem; border-radius: 9px;
+            background: var(--surface); border: 1px solid var(--border);
+            transition: background 0.12s;
+            position: relative; cursor: default;
+        }
+        .rank-row:hover { background: var(--surface2); }
+        .rank-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem; font-weight: 600;
+            color: var(--faint); width: 22px; text-align: right;
+            flex-shrink: 0;
+        }
+        .rank-type {
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 0.07em; text-transform: uppercase;
+            width: 38px; flex-shrink: 0;
+        }
+        .rank-name {
+            font-size: 0.78rem; color: var(--text); font-weight: 500;
+            width: 195px; flex-shrink: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .rank-bar-wrap {
+            flex: 1; background: var(--bg); border-radius: 5px;
+            height: 26px; overflow: hidden; border: 1px solid var(--border);
+        }
+        .rank-bar {
+            height: 100%; border-radius: 4px;
+            display: flex; align-items: center;
+            justify-content: flex-end; padding-right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 700; color: #fff;
+            transition: width 0.8s cubic-bezier(0.23,1,0.32,1);
+        }
+        .rank-val-out {
+            width: 58px; font-size: 0.72rem; font-weight: 700;
+            text-align: right; flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .rank-detail {
+            width: 140px; font-size: 0.62rem;
+            color: var(--faint); flex-shrink: 0;
+        }
+        /* tooltip */
+        .rank-row[data-tip]:hover::after {
+            content: attr(data-tip);
+            position: absolute; left: 0; top: calc(100% + 6px);
+            z-index: 50; max-width: 420px;
+            padding: 0.65rem 0.9rem; border-radius: 10px;
+            background: #18181a; color: #e8e8ea;
+            font-size: 0.64rem; line-height: 1.7;
+            white-space: pre-line; font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+            pointer-events: none;
+        }
+
+        /* ── CHART ── */
+        .chart-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.75rem; margin-bottom: 2rem;
+        }
+        .chart-card h2 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            text-align: center; margin-bottom: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+        .chart-controls {
+            display: flex; gap: 0.75rem;
+            justify-content: center; margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+        .chart-controls select {
+            background: var(--bg); border: 1px solid var(--border);
+            color: var(--text); padding: 0.38rem 0.75rem;
+            border-radius: 7px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem; outline: none;
+        }
+        .chart-wrapper { position: relative; height: 460px; }
+
+        /* ── DATA TABLES ── */
+        .data-table-section { margin-bottom: 2.5rem; }
+        .data-table-section h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.88rem; font-weight: 700; color: var(--text);
+            margin-bottom: 0.75rem; display: flex;
+            align-items: center; gap: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .edit-link {
+            font-size: 0.62rem; color: var(--faint);
+            font-weight: 400; text-decoration: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .edit-link:hover { color: var(--blue); }
+        .data-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.78rem; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 12px;
+            overflow: hidden;
+        }
+        .data-table th {
+            background: var(--surface2); padding: 0.65rem 0.9rem;
+            text-align: left; color: var(--muted); font-weight: 600;
+            font-size: 0.68rem; text-transform: uppercase;
+            letter-spacing: 0.05em; border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            padding: 0.55rem 0.9rem;
+            border-bottom: 1px solid var(--border); color: var(--text);
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background: var(--surface2); }
+        .data-table a { color: var(--blue); text-decoration: none; }
+        .data-table a:hover { text-decoration: underline; }
+        .conf-low    { color: var(--red);    font-weight: 600; }
+        .conf-medium { color: var(--amber);  font-weight: 600; }
+        .conf-high   { color: var(--green);  font-weight: 600; }
+
+        /* ── FOOTER ── */
+        .footer {
+            padding: 2.5rem 0; text-align: center;
+            font-size: 0.7rem; color: var(--faint);
+        }
+        .footer a { color: var(--faint); text-decoration: none; }
+        .footer a:hover { color: var(--blue); }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up {
+            opacity: 0; transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── WINNER DELTA BADGES ── */
+        .hero-stat-deltas {
+            display: flex; gap: 0.45rem; flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+        .delta-badge {
+            display: inline-flex; align-items: center; gap: 0.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem; font-weight: 600;
+            padding: 0.2rem 0.55rem; border-radius: 5px;
+            border: 1px solid transparent;
+        }
+        .delta-badge.pos { background: var(--green-bg); color: var(--green); border-color: rgba(26,158,92,0.18); }
+        .delta-badge.neg { background: var(--red-bg);   color: var(--red);   border-color: rgba(214,59,47,0.18); }
+        .delta-badge.neu { background: var(--surface2); color: var(--muted); border-color: var(--border); }
+        .delta-badge .d-icon { font-style: normal; }
+        .delta-vs {
+            font-size: 0.6rem; color: var(--faint);
+            margin-top: 0.35rem; font-family: 'DM Sans', sans-serif;
+        }
+
+        /* ── BENCHMARK SECTION ── */
+        .bm-problem-grid {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 1.25rem; margin-bottom: 2.5rem;
+        }
+        @media (max-width: 750px) { .bm-problem-grid { grid-template-columns: 1fr; } }
+
+        .bm-problem-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.4rem;
+            border-top: 3px solid var(--red);
+        }
+        .bmp-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+        .bm-problem-card h4 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.95rem; font-weight: 700; color: var(--text);
+            margin-bottom: 0.6rem; letter-spacing: -0.01em;
+        }
+        .bm-problem-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+        .bmp-examples { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .bmp-tag {
+            font-size: 0.62rem; font-weight: 600; padding: 0.18rem 0.5rem;
+            border-radius: 4px; letter-spacing: 0.04em;
+        }
+        .bmp-tag.dead { background: var(--red-bg); color: var(--red); }
+        .bmp-tag.warn { background: var(--amber-bg); color: var(--amber); }
+
+        .bm-stable-header { margin-bottom: 1.25rem; }
+
+        .bm-stable-grid {
+            display: grid; grid-template-columns: repeat(2,1fr);
+            gap: 1.25rem; margin-bottom: 2rem;
+        }
+        @media (max-width: 700px) { .bm-stable-grid { grid-template-columns: 1fr; } }
+
+        .bm-stable-card {
+            background: var(--surface); border: 1.5px solid rgba(26,158,92,0.25);
+            border-radius: 16px; padding: 1.5rem;
+            border-top: 3px solid var(--green);
+        }
+        .bms-header {
+            display: flex; align-items: flex-start;
+            gap: 0.85rem; margin-bottom: 0.85rem;
+        }
+        .bms-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .bms-name {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.0rem; font-weight: 700; color: var(--text);
+            letter-spacing: -0.02em;
+        }
+        .bms-since {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem; font-weight: 500; color: var(--faint);
+            margin-left: 0.4rem; font-weight: 400;
+        }
+        .bms-source { font-size: 0.7rem; margin-top: 0.15rem; }
+        .bms-source a { color: var(--green); text-decoration: none; }
+        .bms-source a:hover { text-decoration: underline; }
+        .bms-desc {
+            font-size: 0.8rem; color: var(--muted);
+            line-height: 1.7; margin-bottom: 1rem;
+        }
+        .bms-props { display: flex; flex-direction: column; gap: 0.3rem; }
+        .bms-prop {
+            font-size: 0.72rem; font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .bms-prop.good { color: var(--green); }
+        .bms-prop.warn { color: var(--amber); }
+
+        .bm-formula-note {
+            background: var(--surface); border: 1px solid var(--border);
+            border-left: 4px solid var(--green);
+            border-radius: 12px; padding: 1.25rem 1.5rem;
+        }
+        .bfn-label {
+            font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.75rem;
+        }
+        .bfn-formula {
+            display: flex; align-items: center; flex-wrap: wrap;
+            gap: 0.6rem; margin-bottom: 0.9rem;
+        }
+        .bfn-part {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem; font-weight: 600;
+            padding: 0.3rem 0.7rem; border-radius: 6px;
+        }
+        .bfn-part.arena  { background: var(--purple-bg); color: var(--purple); }
+        .bfn-part.aa     { background: var(--blue-bg);   color: var(--blue); }
+        .bfn-result      { background: var(--green-bg);  color: var(--green);
+                           font-family: 'JetBrains Mono', monospace;
+                           font-size: 0.78rem; font-weight: 700;
+                           padding: 0.3rem 0.7rem; border-radius: 6px; }
+        .bfn-op {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; font-weight: 600; color: var(--faint);
+        }
+        .bfn-note {
+            font-size: 0.75rem; color: var(--muted); line-height: 1.7;
+        }
+        .bfn-note code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg); padding: 0.1rem 0.35rem;
+            border-radius: 4px; font-size: 0.72rem;
+        }
+
+        /* ── COMPARE TAB ── */
+        .cmp-pickers {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 1rem; align-items: end; margin-bottom: 1.75rem;
+        }
+        @media (max-width: 700px) {
+            .cmp-pickers { grid-template-columns: 1fr; }
+            .cmp-vs { display: none; }
+        }
+        .cmp-picker-col label {
+            display: block; font-size: 0.62rem; font-weight: 600;
+            color: var(--muted); text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 0.4rem;
+        }
+        .cmp-picker-col select {
+            width: 100%; background: var(--surface); border: 1.5px solid var(--border);
+            color: var(--text); padding: 0.5rem 0.75rem;
+            border-radius: 9px; font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem; font-weight: 500; outline: none;
+            transition: border-color 0.15s;
+        }
+        .cmp-picker-col select:focus { border-color: var(--blue); }
+        .cmp-picker-col.side-a select { border-color: rgba(37,87,214,0.4); }
+        .cmp-picker-col.side-b select { border-color: rgba(112,51,216,0.4); }
+        .cmp-vs {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.75rem; font-weight: 800; color: var(--faint);
+            text-align: center; padding-bottom: 0.5rem;
+        }
+        /* verdict banner */
+        .cmp-verdict {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem; display: flex;
+            align-items: center; gap: 1rem;
+        }
+        .cmp-verdict-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .cmp-verdict-text {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            letter-spacing: -0.02em; color: var(--text);
+            line-height: 1.3;
+        }
+        .cmp-verdict-text em { font-style: normal; }
+        .cmp-verdict-text .cv-a { color: var(--blue); }
+        .cmp-verdict-text .cv-b { color: var(--purple); }
+        .cmp-verdict-text .cv-tie { color: var(--muted); }
+        .cmp-verdict-sub {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem; color: var(--muted);
+            margin-top: 0.2rem; font-weight: 400;
+        }
+        /* compare rows grid */
+        .cmp-grid {
+            display: flex; flex-direction: column; gap: 0.75rem;
+        }
+        .cmp-row {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
+        }
+        .cmp-row-label {
+            font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.07em; color: var(--muted);
+            padding: 0.55rem 1rem 0; display: flex; gap: 0.5rem;
+            align-items: center;
+        }
+        .cmp-row-label .crl-tag {
+            font-size: 0.58rem; padding: 0.1rem 0.4rem;
+            border-radius: 4px; font-weight: 700;
+        }
+        .crl-api    { background: var(--blue-bg);   color: var(--blue); }
+        .crl-sub    { background: var(--purple-bg); color: var(--purple); }
+        .crl-local  { background: var(--green-bg);  color: var(--green); }
+        .crl-qual   { background: var(--amber-bg);  color: var(--amber); }
+        .cmp-bars {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1rem 0.75rem;
+        }
+        /* left bar grows right-to-left */
+        .cmp-bar-wrap-a {
+            display: flex; align-items: center;
+            gap: 0.5rem; justify-content: flex-end;
+        }
+        .cmp-bar-wrap-b {
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .cmp-bar-track {
+            flex: 1; height: 22px; background: var(--bg);
+            border-radius: 5px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .cmp-bar-fill-a {
+            height: 100%; background: var(--blue); opacity: 0.85;
+            border-radius: 4px; margin-left: auto;
+            transition: width 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .cmp-bar-fill-b {
+            height: 100%; background: var(--purple); opacity: 0.85;
+            border-radius: 4px;
+            transition: width 0.7s cubic-bezier(0.23,1,0.32,1);
+        }
+        .cmp-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem; font-weight: 700;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .cmp-val-a { color: var(--blue); }
+        .cmp-val-b { color: var(--purple); }
+        .cmp-mid-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; font-weight: 700;
+            text-align: center; white-space: nowrap;
+            flex-shrink: 0; padding: 0.15rem 0.4rem;
+            border-radius: 4px; min-width: 52px;
+        }
+        .cmp-mid-badge.a-wins { background: var(--blue-bg);   color: var(--blue); }
+        .cmp-mid-badge.b-wins { background: var(--purple-bg); color: var(--purple); }
+        .cmp-mid-badge.tie    { background: var(--surface2);  color: var(--faint); }
+        .cmp-na { font-size: 0.7rem; color: var(--faint); font-style: italic; }
+    </style>
 </head>
 <body>
-  <p>This project has moved. <a href="https://desktop-commander.github.io/llm-value-comparison/">Click here if not redirected.</a></p>
+
+<nav class="nav">
+    <a class="nav-brand" href="#"><em>LLM</em> Value</a>
+    <div class="nav-links">
+        <a href="#winners">🏆 Winners</a>
+        <a href="#how">📐 How it works</a>
+        <a href="#benchmarks">📏 Benchmarks</a>
+        <a href="#explore">📊 Full data</a>
+    </div>
+    <div class="nav-right">
+        <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute data ↗</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap dot-bg">
+<div class="container">
+    <div class="hero">
+        <div class="tag blue">Updated automatically · April 2026</div>
+        <h1>Is your AI<br><em>subscription worth it?</em></h1>
+        <p class="hero-sub">Quality-adjusted tokens per dollar — local hardware, subscriptions, and API in one number.</p>
+        <p class="hero-sources">
+            Data from <a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> ·
+            <a href="https://arena.ai/leaderboard" target="_blank">Arena AI</a> ·
+            <a href="https://openrouter.ai" target="_blank">OpenRouter</a> ·
+            <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">open source</a>
+        </p>
+    </div>
+
+    <!-- LIVE WINNER STRIP -->
+    <div id="winners" style="scroll-margin-top:60px" class="hero-stats">
+        <div class="hero-stat hs-local" id="hsStat0">
+            <div class="hero-stat-type">🖥️ Best local setup</div>
+            <div class="hero-stat-model" id="winLocalModel">—</div>
+            <div class="hero-stat-detail" id="winLocalDetail"></div>
+            <div class="hero-stat-num" id="winLocalScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $</div>
+            <div class="hero-stat-deltas" id="winLocalDeltas"></div>
+            <div class="delta-vs" id="winLocalVs"></div>
+        </div>
+        <div class="hero-stat hs-sub" id="hsStat1">
+            <div class="hero-stat-type">💳 Best subscription ⚠️</div>
+            <div class="hero-stat-model" id="winSubModel">—</div>
+            <div class="hero-stat-detail" id="winSubDetail"></div>
+            <div class="hero-stat-num" id="winSubScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $ · estimated</div>
+            <div class="hero-stat-deltas" id="winSubDeltas"></div>
+            <div class="delta-vs" id="winSubVs"></div>
+        </div>
+        <div class="hero-stat hs-api" id="hsStat2">
+            <div class="hero-stat-type">🔌 Best API deal</div>
+            <div class="hero-stat-model" id="winApiModel">—</div>
+            <div class="hero-stat-detail" id="winApiDetail"></div>
+            <div class="hero-stat-num" id="winApiScore">—</div>
+            <div class="hero-stat-unit">quality-adjusted tokens per $</div>
+            <div class="hero-stat-deltas" id="winApiDeltas"></div>
+            <div class="delta-vs" id="winApiVs"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- DC BAR -->
+<div class="dc-bar">
+    <span class="dc-badge">Built by</span>
+    <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a>
+    — model-agnostic AI for local models, API keys, and subscriptions. Our users ask "what should I use?" every day. This is our answer.
+</div>
+
+<div class="container">
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag purple">📐 How we calculate this</div>
+        <div class="section-title">One number. Three categories.</div>
+        <p>Not all tokens are equal — a token from a smarter model is worth more. We multiply raw token volume by quality score and divide by cost. The result: <strong>quality-adjusted tokens per dollar</strong> — one metric that puts a $3,500 GPU, a $20/month plan, and a $0.07/M API on the same axis.</p>
+    </div>
+    <div class="formula-grid">
+        <div class="formula-card fc-local">
+            <h4>🖥️ Local Hardware</h4>
+            <div class="formula-box">
+                <span class="fv-block"><span class="fv-var fv-local">tok/s</span> × hours/day × 365 × years</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block">hardware cost ($)</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">One-time hardware cost amortized over 3 years. tok/s measured per model + hardware combo.</p>
+        </div>
+        <div class="formula-card fc-sub">
+            <h4>💳 Subscription</h4>
+            <div class="formula-box">
+                <span class="fv-block"><span class="fv-var fv-sub">tokens/day limit</span> × 365 × years</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block">$/mo × 12 × years</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">⚠️ Token limits are estimated — providers don't publish exact numbers. Treat as directional.</p>
+        </div>
+        <div class="formula-card fc-api">
+            <h4>🔌 API (pay per token)</h4>
+            <div class="formula-box">
+                <span class="fv-block">1,000,000 tokens</span>
+                <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
+                <hr class="fv-divider">
+                <span class="fv-block"><span class="fv-var fv-api">price/M</span> (75% in + 25% out)</span>
+                <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
+            </div>
+            <p class="formula-note">75/25 input/output ratio reflects typical real-world usage. No time horizon needed.</p>
+        </div>
+    </div>
+    <p class="method-note fade-up">
+        Quality scores: <a href="#benchmarks">Arena ELO + AA Intelligence Index</a> — the two benchmarks that remain comparable across model generations. See the <a href="#benchmarks">Benchmarks section</a> for why other benchmarks can't fairly compare across eras.
+    </p>
+</section>
+
+<!-- BENCHMARKS EXPLAINER -->
+<section class="section" id="benchmarks" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag red">📏 Why benchmarks are hard</div>
+        <div class="section-title">Not all benchmarks age equally.</div>
+        <p>Comparing GPT-3.5 to GPT-5.4 using benchmark scores sounds simple. It isn't. The tests used to measure models in 2023 are mostly useless today — either saturated or discontinued. This matters for any long-term value comparison.</p>
+    </div>
+
+    <!-- THREE PROBLEM CARDS -->
+    <div class="bm-problem-grid fade-up">
+        <div class="bm-problem-card">
+            <div class="bmp-icon">📈</div>
+            <h4>Saturation</h4>
+            <p>MMLU (2020) and HumanEval (2021) were rigorous tests when introduced. Today GPT-4 scores 87% on MMLU, GPT-5 scores ~90%. A 3% gap in a benchmark where the ceiling is 100% tells you almost nothing. The benchmark is broken as a signal, not the models.</p>
+            <div class="bmp-examples">
+                <span class="bmp-tag dead">MMLU — saturated</span>
+                <span class="bmp-tag dead">HumanEval — saturated</span>
+            </div>
+        </div>
+        <div class="bm-problem-card">
+            <div class="bmp-icon">🎯</div>
+            <h4>Different tests, different eras</h4>
+            <p>SWE-bench Verified launched in 2024. Aider Polyglot in 2024. GPQA Diamond in 2023. Models from 2022 were never measured on these. You can't compare GPT-3.5's MMLU score to GPT-5's SWE-bench score — they're measuring different things with different scales.</p>
+            <div class="bmp-examples">
+                <span class="bmp-tag warn">SWE-bench — 2024+</span>
+                <span class="bmp-tag warn">Aider — 2024+</span>
+                <span class="bmp-tag warn">GPQA — 2023+</span>
+            </div>
+        </div>
+        <div class="bm-problem-card">
+            <div class="bmp-icon">🧪</div>
+            <h4>Training contamination</h4>
+            <p>Benchmarks become worthless once labs train on them. Questions leak into pretraining data, benchmark scores stop reflecting real capability. This is why new benchmarks are invented constantly — and why scores from 2022 are especially suspect.</p>
+            <div class="bmp-examples">
+                <span class="bmp-tag dead">GSM8K — contaminated</span>
+                <span class="bmp-tag warn">Most 2022 benchmarks</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- THE TWO STABLE ONES -->
+    <div class="bm-stable-header fade-up">
+        <div class="tag green">✅ What actually works across time</div>
+        <p style="font-size:0.95rem;color:var(--muted);max-width:580px;margin-top:0.25rem">Two signals have been collected continuously since 2023 using the same methodology. They measure different things, but together they give a consistent cross-generation quality score.</p>
+    </div>
+    <div class="bm-stable-grid fade-up">
+        <div class="bm-stable-card">
+            <div class="bms-header">
+                <div class="bms-icon">⚔️</div>
+                <div>
+                    <div class="bms-name">Arena ELO <span class="bms-since">since early 2023</span></div>
+                    <div class="bms-source"><a href="https://lmarena.ai" target="_blank">lmarena.ai ↗</a></div>
+                </div>
+            </div>
+            <p class="bms-desc">Humans pick which model response is better in blind head-to-head comparisons. The ELO rating system means GPT-3.5 and GPT-5.4 are measured on the <strong>exact same scale</strong> — not by what questions they answered, but by how humans prefer their outputs relative to each other.</p>
+            <div class="bms-props">
+                <div class="bms-prop good">✓ Same methodology since launch</div>
+                <div class="bms-prop good">✓ Covers general + coding separately</div>
+                <div class="bms-prop good">✓ Can't be trained on directly</div>
+                <div class="bms-prop warn">~ Reflects human preference, not task accuracy</div>
+            </div>
+        </div>
+        <div class="bm-stable-card">
+            <div class="bms-header">
+                <div class="bms-icon">🔬</div>
+                <div>
+                    <div class="bms-name">AA Intelligence Index <span class="bms-since">since 2023</span></div>
+                    <div class="bms-source"><a href="https://artificialanalysis.ai" target="_blank">artificialanalysis.ai ↗</a></div>
+                </div>
+            </div>
+            <p class="bms-desc">Artificial Analysis runs their own evaluations on every major model using consistent infrastructure and aggregates them into a single 0–100 composite. Unlike leaderboard scores that depend on who submitted, AA re-runs everything themselves on the same hardware.</p>
+            <div class="bms-props">
+                <div class="bms-prop good">✓ Independently run, not self-reported</div>
+                <div class="bms-prop good">✓ Composite — not reliant on a single test</div>
+                <div class="bms-prop good">✓ Covers models back to GPT-3.5 era</div>
+                <div class="bms-prop warn">~ Methodology updates occasionally</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOW WE USE THEM -->
+    <div class="bm-formula-note fade-up">
+        <div class="bfn-label">How we combine them</div>
+        <div class="bfn-formula">
+            <span class="bfn-part arena">Arena ELO → normalized 0–100</span>
+            <span class="bfn-op">+</span>
+            <span class="bfn-part aa">AA Intelligence Index (0–100)</span>
+            <span class="bfn-op">÷ 2</span>
+            <span class="bfn-op">=</span>
+            <span class="bfn-result">Stable Quality Score</span>
+        </div>
+        <p class="bfn-note">Arena ELO is normalized using <code>(ELO − 1000) / 5</code>, which maps typical frontier model ELOs (1100–1400) to a 0–100 range. The two scores are then averaged. If only one is available for a model, that single score is used. Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but <strong>not used in the main value calculation</strong> — they can't fairly compare across model generations.</p>
+    </div>
+</section>
+
+<!-- FULL DATA -->
+<section class="section" id="explore" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag blue">📊 Full data</div>
+        <div class="section-title">Compare everything</div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="calculator">Calculator</div>
+        <div class="tab" data-tab="compare">⚔️ Compare</div>
+        <div class="tab" data-tab="chart">Timeline</div>
+        <div class="tab" data-tab="data">Raw data</div>
+    </div>
+
+    <!-- CALCULATOR -->
+    <div id="tab-calculator" class="tab-content active">
+        <div class="warning-box">
+            ⚠️ <strong>Subscription token limits are estimated</strong> — providers don't publish exact numbers.
+        </div>
+        <div class="settings-bar">
+            <div class="setting-group">
+                <label>Hardware (local)</label>
+                <select id="hardware"></select>
+            </div>
+            <div class="setting-group">
+                <label>Hours / day</label>
+                <input type="number" id="hoursPerDay" value="16" min="1" max="24" style="width:64px">
+            </div>
+            <div class="setting-group">
+                <label>Period</label>
+                <select id="periodYears">
+                    <option value="1">1 year</option>
+                    <option value="2">2 years</option>
+                    <option value="3" selected>3 years</option>
+                    <option value="5">5 years</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label>Benchmark</label>
+                <select id="benchmark"></select>
+            </div>
+        </div>
+        <div class="calc-grid">
+            <div class="calc-card local">
+                <h4>🖥️ Local</h4>
+                <select id="calcLocal"></select>
+                <div class="calc-steps" id="calcLocalSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcLocalValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
+                </div>
+            </div>
+            <div class="calc-card sub">
+                <h4>💳 Subscription ⚠️</h4>
+                <select id="calcSub"></select>
+                <div class="calc-steps" id="calcSubSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcSubValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
+                </div>
+            </div>
+            <div class="calc-card api">
+                <h4>🔌 API</h4>
+                <select id="calcApi"></select>
+                <div class="calc-steps" id="calcApiSteps"></div>
+                <div class="calc-final">
+                    <div class="value" id="calcApiValue">—</div>
+                    <div class="label">quality-adjusted tokens per $</div>
+                </div>
+            </div>
+        </div>
+        <div class="results-section">
+            <h3>All options ranked</h3>
+            <div class="rank-list" id="calculatorContent">Loading…</div>
+        </div>
+    </div>
+
+    <!-- COMPARE -->
+    <div id="tab-compare" class="tab-content">
+        <div class="cmp-pickers">
+            <div class="cmp-picker-col side-a">
+                <label>Model A</label>
+                <select id="cmpA"></select>
+            </div>
+            <div class="cmp-vs">VS</div>
+            <div class="cmp-picker-col side-b">
+                <label>Model B</label>
+                <select id="cmpB"></select>
+            </div>
+        </div>
+        <div id="cmpVerdict" class="cmp-verdict" style="display:none"></div>
+        <div class="cmp-grid" id="cmpGrid"></div>
+    </div>
+
+    <!-- CHART -->
+    <div id="tab-chart" class="tab-content">
+        <div class="chart-card">
+            <h2>Value over time by provider</h2>
+            <div class="chart-controls">
+                <select id="chartBenchmark"></select>
+                <select id="chartType">
+                    <option value="all">All types</option>
+                    <option value="api">API only</option>
+                    <option value="local">Local only</option>
+                    <option value="subscription">Subscription only</option>
+                </select>
+                <select id="chartProvider"><option value="all">All providers</option></select>
+            </div>
+            <div class="chart-wrapper"><canvas id="valueChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- RAW DATA -->
+    <div id="tab-data" class="tab-content">
+        <div class="data-table-section">
+            <h3>🤖 Models <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableModels"><thead><tr><th>Model</th><th>Provider</th><th>Release</th><th>Card</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableApi"><thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>tok/s</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🖥️ Local Performance <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableLocal"><thead><tr><th>Model</th><th>Hardware</th><th>Tok/s</th><th>Quant</th><th>VRAM</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>💳 Subscriptions <span style="color:var(--red);font-size:0.7rem;font-weight:400">(⚠️ Estimated)</span> <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/day</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔧 Hardware <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableHardware"><thead><tr><th>Hardware</th><th>Price</th><th>VRAM</th><th>Year</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+    </div>
+</section>
+
+</div><!-- /container -->
+
+<div class="footer container">
+    <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a> ·
+    <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">GitHub</a> ·
+    <a href="https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7" target="_blank">Original article</a> ·
+    MIT License
+</div>
+
+<script>
+let DATA = { models:{}, hardware:{}, benchmarks:{} };
+let chart = null;
+const HOURS_DEFAULT=16, YEARS_DEFAULT=3;
+
+const PROVIDER_COLORS = {
+  'OpenAI':'#10a37f','Anthropic':'#c47c3a','Google':'#4285f4','DeepSeek':'#dc2626',
+  'Meta':'#0668E1','Alibaba':'#ff6a00','Mistral':'#ff7000','Z.ai':'#0ea5e9','Z AI':'#0ea5e9',
+  'MiniMax':'#7033d8','Kimi':'#dc2626',
+};
+const COL = { api:'var(--blue)', local:'var(--green)', subscription:'var(--purple)' };
+const ICON = { api:'🔌', local:'🖥️', subscription:'💳' };
+const LBL  = { api:'API', local:'Local', subscription:'Sub' };
+
+function fmt(n) {
+  if(n==null) return '—';
+  if(n>=1e9) return (n/1e9).toFixed(1)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(1)+'M';
+  if(n>=1e3) return (n/1e3).toFixed(0)+'K';
+  return n.toFixed(0);
+}
+function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function wap(api){ return api.inputPer1M*0.75+api.outputPer1M*0.25; }
+function norm(score,bmId){
+  if(bmId==='_combined') return score;
+  const bm=DATA.benchmarks[bmId]; if(!bm) return score;
+  if(bm.type==='elo') return Math.max(0,Math.min(100,(score-1000)/5));
+  return score;
+}
+function disp(score,bmId){
+  if(bmId==='_combined') return score.toFixed(1)+'%';
+  const bm=DATA.benchmarks[bmId]; if(!bm) return String(score);
+  return bm.type==='elo' ? score+' ELO' : score+'%';
+}
+function getScore(model,bmId){
+  if(!model.benchmarks) return null;
+  if(bmId==='_combined'){
+    // Use ONLY stable benchmarks (Arena ELO + AA Intelligence Index)
+    // These are the only metrics that remain comparable across model generations.
+    // Task-specific benchmarks (SWE-bench, Aider, etc.) were introduced at different
+    // times and cannot reliably compare GPT-3.5-era models with GPT-5-era models.
+    const stable=Object.entries(DATA.benchmarks).filter(([,b])=>b.stable).map(([id])=>id);
+    let t=0,c=0;
+    stable.forEach(id=>{ if(model.benchmarks[id]){t+=norm(model.benchmarks[id].score,id);c++;} });
+    // Fallback: if no stable scores, use all recommended (for newer data where stable is missing)
+    if(c===0){
+      const rec=Object.entries(DATA.benchmarks).filter(([,b])=>b.recommended).map(([id])=>id);
+      rec.forEach(id=>{ if(model.benchmarks[id]){t+=norm(model.benchmarks[id].score,id);c++;} });
+    }
+    return c>0?t/c:null;
+  }
+  return model.benchmarks[bmId]?model.benchmarks[bmId].score:null;
+}
+
+/* ── COUNT-UP ANIMATION ── */
+function animateCount(el, target, suffix='') {
+  const duration = 1200;
+  const start = performance.now();
+  const isLarge = target >= 1000;
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const cur = target * ease;
+    el.textContent = fmt(cur) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = fmt(target);
+  }
+  requestAnimationFrame(step);
+}
+
+function computeWinners(){
+  // Collect top-2 per category, tracking quality score and effective price separately
+  let topLocal=[], topSub=[], topApi=[];
+
+  Object.values(DATA.models).forEach(model=>{
+    const score=getScore(model,'_combined'); if(!score) return;
+
+    if(model.local) Object.entries(model.local).forEach(([hid,perf])=>{
+      const h=DATA.hardware[hid]; if(!h||!perf.tokensPerSec) return;
+      const val=(perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100))/h.price;
+      // effective price per 1M quality-tokens = hardware / total_quality_tokens
+      const totalQTok = perf.tokensPerSec*3600*HOURS_DEFAULT*365*YEARS_DEFAULT*(score/100);
+      const pricePerMQTok = (h.price / totalQTok) * 1_000_000;
+      topLocal.push({val, score, pricePerMQTok, model:model.name, detail:`${h.name} · ${perf.tokensPerSec} tok/s`});
+    });
+
+    if(model.subscriptions) Object.values(model.subscriptions).forEach(sub=>{
+      if(!sub.tokensPerDay) return;
+      const val=(sub.tokensPerDay*365*YEARS_DEFAULT*(score/100))/(sub.monthlyPrice*12*YEARS_DEFAULT);
+      const totalCost = sub.monthlyPrice*12*YEARS_DEFAULT;
+      const totalQTok = sub.tokensPerDay*365*YEARS_DEFAULT*(score/100);
+      const pricePerMQTok = (totalCost / totalQTok) * 1_000_000;
+      topSub.push({val, score, pricePerMQTok, model:model.name, detail:`${sub.name} · $${sub.monthlyPrice}/mo`});
+    });
+
+    if(model.api&&model.api.inputPer1M>0){
+      const wp = wap(model.api);
+      const val=(1_000_000/wp)*(score/100);
+      // price per 1M quality-tokens
+      const pricePerMQTok = wp / (score/100);
+      topApi.push({val, score, pricePerMQTok, model:model.name, detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M`});
+    }
+  });
+
+  topLocal.sort((a,b)=>b.val-a.val);
+  topSub.sort((a,b)=>b.val-a.val);
+  topApi.sort((a,b)=>b.val-a.val);
+
+  function makeDeltaBadges(top, deltasId, vsId) {
+    if(top.length < 2) return;
+    const w = top[0], r = top[1]; // winner, runner-up
+    const qualDiff = w.score - r.score;
+    const priceDiff = ((r.pricePerMQTok - w.pricePerMQTok) / r.pricePerMQTok) * 100; // positive = winner is cheaper
+
+    const qualSign = qualDiff >= 0 ? '+' : '';
+    const qualClass = qualDiff > 1 ? 'pos' : qualDiff < -1 ? 'neg' : 'neu';
+    const qualLabel = Math.abs(qualDiff) < 0.5
+      ? '≈ same quality'
+      : `${qualSign}${qualDiff.toFixed(1)}% quality`;
+
+    const priceSign = priceDiff >= 0 ? '' : '';
+    const priceClass = priceDiff > 1 ? 'pos' : priceDiff < -1 ? 'neg' : 'neu';
+    const priceLabel = Math.abs(priceDiff) < 1
+      ? '≈ same price'
+      : priceDiff > 0
+        ? `${priceDiff.toFixed(0)}% cheaper`
+        : `${Math.abs(priceDiff).toFixed(0)}% pricier`;
+
+    document.getElementById(deltasId).innerHTML =
+      `<span class="delta-badge ${qualClass}"><em class="d-icon">🧠</em> ${qualLabel}</span>` +
+      `<span class="delta-badge ${priceClass}"><em class="d-icon">💰</em> ${priceLabel}</span>`;
+    document.getElementById(vsId).innerHTML =
+      `vs #2: ${r.model}`;
+  }
+
+  // reveal with stagger + count-up + deltas
+  [[topLocal,'winLocalModel','winLocalDetail','winLocalScore','hsStat0','winLocalDeltas','winLocalVs'],
+   [topSub,  'winSubModel',  'winSubDetail',  'winSubScore',  'hsStat1','winSubDeltas',  'winSubVs'],
+   [topApi,  'winApiModel',  'winApiDetail',  'winApiScore',  'hsStat2','winApiDeltas',  'winApiVs']
+  ].forEach(([top, mId, dId, sId, statId, deltasId, vsId], i) => {
+    if(!top.length) return;
+    const b = top[0];
+    document.getElementById(mId).textContent = b.model;
+    document.getElementById(dId).textContent = b.detail;
+    makeDeltaBadges(top, deltasId, vsId);
+    setTimeout(() => {
+      document.getElementById(statId).classList.add('visible');
+      animateCount(document.getElementById(sId), b.val);
+    }, i * 160);
+  });
+}
+
+async function loadData(){
+  try{
+    const [mR,hR,bR]=await Promise.all([fetch('data/models.json'),fetch('data/hardware.json'),fetch('data/benchmarks.json')]);
+    DATA.models=await mR.json(); DATA.hardware=await hR.json(); DATA.benchmarks=await bR.json();
+    init();
+  } catch(err) {
+    document.getElementById('calculatorContent').innerHTML=`<div class="warning-box">Error loading data: ${err.message}</div>`;
+  }
+}
+
+function initSelects(){
+  const hwSel=document.getElementById('hardware');
+  Object.entries(DATA.hardware).forEach(([id,hw])=>{
+    const o=document.createElement('option');o.value=id;
+    o.textContent=`${hw.name} ($${hw.price.toLocaleString()})`;hwSel.appendChild(o);
+  });
+  ['benchmark','chartBenchmark'].forEach(sid=>{
+    const sel=document.getElementById(sid);
+    const o=document.createElement('option');o.value='_combined';o.textContent='⚡ Arena + AA Index (stable)';sel.appendChild(o);
+    Object.entries(DATA.benchmarks).filter(([,b])=>b.recommended).forEach(([id,bm])=>{
+      const o2=document.createElement('option');o2.value=id;o2.textContent=bm.name;sel.appendChild(o2);
+    });
+  });
+  const pSel=document.getElementById('chartProvider');
+  new Set(Object.values(DATA.models).map(m=>m.provider)).forEach(p=>{
+    const o=document.createElement('option');o.value=p;o.textContent=p;pSel.appendChild(o);
+  });
+}
+
+function populateCalcDropdowns(){
+  const hwId=document.getElementById('hardware').value;
+  const lSel=document.getElementById('calcLocal'); lSel.innerHTML='';
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.local&&m.local[hwId]){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} (${m.local[hwId].tokensPerSec} tok/s)`;lSel.appendChild(o);}
+  });
+  const sSel=document.getElementById('calcSub'); sSel.innerHTML='';
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.subscriptions) Object.entries(m.subscriptions).forEach(([sid,sub])=>{
+      const o=document.createElement('option');o.value=`${id}|${sid}`;
+      o.textContent=`${sub.name} → ${m.name} ($${sub.monthlyPrice}/mo)`;sSel.appendChild(o);
+    });
+  });
+  const aSel=document.getElementById('calcApi'); aSel.innerHTML='';
+  Object.entries(DATA.models).forEach(([id,m])=>{
+    if(m.api&&m.api.inputPer1M>0){const o=document.createElement('option');o.value=id;o.textContent=`${m.name} ($${m.api.inputPer1M}/M)`;aSel.appendChild(o);}
+  });
+}
+
+function init(){
+  computeWinners();
+  initSelects();
+  populateCalcDropdowns();
+  renderDataTables();
+
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      document.querySelectorAll('.tab,.tab-content').forEach(el=>el.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+      if(tab.dataset.tab==='chart') requestAnimationFrame(()=>updateChart());
+      if(tab.dataset.tab==='compare') requestAnimationFrame(()=>renderCompare());
+    });
+  });
+  document.querySelectorAll('#tab-calculator select,#tab-calculator input').forEach(el=>{
+    el.addEventListener('change',updateAll); el.addEventListener('input',updateAll);
+  });
+  document.getElementById('hardware').addEventListener('change',()=>{populateCalcDropdowns();updateAll();});
+  ['chartBenchmark','chartType','chartProvider'].forEach(id=>document.getElementById(id).addEventListener('change',()=>requestAnimationFrame(()=>updateChart())));
+
+  // Compare tab: populate model dropdowns
+  const modelIds = Object.keys(DATA.models);
+  ['cmpA','cmpB'].forEach((selId, i) => {
+    const sel = document.getElementById(selId);
+    modelIds.forEach(id => {
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = DATA.models[id].name;
+      sel.appendChild(o);
+    });
+    // default: A = first, B = second
+    if(i === 1 && modelIds.length > 1) sel.value = modelIds[1];
+    sel.addEventListener('change', renderCompare);
+  });
+  // scroll animations
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.12});
+  document.querySelectorAll('.fade-up,.formula-card').forEach(el=>obs.observe(el));
+  // stagger formula cards
+  document.querySelectorAll('.formula-card').forEach((el,i)=>{
+    el.style.transitionDelay = (i*100)+'ms';
+  });
+
+  updateAll();
+}
+
+function updateAll(){ updateCalcCards(); renderRankedList(); }
+
+function updateCalcCards(){
+  const hwId=document.getElementById('hardware').value;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('benchmark').value;
+  const hw=DATA.hardware[hwId]; if(!hw) return;
+
+  const lId=document.getElementById('calcLocal').value, lm=DATA.models[lId];
+  if(lm&&lm.local&&lm.local[hwId]){
+    const p=lm.local[hwId],sc=getScore(lm,bmId)||0,
+      tpd=p.tokensPerSec*3600*hours,tot=tpd*365*years,
+      adj=tot*(norm(sc,bmId)/100), val=adj/hw.price;
+    document.getElementById('calcLocalSteps').innerHTML=
+      `<div class="calc-step"><span class="num">${p.tokensPerSec}</span> tok/s × 3600 × <span class="num">${hours}</span>h = <span class="result">${fmt(tpd)}</span>/day</div>`+
+      `<div class="calc-step">× 365 × <span class="num">${years}</span>y = <span class="result">${fmt(tot)}</span></div>`+
+      `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(adj)}</span></div>`+
+      `<div class="calc-step">÷ $<span class="num">${hw.price.toLocaleString()}</span> = <span class="result">${fmt(val)}</span></div>`;
+    document.getElementById('calcLocalValue').textContent=fmt(val);
+  }
+
+  const sv=document.getElementById('calcSub').value;
+  if(sv){
+    const [mid,sid]=sv.split('|'), m=DATA.models[mid], sub=m?.subscriptions?.[sid];
+    if(sub&&sub.tokensPerDay){
+      const sc=getScore(m,bmId)||0, tot=sub.tokensPerDay*365*years,
+        cost=sub.monthlyPrice*12*years, adj=tot*(norm(sc,bmId)/100), val=adj/cost;
+      document.getElementById('calcSubSteps').innerHTML=
+        `<div class="calc-step"><span class="num">${fmt(sub.tokensPerDay)}</span> tok/day × 365 × <span class="num">${years}</span>y = <span class="result">${fmt(tot)}</span></div>`+
+        `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(adj)}</span></div>`+
+        `<div class="calc-step">$<span class="num">${sub.monthlyPrice}</span>/mo × 12 × <span class="num">${years}</span>y = $<span class="result">${cost}</span></div>`+
+        `<div class="calc-step">÷ $<span class="num">${cost}</span> = <span class="result">${fmt(val)}</span></div>`;
+      document.getElementById('calcSubValue').textContent=fmt(val);
+    }
+  }
+
+  const aId=document.getElementById('calcApi').value, am=DATA.models[aId];
+  if(am&&am.api){
+    const sc=getScore(am,bmId)||0, wp=wap(am.api), tpd=1_000_000/wp, val=tpd*(norm(sc,bmId)/100);
+    document.getElementById('calcApiSteps').innerHTML=
+      `<div class="calc-step">$<span class="num">${am.api.inputPer1M}</span>×75% + $<span class="num">${am.api.outputPer1M}</span>×25% = $<span class="result">${wp.toFixed(3)}</span>/M</div>`+
+      `<div class="calc-step">1M ÷ $<span class="num">${wp.toFixed(3)}</span> = <span class="result">${fmt(tpd)}</span> tok/$</div>`+
+      `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(val)}</span></div>`;
+    document.getElementById('calcApiValue').textContent=fmt(val);
+  }
+}
+
+function renderRankedList(){
+  const hwId=document.getElementById('hardware').value, hw=DATA.hardware[hwId]; if(!hw) return;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('benchmark').value;
+  let results=[];
+  Object.values(DATA.models).forEach(model=>{
+    const score=getScore(model,bmId); if(!score) return;
+    const np=norm(score,bmId), ds=disp(score,bmId);
+    if(model.api&&model.api.inputPer1M>0){
+      const wp=wap(model.api), tpd=1_000_000/wp, val=tpd*(np/100);
+      results.push({model:model.name,type:'api',val,ds,details:`$${wp.toFixed(3)}/M avg`,
+        tip:`$${model.api.inputPer1M}×75% + $${model.api.outputPer1M}×25% = $${wp.toFixed(3)}/M\n1M ÷ $${wp.toFixed(3)} = ${fmt(tpd)} tok/$\n× ${np.toFixed(1)}% = ${fmt(val)} tok/$`});
+    }
+    if(model.local&&model.local[hwId]){
+      const p=model.local[hwId], tpd=p.tokensPerSec*3600*hours, tot=tpd*365*years, val=(tot/hw.price)*(np/100);
+      results.push({model:model.name,type:'local',val,ds,details:`${p.tokensPerSec} tok/s · ${hw.name}`,
+        tip:`${p.tokensPerSec} tok/s × ${hours}h = ${fmt(tpd)}/day\n× 365 × ${years}y = ${fmt(tot)}\n× ${np.toFixed(1)}% ÷ $${hw.price.toLocaleString()} = ${fmt(val)} tok/$`});
+    }
+    if(model.subscriptions) Object.values(model.subscriptions).forEach(sub=>{
+      if(!sub.tokensPerDay) return;
+      const tot=sub.tokensPerDay*365*years, cost=sub.monthlyPrice*12*years, val=(tot/cost)*(np/100);
+      results.push({model:model.name,type:'subscription',subName:sub.name,val,ds,confidence:sub.confidence,
+        details:`$${sub.monthlyPrice}/mo`,
+        tip:`${fmt(sub.tokensPerDay)} tok/day × 365 × ${years}y = ${fmt(tot)}\n$${sub.monthlyPrice}/mo × 12 × ${years}y = $${cost}\n× ${np.toFixed(1)}% ÷ $${cost} = ${fmt(val)} tok/$`});
+    });
+  });
+  results.sort((a,b)=>b.val-a.val);
+  const maxVal=results[0]?.val||1;
+  let html='';
+  results.forEach((r,i)=>{
+    const pct=Math.max(2,(r.val/maxVal)*100);
+    const col=COL[r.type], icon=ICON[r.type], lbl=LBL[r.type];
+    const warn=r.confidence==='low'?' ⚠️':'';
+    const name=(r.subName?`${r.subName} → ${r.model}`:r.model)+warn;
+    const rankColor = i===0?'var(--green)':i===1?'var(--blue)':i===2?'var(--purple)':'var(--faint)';
+    html+=`<div class="rank-row" ${r.tip?`data-tip="${esc(r.tip)}"`:''}>
+      <span class="rank-num" style="color:${rankColor}">#${i+1}</span>
+      <span class="rank-type" style="color:${col}">${icon} ${lbl}</span>
+      <span class="rank-name">${name}</span>
+      <div class="rank-bar-wrap">
+        <div class="rank-bar" style="width:${pct}%;background:${col};opacity:0.9">
+          ${pct>18?fmt(r.val):''}
+        </div>
+      </div>
+      <span class="rank-val-out" style="color:${col}">${pct<=18?fmt(r.val):''}</span>
+      <span class="rank-detail">${r.details} (${r.ds})</span>
+    </div>`;
+  });
+  const el=document.getElementById('calculatorContent');
+  el.innerHTML=html;
+  // animate bars in after paint
+  requestAnimationFrame(()=>{
+    el.querySelectorAll('.rank-bar').forEach((bar,i)=>{
+      const target=bar.style.width; bar.style.width='0%';
+      setTimeout(()=>{ bar.style.width=target; }, i*18);
+    });
+  });
+}
+
+function renderDataTables(){
+  let h='';
+  Object.values(DATA.models).forEach(m=>{h+=`<tr><td><strong>${m.name}</strong></td><td>${m.provider}</td><td>${m.releaseDate||'—'}</td><td><a href="${m.modelCard||'#'}" target="_blank">↗</a></td></tr>`;});
+  document.querySelector('#tableModels tbody').innerHTML=h;
+  h='';
+  Object.values(DATA.models).forEach(m=>{
+    const bm=m.benchmarks||{},aa=bm.aa_intelligence,elo=bm.arena_elo,swe=bm.swe_bench,aider=bm.aider_polyglot;
+    h+=`<tr><td>${m.name}</td><td>${aa?`<a href="${aa.source}" target="_blank">${aa.score}</a>`:'—'}</td><td>${elo?`<a href="${elo.source}" target="_blank">${elo.score}</a>`:'—'}</td><td>${swe?`<a href="${swe.source}" target="_blank">${swe.score}%</a>`:'—'}</td><td>${aider?`<a href="${aider.source}" target="_blank">${aider.score}%</a>`:'—'}</td></tr>`;
+  });
+  document.querySelector('#tableBenchmarks tbody').innerHTML=h;
+  h='';
+  Object.values(DATA.models).filter(m=>m.api&&m.api.inputPer1M>0).forEach(m=>{h+=`<tr><td>${m.name}</td><td>$${m.api.inputPer1M}</td><td>$${m.api.outputPer1M}</td><td>${m.api.tokensPerSecAPI||'—'}</td><td><a href="${m.api.source}" target="_blank">↗</a></td></tr>`;});
+  document.querySelector('#tableApi tbody').innerHTML=h;
+  h='';
+  Object.values(DATA.models).filter(m=>m.local).forEach(m=>{
+    Object.entries(m.local).forEach(([hwId,perf])=>{
+      const hw=DATA.hardware[hwId];
+      h+=`<tr><td>${m.name}</td><td>${hw?hw.name:hwId}</td><td>${perf.tokensPerSec}</td><td>${perf.quantization||'—'}</td><td>${perf.vramRequired||'?'}GB</td><td><a href="${perf.source}" target="_blank">↗</a></td></tr>`;
+    });
+  });
+  document.querySelector('#tableLocal tbody').innerHTML=h;
+  h='';
+  Object.values(DATA.models).filter(m=>m.subscriptions).forEach(m=>{
+    Object.entries(m.subscriptions).forEach(([,sub])=>{
+      const cc=sub.confidence==='low'?'conf-low':sub.confidence==='medium'?'conf-medium':'conf-high';
+      h+=`<tr><td>${m.name}</td><td>${sub.name}</td><td>$${sub.monthlyPrice}</td><td>${sub.tokensPerDay?fmt(sub.tokensPerDay):'?'}</td><td class="${cc}">${sub.confidence||'low'}</td><td style="max-width:170px;font-size:0.7rem">${sub.notes||''}</td><td><a href="${sub.source}" target="_blank">↗</a></td></tr>`;
+    });
+  });
+  document.querySelector('#tableSubs tbody').innerHTML=h;
+  h='';
+  Object.entries(DATA.hardware).forEach(([,hw])=>{h+=`<tr><td>${hw.name}</td><td>$${hw.price.toLocaleString()}</td><td>${hw.vram}GB</td><td>${hw.year}</td><td><a href="${hw.source}" target="_blank">↗</a></td></tr>`;});
+  document.querySelector('#tableHardware tbody').innerHTML=h;
+}
+
+function updateChart(){
+  const canvas=document.getElementById('valueChart');
+  if(!canvas||!canvas.offsetParent) return; // hidden tab — skip, renders on tab switch
+  const hwId=document.getElementById('hardware').value, hw=DATA.hardware[hwId]; if(!hw) return;
+  const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
+  const years=parseInt(document.getElementById('periodYears').value);
+  const bmId=document.getElementById('chartBenchmark').value;
+  const typeFilter=document.getElementById('chartType').value;
+  const provFilter=document.getElementById('chartProvider').value;
+  let pts=[];
+  Object.values(DATA.models).forEach(model=>{
+    if(provFilter!=='all'&&model.provider!==provFilter) return;
+    const score=getScore(model,bmId); if(!score) return;
+    const np=norm(score,bmId), date=new Date(model.releaseDate||'2025-01-01');
+    if(model.api&&model.api.inputPer1M>0&&(typeFilter==='all'||typeFilter==='api'))
+      pts.push({name:model.name,provider:model.provider,type:'api',date,value:(1_000_000/wap(model.api))*(np/100)});
+    if(model.local&&model.local[hwId]&&(typeFilter==='all'||typeFilter==='local')){
+      const p=model.local[hwId];
+      pts.push({name:model.name+' (local)',provider:model.provider,type:'local',date,value:(p.tokensPerSec*3600*hours*365*years/hw.price)*(np/100)});
+    }
+    if(model.subscriptions&&(typeFilter==='all'||typeFilter==='subscription'))
+      Object.values(model.subscriptions).forEach(sub=>{
+        if(!sub.tokensPerDay) return;
+        pts.push({name:sub.name+'→'+model.name,provider:model.provider,type:'subscription',date,value:(sub.tokensPerDay*365*years/(sub.monthlyPrice*12*years))*(np/100)});
+      });
+  });
+  const groups={};
+  pts.forEach(d=>{const k=`${d.provider}-${d.type}`;if(!groups[k])groups[k]={provider:d.provider,type:d.type,points:[]};groups[k].points.push(d);});
+  Object.values(groups).forEach(g=>g.points.sort((a,b)=>a.date-b.date));
+  const datasets=Object.values(groups).map(g=>{
+    const col=PROVIDER_COLORS[g.provider]||'#888';
+    return{label:g.provider+(g.type==='local'?' (Local)':g.type==='subscription'?' (Sub)':''),
+      data:g.points.map(p=>({x:p.date,y:p.value,...p})),
+      backgroundColor:col,borderColor:col,borderWidth:2,pointRadius:6,showLine:true,tension:0.2,
+      borderDash:g.type==='subscription'?[4,4]:[],
+      pointStyle:g.type==='local'?'rect':g.type==='subscription'?'triangle':'circle'};
+  });
+  if(chart) chart.destroy();
+  chart=new Chart(document.getElementById('valueChart'),{type:'scatter',data:{datasets},options:{
+    responsive:true,maintainAspectRatio:false,
+    scales:{
+      x:{type:'time',time:{unit:'quarter'},title:{display:true,text:'Release Date',color:'#6b6b72'},ticks:{color:'#6b6b72'},grid:{color:'rgba(0,0,0,0.05)'}},
+      y:{type:'logarithmic',title:{display:true,text:'Quality-Adj Tokens / $',color:'#6b6b72'},ticks:{color:'#6b6b72',callback:v=>fmt(v)},grid:{color:'rgba(0,0,0,0.05)'}}
+    },
+    plugins:{
+      tooltip:{callbacks:{title:ctx=>`${ctx[0].raw.type==='api'?'🔌':ctx[0].raw.type==='local'?'🖥️':'💳'} ${ctx[0].raw.name}`,label:ctx=>[`Value: ${fmt(ctx.raw.y)} tok/$`]}},
+      legend:{display:true,labels:{color:'#6b6b72',usePointStyle:true}}
+    }
+  }});
+}
+
+function renderCompare() {
+  const hwId = document.getElementById('hardware').value;
+  const hours = parseFloat(document.getElementById('hoursPerDay').value) || 16;
+  const years = parseInt(document.getElementById('periodYears').value) || 3;
+  const hw = DATA.hardware[hwId];
+
+  const idA = document.getElementById('cmpA').value;
+  const idB = document.getElementById('cmpB').value;
+  const mA = DATA.models[idA];
+  const mB = DATA.models[idB];
+  if (!mA || !mB) return;
+
+  const scoreA = getScore(mA, '_combined') || 0;
+  const scoreB = getScore(mB, '_combined') || 0;
+
+  // helpers
+  function barRow(label, tagCls, tagLabel, valA, valB, fmtFn, lowerIsBetter) {
+    if (valA == null && valB == null) return '';
+    const aNull = valA == null, bNull = valB == null;
+    const best = lowerIsBetter
+      ? (!aNull && !bNull ? (valA <= valB ? 'a' : 'b') : (aNull ? 'b' : 'a'))
+      : (!aNull && !bNull ? (valA >= valB ? 'a' : 'b') : (aNull ? 'b' : 'a'));
+    const tie = !aNull && !bNull && Math.abs(valA - valB) / Math.max(valA, valB) < 0.005;
+    const maxV = Math.max(valA||0, valB||0) || 1;
+    const pctA = aNull ? 0 : Math.max(2, (valA/maxV)*100);
+    const pctB = bNull ? 0 : Math.max(2, (valB/maxV)*100);
+    const midClass = tie ? 'tie' : best === 'a' ? 'a-wins' : 'b-wins';
+    const midText = tie ? '≈ tie'
+      : best === 'a'
+        ? `A +${(((valA-valB)/valB)*100).toFixed(0)}%`
+        : `B +${(((valB-valA)/valA)*100).toFixed(0)}%`;
+    const dispA = aNull ? '<span class="cmp-na">n/a</span>' : `<span class="cmp-val cmp-val-a">${fmtFn(valA)}</span>`;
+    const dispB = bNull ? '<span class="cmp-na">n/a</span>' : `<span class="cmp-val cmp-val-b">${fmtFn(valB)}</span>`;
+    return `<div class="cmp-row">
+      <div class="cmp-row-label"><span class="crl-tag ${tagCls}">${tagLabel}</span> ${label}</div>
+      <div class="cmp-bars">
+        <div class="cmp-bar-wrap-a">
+          ${dispA}
+          <div class="cmp-bar-track"><div class="cmp-bar-fill-a" style="width:${aNull?0:pctA}%"></div></div>
+        </div>
+        <div class="cmp-mid-badge ${midClass}">${midText}</div>
+        <div class="cmp-bar-wrap-b">
+          <div class="cmp-bar-track"><div class="cmp-bar-fill-b" style="width:${bNull?0:pctB}%"></div></div>
+          ${dispB}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Quality
+  const qualRow = barRow('Quality score', 'crl-qual', '🧠 Quality',
+    scoreA, scoreB, v => v.toFixed(1)+'%', false);
+
+  // API value
+  const apiValA = mA.api && mA.api.inputPer1M > 0 ? (1_000_000/wap(mA.api))*(scoreA/100) : null;
+  const apiValB = mB.api && mB.api.inputPer1M > 0 ? (1_000_000/wap(mB.api))*(scoreB/100) : null;
+  const apiPriceA = mA.api && mA.api.inputPer1M > 0 ? wap(mA.api) : null;
+  const apiPriceB = mB.api && mB.api.inputPer1M > 0 ? wap(mB.api) : null;
+  const apiRow = barRow('API · quality-adj tok/$', 'crl-api', '🔌 API value', apiValA, apiValB, fmt, false);
+  const apiPriceRow = barRow('API · blended $/M tokens', 'crl-api', '🔌 API price',
+    apiPriceA, apiPriceB, v => '$'+v.toFixed(3), true);
+
+  // Best subscription value
+  function bestSubVal(m) {
+    const sc = getScore(m, '_combined') || 0;
+    let best = null;
+    if (m.subscriptions) Object.values(m.subscriptions).forEach(sub => {
+      if (!sub.tokensPerDay) return;
+      const v = (sub.tokensPerDay*365*years*(sc/100))/(sub.monthlyPrice*12*years);
+      if (best == null || v > best.val) best = { val: v, name: sub.name, price: sub.monthlyPrice };
+    });
+    return best;
+  }
+  const subA = bestSubVal(mA), subB = bestSubVal(mB);
+  const subRow = barRow('Subscription · quality-adj tok/$', 'crl-sub', '💳 Sub value',
+    subA?.val, subB?.val, fmt, false);
+  const subPriceRow = barRow('Subscription · $/month', 'crl-sub', '💳 Sub price',
+    subA?.price, subB?.price, v => '$'+v, true);
+
+  // Best local value on selected hardware
+  function bestLocalVal(m) {
+    if (!hw || !m.local || !m.local[hwId]) return null;
+    const sc = getScore(m, '_combined') || 0;
+    const p = m.local[hwId];
+    return (p.tokensPerSec*3600*hours*365*years*(sc/100)) / hw.price;
+  }
+  function bestLocalTokS(m) {
+    if (!hw || !m.local || !m.local[hwId]) return null;
+    return m.local[hwId].tokensPerSec;
+  }
+  const localRow = barRow('Local · quality-adj tok/$ ('+((hw&&hw.name)||'—')+')', 'crl-local', '🖥️ Local value',
+    bestLocalVal(mA), bestLocalVal(mB), fmt, false);
+  const tokSRow = barRow('Local · tokens/sec', 'crl-local', '🖥️ Tok/s',
+    bestLocalTokS(mA), bestLocalTokS(mB), v => v+' t/s', false);
+
+  document.getElementById('cmpGrid').innerHTML = qualRow + apiRow + apiPriceRow + subRow + subPriceRow + localRow + tokSRow;
+
+  // Animate bars from 0
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.cmp-bar-fill-a,.cmp-bar-fill-b').forEach(bar => {
+      const target = bar.style.width;
+      bar.style.width = '0%';
+      setTimeout(() => { bar.style.width = target; }, 40);
+    });
+  });
+
+  // Verdict
+  const verdictEl = document.getElementById('cmpVerdict');
+  verdictEl.style.display = '';
+  const aName = mA.name, bName = mB.name;
+
+  // Find overall winner by most categories won (API val, sub val, local val, quality)
+  let aWins = 0, bWins = 0;
+  [[apiValA, apiValB],[subA?.val, subB?.val],[bestLocalVal(mA), bestLocalVal(mB)],[scoreA, scoreB]]
+    .forEach(([a,b]) => {
+      if(a != null && b != null) { if(a > b) aWins++; else if(b > a) bWins++; }
+    });
+
+  let icon, html;
+  if (aWins === bWins) {
+    icon = '🤝';
+    html = `<div class="cmp-verdict-text"><span class="cv-tie">${aName}</span> and <span class="cv-tie">${bName}</span> are roughly equal</div>
+            <div class="cmp-verdict-sub">Tied across quality + value metrics — choose based on availability or preference.</div>`;
+  } else {
+    const winner = aWins > bWins ? aName : bName;
+    const loser  = aWins > bWins ? bName : aName;
+    const wClass = aWins > bWins ? 'cv-a' : 'cv-b';
+    const cats = Math.max(aWins, bWins);
+    icon = '🏆';
+    html = `<div class="cmp-verdict-text"><span class="${wClass}">${winner}</span> wins <em>${cats}</em> of the compared categories</div>
+            <div class="cmp-verdict-sub">Better overall value than ${loser} across quality and cost metrics.</div>`;
+  }
+  verdictEl.innerHTML = `<div class="cmp-verdict-icon">${icon}</div><div>${html}</div>`;
+}
+
+loadData();
+</script>
 </body>
 </html>
