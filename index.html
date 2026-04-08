@@ -1567,8 +1567,13 @@ function updateChart(){
       borderDash:g.type==='subscription'?[4,4]:[],
       pointStyle:g.type==='local'?'rect':g.type==='subscription'?'triangle':'circle'};
   });
-  if(chart) chart.destroy();
-  chart=new Chart(document.getElementById('valueChart'),{type:'scatter',data:{datasets},options:{
+  if(chart) { chart.destroy(); chart = null; }
+  // Chart.js needs a fresh canvas after destroy — replace the element
+  const oldCanvas = document.getElementById('valueChart');
+  const newCanvas = document.createElement('canvas');
+  newCanvas.id = 'valueChart';
+  oldCanvas.parentNode.replaceChild(newCanvas, oldCanvas);
+  chart=new Chart(newCanvas,{type:'scatter',data:{datasets},options:{
     responsive:true,maintainAspectRatio:false,
     scales:{
       x:{type:'time',time:{unit:'quarter'},title:{display:true,text:'Release Date',color:'#6b6b72'},ticks:{color:'#6b6b72'},grid:{color:'rgba(0,0,0,0.05)'}},
