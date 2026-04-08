@@ -674,7 +674,7 @@
         "score": 84,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       },
-      "arena_elo": {
+      "arena_text": {
         "score": 1499,
         "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
@@ -720,6 +720,16 @@
       "gpqa_diamond": {
         "score": 79.9,
         "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "arena_text": {
+        "score": 1390,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1380,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -729,7 +739,16 @@
       "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
     },
     "local": null,
-    "subscriptions": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "tokensPerDay": 640000,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing"
+      }
+    },
     "_aa_synced": "2026-04-03"
   },
   "claude-4-5-haiku": {
@@ -750,6 +769,16 @@
       "livecodebench": {
         "score": 51.1,
         "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "arena_text": {
+        "score": 1320,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1300,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -759,7 +788,16 @@
       "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
     },
     "local": null,
-    "subscriptions": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "tokensPerDay": 640000,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing"
+      }
+    },
     "_aa_synced": "2026-04-03"
   },
   "claude-4-5-sonnet": {
@@ -780,6 +818,16 @@
       "livecodebench": {
         "score": 59,
         "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "arena_text": {
+        "score": 1370,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1360,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -789,7 +837,16 @@
       "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
     },
     "local": null,
-    "subscriptions": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "tokensPerDay": 640000,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing"
+      }
+    },
     "_aa_synced": "2026-04-03"
   },
   "gpt-5-4": {
@@ -807,7 +864,7 @@
         "score": 92,
         "source": "https://artificialanalysis.ai/models/gpt-5-4"
       },
-      "arena_elo": {
+      "arena_text": {
         "score": 1484,
         "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
@@ -853,6 +910,16 @@
       "gpqa_diamond": {
         "score": 91.5,
         "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "arena_text": {
+        "score": 1440,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1450,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -888,6 +955,16 @@
       "gpqa_diamond": {
         "score": 89.9,
         "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "arena_text": {
+        "score": 1420,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1430,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -897,7 +974,24 @@
       "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
     },
     "local": null,
-    "subscriptions": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "tokensPerDay": 8192000,
+        "confidence": "medium",
+        "notes": "Codex models available via ChatGPT Plus with xhigh effort.",
+        "source": "https://openai.com/chatgpt/pricing/"
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "tokensPerDay": 81920000,
+        "confidence": "medium",
+        "notes": "Unlimited access including Codex models.",
+        "source": "https://openai.com/chatgpt/pricing/"
+      }
+    },
     "_aa_synced": "2026-04-03"
   },
   "gemini-3-1-pro": {
@@ -915,7 +1009,7 @@
         "score": 94.1,
         "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
       },
-      "arena_elo": {
+      "arena_text": {
         "score": 1494,
         "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
@@ -953,6 +1047,16 @@
       "gpqa_diamond": {
         "score": 82,
         "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "arena_text": {
+        "score": 1380,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1360,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -991,6 +1095,16 @@
       "livecodebench": {
         "score": 89.4,
         "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "arena_text": {
+        "score": 1350,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1330,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1017,6 +1131,16 @@
       "gpqa_diamond": {
         "score": 84.8,
         "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "arena_text": {
+        "score": 1340,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1320,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1043,6 +1167,16 @@
       "gpqa_diamond": {
         "score": 87.4,
         "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "arena_text": {
+        "score": 1370,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1350,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1069,6 +1203,16 @@
       "gpqa_diamond": {
         "score": 87.9,
         "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "arena_text": {
+        "score": 1360,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1370,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1099,6 +1243,16 @@
       "livecodebench": {
         "score": 59.3,
         "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "arena_text": {
+        "score": 1380,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1390,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1198,6 +1352,16 @@
       "aa_intelligence": {
         "score": 28.5,
         "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "arena_text": {
+        "score": 1310,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1290,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": {
@@ -1232,6 +1396,16 @@
       "aa_intelligence": {
         "score": 26.1,
         "source": "https://artificialanalysis.ai/models/gemma-4-26b-a4b-it"
+      },
+      "arena_text": {
+        "score": 1290,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1270,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
       }
     },
     "api": null,
