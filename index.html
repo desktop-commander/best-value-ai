@@ -526,6 +526,37 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
+        /* ── MOBILE RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav { padding: 0 1rem; gap: 1rem; }
+            .nav-links { display: none; }
+            .container { padding: 0 1rem; }
+            .hero-wrap { padding: 3rem 0 0; }
+            .hero h1 { font-size: 2rem; }
+            .hero-sub { font-size: 0.9rem; }
+            .settings-bar { padding: 0.75rem; gap: 0.75rem; }
+            .settings-bar select, .settings-bar input { font-size: 0.75rem; padding: 0.3rem 0.5rem; }
+            .setting-group label { font-size: 0.58rem; }
+            .rank-row { flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem; }
+            .rank-name { width: auto; max-width: 50%; font-size: 0.72rem; }
+            .rank-detail { display: none; }
+            .rank-val-out { width: auto; font-size: 0.68rem; }
+            .rank-bar-wrap { flex-basis: 100%; order: 10; }
+            .rank-type { width: auto; font-size: 0.55rem; }
+            .data-table { font-size: 0.68rem; display: block; overflow-x: auto; }
+            .data-table th, .data-table td { padding: 0.4rem 0.5rem; white-space: nowrap; }
+            .cmp-bars { grid-template-columns: 1fr; gap: 0.3rem; }
+            .cmp-bar-wrap-a { justify-content: flex-start; }
+            .cmp-mid-badge { text-align: left; }
+            .dc-bar { font-size: 0.7rem; padding: 0.65rem 1rem; }
+            .bm-problem-grid { grid-template-columns: 1fr; }
+            .bm-stable-grid { grid-template-columns: 1fr; }
+            .formula-grid { grid-template-columns: 1fr; }
+            .calc-grid { grid-template-columns: 1fr; }
+            .chart-wrapper { height: 320px; }
+            .bfn-formula { flex-direction: column; align-items: flex-start; }
+        }
+
         /* ── WINNER DELTA BADGES ── */
         .hero-stat-deltas {
             display: flex; gap: 0.45rem; flex-wrap: wrap;
@@ -884,10 +915,10 @@
                 <span class="fv-block">1,000,000 tokens</span>
                 <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
                 <hr class="fv-divider">
-                <span class="fv-block"><span class="fv-var fv-api">price/M</span> (75% in + 25% out)</span>
+                <span class="fv-block"><span class="fv-var fv-api">price/M</span> (input% in + output% out)</span>
                 <span class="fv-block" style="margin-top:0.35rem"><span class="fv-op">=</span> <span class="fv-result">quality tokens / $</span></span>
             </div>
-            <p class="formula-note">75/25 input/output ratio reflects typical real-world usage. No time horizon needed.</p>
+            <p class="formula-note">Adjustable input/output ratio — defaults to 75/25 for general use. Coding workloads are ~90/10 (long context, short output), chat is ~50/50, RAG is ~95/5.</p>
         </div>
     </div>
     <p class="method-note fade-up">
@@ -979,14 +1010,14 @@
     <div class="bm-formula-note fade-up">
         <div class="bfn-label">How we combine them</div>
         <div class="bfn-formula">
-            <span class="bfn-part arena">Arena ELO → normalized 0–100</span>
+            <span class="bfn-part arena">Arena ELO → z-score (0–100)</span>
             <span class="bfn-op">+</span>
             <span class="bfn-part aa">AA Intelligence Index (0–100)</span>
             <span class="bfn-op">÷ 2</span>
             <span class="bfn-op">=</span>
             <span class="bfn-result">Stable Quality Score</span>
         </div>
-        <p class="bfn-note">Arena ELO is normalized using <code>(ELO − 1000) / 5</code>, which maps typical frontier model ELOs (1100–1400) to a 0–100 range. The two scores are then averaged. If only one is available for a model, that single score is used. Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but <strong>not used in the main value calculation</strong> — they can't fairly compare across model generations.</p>
+        <p class="bfn-note">Both scores are z-score normalized: <code>(score − mean) / std × 15 + 50</code>, centering each at 50 on its own distribution. This ensures Arena ELO and AA Intelligence contribute equally to the average — without normalization, Arena's larger numbers would dominate. The two normalized scores are then averaged. If only one is available for a model, that single score is used. Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but <strong>not used in the main value calculation</strong> — they can't fairly compare across model generations.</p>
     </div>
 </section>
 
@@ -1030,6 +1061,15 @@
             <div class="setting-group">
                 <label>Benchmark</label>
                 <select id="benchmark"></select>
+            </div>
+            <div class="setting-group">
+                <label>In/Out ratio</label>
+                <select id="ioRatio">
+                    <option value="0.75">General (75/25)</option>
+                    <option value="0.90">Coding (90/10)</option>
+                    <option value="0.50">Chat (50/50)</option>
+                    <option value="0.95">RAG (95/5)</option>
+                </select>
             </div>
         </div>
         <div class="calc-grid">
@@ -1110,7 +1150,7 @@
         </div>
         <div class="data-table-section">
             <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
+            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena Text ELO</th><th>Arena Code ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
         </div>
         <div class="data-table-section">
             <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
@@ -1162,11 +1202,29 @@ function fmt(n) {
   return n.toFixed(0);
 }
 function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function wap(api){ return api.inputPer1M*0.75+api.outputPer1M*0.25; }
+function getIORatio(){ const el=document.getElementById('ioRatio'); return el ? parseFloat(el.value) : 0.75; }
+function wap(api){ const r=getIORatio(); return api.inputPer1M*r+api.outputPer1M*(1-r); }
+// Z-score normalization stats — computed once on data load, used everywhere
+let NORM_STATS = { arena: null, aa: null };
+function computeNormStats() {
+  let arenaScores=[], aaScores=[];
+  Object.values(DATA.models).forEach(m => {
+    const bm = m.benchmarks || {};
+    if(bm.arena_text?.score) arenaScores.push(bm.arena_text.score);
+    if(bm.arena_code?.score) arenaScores.push(bm.arena_code.score);
+    if(bm.aa_intelligence?.score) aaScores.push(bm.aa_intelligence.score);
+  });
+  function stats(arr) { const n=arr.length,mean=arr.reduce((a,b)=>a+b,0)/n,std=Math.sqrt(arr.reduce((a,b)=>a+(b-mean)**2,0)/n); return {mean,std}; }
+  if(arenaScores.length) NORM_STATS.arena = stats(arenaScores);
+  if(aaScores.length) NORM_STATS.aa = stats(aaScores);
+}
 function norm(score,bmId){
   if(bmId==='_combined') return score;
   const bm=DATA.benchmarks[bmId]; if(!bm) return score;
-  if(bm.type==='elo') return Math.max(0,Math.min(100,(score-1000)/5));
+  // Z-score normalization: center at 50, spread by 15
+  // This ensures Arena ELO and AA Intelligence contribute equally when averaged
+  if(bm.type==='elo' && NORM_STATS.arena) return Math.max(0,Math.min(100, 50+((score-NORM_STATS.arena.mean)/NORM_STATS.arena.std)*15));
+  if(bmId==='aa_intelligence' && NORM_STATS.aa) return Math.max(0,Math.min(100, 50+((score-NORM_STATS.aa.mean)/NORM_STATS.aa.std)*15));
   return score;
 }
 function disp(score,bmId){
@@ -1238,9 +1296,9 @@ function computeWinners(){
     if(model.api&&model.api.inputPer1M>0){
       const wp = wap(model.api);
       const val=(1_000_000/wp)*(score/100);
-      // price per 1M quality-tokens
       const pricePerMQTok = wp / (score/100);
-      topApi.push({val, score, pricePerMQTok, model:model.name, detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M`});
+      const r=getIORatio(), inPct=Math.round(r*100), outPct=100-inPct;
+      topApi.push({val, score, pricePerMQTok, model:model.name, detail:`$${model.api.inputPer1M}/$${model.api.outputPer1M} per 1M (${inPct}/${outPct})`});
     }
   });
 
@@ -1296,6 +1354,7 @@ async function loadData(){
   try{
     const [mR,hR,bR]=await Promise.all([fetch('data/models.json'),fetch('data/hardware.json'),fetch('data/benchmarks.json')]);
     DATA.models=await mR.json(); DATA.hardware=await hR.json(); DATA.benchmarks=await bR.json();
+    computeNormStats();
     init();
   } catch(err) {
     document.getElementById('calculatorContent').innerHTML=`<div class="warning-box">Error loading data: ${err.message}</div>`;
@@ -1428,8 +1487,9 @@ function updateCalcCards(){
   const aId=document.getElementById('calcApi').value, am=DATA.models[aId];
   if(am&&am.api){
     const sc=getScore(am,bmId)||0, wp=wap(am.api), tpd=1_000_000/wp, val=tpd*(norm(sc,bmId)/100);
+    const r=getIORatio(), inPct=Math.round(r*100), outPct=100-inPct;
     document.getElementById('calcApiSteps').innerHTML=
-      `<div class="calc-step">$<span class="num">${am.api.inputPer1M}</span>×75% + $<span class="num">${am.api.outputPer1M}</span>×25% = $<span class="result">${wp.toFixed(3)}</span>/M</div>`+
+      `<div class="calc-step">$<span class="num">${am.api.inputPer1M}</span>×${inPct}% + $<span class="num">${am.api.outputPer1M}</span>×${outPct}% = $<span class="result">${wp.toFixed(3)}</span>/M</div>`+
       `<div class="calc-step">1M ÷ $<span class="num">${wp.toFixed(3)}</span> = <span class="result">${fmt(tpd)}</span> tok/$</div>`+
       `<div class="calc-step">× quality <span class="num">${disp(sc,bmId)}</span> = <span class="result">${fmt(val)}</span></div>`;
     document.getElementById('calcApiValue').textContent=fmt(val);
@@ -1447,8 +1507,9 @@ function renderRankedList(){
     const np=norm(score,bmId), ds=disp(score,bmId);
     if(model.api&&model.api.inputPer1M>0){
       const wp=wap(model.api), tpd=1_000_000/wp, val=tpd*(np/100);
+      const r=getIORatio(), inPct=Math.round(r*100), outPct=100-inPct;
       results.push({model:model.name,type:'api',val,ds,details:`$${wp.toFixed(3)}/M avg`,
-        tip:`$${model.api.inputPer1M}×75% + $${model.api.outputPer1M}×25% = $${wp.toFixed(3)}/M\n1M ÷ $${wp.toFixed(3)} = ${fmt(tpd)} tok/$\n× ${np.toFixed(1)}% = ${fmt(val)} tok/$`});
+        tip:`$${model.api.inputPer1M}×${inPct}% + $${model.api.outputPer1M}×${outPct}% = $${wp.toFixed(3)}/M\n1M ÷ $${wp.toFixed(3)} = ${fmt(tpd)} tok/$\n× ${np.toFixed(1)}% = ${fmt(val)} tok/$`});
     }
     if(model.local&&model.local[hwId]){
       const p=model.local[hwId], tpd=p.tokensPerSec*3600*hours, tot=tpd*365*years, val=(tot/hw.price)*(np/100);
@@ -1486,14 +1547,22 @@ function renderRankedList(){
     </div>`;
   });
   const el=document.getElementById('calculatorContent');
+  const isFirstRender = el.innerHTML === 'Loading…' || el.innerHTML === '';
   el.innerHTML=html;
-  // animate bars in after paint
-  requestAnimationFrame(()=>{
-    el.querySelectorAll('.rank-bar').forEach((bar,i)=>{
-      const target=bar.style.width; bar.style.width='0%';
-      setTimeout(()=>{ bar.style.width=target; }, i*18);
+  if(isFirstRender) {
+    // First load: animate bars 0 → target
+    requestAnimationFrame(()=>{
+      el.querySelectorAll('.rank-bar').forEach((bar,i)=>{
+        const target=bar.style.width; bar.style.width='0%';
+        setTimeout(()=>{ bar.style.width=target; }, i*18);
+      });
     });
-  });
+  } else {
+    // Re-render from dropdown change: disable CSS transition so bars jump instantly to correct width
+    el.querySelectorAll('.rank-bar').forEach(bar=>{
+      bar.style.transition='none';
+    });
+  }
 }
 
 function renderDataTables(){
@@ -1502,8 +1571,9 @@ function renderDataTables(){
   document.querySelector('#tableModels tbody').innerHTML=h;
   h='';
   Object.values(DATA.models).forEach(m=>{
-    const bm=m.benchmarks||{},aa=bm.aa_intelligence,elo=bm.arena_elo,swe=bm.swe_bench,aider=bm.aider_polyglot;
-    h+=`<tr><td>${m.name}</td><td>${aa?`<a href="${aa.source}" target="_blank">${aa.score}</a>`:'—'}</td><td>${elo?`<a href="${elo.source}" target="_blank">${elo.score}</a>`:'—'}</td><td>${swe?`<a href="${swe.source}" target="_blank">${swe.score}%</a>`:'—'}</td><td>${aider?`<a href="${aider.source}" target="_blank">${aider.score}%</a>`:'—'}</td></tr>`;
+    const bm=m.benchmarks||{},aa=bm.aa_intelligence,at=bm.arena_text,ac=bm.arena_code,swe=bm.swe_bench,aider=bm.aider_polyglot;
+    const cell = (v, fmt) => v ? `<a href="${v.source}" target="_blank">${fmt(v)}</a>` : '—';
+    h+=`<tr><td>${m.name}</td><td>${cell(aa,v=>v.score)}</td><td>${cell(at,v=>v.score)}</td><td>${cell(ac,v=>v.score)}</td><td>${cell(swe,v=>v.score+'%')}</td><td>${cell(aider,v=>v.score+'%')}</td></tr>`;
   });
   document.querySelector('#tableBenchmarks tbody').innerHTML=h;
   h='';
@@ -1532,7 +1602,7 @@ function renderDataTables(){
 
 function updateChart(){
   const canvas=document.getElementById('valueChart');
-  if(!canvas||!canvas.offsetParent) return; // hidden tab — skip, renders on tab switch
+  if(!canvas||!canvas.offsetParent) return;
   const hwId=document.getElementById('hardware').value, hw=DATA.hardware[hwId]; if(!hw) return;
   const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
   const years=parseInt(document.getElementById('periodYears').value);
@@ -1567,8 +1637,13 @@ function updateChart(){
       borderDash:g.type==='subscription'?[4,4]:[],
       pointStyle:g.type==='local'?'rect':g.type==='subscription'?'triangle':'circle'};
   });
-  if(chart) chart.destroy();
-  chart=new Chart(document.getElementById('valueChart'),{type:'scatter',data:{datasets},options:{
+  if(chart) { chart.destroy(); chart = null; }
+  // Chart.js needs a fresh canvas after destroy — replace the element
+  const oldCanvas = document.getElementById('valueChart');
+  const newCanvas = document.createElement('canvas');
+  newCanvas.id = 'valueChart';
+  oldCanvas.parentNode.replaceChild(newCanvas, oldCanvas);
+  chart=new Chart(newCanvas,{type:'scatter',data:{datasets},options:{
     responsive:true,maintainAspectRatio:false,
     scales:{
       x:{type:'time',time:{unit:'quarter'},title:{display:true,text:'Release Date',color:'#6b6b72'},ticks:{color:'#6b6b72'},grid:{color:'rgba(0,0,0,0.05)'}},
