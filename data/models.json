@@ -132,7 +132,7 @@
         "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1390,
+        "score": 1202,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aider_polyglot": {
@@ -149,7 +149,7 @@
       "outputPer1M": 10,
       "source": "https://artificialanalysis.ai/models/gemini-2-5-pro",
       "provider": "Google",
-      "tokensPerSecAPI": 116.3
+      "tokensPerSecAPI": 120.7
     },
     "local": null,
     "subscriptions": {
@@ -162,7 +162,7 @@
         "source": "https://a16z.com/state-of-ai/"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "glm-4.7-flash": {
     "name": "GLM-4.7 Flash",
@@ -188,7 +188,7 @@
       "outputPer1M": 0.4,
       "source": "https://artificialanalysis.ai/models/glm-4-7-flash",
       "provider": "Z.ai",
-      "tokensPerSecAPI": 85.6
+      "tokensPerSecAPI": 81.8
     },
     "local": {
       "mac_m4_48gb": {
@@ -200,7 +200,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gpt-oss-120b": {
     "name": "GPT-OSS 120B",
@@ -485,10 +485,6 @@
       "aa_intelligence": {
         "score": 43.1,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
-      },
-      "arena_elo": {
-        "score": 1468,
-        "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
     },
     "api": {
@@ -496,7 +492,7 @@
       "outputPer1M": 25,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-5",
       "provider": "Anthropic",
-      "tokensPerSecAPI": 50.6
+      "tokensPerSecAPI": 52.6
     },
     "local": null,
     "subscriptions": {
@@ -517,7 +513,7 @@
         "source": "https://a16z.com/state-of-ai/"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gemini-3-pro": {
     "name": "Gemini 3 Pro",
@@ -540,10 +536,6 @@
       "swe_bench": {
         "score": 76.2,
         "source": "https://www.swebench.com/"
-      },
-      "arena_elo": {
-        "score": 1486,
-        "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
     },
     "api": {
@@ -585,10 +577,6 @@
       "swe_bench": {
         "score": 78,
         "source": "https://www.swebench.com/"
-      },
-      "arena_elo": {
-        "score": 1474,
-        "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
     },
     "api": {
@@ -625,10 +613,6 @@
       "aa_intelligence": {
         "score": 51.3,
         "source": "https://artificialanalysis.ai/models/gpt-5-2"
-      },
-      "arena_elo": {
-        "score": 1478,
-        "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
       }
     },
     "api": {
@@ -636,7 +620,7 @@
       "outputPer1M": 14,
       "source": "https://artificialanalysis.ai/models/gpt-5-2",
       "provider": "OpenAI",
-      "tokensPerSecAPI": 70.5
+      "tokensPerSecAPI": 68
     },
     "local": null,
     "subscriptions": {
@@ -657,7 +641,7 @@
         "source": "https://openai.com/chatgpt/pricing/"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "claude-opus-4-6": {
     "id": "claude-opus-4-6",
@@ -675,14 +659,18 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       },
       "arena_text": {
-        "score": 1499,
-        "source": "https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text"
+        "score": 1497,
+        "source": "https://lmarena.ai/leaderboard"
+      },
+      "arena_code": {
+        "score": 1543,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 5,
       "outputPer1M": 25,
-      "tokensPerSecAPI": 45.6,
+      "tokensPerSecAPI": 46.1,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
     },
     "local": null,
@@ -704,7 +692,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "claude-sonnet-4-6": {
     "id": "claude-sonnet-4-6",
@@ -722,20 +710,18 @@
         "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
       },
       "arena_text": {
-        "score": 1390,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1462,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1380,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1521,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 3,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 47.2,
+      "tokensPerSecAPI": 47.9,
       "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
     },
     "local": null,
@@ -749,7 +735,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "claude-4-5-haiku": {
     "id": "claude-4-5-haiku",
@@ -872,7 +858,7 @@
     "api": {
       "inputPer1M": 2.5,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 73.8,
+      "tokensPerSecAPI": 84.7,
       "source": "https://artificialanalysis.ai/models/gpt-5-4"
     },
     "local": null,
@@ -894,7 +880,7 @@
         "source": "https://openai.com/chatgpt/pricing/"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gpt-5-3-codex": {
     "id": "gpt-5-3-codex",
@@ -925,7 +911,7 @@
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "tokensPerSecAPI": 65.3,
+      "tokensPerSecAPI": 75.5,
       "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
     },
     "local": null,
@@ -939,7 +925,7 @@
         "source": "https://openai.com/chatgpt/pricing/"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gpt-5-2-codex": {
     "id": "gpt-5-2-codex",
@@ -1017,7 +1003,7 @@
     "api": {
       "inputPer1M": 2,
       "outputPer1M": 12,
-      "tokensPerSecAPI": 117.4,
+      "tokensPerSecAPI": 129.4,
       "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
     },
     "local": null,
@@ -1031,7 +1017,7 @@
         "source": "https://one.google.com/about/plans"
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "glm-5": {
     "id": "glm-5",
@@ -1049,20 +1035,18 @@
         "source": "https://artificialanalysis.ai/models/glm-5"
       },
       "arena_text": {
-        "score": 1380,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1456,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1360,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1441,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 1,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 57.3,
+      "tokensPerSecAPI": 68.7,
       "source": "https://artificialanalysis.ai/models/glm-5"
     },
     "local": {
@@ -1075,7 +1059,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "glm-4.7": {
     "id": "glm-4.7",
@@ -1102,20 +1086,19 @@
         "_estimated": true
       },
       "arena_code": {
-        "score": 1330,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1439,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.6,
       "outputPer1M": 2.2,
-      "tokensPerSecAPI": 73.4,
+      "tokensPerSecAPI": 74.6,
       "source": "https://artificialanalysis.ai/models/glm-4-7"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "minimax-m2.5": {
     "id": "minimax-m2.5",
@@ -1138,20 +1121,19 @@
         "_estimated": true
       },
       "arena_code": {
-        "score": 1320,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1396,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 59.4,
+      "tokensPerSecAPI": 72.5,
       "source": "https://artificialanalysis.ai/models/minimax-m2-5"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "minimax-m2.7": {
     "id": "minimax-m2.7",
@@ -1174,20 +1156,19 @@
         "_estimated": true
       },
       "arena_code": {
-        "score": 1350,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1428,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 40.1,
+      "tokensPerSecAPI": 43,
       "source": "https://artificialanalysis.ai/models/minimax-m2-7"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "kimi-k2.5": {
     "id": "kimi-k2.5",
@@ -1218,12 +1199,12 @@
     "api": {
       "inputPer1M": 0.6,
       "outputPer1M": 3,
-      "tokensPerSecAPI": 33.6,
+      "tokensPerSecAPI": 31.6,
       "source": "https://artificialanalysis.ai/models/kimi-k2-5"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "deepseek-v3.2": {
     "id": "deepseek-v3.2",
@@ -1250,20 +1231,19 @@
         "_estimated": true
       },
       "arena_code": {
-        "score": 1390,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1327,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.28,
       "outputPer1M": 0.42,
-      "tokensPerSecAPI": 34.9,
+      "tokensPerSecAPI": 47.3,
       "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "qwen3.5-35b-a3b": {
     "id": "qwen3.5-35b-a3b",
@@ -1279,17 +1259,21 @@
       "gpqa_diamond": {
         "score": 84.5,
         "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "arena_code": {
+        "score": 1247,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.25,
       "outputPer1M": 2,
-      "tokensPerSecAPI": 115.3,
+      "tokensPerSecAPI": 133.2,
       "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "qwen3.5-27b": {
     "id": "qwen3.5-27b",
@@ -1305,17 +1289,21 @@
       "gpqa_diamond": {
         "score": 85.8,
         "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "arena_code": {
+        "score": 1344,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 2.4,
-      "tokensPerSecAPI": 87.7,
+      "tokensPerSecAPI": 90.2,
       "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "qwen3.5-122b-a10b": {
     "id": "qwen3.5-122b-a10b",
@@ -1331,17 +1319,21 @@
       "gpqa_diamond": {
         "score": 85.7,
         "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "arena_code": {
+        "score": 1362,
+        "source": "https://lmarena.ai/leaderboard/code"
       }
     },
     "api": {
       "inputPer1M": 0.4,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 131.4,
+      "tokensPerSecAPI": 130.8,
       "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
     },
     "local": null,
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gemma-4-31b": {
     "name": "Gemma 4 31B",
@@ -1350,13 +1342,12 @@
     "modelCard": "https://huggingface.co/google/gemma-4-31b-it",
     "benchmarks": {
       "aa_intelligence": {
-        "score": 28.5,
+        "score": 39.2,
         "source": "https://artificialanalysis.ai/models/gemma-4-31b"
       },
       "arena_text": {
-        "score": 1310,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1451,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
         "score": 1290,
@@ -1385,7 +1376,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-08"
   },
   "gemma-4-26b-a4b": {
     "name": "Gemma 4 26B A4B",

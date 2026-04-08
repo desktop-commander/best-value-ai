@@ -33,7 +33,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const MODELS_FILE = path.join(DATA_DIR, 'models.json');
 const AA_API = 'https://artificialanalysis.ai/api/v2/data/llms/models';
-const ARENA_API = 'https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text';
+const ARENA_TEXT_API = 'https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text';
+const ARENA_CODE_API = 'https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=code';
 const OPENROUTER_API = 'https://openrouter.ai/api/v1/models';
 
 // --- Load API key ---
@@ -80,6 +81,7 @@ const PRIORITY_SLUGS = [
 const SLUG_TO_OUR_ID = {
   'claude-opus-4-6':          'claude-opus-4-6',
   'claude-sonnet-4-6':        'claude-sonnet-4-6',
+  'claude-opus-4-5':          'claude-opus-4-5',
   'claude-opus-4-5':          'claude-opus-4-5',
   'gemini-3-1-pro-preview':   'gemini-3-1-pro',
   'gemini-3-pro-preview':     'gemini-3-pro',
@@ -128,12 +130,8 @@ function aaToOurFormat(aa) {
           source: `https://artificialanalysis.ai/models/${slug}`
         }
       }),
-      ...(ev.livecodebench != null && {
-        livecodebench: {
-          score: parseFloat((ev.livecodebench * 100).toFixed(1)),
-          source: `https://artificialanalysis.ai/models/${slug}`
-        }
-      }),
+      // Note: arena_text and arena_code are added separately in the main loop
+    // after fetching from the Arena leaderboard APIs
     },
     api: (p.price_1m_input_tokens != null && p.price_1m_input_tokens > 0) ? {
       inputPer1M: p.price_1m_input_tokens,
@@ -155,25 +153,30 @@ async function main() {
 
   // Fetch all three sources in parallel
   console.log('Fetching from all sources in parallel...');
-  const [aaRes, arenaRes, orRes] = await Promise.all([
+  const [aaRes, arenaTextRes, arenaCodeRes, orRes] = await Promise.all([
     fetch(AA_API, { headers: { 'x-api-key': apiKey } }),
-    fetch(ARENA_API),
+    fetch(ARENA_TEXT_API),
+    fetch(ARENA_CODE_API),
     fetch(OPENROUTER_API),
   ]);
 
   const { data: aaModels } = await aaRes.json();
-  const arenaData = await arenaRes.json();
+  const arenaTextData = await arenaTextRes.json();
+  const arenaCodeData = await arenaCodeRes.json();
   const orData = await orRes.json();
 
-  console.log(`AA: ${aaModels.length} models | Arena: ${arenaData.models?.length} | OpenRouter: ${orData.data?.length}`);
+  console.log(`AA: ${aaModels.length} models | Arena text: ${arenaTextData.models?.length} | Arena code: ${arenaCodeData.models?.length} | OpenRouter: ${orData.data?.length}`);
 
   // Index sources
   const aaBySlug = {};
   for (const m of aaModels) aaBySlug[m.slug] = m;
 
-  // Arena ELO by model slug
-  const arenaBySlug = {};
-  for (const m of (arenaData.models || [])) arenaBySlug[m.model] = m.score;
+  // Arena ELO by model slug — separate text and code leaderboards
+  const arenaTextBySlug = {};
+  for (const m of (arenaTextData.models || [])) arenaTextBySlug[m.model] = m.score;
+
+  const arenaCodeBySlug = {};
+  for (const m of (arenaCodeData.models || [])) arenaCodeBySlug[m.model] = m.score;
 
   // OpenRouter pricing by model ID
   const orBySlug = {};
@@ -222,14 +225,27 @@ async function main() {
       };
     }
 
-    // Update Arena ELO — try various slug patterns
+    // Update Arena ELO — write to arena_text and arena_code keys (stable benchmarks)
+    // NOT to arena_elo (legacy key no longer used for scoring)
     const arenaSlugCandidates = [aaSlug, ourId, ourId.replace(/\./g, '-')];
     for (const slug of arenaSlugCandidates) {
-      if (arenaBySlug[slug]) {
+      if (arenaTextBySlug[slug]) {
         existing[ourId].benchmarks = existing[ourId].benchmarks || {};
-        existing[ourId].benchmarks.arena_elo = {
-          score: arenaBySlug[slug],
-          source: 'https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text'
+        existing[ourId].benchmarks.arena_text = {
+          score: arenaTextBySlug[slug],
+          source: 'https://lmarena.ai/leaderboard'
+        };
+        // Remove stale arena_elo key if present
+        delete existing[ourId].benchmarks.arena_elo;
+        break;
+      }
+    }
+    for (const slug of arenaSlugCandidates) {
+      if (arenaCodeBySlug[slug]) {
+        existing[ourId].benchmarks = existing[ourId].benchmarks || {};
+        existing[ourId].benchmarks.arena_code = {
+          score: arenaCodeBySlug[slug],
+          source: 'https://lmarena.ai/leaderboard/code'
         };
         break;
       }
