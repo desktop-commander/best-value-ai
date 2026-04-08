@@ -27,19 +27,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     }
@@ -227,6 +227,10 @@
       "arena_text": {
         "score": 1354,
         "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_intelligence": {
+        "score": 33.3,
+        "source": "https://artificialanalysis.ai/"
       }
     },
     "api": null,
@@ -314,6 +318,10 @@
       "aider_polyglot": {
         "score": 32.5,
         "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 12.5,
+        "source": "https://artificialanalysis.ai/"
       }
     },
     "api": {
@@ -362,6 +370,10 @@
       "mmlu": {
         "score": 69.4,
         "source": "https://ai.meta.com/blog/meta-llama-3-1/"
+      },
+      "aa_intelligence": {
+        "score": 11.8,
+        "source": "https://artificialanalysis.ai/"
       }
     },
     "api": {
@@ -450,6 +462,10 @@
       "aider_polyglot": {
         "score": 40,
         "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 19.7,
+        "source": "https://artificialanalysis.ai/"
       }
     },
     "api": {
@@ -517,19 +533,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     },
@@ -704,19 +720,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       }
     },
@@ -1435,7 +1451,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE 26B total, 4B active. Runs on 8GB GPU — very accessible.",
+        "notes": "MoE 26B total, 4B active. Runs on 8GB GPU \u2014 very accessible.",
         "source": "https://huggingface.co/google/gemma-4-26b-a4b-it"
       },
       "mac_m3_max_64gb": {

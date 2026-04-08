@@ -74,6 +74,10 @@ const PRIORITY_SLUGS = [
   'qwen3-5-35b-a3b', 'qwen3-5-27b', 'qwen3-5-122b-a10b',
   // Google open weights
   'gemma-4-31b', 'gemma-4-26b-a4b-it',
+  // Meta open weights
+  'llama-3-1-instruct-70b', 'llama-3-1-instruct-8b',
+  // Alibaba open weights
+  'qwq-32b',
 ];
 
 // Mapping: AA slug → our model ID in models.json
@@ -86,6 +90,9 @@ const SLUG_TO_OUR_ID = {
   'gemini-3-1-pro-preview':   'gemini-3-1-pro',
   'gemini-3-pro-preview':     'gemini-3-pro',
   'gemini-3-flash-preview':   'gemini-3-flash',
+  'llama-3-1-instruct-70b':   'llama-3.1-70b',
+  'llama-3-1-instruct-8b':    'llama-3.1-8b',
+  'qwq-32b':                  'qwen-3-32b',
   'gemini-2-5-pro':           'gemini-2.5-pro',
   'gpt-5-4':                  'gpt-5-4',
   'gpt-5-2':                  'gpt-5-2',
