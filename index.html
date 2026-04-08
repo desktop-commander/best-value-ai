@@ -1110,7 +1110,7 @@
         </div>
         <div class="data-table-section">
             <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
+            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena Text ELO</th><th>Arena Code ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
         </div>
         <div class="data-table-section">
             <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
@@ -1510,8 +1510,9 @@ function renderDataTables(){
   document.querySelector('#tableModels tbody').innerHTML=h;
   h='';
   Object.values(DATA.models).forEach(m=>{
-    const bm=m.benchmarks||{},aa=bm.aa_intelligence,elo=bm.arena_elo,swe=bm.swe_bench,aider=bm.aider_polyglot;
-    h+=`<tr><td>${m.name}</td><td>${aa?`<a href="${aa.source}" target="_blank">${aa.score}</a>`:'—'}</td><td>${elo?`<a href="${elo.source}" target="_blank">${elo.score}</a>`:'—'}</td><td>${swe?`<a href="${swe.source}" target="_blank">${swe.score}%</a>`:'—'}</td><td>${aider?`<a href="${aider.source}" target="_blank">${aider.score}%</a>`:'—'}</td></tr>`;
+    const bm=m.benchmarks||{},aa=bm.aa_intelligence,at=bm.arena_text,ac=bm.arena_code,swe=bm.swe_bench,aider=bm.aider_polyglot;
+    const cell = (v, fmt) => v ? `<a href="${v.source}" target="_blank">${fmt(v)}</a>` : '—';
+    h+=`<tr><td>${m.name}</td><td>${cell(aa,v=>v.score)}</td><td>${cell(at,v=>v.score)}</td><td>${cell(ac,v=>v.score)}</td><td>${cell(swe,v=>v.score+'%')}</td><td>${cell(aider,v=>v.score+'%')}</td></tr>`;
   });
   document.querySelector('#tableBenchmarks tbody').innerHTML=h;
   h='';
