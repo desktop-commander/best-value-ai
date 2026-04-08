@@ -1140,7 +1140,23 @@
       "tokensPerSecAPI": 74.6,
       "source": "https://artificialanalysis.ai/models/glm-4-7"
     },
-    "local": null,
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 45,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "notes": "Estimated from GLM-4.7 architecture (similar to 30-40B dense models).",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 30,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1174,7 +1190,15 @@
       "tokensPerSecAPI": 72.5,
       "source": "https://artificialanalysis.ai/models/minimax-m2-5"
     },
-    "local": null,
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 18,
+        "quantization": "TQ1_0",
+        "vramRequired": 128,
+        "notes": "MoE \u2014 aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "source": "https://openbenchmarking.org/test/pts/llama-cpp"
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1208,7 +1232,16 @@
       "tokensPerSecAPI": 43,
       "source": "https://artificialanalysis.ai/models/minimax-m2-7"
     },
-    "local": null,
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 12,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE \u2014 requires 128GB+ unified memory.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1242,7 +1275,24 @@
       "tokensPerSecAPI": 31.6,
       "source": "https://artificialanalysis.ai/models/kimi-k2-5"
     },
-    "local": null,
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 10,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE 1T/32B active. Extremely large \u2014 needs 128GB+ unified memory with heavy quantization.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      },
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 8,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE 1T/32B active. Estimated \u2014 community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1280,7 +1330,32 @@
       "tokensPerSecAPI": 47.3,
       "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
     },
-    "local": null,
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 15,
+        "quantization": "Q4_K_M",
+        "vramRequired": 80,
+        "notes": "Requires 2\u00d7 RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "framework_desktop_128gb": {
+        "tokensPerSec": 14,
+        "quantization": "Q4_K_M",
+        "vramRequired": 110,
+        "notes": "Full unified memory run. Estimated from V3.1 on same hardware class.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 12,
+        "quantization": "Q4_K_M",
+        "vramRequired": 110,
+        "notes": "Estimated \u2014 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1314,7 +1389,30 @@
       "tokensPerSecAPI": 133.2,
       "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
     },
-    "local": null,
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 122,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "MoE \u2014 only 3B active params per token. Fits in single 24GB GPU.",
+        "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 110,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "MoE \u2014 only 3B active params per token.",
+        "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 65,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "Estimated from M3 Ultra 8-bit results scaled for M3 Max bandwidth.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1348,7 +1446,30 @@
       "tokensPerSecAPI": 90.2,
       "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
     },
-    "local": null,
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 58,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "Dense 27B. Community reports 55\u201365 t/s at Q4_K_M on RTX 4090.",
+        "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 48,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "Dense 27B. Scaled from 4090 for 3090 bandwidth.",
+        "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms",
+        "_estimated": true
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 22,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "MLX 8-bit benchmark on M3 Ultra 512GB gives 21.3 t/s; M3 Max 64GB similar.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1382,7 +1503,31 @@
       "tokensPerSecAPI": 130.8,
       "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
     },
-    "local": null,
+    "local": {
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 55,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE \u2014 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
+        "_estimated": true
+      },
+      "mac_m3_max_128gb": {
+        "tokensPerSec": 42,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE \u2014 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
+      },
+      "framework_desktop_128gb": {
+        "tokensPerSec": 38,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE. DGX Spark (similar unified memory architecture) reports ~38 t/s at Q4.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      }
+    },
     "subscriptions": null,
     "_aa_synced": "2026-04-08"
   },
@@ -1424,6 +1569,20 @@
         "quantization": "Q4_K_M",
         "vramRequired": 20,
         "source": "https://huggingface.co/google/gemma-4-31b-it"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 28,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://till-freitag.com/en/blog/open-source-llm-comparison",
+        "_estimated": true
+      },
+      "mac_m4_48gb": {
+        "tokensPerSec": 32,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
       }
     },
     "subscriptions": null,
@@ -1463,6 +1622,20 @@
         "quantization": "Q4_K_M",
         "vramRequired": 8,
         "source": "https://huggingface.co/google/gemma-4-26b-a4b-it"
+      },
+      "rtx_5090": {
+        "tokensPerSec": 85,
+        "quantization": "Q4_K_M",
+        "vramRequired": 8,
+        "notes": "MoE \u2014 only 4B active. Extremely fast for its capability level.",
+        "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 48,
+        "quantization": "Q4_K_M",
+        "vramRequired": 8,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
       }
     },
     "subscriptions": null,
