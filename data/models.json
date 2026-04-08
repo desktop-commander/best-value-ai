@@ -6,8 +6,8 @@
     "modelCard": "https://www.anthropic.com/news/claude-4",
     "benchmarks": {
       "arena_text": {
-        "score": 1380,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1412,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1400,
@@ -27,19 +27,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     }
@@ -51,8 +51,8 @@
     "modelCard": "https://www.anthropic.com/news/claude-4",
     "benchmarks": {
       "arena_text": {
-        "score": 1350,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1389,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1370,
@@ -92,8 +92,8 @@
     "modelCard": "https://github.com/deepseek-ai/DeepSeek-V3",
     "benchmarks": {
       "arena_text": {
-        "score": 1320,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1395,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1350,
@@ -132,12 +132,12 @@
     "modelCard": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
     "benchmarks": {
       "arena_text": {
-        "score": 1370,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1448,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1202,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 72.9,
@@ -185,6 +185,10 @@
       "aa_intelligence": {
         "score": 30.1,
         "source": "https://artificialanalysis.ai/"
+      },
+      "arena_text": {
+        "score": 1369,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -219,6 +223,10 @@
       "mmlu": {
         "score": 90,
         "source": "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-max-ai-pcs-deliver-exceptional-intelligence.html"
+      },
+      "arena_text": {
+        "score": 1354,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": null,
@@ -239,8 +247,8 @@
     "modelCard": "https://openai.com/index/hello-gpt-4o/",
     "benchmarks": {
       "arena_text": {
-        "score": 1290,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1443,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1310,
@@ -292,8 +300,8 @@
     "modelCard": "https://ai.meta.com/blog/meta-llama-3-1/",
     "benchmarks": {
       "arena_text": {
-        "score": 1200,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1293,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1180,
@@ -344,8 +352,8 @@
     "modelCard": "https://ai.meta.com/blog/meta-llama-3-1/",
     "benchmarks": {
       "arena_text": {
-        "score": 1100,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1211,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1080,
@@ -391,8 +399,8 @@
     "modelCard": "https://openai.com/o3",
     "benchmarks": {
       "arena_text": {
-        "score": 1400,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1431,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1420,
@@ -432,8 +440,8 @@
     "modelCard": "https://huggingface.co/Qwen/QwQ-32B",
     "benchmarks": {
       "arena_text": {
-        "score": 1180,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1336,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1200,
@@ -479,12 +487,12 @@
     "modelCard": "https://www.anthropic.com/news/claude-opus-4-5",
     "benchmarks": {
       "arena_text": {
-        "score": 1485,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1468,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1519,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "score": 1465,
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 89.4,
@@ -509,19 +517,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     },
@@ -535,11 +543,11 @@
     "benchmarks": {
       "arena_text": {
         "score": 1486,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1438,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 75,
@@ -580,11 +588,11 @@
     "benchmarks": {
       "arena_text": {
         "score": 1474,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1436,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 72,
@@ -595,7 +603,7 @@
         "source": "https://www.swebench.com/"
       },
       "aa_intelligence": {
-        "score": 35.0,
+        "score": 35,
         "source": "https://artificialanalysis.ai/"
       }
     },
@@ -615,12 +623,12 @@
     "modelCard": "https://openai.com/index/introducing-gpt-5-2/",
     "benchmarks": {
       "arena_text": {
-        "score": 1480,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1440,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1486,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "score": 1403,
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 88,
@@ -680,11 +688,11 @@
       },
       "arena_text": {
         "score": 1497,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1543,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -696,19 +704,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       }
     },
@@ -731,11 +739,11 @@
       },
       "arena_text": {
         "score": 1462,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1521,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -777,13 +785,12 @@
         "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
       },
       "arena_text": {
-        "score": 1320,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1407,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1312,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -826,11 +833,11 @@
       },
       "arena_text": {
         "score": 1452,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1386,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -869,7 +876,7 @@
       },
       "arena_text": {
         "score": 1466,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -915,13 +922,12 @@
         "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
       },
       "arena_text": {
-        "score": 1440,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1456,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1407,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -965,7 +971,7 @@
       },
       "arena_code": {
         "score": 1335,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1012,11 +1018,11 @@
       },
       "arena_text": {
         "score": 1493,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1456,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1055,11 +1061,11 @@
       },
       "arena_text": {
         "score": 1456,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1441,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1100,13 +1106,12 @@
         "source": "https://artificialanalysis.ai/models/glm-4-7"
       },
       "arena_text": {
-        "score": 1350,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1443,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1439,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1135,13 +1140,12 @@
         "source": "https://artificialanalysis.ai/models/minimax-m2-5"
       },
       "arena_text": {
-        "score": 1340,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1404,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1396,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1170,13 +1174,12 @@
         "source": "https://artificialanalysis.ai/models/minimax-m2-7"
       },
       "arena_text": {
-        "score": 1370,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1403,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1428,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1206,11 +1209,11 @@
       },
       "arena_text": {
         "score": 1452,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1429,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1243,13 +1246,12 @@
         "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
       },
       "arena_text": {
-        "score": 1380,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1424,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1327,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
@@ -1279,7 +1281,11 @@
       },
       "arena_code": {
         "score": 1247,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1397,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -1309,7 +1315,11 @@
       },
       "arena_code": {
         "score": 1344,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1404,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -1339,7 +1349,11 @@
       },
       "arena_code": {
         "score": 1362,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1417,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -1364,7 +1378,7 @@
       },
       "arena_text": {
         "score": 1451,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1290,
@@ -1406,9 +1420,8 @@
         "source": "https://artificialanalysis.ai/models/gemma-4-26b-a4b-it"
       },
       "arena_text": {
-        "score": 1290,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1438,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1270,
@@ -1422,7 +1435,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE 26B total, 4B active. Runs on 8GB GPU \u2014 very accessible.",
+        "notes": "MoE 26B total, 4B active. Runs on 8GB GPU — very accessible.",
         "source": "https://huggingface.co/google/gemma-4-26b-a4b-it"
       },
       "mac_m3_max_64gb": {
