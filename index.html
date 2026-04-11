@@ -1331,7 +1331,7 @@
     <span class="rank-val-out" style="color:#1a9e5c">1.3M</span>
     <span class="rank-detail">48 tok/s · RTX 3090 (40.6%)</span>
   </div>
-</div></div></div>
+</div></div></div></div>
     </div>
 
     <!-- COMPARE -->
@@ -1676,10 +1676,22 @@ function init(){
       else if (type === 'local') show = m.local && Object.keys(m.local).length > 0;
       if (show) {
         const o = document.createElement('option');
-        o.value = id; o.textContent = m.name; sel.appendChild(o);
+        o.value = id;
+        // Show context based on type
+        let label = m.name;
+        if (type === 'local' && m.local) {
+          const hwNames = Object.keys(m.local).map(h => DATA.hardware[h]?.name).filter(Boolean);
+          if (hwNames.length) label += ` (${hwNames.join(', ')})`;
+        } else if (type === 'subscription' && m.subscriptions) {
+          const subs = Object.values(m.subscriptions).map(s => `${s.name} $${s.monthlyPrice}/mo`);
+          if (subs.length) label += ` — ${subs[0]}`;
+        } else if (type === 'api' && m.api) {
+          label += ` — $${wap(m.api).toFixed(2)}/M`;
+        }
+        o.textContent = label;
+        sel.appendChild(o);
       }
     });
-    // Try to keep previous selection
     if (prevVal && [...sel.options].some(o => o.value === prevVal)) sel.value = prevVal;
   }
   function initCmpDropdowns() {
@@ -1966,17 +1978,17 @@ function renderCompare() {
     return best;
   }
   const localA = bestLocalVal(mA), localB = bestLocalVal(mB);
-  const localLabelA = localA ? ` (${localA.hw})` : '';
-  const localLabelB = localB ? ` (${localB.hw})` : '';
-  const localRow = barRow('Local · quality-adj tok/$', 'crl-local', '🖥️ Local value',
+  const localHwA = localA ? ` on ${localA.hw}` : '';
+  const localHwB = localB ? ` on ${localB.hw}` : '';
+  const localRow = barRow(`Local value${localA||localB ? ' · ' + [localA&&(mA.name+localHwA), localB&&(mB.name+localHwB)].filter(Boolean).join(' vs ') : ''}`, 'crl-local', '🖥️ Local tok/$',
     localA?.val, localB?.val, fmt, false);
-  const tokSRow = barRow('Local · tokens/sec', 'crl-local', '🖥️ Tok/s',
+  const tokSRow = barRow(`Local tok/s${localA ? ' · A: '+localA.hw : ''}${localB ? ' · B: '+localB.hw : ''}`, 'crl-local', '🖥️ Local t/s',
     localA?.tps, localB?.tps, v => v+' t/s', false);
 
   // API throughput
   const apiTpsA = mA.api?.tokensPerSecAPI || null;
   const apiTpsB = mB.api?.tokensPerSecAPI || null;
-  const apiTpsRow = barRow('API · tokens/sec', 'crl-api', '🔌 API tok/s',
+  const apiTpsRow = barRow('API throughput (provider-reported)', 'crl-api', '🔌 API t/s',
     apiTpsA, apiTpsB, v => v.toFixed(1)+' t/s', false);
 
   document.getElementById('cmpGrid').innerHTML = qualRow + apiRow + apiPriceRow + apiTpsRow + subRow + subPriceRow + localRow + tokSRow;
