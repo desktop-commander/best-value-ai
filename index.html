@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Your AI Subscription Worth It?</title>
-    <meta name="description" content="Quality-adjusted tokens per dollar across local hardware, subscriptions, and API.">
+    <title>LLM Value Calculator — Best AI Model for Your Money (Local vs API vs Subscription)</title>
+    <meta name="description" content="Compare AI models by value: quality-adjusted tokens per dollar across local hardware, ChatGPT/Claude subscriptions, and API pricing. Free, open-source, updated automatically.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's the best value AI model right now?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Use our ranked comparison to see all models sorted by quality-adjusted tokens per dollar — covering local hardware, subscriptions like ChatGPT Plus and Claude Pro, and API pricing from OpenAI, Anthropic, Google, and others." }
+        },
+        {
+          "@type": "Question",
+          "name": "GPT-5.4 vs Claude Opus 4.6 — which is better value?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Our head-to-head comparison tool lets you pick any two models and compare quality score, API value, subscription value, and local performance side by side with visual bar charts." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is AI getting cheaper or more expensive over time?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Our timeline chart tracks value per dollar by provider since 2023. Quality-adjusted token value has generally increased as competition drives prices down while model quality converges at the frontier." }
+        }
+      ]
+    }
+    </script>
     <style>
         :root {
             --bg:         #f5f4f0;
@@ -831,6 +854,49 @@
         .cmp-mid-badge.b-wins { background: var(--purple-bg); color: var(--purple); }
         .cmp-mid-badge.tie    { background: var(--surface2);  color: var(--faint); }
         .cmp-na { font-size: 0.7rem; color: var(--faint); font-style: italic; }
+
+        /* ── QUESTION CARDS ── */
+        .hero-questions {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1rem; margin-top: 2.5rem; margin-bottom: 0.5rem;
+        }
+        @media (max-width: 750px) { .hero-questions { grid-template-columns: 1fr; } }
+        .q-card {
+            background: var(--surface); border: 1.5px solid var(--border);
+            border-radius: 14px; padding: 1.25rem 1.35rem;
+            cursor: pointer; transition: all 0.2s ease;
+            text-decoration: none; color: inherit;
+            display: flex; flex-direction: column; gap: 0.5rem;
+            position: relative; overflow: hidden;
+        }
+        .q-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+        .q-card::after {
+            content: '→'; position: absolute; right: 1.1rem; top: 1.2rem;
+            font-size: 1.1rem; color: var(--faint); transition: transform 0.2s;
+        }
+        .q-card:hover::after { transform: translateX(3px); color: var(--blue); }
+        .q-card-icon { font-size: 1.5rem; }
+        .q-card-question {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 0.95rem; font-weight: 700; line-height: 1.3;
+            letter-spacing: -0.02em; color: var(--text);
+            padding-right: 1.5rem;
+        }
+        .q-card-hint { font-size: 0.72rem; color: var(--muted); line-height: 1.5; }
+        .q-card-tag {
+            display: inline-block; font-size: 0.58rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            padding: 0.15rem 0.5rem; border-radius: 4px; width: fit-content;
+        }
+        .q-card.qc-rank .q-card-tag { background: var(--green-bg); color: var(--green); }
+        .q-card.qc-compare .q-card-tag { background: var(--purple-bg); color: var(--purple); }
+        .q-card.qc-history .q-card-tag { background: var(--blue-bg); color: var(--blue); }
+        .q-card.qc-rank:hover { border-color: var(--green); }
+        .q-card.qc-rank:hover::after { color: var(--green); }
+        .q-card.qc-compare:hover { border-color: var(--purple); }
+        .q-card.qc-compare:hover::after { color: var(--purple); }
+        .q-card.qc-history:hover { border-color: var(--blue); }
+        .q-card.qc-history:hover::after { color: var(--blue); }
     </style>
 </head>
 <body>
@@ -838,10 +904,10 @@
 <nav class="nav">
     <a class="nav-brand" href="#"><em>LLM</em> Value</a>
     <div class="nav-links">
-        <a href="#winners">🏆 Winners</a>
-        <a href="#how">📐 How it works</a>
+        <a href="#winners">🏆 Best value</a>
+        <a href="#explore">📊 Compare</a>
+        <a href="#how">📐 Method</a>
         <a href="#benchmarks">📏 Benchmarks</a>
-        <a href="#explore">📊 Full data</a>
     </div>
     <div class="nav-right">
         <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute data ↗</a>
@@ -853,14 +919,36 @@
 <div class="container">
     <div class="hero">
         <div class="tag blue">Updated automatically · April 2026</div>
-        <h1>Is your AI<br><em>subscription worth it?</em></h1>
-        <p class="hero-sub">Quality-adjusted tokens per dollar — local hardware, subscriptions, and API in one number.</p>
+        <h1>LLM Value<br><em>Calculator</em></h1>
+        <p class="hero-sub">Quality-adjusted tokens per dollar — local hardware, subscriptions, and API in one number. Find the best deal for your use case.</p>
         <p class="hero-sources">
             Data from <a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> ·
             <a href="https://arena.ai/leaderboard" target="_blank">Arena AI</a> ·
             <a href="https://openrouter.ai" target="_blank">OpenRouter</a> ·
             <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">open source</a>
         </p>
+
+        <!-- QUESTION CARDS -->
+        <div class="hero-questions">
+            <a class="q-card qc-rank" href="#explore" onclick="switchTab('calculator')">
+                <div class="q-card-tag">Ranking</div>
+                <div class="q-card-icon">🏆</div>
+                <div class="q-card-question">What's the best value AI model right now?</div>
+                <div class="q-card-hint">All models ranked by quality-adjusted tokens per dollar — local, subscription, and API side by side.</div>
+            </a>
+            <a class="q-card qc-compare" href="#explore" onclick="switchTab('compare')">
+                <div class="q-card-tag">Head to head</div>
+                <div class="q-card-icon">⚔️</div>
+                <div class="q-card-question">GPT-5.4 vs Claude Opus — which is better value?</div>
+                <div class="q-card-hint">Pick any two models. Compare quality, API price, subscription value, and local performance side by side.</div>
+            </a>
+            <a class="q-card qc-history" href="#explore" onclick="switchTab('chart')">
+                <div class="q-card-tag">Trends</div>
+                <div class="q-card-icon">📈</div>
+                <div class="q-card-question">Is AI getting cheaper or more expensive over time?</div>
+                <div class="q-card-hint">Value trends by provider since 2023. See how each release changed the economics.</div>
+            </a>
+        </div>
     </div>
 
     <!-- LIVE WINNER STRIP -->
@@ -1841,6 +1929,14 @@ function renderCompare() {
             <div class="cmp-verdict-sub">Better overall value than ${loser} across quality and cost metrics.</div>`;
   }
   verdictEl.innerHTML = `<div class="cmp-verdict-icon">${icon}</div><div>${html}</div>`;
+}
+
+// Global tab switch function (called from hero question cards)
+function switchTab(tabName) {
+  setTimeout(() => {
+    const tab = document.querySelector(`.tab[data-tab="${tabName}"]`);
+    if (tab) tab.click();
+  }, 100);
 }
 
 loadData();
