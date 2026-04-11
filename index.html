@@ -884,8 +884,8 @@
             <a class="q-card qc-compare" href="#explore" onclick="switchTab('compare')">
                 <div class="q-card-tag">Head to head</div>
                 <div class="q-card-icon">⚔️</div>
-                <div class="q-card-question" id="qcCompareTitle">Best subscription vs best API — which wins?</div>
-                <div class="q-card-hint" id="qcCompareHint">Compare any two models head-to-head on quality, API price, subscription value, and local performance.</div>
+                <div class="q-card-question" id="qcCompareTitle">Best subscription vs best local — which wins?</div>
+                <div class="q-card-hint" id="qcCompareHint">Compare any two models head-to-head on quality, price, and value per dollar across subscription, API, and local hardware.</div>
             </a>
             <a class="q-card qc-history" href="#explore" onclick="switchTab('chart')">
                 <div class="q-card-tag">Trends</div>
@@ -1138,6 +1138,11 @@
         </div>
         <div class="results-section">
             <h3>All options ranked by quality-adjusted tokens per dollar</h3>
+            <div class="rank-paging" style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;font-size:0.75rem;color:var(--muted)">
+                <span id="rankPageInfo"></span>
+                <button id="rankPrev" onclick="rankPage(-1)" style="padding:0.3rem 0.7rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:0.72rem">← Prev</button>
+                <button id="rankNext" onclick="rankPage(1)" style="padding:0.3rem 0.7rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:0.72rem">Next →</button>
+            </div>
             <div class="rank-list" id="calculatorContent"><div class="rank-row">
     <span class="rank-num" style="color:#7033d8">#1</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
@@ -1321,8 +1326,8 @@
                 <select id="cmpTypeB" style="margin-bottom:0.4rem">
                     <option value="all">All types</option>
                     <option value="subscription">💳 Subscription</option>
-                    <option value="api" selected>🔌 API</option>
-                    <option value="local">🖥️ Local</option>
+                    <option value="api">🔌 API</option>
+                    <option value="local" selected>🖥️ Local</option>
                 </select>
                 <select id="cmpB"></select>
             </div>
@@ -1673,6 +1678,10 @@ function init(){
 }
 
 
+let _rankResults = [], _rankPage = 0;
+const RANK_PAGE_SIZE = 25;
+function rankPage(delta) { _rankPage = Math.max(0, Math.min(Math.ceil(_rankResults.length/RANK_PAGE_SIZE)-1, _rankPage+delta)); renderRankPage(); }
+
 function renderRankedList(){
   const hours=parseFloat(document.getElementById('hoursPerDay').value)||16;
   const years=parseInt(document.getElementById('periodYears').value);
@@ -1706,44 +1715,46 @@ function renderRankedList(){
     });
   });
   results.sort((a,b)=>b.val-a.val);
-  const maxVal=results[0]?.val||1;
-  let html='';
-  results.forEach((r,i)=>{
-    const pct=Math.max(2,(r.val/maxVal)*100);
-    const col=COL[r.type], icon=ICON[r.type], lbl=LBL[r.type];
-    const warn=r.confidence==='low'?' ⚠️':'';
-    const name=(r.subName?`${r.subName} → ${r.model}`:r.model)+warn;
-    const rankColor = i===0?'var(--green)':i===1?'var(--blue)':i===2?'var(--purple)':'var(--faint)';
-    html+=`<div class="rank-row" ${r.tip?`data-tip="${esc(r.tip)}"`:''}>
-      <span class="rank-num" style="color:${rankColor}">#${i+1}</span>
+  _rankResults = results;
+  _rankPage = 0;
+  renderRankPage();
+}
+
+function renderRankPage() {
+  const results = _rankResults;
+  const start = _rankPage * RANK_PAGE_SIZE;
+  const page = results.slice(start, start + RANK_PAGE_SIZE);
+  const maxVal = results[0]?.val || 1;
+  const totalPages = Math.ceil(results.length / RANK_PAGE_SIZE);
+
+  // Update paging controls
+  document.getElementById('rankPageInfo').textContent = `${start+1}–${Math.min(start+RANK_PAGE_SIZE, results.length)} of ${results.length}`;
+  document.getElementById('rankPrev').disabled = _rankPage === 0;
+  document.getElementById('rankNext').disabled = _rankPage >= totalPages - 1;
+
+  let html = '';
+  page.forEach((r, idx) => {
+    const i = start + idx;
+    const pct = Math.max(2, (r.val / maxVal) * 100);
+    const col = COL[r.type], icon = ICON[r.type], lbl = LBL[r.type];
+    const warn = r.confidence === 'low' ? ' ⚠️' : '';
+    const name = (r.subName ? `${r.subName} → ${r.model}` : r.model) + warn;
+    const rankColor = i === 0 ? 'var(--green)' : i === 1 ? 'var(--blue)' : i === 2 ? 'var(--purple)' : 'var(--faint)';
+    html += `<div class="rank-row" ${r.tip ? `data-tip="${esc(r.tip)}"` : ''}>
+      <span class="rank-num" style="color:${rankColor}">#${i + 1}</span>
       <span class="rank-type" style="color:${col}">${icon} ${lbl}</span>
       <span class="rank-name">${name}</span>
       <div class="rank-bar-wrap">
         <div class="rank-bar" style="width:${pct}%;background:${col};opacity:0.9">
-          ${pct>18?fmt(r.val):''}
+          ${pct > 18 ? fmt(r.val) : ''}
         </div>
       </div>
-      <span class="rank-val-out" style="color:${col}">${pct<=18?fmt(r.val):''}</span>
+      <span class="rank-val-out" style="color:${col}">${pct <= 18 ? fmt(r.val) : ''}</span>
       <span class="rank-detail">${r.details} (${r.ds})</span>
     </div>`;
   });
-  const el=document.getElementById('calculatorContent');
-  const isFirstRender = el.innerHTML === 'Loading…' || el.innerHTML === '';
-  el.innerHTML=html;
-  if(isFirstRender) {
-    // First load: animate bars 0 → target
-    requestAnimationFrame(()=>{
-      el.querySelectorAll('.rank-bar').forEach((bar,i)=>{
-        const target=bar.style.width; bar.style.width='0%';
-        setTimeout(()=>{ bar.style.width=target; }, i*18);
-      });
-    });
-  } else {
-    // Re-render from dropdown change: disable CSS transition so bars jump instantly to correct width
-    el.querySelectorAll('.rank-bar').forEach(bar=>{
-      bar.style.transition='none';
-    });
-  }
+  const el = document.getElementById('calculatorContent');
+  el.innerHTML = html;
 }
 
 function renderDataTables(){
@@ -2047,21 +2058,25 @@ function setCompareDefaults() {
     }
   });
 
-  // Set compare dropdowns: best sub vs best API (most useful default comparison)
+  // Set compare dropdowns: best subscription vs best local (data-driven)
   if (bestSub) document.getElementById('cmpA').value = bestSub.id;
-  if (bestApi) document.getElementById('cmpB').value = bestApi.id;
+  if (bestLocal) document.getElementById('cmpB').value = bestLocal.id;
 
   // Update hero compare card with actual model names
   const titleEl = document.getElementById('qcCompareTitle');
   const hintEl = document.getElementById('qcCompareHint');
-  if (titleEl && bestSub && bestApi) {
-    titleEl.textContent = `${bestSub.subName} (${bestSub.name}) vs ${bestApi.name} API`;
-    hintEl.textContent = `$${bestSub.price}/mo subscription vs ${bestApi.price} API — which gives more value per dollar?`;
+  if (titleEl && bestSub && bestLocal) {
+    titleEl.textContent = `${bestSub.subName} ($${bestSub.price}/mo) vs ${bestLocal.name} local`;
+    hintEl.textContent = `Best subscription vs best local setup — which gives you more value per dollar?`;
   }
 }
 
 loadData();
 </script>
+<!-- SEO: Pre-rendered 2026-04-11 from 34 models -->
+<div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+<h2>Best Value AI Models — 2026-04-11</h2>
+<p>Comparing 34 AI models across API pricing, subscriptions, and local hardware.</p><p>Best API value: GLM-4.7 Flash at $0.15/M blended — 2.8M quality-adjusted tokens per dollar.</p><p>Best subscription value: ChatGPT Plus — 8.2M quality-adjusted tokens per dollar.</p><p>Best local value: Qwen3.5 35B A3B (Reasoning) (110 tok/s · RTX 3090) — 2.9M quality-adjusted tokens per dollar.</p><h3>Top 10 AI Models by Value (Quality-Adjusted Tokens per Dollar)</h3><ol><li>ChatGPT Plus → GPT-5.4 (xhigh) (Subscription) — 8.2M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro → GPT-5.4 (xhigh) (Subscription) — 8.2M tok/$ — ChatGPT Pro · $200/mo</li><li>ChatGPT Pro (Codex) → GPT-5.3 Codex (xhigh) (Subscription) — 7.6M tok/$ — ChatGPT Pro (Codex) · $200/mo</li><li>ChatGPT Plus → GPT-5.2 (Subscription) — 7.3M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro → GPT-5.2 (Subscription) — 7.3M tok/$ — ChatGPT Pro · $200/mo</li><li>ChatGPT Pro → o3 (Subscription) — 6.7M tok/$ — ChatGPT Pro · $200/mo</li><li>ChatGPT Plus → GPT-5.2 Codex (xhigh) (Subscription) — 6.6M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro → GPT-5.2 Codex (xhigh) (Subscription) — 6.6M tok/$ — ChatGPT Pro · $200/mo</li><li>ChatGPT Plus → GPT-4o (Subscription) — 4.9M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro → GPT-4o (Subscription) — 4.9M tok/$ — ChatGPT Pro · $200/mo</li></ol><h3>All Models Compared</h3><p>Claude Opus 4, Claude Sonnet 4, DeepSeek V3.1, Gemini 2.5 Pro, GLM-4.7 Flash, GPT-OSS 120B, GPT-4o, Llama 3.1 70B, Llama 3.1 8B, o3, Qwen QwQ-32B, Claude Opus 4.5, Gemini 3 Pro, Gemini 3 Flash, GPT-5.2, Claude Opus 4.6 (Non-reasoning, High Effort), Claude Sonnet 4.6 (Non-reasoning, High Effort), Claude 4.5 Haiku (Non-reasoning), Claude 4.5 Sonnet (Non-reasoning), GPT-5.4 (xhigh), GPT-5.3 Codex (xhigh), GPT-5.2 Codex (xhigh), Gemini 3.1 Pro Preview, GLM-5 (Reasoning), GLM-4.7 (Reasoning), MiniMax-M2.5, MiniMax-M2.7, Kimi K2.5 (Reasoning), DeepSeek V3.2 (Non-reasoning), Qwen3.5 35B A3B (Reasoning), Qwen3.5 27B (Reasoning), Qwen3.5 122B A10B (Reasoning), Gemma 4 31B, Gemma 4 26B A4B</p></div>
 <!-- SEO: Pre-rendered 2026-04-11 from 34 models -->
 <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
 <h2>Best Value AI Models — 2026-04-11</h2>
