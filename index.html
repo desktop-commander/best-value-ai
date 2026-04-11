@@ -514,6 +514,32 @@
         .footer a { color: var(--faint); text-decoration: none; }
         .footer a:hover { color: var(--blue); }
 
+        /* ── DATA ACCESS BANNER ── */
+        .data-access {
+            background: var(--surface); border: 1.5px solid var(--border);
+            border-radius: 16px; padding: 1.75rem 2rem;
+            margin: 2.5rem 0; display: flex; gap: 2rem;
+            flex-wrap: wrap; align-items: flex-start;
+        }
+        .data-access h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em;
+            color: var(--text); margin-bottom: 0.4rem; width: 100%;
+        }
+        .data-access-col { flex: 1; min-width: 220px; }
+        .data-access-col h4 {
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 0.5rem;
+        }
+        .data-access-col p { font-size: 0.78rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.5rem; }
+        .data-access-col code {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+            background: var(--bg); padding: 0.15rem 0.45rem; border-radius: 4px;
+        }
+        .data-access-col a { color: var(--blue); text-decoration: none; font-weight: 500; }
+        .data-access-col a:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .data-access { flex-direction: column; gap: 1.25rem; } }
+
         /* ── SCROLL ANIMATIONS ── */
         .fade-up {
             opacity: 0; transform: translateY(18px);
@@ -872,9 +898,9 @@
 
 <!-- DC BAR -->
 <div class="dc-bar">
-    <span class="dc-badge">Built by</span>
+    <span class="dc-badge">Supported by</span>
     <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a>
-    — model-agnostic AI for local models, API keys, and subscriptions. Our users ask "what should I use?" every day. This is our answer.
+    — model-agnostic AI that works with local models, API keys, and subscriptions.
 </div>
 
 <div class="container">
@@ -1173,11 +1199,37 @@
 
 </div><!-- /container -->
 
+<!-- DATA ACCESS + CONTRIBUTE -->
+<div class="container">
+<div class="data-access">
+    <h3>📦 Use this data in your project</h3>
+    <div class="data-access-col">
+        <h4 style="color:var(--blue)">JSON data files</h4>
+        <p>All model, hardware, and benchmark data is stored as open JSON files. Fetch them directly — no API key needed.</p>
+        <p>
+            <a href="https://desktop-commander.github.io/llm-value-comparison/data/models.json" target="_blank"><code>models.json</code></a> ·
+            <a href="https://desktop-commander.github.io/llm-value-comparison/data/hardware.json" target="_blank"><code>hardware.json</code></a> ·
+            <a href="https://desktop-commander.github.io/llm-value-comparison/data/benchmarks.json" target="_blank"><code>benchmarks.json</code></a>
+        </p>
+    </div>
+    <div class="data-access-col">
+        <h4 style="color:var(--green)">Attribution</h4>
+        <p>Free to use under <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/LICENSE" target="_blank">Apache 2.0</a>. If you use the data or host a fork, please credit:</p>
+        <p><strong>"Data from <a href="https://desktop-commander.github.io/llm-value-comparison/">LLM Value Comparison</a>, supported by <a href="https://desktopcommander.app">Desktop Commander</a>"</strong></p>
+    </div>
+    <div class="data-access-col">
+        <h4 style="color:var(--purple)">Contribute</h4>
+        <p>Missing a model? Have local benchmark data? Found a pricing error? PRs welcome — especially local tok/s measurements on your hardware.</p>
+        <p><a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute on GitHub ↗</a></p>
+    </div>
+</div>
+</div>
+
 <div class="footer container">
-    <a href="https://desktopcommander.app" target="_blank">Desktop Commander</a> ·
+    Supported by <a href="https://desktopcommander.app" target="_blank"><strong>Desktop Commander</strong></a> ·
     <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">GitHub</a> ·
     <a href="https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7" target="_blank">Original article</a> ·
-    Apache 2.0 License
+    <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/LICENSE" target="_blank">Apache 2.0</a>
 </div>
 
 <script>
