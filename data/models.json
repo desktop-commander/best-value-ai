@@ -27,19 +27,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     }
@@ -533,19 +533,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://a16z.com/state-of-ai/"
       }
     },
@@ -720,19 +720,19 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "tokensPerDay": 3200000,
         "confidence": "low",
-        "notes": "5\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "tokensPerDay": 12800000,
         "confidence": "low",
-        "notes": "20\u00d7 Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "notes": "20× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
         "source": "https://www.anthropic.com/pricing"
       }
     },
@@ -1195,7 +1195,7 @@
         "tokensPerSec": 18,
         "quantization": "TQ1_0",
         "vramRequired": 128,
-        "notes": "MoE \u2014 aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "notes": "MoE — aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
         "source": "https://openbenchmarking.org/test/pts/llama-cpp"
       }
     },
@@ -1237,7 +1237,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE \u2014 requires 128GB+ unified memory.",
+        "notes": "MoE — requires 128GB+ unified memory.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       }
@@ -1280,7 +1280,7 @@
         "tokensPerSec": 10,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Extremely large \u2014 needs 128GB+ unified memory with heavy quantization.",
+        "notes": "MoE 1T/32B active. Extremely large — needs 128GB+ unified memory with heavy quantization.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       },
@@ -1288,7 +1288,7 @@
         "tokensPerSec": 8,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Estimated \u2014 community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "notes": "MoE 1T/32B active. Estimated — community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -1335,7 +1335,7 @@
         "tokensPerSec": 15,
         "quantization": "Q4_K_M",
         "vramRequired": 80,
-        "notes": "Requires 2\u00d7 RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "notes": "Requires 2× RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions",
         "_estimated": true
       },
@@ -1351,7 +1351,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 110,
-        "notes": "Estimated \u2014 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "notes": "Estimated — 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -1394,14 +1394,14 @@
         "tokensPerSec": 122,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token. Fits in single 24GB GPU.",
+        "notes": "MoE — only 3B active params per token. Fits in single 24GB GPU.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "rtx_3090": {
         "tokensPerSec": 110,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token.",
+        "notes": "MoE — only 3B active params per token.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "mac_m3_max_64gb": {
@@ -1451,7 +1451,7 @@
         "tokensPerSec": 58,
         "quantization": "Q4_K_M",
         "vramRequired": 16,
-        "notes": "Dense 27B. Community reports 55\u201365 t/s at Q4_K_M on RTX 4090.",
+        "notes": "Dense 27B. Community reports 55–65 t/s at Q4_K_M on RTX 4090.",
         "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
       },
       "rtx_3090": {
@@ -1468,6 +1468,20 @@
         "vramRequired": 16,
         "notes": "MLX 8-bit benchmark on M3 Ultra 512GB gives 21.3 t/s; M3 Max 64GB similar.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
+      },
+      "rx_7900_xtx": {
+        "tokensPerSec": 2.9,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 6,
+        "_estimated": false,
+        "notes": "DC production data: 6 messages, Ryzen 9 3900X, Windows"
+      },
+      "rtx_4060": {
+        "tokensPerSec": 6.5,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 6,
+        "_estimated": false,
+        "notes": "DC production data: 6 messages, i7-14700F, Windows"
       }
     },
     "subscriptions": null,
@@ -1508,7 +1522,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "notes": "MoE — 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
         "_estimated": true
       },
@@ -1516,7 +1530,7 @@
         "tokensPerSec": 42,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "notes": "MoE — 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
       },
       "framework_desktop_128gb": {
@@ -1558,11 +1572,11 @@
     },
     "local": {
       "rtx_4090": {
-        "tokensPerSec": 35,
-        "quantization": "Q4_K_M",
-        "vramRequired": 20,
-        "notes": "Dense 31B model. Fits on single RTX 4090 at Q4.",
-        "source": "https://huggingface.co/google/gemma-4-31b-it"
+        "tokensPerSec": 19.5,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC production data: 1 messages, i9-14900K, Windows"
       },
       "mac_m3_max_64gb": {
         "tokensPerSec": 28,
@@ -1583,6 +1597,15 @@
         "vramRequired": 20,
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
+      },
+      "macbook_pro_2019_i9": {
+        "tokensPerSec": 21.9,
+        "quantization": "cloud (mixed)",
+        "vramRequired": 64,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 2,
+        "_estimated": false,
+        "notes": "DC production data: 2 messages, i9-9980HK, macOS"
       }
     },
     "subscriptions": null,
@@ -1611,11 +1634,11 @@
     "api": null,
     "local": {
       "rtx_4090": {
-        "tokensPerSec": 55,
-        "quantization": "Q4_K_M",
-        "vramRequired": 8,
-        "notes": "MoE 26B total, 4B active. Runs on 8GB GPU \u2014 very accessible.",
-        "source": "https://huggingface.co/google/gemma-4-26b-a4b-it"
+        "tokensPerSec": 1.2,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC production data: 1 messages, i9-13900KS, Windows"
       },
       "mac_m3_max_64gb": {
         "tokensPerSec": 45,
@@ -1627,7 +1650,7 @@
         "tokensPerSec": 85,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE \u2014 only 4B active. Extremely fast for its capability level.",
+        "notes": "MoE — only 4B active. Extremely fast for its capability level.",
         "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
       },
       "rtx_3090": {
@@ -1636,6 +1659,36 @@
         "vramRequired": 8,
         "source": "https://github.com/ggml-org/llama.cpp/discussions",
         "_estimated": true
+      },
+      "mac_m1_max_64gb": {
+        "tokensPerSec": 4.4,
+        "vramRequired": 64,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 3,
+        "_estimated": false,
+        "notes": "DC production data: 3 messages, M1 Max, macOS"
+      },
+      "rtx_3080_ti": {
+        "tokensPerSec": 5.6,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC production data: 1 messages, Ryzen 9 9900X3D, Windows"
+      },
+      "rtx_4060": {
+        "tokensPerSec": 8.7,
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 5,
+        "_estimated": false,
+        "notes": "DC production data: 5 messages, i7-14700F, Windows"
+      },
+      "rtx_5070": {
+        "tokensPerSec": 9.4,
+        "quantization": "e4b (4-bit)",
+        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "_dcMsgs": 15,
+        "_estimated": false,
+        "notes": "DC production data: 15 messages, Ryzen 7 5700X, Windows"
       }
     },
     "subscriptions": null,

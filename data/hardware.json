@@ -64,5 +64,94 @@
     "year": 2020,
     "notes": "Two RTX 3090s for larger models",
     "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/"
+  },
+  "rtx_5070": {
+    "name": "RTX 5070",
+    "price": 550,
+    "vram": 12,
+    "year": 2025,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5070/"
+  },
+  "rtx_4060": {
+    "name": "RTX 4060",
+    "price": 300,
+    "vram": 8,
+    "year": 2023,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060/"
+  },
+  "rtx_4060_laptop": {
+    "name": "RTX 4060 Laptop",
+    "price": 1200,
+    "vram": 8,
+    "year": 2023,
+    "notes": "Estimated laptop price with RTX 4060",
+    "source": "https://www.nvidia.com/en-us/geforce/laptops/"
+  },
+  "rtx_3080_ti": {
+    "name": "RTX 3080 Ti",
+    "price": 1200,
+    "vram": 12,
+    "year": 2021,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080-3080ti/"
+  },
+  "rtx_a3000_laptop": {
+    "name": "RTX A3000 Laptop",
+    "price": 1800,
+    "vram": 6,
+    "year": 2021,
+    "notes": "Workstation laptop GPU",
+    "source": "https://www.nvidia.com/en-us/design-visualization/rtx-a3000/"
+  },
+  "rx_7900_xtx": {
+    "name": "AMD RX 7900 XTX",
+    "price": 950,
+    "vram": 24,
+    "year": 2022,
+    "source": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx"
+  },
+  "macbook_pro_2019_i9": {
+    "name": "MacBook Pro 2019 i9 (64GB)",
+    "price": 2800,
+    "vram": 64,
+    "year": 2019,
+    "notes": "Uses system RAM for inference",
+    "source": "https://www.apple.com/shop/refurbished/mac/macbook-pro"
+  },
+  "mac_m1_max_64gb": {
+    "name": "Mac M1 Max 64GB",
+    "price": 3000,
+    "vram": 64,
+    "year": 2021,
+    "source": "https://www.apple.com/shop/refurbished/mac/macbook-pro"
+  },
+  "mac_m2_8gb": {
+    "name": "Mac M2 8GB",
+    "price": 1000,
+    "vram": 8,
+    "year": 2022,
+    "source": "https://www.apple.com/shop/buy-mac/macbook-air"
+  },
+  "mac_m4_24gb": {
+    "name": "Mac M4 24GB",
+    "price": 1600,
+    "vram": 24,
+    "year": 2024,
+    "source": "https://www.apple.com/shop/buy-mac/macbook-pro"
+  },
+  "intel_iris_xe_laptop": {
+    "name": "Intel Iris Xe Laptop (16GB)",
+    "price": 700,
+    "vram": 16,
+    "year": 2022,
+    "notes": "CPU inference only, integrated GPU",
+    "source": "https://www.intel.com/content/www/us/en/products/platforms/details/alder-lake-p.html"
+  },
+  "intel_uhd_615_laptop": {
+    "name": "Intel UHD 615 Laptop (16GB)",
+    "price": 400,
+    "vram": 16,
+    "year": 2018,
+    "notes": "Very low-end CPU inference, Core m3",
+    "source": "https://www.intel.com/content/www/us/en/products/platforms/details/amber-lake-y.html"
   }
 }
