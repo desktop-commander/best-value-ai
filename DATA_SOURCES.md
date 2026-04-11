@@ -27,8 +27,35 @@ This document explains where data comes from and how to update it.
 | Data | Reason | Workaround |
 |------|--------|-----------|
 | Subscription token limits | Providers don't publish them | Community reverse-engineering |
-| Local tok/s benchmarks | Hardware-specific, no central DB | PRs from community |
+| Local tok/s benchmarks | Hardware-specific, no central DB | PRs from community + DC production data |
 | SWE-bench scores | No public API | Monthly manual scrape |
+
+## Hardware Prices
+
+No free API exists for GPU/hardware prices. PCPartPicker has an internal API but doesn't make it public. The best reference sources:
+
+| Source | Coverage | Notes |
+|--------|----------|-------|
+| [bestvaluegpu.com](https://bestvaluegpu.com/) | MSRP + current Amazon + eBay used for NVIDIA/AMD GPUs | URL pattern: `/history/new-and-used-{model}-price-history-and-specs/` |
+| [gpudeals.net](https://gpudeals.net/) | Current lowest prices from Amazon & eBay | Per-model pages with MSRP reference |
+| [Apple Refurbished Store](https://www.apple.com/shop/refurbished/mac) | Mac/MacBook prices | Use refurbished prices for older models |
+| [PCPartPicker](https://pcpartpicker.com/trends/) | Price trends, multi-retailer | No API — browse only |
+| [GPU Sniper](https://gpusniper.com/) | Real-time price tracking | Fetches from retailer APIs directly |
+
+**Update frequency:** Quarterly manual check is sufficient — GPU prices change slowly.
+**Convention:** GPU-only entries use MSRP or current street price. Mac/laptop entries use full system price (marked with "(full system)" in name). Discontinued GPUs use used/eBay price.
+
+## DC Production Data
+
+Desktop Commander's production database provides real-world local inference benchmarks from actual user sessions. These are stored with hardware info (GPU, CPU, RAM, OS) and measured output tokens per second.
+
+| Source | What it provides | Access |
+|--------|-----------------|--------|
+| DC App production DB | Local model tok/s + exact hardware combos | `node scripts/import-dc-local-data.js` (requires DB access) |
+
+**Import script:** `scripts/import-dc-local-data.js` — maps DB model×hardware combos to models.json entries. Re-run periodically as more users run local models. All entries are tagged with `source: "DC production data"` and include message count for confidence assessment.
+
+**Arena full leaderboard scraper:** `scripts/sync-from-arena.js` — scrapes the full 338-model Arena leaderboard from Chrome tabs (the free API only has ~60 models). Requires two Chrome tabs open: `arena.ai/leaderboard/text` and `arena.ai/leaderboard/code`.
 
 ## Benchmark Glossary
 
