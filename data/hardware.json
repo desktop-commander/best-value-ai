@@ -67,91 +67,98 @@
   },
   "rtx_5070": {
     "name": "RTX 5070",
-    "price": 550,
+    "price": 549,
     "vram": 12,
     "year": 2025,
-    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5070/"
+    "notes": "MSRP $549. Street price $480-635 (Apr 2026).",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-5070-price-history-and-specs/"
   },
   "rtx_4060": {
     "name": "RTX 4060",
-    "price": 300,
+    "price": 299,
     "vram": 8,
     "year": 2023,
-    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4060/"
+    "notes": "MSRP $299. Stable pricing since launch.",
+    "source": "https://gpudeals.net/gpus/rtx-4060.html"
   },
   "rtx_4060_laptop": {
-    "name": "RTX 4060 Laptop",
-    "price": 1200,
+    "name": "RTX 4060 Laptop (full system)",
+    "price": 1100,
     "vram": 8,
     "year": 2023,
-    "notes": "Estimated laptop price with RTX 4060",
+    "notes": "Full laptop system price. GPU-only cost not separable.",
     "source": "https://www.nvidia.com/en-us/geforce/laptops/"
   },
   "rtx_3080_ti": {
-    "name": "RTX 3080 Ti",
-    "price": 1200,
+    "name": "RTX 3080 Ti (used)",
+    "price": 425,
     "vram": 12,
     "year": 2021,
-    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080-3080ti/"
+    "notes": "Discontinued. MSRP was $1199. Used ~$425 on eBay (Apr 2026).",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-3080-ti-price-history-and-specs/"
   },
   "rtx_a3000_laptop": {
-    "name": "RTX A3000 Laptop",
-    "price": 1800,
+    "name": "RTX A3000 Laptop (full system)",
+    "price": 1500,
     "vram": 6,
     "year": 2021,
-    "notes": "Workstation laptop GPU",
+    "notes": "Workstation laptop with RTX A3000. Full system price estimate.",
     "source": "https://www.nvidia.com/en-us/design-visualization/rtx-a3000/"
   },
   "rx_7900_xtx": {
     "name": "AMD RX 7900 XTX",
-    "price": 950,
+    "price": 999,
     "vram": 24,
     "year": 2022,
+    "notes": "MSRP $999. Street price ~$890-999 (Apr 2026).",
     "source": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx"
   },
   "macbook_pro_2019_i9": {
-    "name": "MacBook Pro 2019 i9 (64GB)",
-    "price": 2800,
+    "name": "MacBook Pro 2019 i9 64GB (full system)",
+    "price": 2000,
     "vram": 64,
     "year": 2019,
-    "notes": "Uses system RAM for inference",
+    "notes": "Refurbished price estimate. Uses unified/system RAM for inference. Radeon Pro 5500M iGPU.",
     "source": "https://www.apple.com/shop/refurbished/mac/macbook-pro"
   },
   "mac_m1_max_64gb": {
-    "name": "Mac M1 Max 64GB",
-    "price": 3000,
+    "name": "Mac M1 Max 64GB (full system)",
+    "price": 2500,
     "vram": 64,
     "year": 2021,
+    "notes": "Refurbished MacBook Pro 16\" M1 Max 64GB. Uses unified memory for inference.",
     "source": "https://www.apple.com/shop/refurbished/mac/macbook-pro"
   },
   "mac_m2_8gb": {
-    "name": "Mac M2 8GB",
-    "price": 1000,
+    "name": "Mac M2 8GB (full system)",
+    "price": 800,
     "vram": 8,
     "year": 2022,
+    "notes": "MacBook Air M2 8GB. Refurbished/sale price. Very limited for LLM inference.",
     "source": "https://www.apple.com/shop/buy-mac/macbook-air"
   },
   "mac_m4_24gb": {
-    "name": "Mac M4 24GB",
-    "price": 1600,
+    "name": "Mac M4 24GB (full system)",
+    "price": 1599,
     "vram": 24,
     "year": 2024,
+    "notes": "MacBook Pro 14\" M4 24GB. Starting price $1599.",
     "source": "https://www.apple.com/shop/buy-mac/macbook-pro"
   },
   "intel_iris_xe_laptop": {
-    "name": "Intel Iris Xe Laptop (16GB)",
-    "price": 700,
+    "name": "Intel Iris Xe Laptop 16GB (full system)",
+    "price": 600,
     "vram": 16,
     "year": 2022,
-    "notes": "CPU inference only, integrated GPU",
+    "notes": "Budget laptop with i7-1355U. CPU-only inference, integrated GPU. Estimated system price.",
     "source": "https://www.intel.com/content/www/us/en/products/platforms/details/alder-lake-p.html"
   },
   "intel_uhd_615_laptop": {
-    "name": "Intel UHD 615 Laptop (16GB)",
-    "price": 400,
+    "name": "Intel UHD 615 Laptop 16GB (full system)",
+    "price": 300,
     "vram": 16,
     "year": 2018,
-    "notes": "Very low-end CPU inference, Core m3",
+    "notes": "Very old/cheap laptop with Core m3-8100Y. CPU-only inference. Used price estimate.",
     "source": "https://www.intel.com/content/www/us/en/products/platforms/details/amber-lake-y.html"
   }
 }
