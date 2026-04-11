@@ -21,8 +21,8 @@
         },
         {
           "@type": "Question",
-          "name": "Claude Opus 4.6 vs GPT-5.4 — which is better value via API or subscription?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Our head-to-head comparison tool lets you pick any two models and compare quality score, API value, subscription value, and local performance side by side with visual bar charts." }
+          "name": "Best AI subscription vs best API — which is better value?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Our head-to-head comparison tool automatically picks the best subscription and best API models and compares them on quality-adjusted tokens per dollar. You can also pick any two models to compare quality, price, and value side by side." }
         },
         {
           "@type": "Question",
@@ -942,8 +942,8 @@
             <a class="q-card qc-compare" href="#explore" onclick="switchTab('compare')">
                 <div class="q-card-tag">Head to head</div>
                 <div class="q-card-icon">⚔️</div>
-                <div class="q-card-question">Claude Opus 4.6 vs GPT-5.4 — API or subscription?</div>
-                <div class="q-card-hint">Pick any two models. Compare quality, API price, subscription value, and local performance side by side.</div>
+                <div class="q-card-question">Best subscription vs best API — which wins?</div>
+                <div class="q-card-hint">Compare any two models head-to-head on quality, API price, subscription value, and local performance.</div>
             </a>
             <a class="q-card qc-history" href="#explore" onclick="switchTab('chart')">
                 <div class="q-card-tag">Trends</div>
@@ -1566,7 +1566,7 @@ function init(){
   document.getElementById('hardware').addEventListener('change',()=>{populateCalcDropdowns();updateAll();});
   ['chartBenchmark','chartType','chartProvider'].forEach(id=>document.getElementById(id).addEventListener('change',()=>requestAnimationFrame(()=>updateChart())));
 
-  // Compare tab: populate model dropdowns
+  // Compare tab: populate model dropdowns with data-driven defaults
   const modelIds = Object.keys(DATA.models);
   ['cmpA','cmpB'].forEach((selId, i) => {
     const sel = document.getElementById(selId);
@@ -1576,15 +1576,10 @@ function init(){
       o.textContent = DATA.models[id].name;
       sel.appendChild(o);
     });
-    // Default: Opus 4.6 vs Sonnet 4.6 (the two most compared Anthropic models)
-    const defaults = { cmpA: 'claude-opus-4-6', cmpB: 'claude-sonnet-4-6' };
-    if (defaults[selId] && DATA.models[defaults[selId]]) {
-      sel.value = defaults[selId];
-    } else if(i === 1 && modelIds.length > 1) {
-      sel.value = modelIds[1];
-    }
     sel.addEventListener('change', renderCompare);
   });
+  // Set defaults: best subscription model vs best API model (data-driven)
+  setCompareDefaults();
   // scroll animations
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -1913,41 +1908,92 @@ function renderCompare() {
     });
   });
 
-  // Verdict
+  // Verdict — based on best quality-adjusted tokens per dollar across all types
   const verdictEl = document.getElementById('cmpVerdict');
   verdictEl.style.display = '';
   const aName = mA.name, bName = mB.name;
 
-  // Find overall winner by most categories won (API val, sub val, local val, quality)
-  let aWins = 0, bWins = 0;
-  [[apiValA, apiValB],[subA?.val, subB?.val],[bestLocalVal(mA), bestLocalVal(mB)],[scoreA, scoreB]]
-    .forEach(([a,b]) => {
-      if(a != null && b != null) { if(a > b) aWins++; else if(b > a) bWins++; }
+  // Find the best value for each model across all types
+  function bestValue(model, score) {
+    let best = { val: 0, type: '' };
+    if (model.api && model.api.inputPer1M > 0) {
+      const v = (1_000_000 / wap(model.api)) * (score / 100);
+      if (v > best.val) best = { val: v, type: 'API' };
+    }
+    if (model.subscriptions) Object.values(model.subscriptions).forEach(sub => {
+      if (!sub.tokensPerDay) return;
+      const years = parseInt(document.getElementById('periodYears')?.value) || 3;
+      const v = (sub.tokensPerDay * 365 * years * (score / 100)) / (sub.monthlyPrice * 12 * years);
+      if (v > best.val) best = { val: v, type: `${sub.name} subscription` };
     });
+    if (hw && model.local && model.local[hwId]) {
+      const hours = parseFloat(document.getElementById('hoursPerDay')?.value) || 16;
+      const years = parseInt(document.getElementById('periodYears')?.value) || 3;
+      const p = model.local[hwId];
+      const v = (p.tokensPerSec * 3600 * hours * 365 * years * (score / 100)) / hw.price;
+      if (v > best.val) best = { val: v, type: `Local (${hw.name})` };
+    }
+    return best;
+  }
+
+  const bestA = bestValue(mA, scoreA);
+  const bestB = bestValue(mB, scoreB);
 
   let icon, html;
-  if (aWins === bWins) {
+  if (bestA.val === 0 && bestB.val === 0) {
+    icon = '❓';
+    html = `<div class="cmp-verdict-text">Insufficient data to compare</div>`;
+  } else if (Math.abs(bestA.val - bestB.val) / Math.max(bestA.val, bestB.val) < 0.05) {
     icon = '🤝';
-    html = `<div class="cmp-verdict-text"><span class="cv-tie">${aName}</span> and <span class="cv-tie">${bName}</span> are roughly equal</div>
-            <div class="cmp-verdict-sub">Tied across quality + value metrics — choose based on availability or preference.</div>`;
+    html = `<div class="cmp-verdict-text"><span class="cv-tie">${aName}</span> and <span class="cv-tie">${bName}</span> are roughly equal in value</div>
+            <div class="cmp-verdict-sub">${aName} best via ${bestA.type} (${fmt(bestA.val)} tok/$) vs ${bName} via ${bestB.type} (${fmt(bestB.val)} tok/$)</div>`;
   } else {
-    const winner = aWins > bWins ? aName : bName;
-    const loser  = aWins > bWins ? bName : aName;
-    const wClass = aWins > bWins ? 'cv-a' : 'cv-b';
-    const cats = Math.max(aWins, bWins);
+    const aWins = bestA.val > bestB.val;
+    const winner = aWins ? aName : bName;
+    const loser = aWins ? bName : aName;
+    const wBest = aWins ? bestA : bestB;
+    const lBest = aWins ? bestB : bestA;
+    const wClass = aWins ? 'cv-a' : 'cv-b';
+    const pctBetter = Math.round(((wBest.val - lBest.val) / lBest.val) * 100);
     icon = '🏆';
-    html = `<div class="cmp-verdict-text"><span class="${wClass}">${winner}</span> wins <em>${cats}</em> of the compared categories</div>
-            <div class="cmp-verdict-sub">Better overall value than ${loser} across quality and cost metrics.</div>`;
+    html = `<div class="cmp-verdict-text"><span class="${wClass}">${winner}</span> delivers <em>${pctBetter}%</em> more value per dollar</div>
+            <div class="cmp-verdict-sub">Best via ${wBest.type} (${fmt(wBest.val)} quality-adj tok/$) vs ${loser} via ${lBest.type} (${fmt(lBest.val)} tok/$)</div>`;
   }
   verdictEl.innerHTML = `<div class="cmp-verdict-icon">${icon}</div><div>${html}</div>`;
 }
 
 // Global tab switch function (called from hero question cards)
-function switchTab(tabName) {
+// Can optionally set compare models: switchTab('compare', 'model-a-id', 'model-b-id')
+function switchTab(tabName, modelA, modelB) {
   setTimeout(() => {
+    if (modelA && document.getElementById('cmpA')) document.getElementById('cmpA').value = modelA;
+    if (modelB && document.getElementById('cmpB')) document.getElementById('cmpB').value = modelB;
     const tab = document.querySelector(`.tab[data-tab="${tabName}"]`);
     if (tab) tab.click();
   }, 100);
+}
+
+// Find best model in each category (subscription, API) and set as compare defaults
+function setCompareDefaults() {
+  let bestSub = null, bestApi = null;
+  const years = parseInt(document.getElementById('periodYears')?.value) || 3;
+  Object.entries(DATA.models).forEach(([id, model]) => {
+    const score = getScore(model, '_combined'); if (!score) return;
+    // Best subscription
+    if (model.subscriptions) Object.values(model.subscriptions).forEach(sub => {
+      if (!sub.tokensPerDay) return;
+      const val = (sub.tokensPerDay * 365 * years * (score/100)) / (sub.monthlyPrice * 12 * years);
+      if (!bestSub || val > bestSub.val) bestSub = { id, val };
+    });
+    // Best API
+    if (model.api && model.api.inputPer1M > 0) {
+      const wp = wap(model.api);
+      const val = (1_000_000 / wp) * (score / 100);
+      if (!bestApi || val > bestApi.val) bestApi = { id, val };
+    }
+  });
+  if (bestSub) document.getElementById('cmpA').value = bestSub.id;
+  if (bestApi) document.getElementById('cmpB').value = bestApi.id;
 }
 
 loadData();
