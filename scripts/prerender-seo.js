@@ -166,11 +166,40 @@ let html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf-8');
 html = html.replace(/<!-- SEO:[\s\S]*?<\/div>\n?/g, '');
 html = html.replace(/<div id="seo-content"[\s\S]*?<\/div>\n?/g, '');
 
-// 1. Replace ranked list content (whether "Loading…" or previous pre-render)
-html = html.replace(
-  /<div class="rank-list" id="calculatorContent">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
-  `<div class="rank-list" id="calculatorContent">${rankedHtml}</div></div></div>`
-);
+// 1. Replace ranked list content inside calculatorContent div
+// Strategy: find the opening tag, then find its matching closing </div> by counting nesting
+const openTag = '<div class="rank-list" id="calculatorContent">';
+const openIdx = html.indexOf(openTag);
+if (openIdx >= 0) {
+  const contentStart = openIdx + openTag.length;
+  // Find the matching closing </div> by counting nested divs
+  let depth = 0, searchPos = contentStart;
+  let closePos = -1;
+  while (searchPos < html.length) {
+    const nextOpen = html.indexOf('<div', searchPos);
+    const nextClose = html.indexOf('</div>', searchPos);
+    if (nextClose === -1) break;
+    if (nextOpen !== -1 && nextOpen < nextClose) {
+      depth++;
+      searchPos = nextOpen + 4;
+    } else {
+      if (depth === 0) {
+        closePos = nextClose;
+        break;
+      }
+      depth--;
+      searchPos = nextClose + 6;
+    }
+  }
+  if (closePos >= 0) {
+    html = html.substring(0, contentStart) + rankedHtml + html.substring(closePos);
+    console.log('  Replaced ranked list content');
+  } else {
+    console.log('  ⚠ Could not find closing </div> for calculatorContent');
+  }
+} else {
+  console.log('  ⚠ Could not find calculatorContent div');
+}
 
 // 2. Inject winner card static content
 if (bestLocal) {
