@@ -162,10 +162,14 @@ seoText += `</div>`;
 // Now inject into index.html
 let html = fs.readFileSync(path.join(REPO, 'index.html'), 'utf-8');
 
-// 1. Replace "Loading…" in ranked list with pre-rendered content
+// Remove any existing SEO content blocks first (prevent duplication on re-runs)
+html = html.replace(/<!-- SEO:[\s\S]*?<\/div>\n?/g, '');
+html = html.replace(/<div id="seo-content"[\s\S]*?<\/div>\n?/g, '');
+
+// 1. Replace ranked list content (whether "Loading…" or previous pre-render)
 html = html.replace(
-  '<div class="rank-list" id="calculatorContent">Loading…</div>',
-  `<div class="rank-list" id="calculatorContent">${rankedHtml}</div>`
+  /<div class="rank-list" id="calculatorContent">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
+  `<div class="rank-list" id="calculatorContent">${rankedHtml}</div></div></div>`
 );
 
 // 2. Inject winner card static content

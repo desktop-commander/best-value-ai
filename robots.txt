@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://desktop-commander.github.io/llm-value-comparison/sitemap.xml
