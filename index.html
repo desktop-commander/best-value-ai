@@ -21,7 +21,7 @@
         },
         {
           "@type": "Question",
-          "name": "GPT-5.4 vs Claude Opus 4.6 — which is better value?",
+          "name": "Claude Opus 4.6 vs GPT-5.4 — which is better value via API or subscription?",
           "acceptedAnswer": { "@type": "Answer", "text": "Our head-to-head comparison tool lets you pick any two models and compare quality score, API value, subscription value, and local performance side by side with visual bar charts." }
         },
         {
@@ -910,7 +910,10 @@
         <a href="#benchmarks">📏 Benchmarks</a>
     </div>
     <div class="nav-right">
-        <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute data ↗</a>
+        <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">
+            <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-3px;margin-right:4px"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Let your AI agent contribute data ↗
+        </a>
     </div>
 </nav>
 
@@ -939,7 +942,7 @@
             <a class="q-card qc-compare" href="#explore" onclick="switchTab('compare')">
                 <div class="q-card-tag">Head to head</div>
                 <div class="q-card-icon">⚔️</div>
-                <div class="q-card-question">GPT-5.4 vs Claude Opus — which is better value?</div>
+                <div class="q-card-question">Claude Opus 4.6 vs GPT-5.4 — API or subscription?</div>
                 <div class="q-card-hint">Pick any two models. Compare quality, API price, subscription value, and local performance side by side.</div>
             </a>
             <a class="q-card qc-history" href="#explore" onclick="switchTab('chart')">
@@ -1307,8 +1310,11 @@
     </div>
     <div class="data-access-col">
         <h4 style="color:var(--purple)">Contribute</h4>
-        <p>Missing a model? Have local benchmark data? Found a pricing error? PRs welcome — especially local tok/s measurements on your hardware.</p>
-        <p><a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">Contribute on GitHub ↗</a></p>
+        <p>Missing a model? Have local benchmark data? Let your AI agent submit a PR with your hardware's performance data, or contribute manually.</p>
+        <p><a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">
+            <svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:3px"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Let your AI agent contribute data ↗
+        </a></p>
     </div>
 </div>
 </div>
@@ -1570,8 +1576,13 @@ function init(){
       o.textContent = DATA.models[id].name;
       sel.appendChild(o);
     });
-    // default: A = first, B = second
-    if(i === 1 && modelIds.length > 1) sel.value = modelIds[1];
+    // Default: Opus 4.6 vs Sonnet 4.6 (the two most compared Anthropic models)
+    const defaults = { cmpA: 'claude-opus-4-6', cmpB: 'claude-sonnet-4-6' };
+    if (defaults[selId] && DATA.models[defaults[selId]]) {
+      sel.value = defaults[selId];
+    } else if(i === 1 && modelIds.length > 1) {
+      sel.value = modelIds[1];
+    }
     sel.addEventListener('change', renderCompare);
   });
   // scroll animations
