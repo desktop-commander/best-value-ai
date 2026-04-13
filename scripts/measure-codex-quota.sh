@@ -60,7 +60,11 @@ get_codex_status() {
     echo "  [$label] Waiting 18s for TUI + MCP init..."
     sleep 18
 
-    # Send Escape to ensure clean state, then /status + Enter
+    # Dismiss any welcome/tip screen first
+    tmux send-keys -t "$SESSION_NAME" Escape
+    sleep 2
+
+    # Send Escape again to ensure clean state, then /status + Enter
     echo "  [$label] Sending /status..."
     tmux send-keys -t "$SESSION_NAME" Escape
     sleep 1
@@ -68,8 +72,8 @@ get_codex_status() {
     sleep 1
     tmux send-keys -t "$SESSION_NAME" Enter
 
-    echo "  [$label] Waiting 10s for rate limit fetch..."
-    sleep 10
+    echo "  [$label] Waiting 12s for rate limit fetch..."
+    sleep 12
 
     # Capture screen
     tmux capture-pane -t "$SESSION_NAME" -p > "$outfile"
@@ -166,8 +170,17 @@ after = json.loads('$AFTER_JSON')
 tokens = json.loads('$TASK_TOKENS')
 
 # Calculate deltas (Codex shows % LEFT, so consumed = before - after)
+# If BEFORE is empty (first run), assume 100% left
 delta_5h = before.get('5h_pct_left', 100) - after.get('5h_pct_left', 100)
 delta_weekly = before.get('weekly_pct_left', 100) - after.get('weekly_pct_left', 100)
+before_note = ''
+if not before.get('5h_pct_left'):
+    before_note = ' (BEFORE capture failed — assuming 100% as baseline)'
+    print(f'  ⚠ BEFORE status was empty, assuming fresh window (100%/100%)')
+    before['5h_pct_left'] = 100
+    before['weekly_pct_left'] = 100
+    delta_5h = 100 - after.get('5h_pct_left', 100)
+    delta_weekly = 100 - after.get('weekly_pct_left', 100)
 total = tokens.get('total', 0)
 
 estimates = {}
