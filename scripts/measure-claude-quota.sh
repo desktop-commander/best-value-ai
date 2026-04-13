@@ -67,6 +67,28 @@ get_claude_usage() {
 
     # Capture screen
     tmux capture-pane -t "$SESSION_NAME" -p > "$outfile"
+    
+    # Verify we got usage data
+    if ! grep -q "% used" "$outfile" 2>/dev/null; then
+        echo "  [$label] ⚠ First capture missed Usage tab, retrying..."
+        tmux send-keys -t "$SESSION_NAME" Escape
+        sleep 2
+        tmux send-keys -t "$SESSION_NAME" '/status'
+        sleep 0.5
+        tmux send-keys -t "$SESSION_NAME" Enter
+        sleep 4
+        tmux send-keys -t "$SESSION_NAME" Tab
+        sleep 1
+        tmux send-keys -t "$SESSION_NAME" Tab
+        sleep 5
+        tmux capture-pane -t "$SESSION_NAME" -p > "$outfile"
+        
+        if ! grep -q "% used" "$outfile" 2>/dev/null; then
+            echo "  [$label] ✗ FAILED to capture Usage after 2 attempts"
+            head -20 "$outfile"
+        fi
+    fi
+    
     echo "  [$label] Screen captured to $outfile"
 
     # Close session

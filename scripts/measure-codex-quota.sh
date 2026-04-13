@@ -77,6 +77,26 @@ get_codex_status() {
 
     # Capture screen
     tmux capture-pane -t "$SESSION_NAME" -p > "$outfile"
+    
+    # Verify we got status data (look for "% left" in output)
+    if ! grep -q "% left" "$outfile" 2>/dev/null; then
+        echo "  [$label] ⚠ First capture missed /status, retrying..."
+        # Try again — sometimes TUI needs more time
+        tmux send-keys -t "$SESSION_NAME" Escape
+        sleep 2
+        tmux send-keys -t "$SESSION_NAME" '/status'
+        sleep 1
+        tmux send-keys -t "$SESSION_NAME" Enter
+        sleep 15
+        tmux capture-pane -t "$SESSION_NAME" -p > "$outfile"
+        
+        if ! grep -q "% left" "$outfile" 2>/dev/null; then
+            echo "  [$label] ✗ FAILED to capture /status after 2 attempts"
+            echo "  [$label]   Screen contents:"
+            head -20 "$outfile"
+        fi
+    fi
+    
     echo "  [$label] Screen captured"
 
     # Kill session
@@ -170,17 +190,25 @@ after = json.loads('$AFTER_JSON')
 tokens = json.loads('$TASK_TOKENS')
 
 # Calculate deltas (Codex shows % LEFT, so consumed = before - after)
-# If BEFORE is empty (first run), assume 100% left
-delta_5h = before.get('5h_pct_left', 100) - after.get('5h_pct_left', 100)
-delta_weekly = before.get('weekly_pct_left', 100) - after.get('weekly_pct_left', 100)
-before_note = ''
-if not before.get('5h_pct_left'):
-    before_note = ' (BEFORE capture failed — assuming 100% as baseline)'
-    print(f'  ⚠ BEFORE status was empty, assuming fresh window (100%/100%)')
-    before['5h_pct_left'] = 100
-    before['weekly_pct_left'] = 100
-    delta_5h = 100 - after.get('5h_pct_left', 100)
-    delta_weekly = 100 - after.get('weekly_pct_left', 100)
+before_ok = bool(before.get('5h_pct_left'))
+after_ok = bool(after.get('5h_pct_left'))
+
+if not before_ok:
+    print('  ✗ BEFORE status capture failed — cannot calculate accurate quotas')
+    print('  ✗ Run the script again with a fresh 5h window for reliable results')
+    print(f'  ℹ AFTER status: {after}')
+    print(f'  ℹ Tokens consumed: {total}')
+    estimates = {'error': 'BEFORE capture failed, no reliable estimate possible'}
+    delta_5h = 0
+    delta_weekly = 0
+elif not after_ok:
+    print('  ✗ AFTER status capture failed — cannot calculate')
+    estimates = {'error': 'AFTER capture failed'}
+    delta_5h = 0
+    delta_weekly = 0
+else:
+    delta_5h = before['5h_pct_left'] - after['5h_pct_left']
+    delta_weekly = before['weekly_pct_left'] - after['weekly_pct_left']
 total = tokens.get('total', 0)
 
 estimates = {}
