@@ -884,6 +884,7 @@
         <a href="#explore">📊 Compare</a>
         <a href="#how">📐 Method</a>
         <a href="#benchmarks">📏 Benchmarks</a>
+        <a href="#subscription-method">💳 Subscriptions</a>
     </div>
     <div class="nav-right">
         <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">
@@ -1111,6 +1112,42 @@
             <span class="bfn-result">Stable Quality Score</span>
         </div>
         <p class="bfn-note">Both scores are z-score normalized: <code>(score − mean) / std × 15 + 50</code>, centering each at 50 on its own distribution. This ensures Arena ELO and AA Intelligence contribute equally to the average — without normalization, Arena's larger numbers would dominate. The two normalized scores are then averaged. If only one is available for a model, that single score is used. Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but <strong>not used in the main value calculation</strong> — they can't fairly compare across model generations.</p>
+    </div>
+</section>
+
+<!-- SUBSCRIPTION MEASUREMENT -->
+<section class="section" id="subscription-method" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag purple">💳 How we measure subscription quotas</div>
+        <div class="section-title">Providers don't publish token limits. We measure them.</div>
+        <p style="font-size:0.95rem;color:var(--muted);max-width:620px;margin-top:0.25rem">Neither OpenAI nor Anthropic publish exact daily token quotas for subscriptions. Both use rolling 5-hour windows and weekly limits expressed as percentages — not absolute numbers. So we measure empirically.</p>
+    </div>
+
+    <div class="formula-grid fade-up" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="formula-card">
+            <h4 style="color:var(--blue)">1. Run a standardized task</h4>
+            <p style="font-size:0.78rem;color:var(--muted);line-height:1.65">We run the same coding task (doubly-linked list + 10 tests) through Codex CLI or Claude Code with <code>--json</code> output, which gives <strong>exact token counts</strong> per API turn — input, cached, output, and reasoning tokens.</p>
+        </div>
+        <div class="formula-card">
+            <h4 style="color:var(--green)">2. Read quota before &amp; after</h4>
+            <p style="font-size:0.78rem;color:var(--muted);line-height:1.65">The CLI's <code>/status</code> command shows your 5-hour and weekly limits as percentages. We record these before and after the task. The delta tells us what fraction of the quota our known token count consumed.</p>
+        </div>
+        <div class="formula-card">
+            <h4 style="color:var(--purple)">3. Calculate total quota</h4>
+            <p style="font-size:0.78rem;color:var(--muted);line-height:1.65"><code>total_quota = tokens_consumed ÷ (pct_consumed / 100)</code><br>Example: 797K tokens consumed 12% of the 5h window → 5h quota ≈ 6.6M tokens. Weekly is the binding constraint → <strong>~1.9M tokens/day</strong> for ChatGPT Plus.</p>
+        </div>
+    </div>
+
+    <div class="fade-up" style="max-width:700px;margin:1.5rem auto 0;text-align:center">
+        <p style="font-size:0.78rem;color:var(--muted);line-height:1.65">
+            Token counts include system prompt (~70K), cached input, reasoning overhead, and tool calls — not just user-visible output.
+            Reasoning effort matters: <strong>xhigh uses 1.7× more tokens</strong> than medium for the same task.
+            <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/MEASUREMENT_METHODOLOGY.md" target="_blank" style="color:var(--blue)">Full methodology →</a>
+        </p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">
+            <strong>Help improve this data.</strong> Run <code>bash scripts/measure-codex-quota.sh</code> on your plan and
+            <a href="https://github.com/desktop-commander/llm-value-comparison/issues/new" target="_blank" style="color:var(--blue)">submit your results</a>.
+        </p>
     </div>
 </section>
 
