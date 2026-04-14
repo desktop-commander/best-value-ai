@@ -126,33 +126,49 @@ echo "BEFORE=$BEFORE_JSON"
 # STEP 2: RUN TASKS
 # ═══════════════════════════════════════
 echo ""
-echo "--- TASK: running until quota moves ---"
-echo "Claude tasks use ~17K tokens each. Running in batches until /status shows a change."
+echo "--- TASK: running parallel batches until quota moves ---"
+echo "Claude tasks use ~17K tokens each. Running in parallel to move the needle faster."
 PROMPT="Write a Python doubly-linked list with insert_head, insert_tail, delete_node, find, reverse, to_list. Include Node class, type hints, docstrings. Write exactly 10 pytest tests. Output only the code."
 TOTAL_IN=0; TOTAL_CACHED=0; TOTAL_OUT=0; TOTAL_DUR=0; RUNS=0
-MAX_RUNS=${MAX_RUNS:-200}
-CHECK_EVERY=${CHECK_EVERY:-10}
+MAX_BATCHES=${MAX_BATCHES:-20}
+PARALLEL=${PARALLEL:-10}
 MIN_PCT_CHANGE=${MIN_PCT_CHANGE:-1}
 
-# Get the BEFORE weekly % to compare against
+# Get BEFORE weekly % to compare against
 BEFORE_WEEKLY=$(echo "$BEFORE_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('weekly_all_pct_used', -1))")
 echo "Target: detect ≥${MIN_PCT_CHANGE}% weekly change from ${BEFORE_WEEKLY}%"
-echo "Will check /status every $CHECK_EVERY runs (max $MAX_RUNS runs)"
+echo "Parallel: $PARALLEL tasks per batch, max $MAX_BATCHES batches"
 echo ""
 
 cd "$WORK_DIR"
-for i in $(seq 1 $MAX_RUNS); do
-    JF="/tmp/claude_run_${TS}_${i}.json"
-    echo -n "  Run $i..."
+for batch in $(seq 1 $MAX_BATCHES); do
+    echo "  Batch $batch/$MAX_BATCHES ($PARALLEL parallel tasks)..."
     T0=$(date +%s)
-    echo "" | claude -p "$PROMPT" --output-format json > "$JF" 2>/dev/null || true
+
+    # Launch PARALLEL tasks in background
+    PIDS=""
+    for j in $(seq 1 $PARALLEL); do
+        RUN_NUM=$(( (batch-1)*PARALLEL + j ))
+        JF="/tmp/claude_run_${TS}_${RUN_NUM}.json"
+        (echo "" | claude -p "$PROMPT" --output-format json > "$JF" 2>/dev/null) &
+        PIDS="$PIDS $!"
+    done
+
+    # Wait for all to finish
+    for pid in $PIDS; do
+        wait $pid 2>/dev/null || true
+    done
+
     T1=$(date +%s)
     DUR=$((T1 - T0))
     TOTAL_DUR=$((TOTAL_DUR + DUR))
-    RUNS=$((RUNS + 1))
 
-    # Parse tokens
-    TOKS=$(python3 -c "
+    # Parse tokens from all runs in this batch
+    BATCH_TOTAL=0
+    for j in $(seq 1 $PARALLEL); do
+        RUN_NUM=$(( (batch-1)*PARALLEL + j ))
+        JF="/tmp/claude_run_${TS}_${RUN_NUM}.json"
+        TOKS=$(python3 -c "
 import json
 try:
     d=json.load(open('$JF'))
@@ -162,35 +178,35 @@ try:
     out=u.get('output_tokens',0)
     print(inp, cached, out)
 except: print('0 0 0')
-")
-    read ri rc ro <<< "$TOKS"
-    TOTAL_IN=$((TOTAL_IN + ri))
-    TOTAL_CACHED=$((TOTAL_CACHED + rc))
-    TOTAL_OUT=$((TOTAL_OUT + ro))
-    echo " ${DUR}s · tok=$((ri+ro)) · total=$((TOTAL_IN+TOTAL_OUT))"
+" 2>/dev/null)
+        read ri rc ro <<< "$TOKS"
+        TOTAL_IN=$((TOTAL_IN + ri))
+        TOTAL_CACHED=$((TOTAL_CACHED + rc))
+        TOTAL_OUT=$((TOTAL_OUT + ro))
+        BATCH_TOTAL=$((BATCH_TOTAL + ri + ro))
+        RUNS=$((RUNS + 1))
+    done
+    TOTAL=$((TOTAL_IN + TOTAL_OUT))
+    echo "    ${DUR}s · batch=$BATCH_TOTAL · total=$TOTAL · runs=$RUNS"
 
-    # Every CHECK_EVERY runs, check if quota has moved
-    if [ $((i % CHECK_EVERY)) -eq 0 ]; then
-        echo ""
-        echo "  --- Checking /status after $i runs ---"
-        MID="/tmp/claude_mid_${TS}_${i}.txt"
-        capture_status "CHECK-$i" "$MID"
-        MID_JSON=$(parse_status "$MID")
-        MID_WEEKLY=$(echo "$MID_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('weekly_all_pct_used', -1))")
-        DELTA=$((MID_WEEKLY - BEFORE_WEEKLY))
-        echo "  Weekly: ${BEFORE_WEEKLY}% → ${MID_WEEKLY}% (delta: ${DELTA}%)"
+    # Check /status after each batch
+    echo "    Checking /status..."
+    MID="/tmp/claude_mid_${TS}_b${batch}.txt"
+    capture_status "CHECK-b$batch" "$MID"
+    MID_JSON=$(parse_status "$MID")
+    MID_WEEKLY=$(echo "$MID_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('weekly_all_pct_used', -1))")
+    DELTA=$((MID_WEEKLY - BEFORE_WEEKLY))
+    echo "    Weekly: ${BEFORE_WEEKLY}% → ${MID_WEEKLY}% (delta: ${DELTA}%)"
 
-        if [ "$DELTA" -ge "$MIN_PCT_CHANGE" ] 2>/dev/null; then
-            echo "  ✓ Quota moved by ${DELTA}% — enough for estimate!"
-            # Save this as the AFTER
-            AFTER_JSON="$MID_JSON"
-            AFTER_CAPTURED=1
-            break
-        else
-            echo "  Not enough change yet, continuing..."
-        fi
-        echo ""
+    if [ "$DELTA" -ge "$MIN_PCT_CHANGE" ] 2>/dev/null; then
+        echo "    ✓ Quota moved by ${DELTA}% — enough for estimate!"
+        AFTER_JSON="$MID_JSON"
+        AFTER_CAPTURED=1
+        break
+    else
+        echo "    Not enough change yet, continuing..."
     fi
+    echo ""
 done
 TOTAL=$((TOTAL_IN + TOTAL_OUT))
 echo ""
