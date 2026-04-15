@@ -1,0 +1,47 @@
+{
+  "tool": "codex-cli",
+  "version": "codex-cli 0.120.0",
+  "plan": "wonderwhy.er@gmail.com (Plus)",
+  "model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+  "timestamp": "2026-04-13T20:37:01Z",
+  "task": "doubly-linked-list-with-tests",
+  "task_duration_seconds": 396,
+  "tokens": {
+    "input": 2619014,
+    "cached": 2229504,
+    "output": 12969,
+    "total": 2631983,
+    "num_runs": 5
+  },
+  "quota_before": {
+    "5h_pct_left": 96,
+    "weekly_pct_left": 91,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "model": "gpt-5.4 (reasoning xhigh, summaries auto)"
+  },
+  "quota_after": {
+    "5h_pct_left": 86,
+    "weekly_pct_left": 89,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "model": "gpt-5.4 (reasoning xhigh, summaries auto)"
+  },
+  "quota_consumed": {
+    "5h_pct": 10,
+    "weekly_pct": 2
+  },
+  "estimates": {
+    "5h_window_tokens": 26319830,
+    "5h_readable": "~26.3M tokens per 5h window",
+    "weekly_tokens": 131599150,
+    "daily_tokens": 18799878,
+    "weekly_readable": "~131.6M tokens per week",
+    "daily_readable": "~18.8M tokens per day",
+    "binding_constraint": "weekly",
+    "effective_daily": 18799878
+  },
+  "raw_files": {
+    "before_screen": "/tmp/codex_before_20260413_232840.txt",
+    "after_screen": "/tmp/codex_after_20260413_232840.txt",
+    "task_jsonl": "/tmp/codex_task_20260413_232840_run5.jsonl"
+  }
+}

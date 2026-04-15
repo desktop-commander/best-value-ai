@@ -89,7 +89,12 @@ if m: d['5h_pct_left'] = int(m.group(1))
 m = re.search(r'Weekly limit:.*?(\d+)%\s*left', text)
 if m: d['weekly_pct_left'] = int(m.group(1))
 m = re.search(r'Account:\s*(.*?)(?:\n|│)', text)
-if m: d['account'] = m.group(1).strip()
+if m:
+    acct = m.group(1).strip()
+    d['account'] = acct
+    # Extract plan name: 'user@email.com (Plus)' → 'Plus'
+    pm = re.search(r'\((\w+)\)', acct)
+    if pm: d['plan'] = pm.group(1)
 m = re.search(r'Model:\s*(.*?)(?:\n|│)', text)
 if m: d['model'] = m.group(1).strip()
 print(json.dumps(d))
@@ -210,7 +215,8 @@ else:
 
 result = {
     'tool': 'codex-cli', 'version': '$VER',
-    'plan': after.get('account', before.get('account', 'unknown')),
+    'plan': after.get('plan', before.get('plan', 'unknown')),
+    'account': after.get('account', before.get('account', 'unknown')),
     'model': after.get('model', before.get('model', 'unknown')),
     'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     'task': 'doubly-linked-list-with-tests',

@@ -1,0 +1,35 @@
+{
+  "tool": "codex-cli",
+  "version": "0.120.0",
+  "model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+  "plan": "Plus ($20/mo)",
+  "account": "wonderwhy.er@gmail.com",
+  "timestamp": "2026-04-13T18:30:00Z",
+  "measurement_method": "tmux + pexpect for /status, --json JSONL for token counts",
+  "runs": [
+    {"name": "hello-world", "reasoning": "xhigh", "input": 69936, "cached": 3456, "output": 87, "total": 70023},
+    {"name": "linked-list-tests", "reasoning": "xhigh", "input": 361912, "cached": 293760, "output": 8177, "total": 370089},
+    {"name": "linked-list-tests", "reasoning": "medium", "input": 211972, "cached": 145152, "output": 3073, "total": 215045},
+    {"name": "status-prompt-overhead", "reasoning": "xhigh", "input": 140709, "cached": 73984, "output": 987, "total": 141696}
+  ],
+  "quota_before": {"5h_pct_left": 100, "weekly_pct_left": 100},
+  "quota_after": {"5h_pct_left": 88, "weekly_pct_left": 94},
+  "total_tokens_consumed": 796853,
+  "quota_consumed": {"5h_pct": 12, "weekly_pct": 6},
+  "estimates": {
+    "5h_window_tokens": 6640442,
+    "weekly_tokens": 13280883,
+    "daily_tokens_effective": 1897269,
+    "binding_constraint": "weekly",
+    "5h_readable": "~6.6M tokens per 5h window",
+    "weekly_readable": "~13.3M tokens per week",
+    "daily_readable": "~1.9M tokens per day (weekly / 7)"
+  },
+  "notes": [
+    "Token counts include system prompt (~70K), cached input, reasoning tokens, and all tool call overhead",
+    "xhigh reasoning uses ~1.7x more tokens than medium for the same task",
+    "The 5h window allows ~8 real coding tasks, but weekly limit caps total to ~19 tasks/week",
+    "These are raw tokens consumed against quota, not user-visible output tokens only",
+    "Our formula currently has tokensPerDay: 8,192,000 — real measurement shows ~1.9M"
+  ]
+}

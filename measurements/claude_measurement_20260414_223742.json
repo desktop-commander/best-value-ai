@@ -1,0 +1,33 @@
+{
+  "tool": "claude-code",
+  "version": "2.0.36 (Claude Code)",
+  "plan": "Claude Max",
+  "model": "Sonnet 4.5",
+  "timestamp": "2026-04-14T19:38:37Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 1,
+  "duration_seconds": 16,
+  "tokens": {
+    "input": 15332,
+    "cached": 15330,
+    "output": 1482,
+    "total": 16814
+  },
+  "quota_before": {
+    "session_pct_used": 14,
+    "weekly_all_pct_used": 39,
+    "model": "Sonnet 4.5",
+    "plan": "Claude Max"
+  },
+  "quota_after": {
+    "session_pct_used": 14,
+    "weekly_all_pct_used": 39,
+    "model": "Sonnet 4.5",
+    "plan": "Claude Max"
+  },
+  "quota_consumed": {
+    "session_pct": 0,
+    "weekly_all_pct": 0
+  },
+  "estimates": {}
+}
