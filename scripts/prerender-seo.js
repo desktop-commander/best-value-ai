@@ -242,6 +242,50 @@ html = html.replace(
   `Updated automatically · ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`
 );
 
+// Pre-render measurement results table
+const MEAS_DIR = path.join(REPO, 'measurements');
+const measFiles = fs.readdirSync(MEAS_DIR).filter(f => f.endsWith('.json'));
+const measByPlan = {};
+for (const f of measFiles) {
+  try {
+    const d = JSON.parse(fs.readFileSync(path.join(MEAS_DIR, f)));
+    let plan = d.plan || 'unknown';
+    const pm = plan.match(/\((\w+)\)$/); if (pm) plan = pm[1];
+    const pm2 = plan.match(/^(\w[\w\s]*?)\s*\(/); if (pm2) plan = pm2[1];
+    const est = d.estimates || {};
+    const d5 = d.quota_consumed?.['5h_pct'] || 0;
+    const dw = d.quota_consumed?.weekly_pct || d.quota_consumed?.weekly_all_pct || 0;
+    const delta = Math.max(d5, dw);
+    if (!measByPlan[plan]) measByPlan[plan] = [];
+    measByPlan[plan].push({ file: f, plan, tool: d.tool, model: d.model, ts: d.timestamp, est5h: est['5h_tokens'], estWeekly: est.weekly_tokens, estDaily: est.daily_tokens || est.daily_tokens_effective, delta, d5, dw, runs: d.num_runs, tokens: d.tokens?.total });
+  } catch(e) {}
+}
+
+// Build table HTML — show best measurement per plan
+let measHtml = '<table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Δ%</th><th>5h window</th><th>Daily est</th><th>Confidence</th></tr></thead><tbody>';
+for (const [plan, ms] of Object.entries(measByPlan).sort()) {
+  ms.sort((a, b) => b.delta - a.delta);
+  const b = ms[0];
+  const conf = b.delta >= 20 ? '🟢 high' : b.delta >= 10 ? '🟡 medium' : '🔴 low';
+  const h5 = b.est5h ? `${(b.est5h/1e6).toFixed(1)}M` : '—';
+  const daily = b.estDaily ? `${(b.estDaily/1e6).toFixed(1)}M` : '—';
+  const dt = b.ts ? b.ts.split('T')[0] : '?';
+  const tool = b.tool === 'codex-cli' ? 'Codex' : b.tool === 'claude-code' ? 'Claude' : b.tool;
+  measHtml += `<tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">${plan}</td><td>${tool}</td><td>${dt}</td><td>${b.runs || '?'}</td><td>${b.d5}%/${b.dw}%</td><td>${h5}</td><td>${daily}</td><td>${conf}</td></tr>`;
+}
+measHtml += '</tbody></table>';
+
+// Replace measurement results placeholder
+html = html.replace(
+  /<div id="measurementResults"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
+  `<div id="measurementResults" class="fade-up" style="max-width:750px;margin:1.5rem auto 0">
+        <h4 style="font-size:0.85rem;color:var(--text);margin-bottom:0.75rem;text-align:center">📊 Our measurements</h4>
+        ${measHtml}
+        <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Δ% = 5h/weekly quota consumed. Higher = more reliable. <a href="https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
+    </div>`
+);
+console.log(`  ✓ Measurements: ${Object.keys(measByPlan).length} plans from ${measFiles.length} files`);
+
 fs.writeFileSync(path.join(REPO, 'index.html'), html);
 
 console.log(`Pre-rendered SEO content into index.html:`);
