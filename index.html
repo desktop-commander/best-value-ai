@@ -1152,7 +1152,10 @@
         <table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Δ%</th><th>5h window</th><th>Daily est</th><th>Confidence</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Business</td><td>Codex</td><td>2026-04-15</td><td>5</td><td>21%/4%</td><td>11.4M</td><td>8.6M</td><td>🟢 high</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Claude Max</td><td>Claude</td><td>2026-04-14</td><td>1</td><td>0%/0%</td><td>—</td><td>—</td><td>🔴 low</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Plus</td><td>Codex</td><td>2026-04-13</td><td>?</td><td>12%/6%</td><td>—</td><td>1.9M</td><td>🟡 medium</td></tr></tbody></table>
         <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Δ% = 5h/weekly quota consumed. Higher = more reliable. <a href="https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
     </div>
-        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">
+    <!-- /measurementResults -->
+
+    <div class="fade-up" style="max-width:700px;margin:1rem auto 0;text-align:center">
+        <p style="font-size:0.78rem;color:var(--muted)">
             <strong>Help improve this data.</strong> Run <code>bash scripts/measure-codex-quota.sh</code> on your plan and
             <a href="https://github.com/desktop-commander/llm-value-comparison/issues/new" target="_blank" style="color:var(--blue)">submit your results</a>.
         </p>
@@ -1176,7 +1179,7 @@
     <!-- CALCULATOR -->
     <div id="tab-calculator" class="tab-content active">
         <div class="warning-box">
-            ⚠️ <strong>Subscription token limits are estimated</strong> — providers don't publish exact numbers. Local values depend on hardware selection.
+            ⚠️ Subscription token limits are <a href="#subscription-method" style="color:inherit;text-decoration:underline"><strong>empirically measured</strong></a> — providers don't publish exact numbers. Local values depend on hardware selection.
         </div>
         <div class="settings-bar">
             <div class="setting-group">

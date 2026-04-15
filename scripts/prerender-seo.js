@@ -276,14 +276,18 @@ for (const [plan, ms] of Object.entries(measByPlan).sort()) {
 measHtml += '</tbody></table>';
 
 // Replace measurement results placeholder
-html = html.replace(
-  /<div id="measurementResults"[^>]*>[\s\S]*?<\/div>\s*<\/div>/,
-  `<div id="measurementResults" class="fade-up" style="max-width:750px;margin:1.5rem auto 0">
+// Use a marker comment to safely find the end of the section
+const measStart = html.indexOf('<div id="measurementResults"');
+const measEnd = html.indexOf('<!-- /measurementResults -->', measStart);
+if (measStart !== -1 && measEnd !== -1) {
+  const measReplacement = `<div id="measurementResults" class="fade-up" style="max-width:750px;margin:1.5rem auto 0">
         <h4 style="font-size:0.85rem;color:var(--text);margin-bottom:0.75rem;text-align:center">📊 Our measurements</h4>
         ${measHtml}
         <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Δ% = 5h/weekly quota consumed. Higher = more reliable. <a href="https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
-    </div>`
-);
+    </div>
+    <!-- /measurementResults -->`;
+  html = html.substring(0, measStart) + measReplacement + html.substring(measEnd + '<!-- /measurementResults -->'.length);
+}
 console.log(`  ✓ Measurements: ${Object.keys(measByPlan).length} plans from ${measFiles.length} files`);
 
 fs.writeFileSync(path.join(REPO, 'index.html'), html);
