@@ -41,6 +41,9 @@ capture_status() {
         sleep 5
     fi
 
+    # Capture welcome screen for plan/model info before navigating away
+    tmux capture-pane -t "$SN" -p > "/tmp/claude_welcome_${TS}.txt"
+
     echo "$label: sending Escape..."
     tmux send-keys -t "$SN" Escape
     sleep 1
@@ -97,7 +100,7 @@ capture_status() {
 # ── Function: parse Claude usage from captured screen ──
 parse_status() {
     python3 -c "
-import re, json
+import re, json, os
 text = open('$1').read()
 d = {}
 m = re.search(r'Current session.*?(\d+)%\s*used', text, re.DOTALL)
@@ -106,9 +109,13 @@ m = re.search(r'Current week \(all models\).*?(\d+)%\s*used', text, re.DOTALL)
 if m: d['weekly_all_pct_used'] = int(m.group(1))
 m = re.search(r'Current week \(Sonnet only\).*?(\d+)%\s*used', text, re.DOTALL)
 if m: d['weekly_sonnet_pct_used'] = int(m.group(1))
-# Try to get plan from the welcome screen or status
-m = re.search(r'(Sonnet|Opus)\s+[\d.]+\s*·\s*(Claude (?:Pro|Max))', text)
-if m: d['model'] = m.group(0).split('·')[0].strip(); d['plan'] = m.group(2)
+# Read plan/model from welcome screen
+wf = '/tmp/claude_welcome_${TS}.txt'
+if os.path.exists(wf):
+    wt = open(wf).read()
+    # Welcome screen shows 'Sonnet 4.5 · Claude Max' or 'Opus 4.6 · Claude Pro'
+    m = re.search(r'((?:Sonnet|Opus|Haiku)\s+[\d.]+)\s*·\s*(Claude (?:Pro|Max))', wt)
+    if m: d['model'] = m.group(1); d['plan'] = m.group(2)
 print(json.dumps(d))
 "
 }

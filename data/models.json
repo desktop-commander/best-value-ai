@@ -29,10 +29,10 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 3200000,
+        "tokensPerDay": 29018257,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
-        "source": "https://a16z.com/state-of-ai/"
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
@@ -535,10 +535,10 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 3200000,
+        "tokensPerDay": 29018257,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
-        "source": "https://a16z.com/state-of-ai/"
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
@@ -722,10 +722,10 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 3200000,
+        "tokensPerDay": 29018257,
         "confidence": "low",
-        "notes": "5× Pro limits. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
-        "source": "https://www.anthropic.com/pricing"
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
