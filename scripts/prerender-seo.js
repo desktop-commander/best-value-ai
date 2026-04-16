@@ -314,6 +314,8 @@ for (const f of measFiles) {
   } catch(e) {}
 }
 // Inject into HTML before closing </body>
+// First strip any existing MEASUREMENT_TIMELINE scripts (prevent duplicates on re-run)
+html = html.replace(/<script>window\.MEASUREMENT_TIMELINE=[^<]*<\/script>\n?/g, '');
 const measTimelineJson = JSON.stringify(measTimeline);
 html = html.replace('</body>', `<script>window.MEASUREMENT_TIMELINE=${measTimelineJson};</script>\n</body>`);
 

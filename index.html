@@ -888,13 +888,14 @@
 <body>
 
 <nav class="nav">
-    <a class="nav-brand" href="#"><em>LLM</em> Value</a>
+    <a class="nav-brand" href="#" style="display:flex;align-items:center;gap:0.5rem"><img src="favicon-source.png" alt="" width="26" height="26" style="border-radius:6px"><span><em>LLM</em> Value</span></a>
     <div class="nav-links">
         <a href="#winners">🏆 Best value</a>
         <a href="#explore">📊 Compare</a>
         <a href="#how">📐 Method</a>
         <a href="#benchmarks">📏 Benchmarks</a>
         <a href="#subscription-method">💳 Measurements</a>
+        <a href="#raw-data">📋 Data</a>
     </div>
     <div class="nav-right">
         <a class="nav-cta" href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">
@@ -904,10 +905,13 @@
     </div>
 </nav>
 
+<main>
+
 <!-- HERO -->
 <div class="hero-wrap dot-bg">
 <div class="container">
     <div class="hero">
+        <img src="favicon-source.png" alt="LLM Value Calculator" width="96" height="96" style="margin:0 auto 1rem;display:block;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08)">
         <div class="tag blue">Updated automatically · April 2026</div>
         <h1>LLM Value<br><em>Calculator</em></h1>
         <p class="hero-sub">Quality-adjusted tokens per dollar — local hardware, subscriptions, and API in one number. Find the best deal for your use case.</p>
@@ -988,12 +992,12 @@
 <section class="section" id="how" style="scroll-margin-top:60px">
     <div class="section-header fade-up">
         <div class="tag purple">📐 How we calculate this</div>
-        <div class="section-title">One number. Three categories.</div>
+        <h2 class="section-title">One number. Three categories.</h2>
         <p>Not all tokens are equal — a token from a smarter model is worth more. We multiply raw token volume by quality score and divide by cost. The result: <strong>quality-adjusted tokens per dollar</strong> — one metric that puts a $3,500 GPU, a $20/month plan, and a $0.07/M API on the same axis.</p>
     </div>
     <div class="formula-grid">
         <div class="formula-card fc-local">
-            <h4>🖥️ Local Hardware</h4>
+            <h3>🖥️ Local Hardware</h3>
             <div class="formula-box">
                 <span class="fv-block"><span class="fv-var fv-local">tok/s</span> × hours/day × 365 × years</span>
                 <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
@@ -1004,7 +1008,7 @@
             <p class="formula-note">One-time hardware cost amortized over 3 years. tok/s measured per model + hardware combo.</p>
         </div>
         <div class="formula-card fc-sub">
-            <h4>💳 Subscription</h4>
+            <h3>💳 Subscription</h3>
             <div class="formula-box">
                 <span class="fv-block"><span class="fv-var fv-sub">tokens/week limit</span> × 4</span>
                 <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
@@ -1015,7 +1019,7 @@
             <p class="formula-note">⚠️ Token limits are <a href="#subscription-method" style="color:inherit">empirically measured</a> — providers don't publish exact numbers.</p>
         </div>
         <div class="formula-card fc-api">
-            <h4>🔌 API (pay per token)</h4>
+            <h3>🔌 API (pay per token)</h3>
             <div class="formula-box">
                 <span class="fv-block">1,000,000 tokens</span>
                 <span class="fv-block" style="padding-left:1rem"><span class="fv-op">×</span> <span class="fv-var fv-qual">quality %</span></span>
@@ -1035,7 +1039,7 @@
 <section class="section" id="explore" style="scroll-margin-top:60px">
     <div class="section-header fade-up">
         <div class="tag blue">📊 Full data</div>
-        <div class="section-title">Explore the numbers</div>
+        <h2 class="section-title">Explore the numbers</h2>
     </div>
 
     <!-- RANKING (was Calculator) -->
@@ -1052,11 +1056,11 @@
         </div>
         <div class="settings-bar">
             <div class="setting-group">
-                <label>Hours / day (local)</label>
+                <label for="hoursPerDay">Hours / day (local)</label>
                 <input type="number" id="hoursPerDay" value="16" min="1" max="24" style="width:64px">
             </div>
             <div class="setting-group">
-                <label>Amortization</label>
+                <label for="periodYears">Amortization</label>
                 <select id="periodYears">
                     <option value="1">1 year</option>
                     <option value="2">2 years</option>
@@ -1065,11 +1069,11 @@
                 </select>
             </div>
             <div class="setting-group">
-                <label>Benchmark</label>
+                <label for="benchmark">Benchmark</label>
                 <select id="benchmark"></select>
             </div>
             <div class="setting-group">
-                <label>In/Out ratio</label>
+                <label for="ioRatio">In/Out ratio</label>
                 <select id="ioRatio">
                     <option value="0.75">General (75/25)</option>
                     <option value="0.90">Coding (90/10)</option>
@@ -1078,7 +1082,7 @@
                 </select>
             </div>
             <div class="setting-group">
-                <label>Show</label>
+                <label for="typeFilter">Show</label>
                 <select id="typeFilter">
                     <option value="all">All types</option>
                     <option value="api">🔌 API only</option>
@@ -1263,25 +1267,25 @@
     <div id="tab-compare" class="tab-content">
         <div class="cmp-pickers">
             <div class="cmp-picker-col side-a">
-                <label>Model A</label>
-                <select id="cmpTypeA" style="margin-bottom:0.4rem">
+                <label for="cmpTypeA">Model A</label>
+                <select id="cmpTypeA" style="margin-bottom:0.4rem" aria-label="Model A type">
                     <option value="all">All types</option>
                     <option value="subscription" selected>💳 Subscription</option>
                     <option value="api">🔌 API</option>
                     <option value="local">🖥️ Local</option>
                 </select>
-                <select id="cmpA"></select>
+                <select id="cmpA" aria-label="Model A selection"></select>
             </div>
             <div class="cmp-vs">VS</div>
             <div class="cmp-picker-col side-b">
-                <label>Model B</label>
-                <select id="cmpTypeB" style="margin-bottom:0.4rem">
+                <label for="cmpTypeB">Model B</label>
+                <select id="cmpTypeB" style="margin-bottom:0.4rem" aria-label="Model B type">
                     <option value="all">All types</option>
                     <option value="subscription">💳 Subscription</option>
                     <option value="api">🔌 API</option>
                     <option value="local" selected>🖥️ Local</option>
                 </select>
-                <select id="cmpB"></select>
+                <select id="cmpB" aria-label="Model B selection"></select>
             </div>
         </div>
         <div id="cmpVerdict" class="cmp-verdict" style="display:none"></div>
@@ -1292,63 +1296,35 @@
     <h3 class="section-subhead">📈 Timeline — how value has changed over time</h3>
     <div id="tab-chart" class="tab-content">
         <div class="chart-card">
-            <h2>Value over time by provider</h2>
+            <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Value over time by provider</h3>
             <div class="chart-controls">
-                <select id="chartBenchmark"></select>
-                <select id="chartType">
+                <select id="chartBenchmark" aria-label="Benchmark for chart"></select>
+                <select id="chartType" aria-label="Filter chart by type">
                     <option value="all">All types</option>
                     <option value="api">API only</option>
                     <option value="local">Local only</option>
                     <option value="subscription">Subscription only</option>
                 </select>
-                <select id="chartProvider"><option value="all">All providers</option></select>
+                <select id="chartProvider" aria-label="Filter chart by provider"><option value="all">All providers</option></select>
             </div>
             <div class="chart-wrapper"><canvas id="valueChart"></canvas></div>
         </div>
 
         <!-- Subscription tokens timeline -->
         <div class="chart-card" style="margin-top:1.5rem">
-            <h2>Subscription tokens over time</h2>
+            <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Subscription tokens over time</h3>
             <p style="font-size:0.78rem;color:var(--muted);margin-top:-0.25rem;margin-bottom:0.75rem">How many tokens each plan gives you per day, based on our <a href="#subscription-method" style="color:var(--blue)">empirical measurements</a>.</p>
             <div class="chart-wrapper"><canvas id="subTokensChart"></canvas></div>
         </div>
     </div>
 
-    <!-- RAW DATA -->
-    <h3 class="section-subhead">📋 Raw data — all models, hardware, and subscriptions</h3>
-    <div id="tab-data" class="tab-content">
-        <div class="data-table-section">
-            <h3>🤖 Models <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableModels"><thead><tr><th>Model</th><th>Provider</th><th>Release</th><th>Card</th></tr></thead><tbody></tbody></table>
-        </div>
-        <div class="data-table-section">
-            <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena Text ELO</th><th>Arena Code ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
-        </div>
-        <div class="data-table-section">
-            <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableApi"><thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>tok/s</th><th>Source</th></tr></thead><tbody></tbody></table>
-        </div>
-        <div class="data-table-section">
-            <h3>🖥️ Local Performance <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableLocal"><thead><tr><th>Model</th><th>Hardware</th><th>Tok/s</th><th>Quant</th><th>VRAM</th><th>Source</th></tr></thead><tbody></tbody></table>
-        </div>
-        <div class="data-table-section">
-            <h3>💳 Subscriptions <span style="color:var(--red);font-size:0.7rem;font-weight:400">(⚠️ Estimated)</span> <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/week</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
-        </div>
-        <div class="data-table-section">
-            <h3>🔧 Hardware <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableHardware"><thead><tr><th>Hardware</th><th>Price</th><th>VRAM</th><th>Year</th><th>Source</th></tr></thead><tbody></tbody></table>
-        </div>
-    </div>
 </section>
 
 <!-- BENCHMARKS EXPLAINER -->
 <section class="section" id="benchmarks" style="scroll-margin-top:60px">
     <div class="section-header fade-up">
         <div class="tag red">📏 Why benchmarks are hard</div>
-        <div class="section-title">Not all benchmarks age equally.</div>
+        <h2 class="section-title">Not all benchmarks age equally.</h2>
         <p>Comparing GPT-3.5 to GPT-5.4 using benchmark scores sounds simple. It isn't. The tests used to measure models in 2023 are mostly useless today — either saturated or discontinued. This matters for any long-term value comparison.</p>
     </div>
 
@@ -1443,7 +1419,7 @@
 <section class="section" id="subscription-method" style="scroll-margin-top:60px">
     <div class="section-header fade-up">
         <div class="tag purple">💳 How we measure subscription quotas</div>
-        <div class="section-title">Providers don't publish token limits. We measure them.</div>
+        <h2 class="section-title">Providers don't publish token limits. We measure them.</h2>
         <p style="font-size:0.95rem;color:var(--muted);max-width:620px;margin-top:0.25rem">Neither OpenAI nor Anthropic publish exact daily token quotas for subscriptions. Both use rolling 5-hour windows and weekly limits expressed as percentages — not absolute numbers. So we measure empirically.</p>
     </div>
 
@@ -1485,6 +1461,43 @@
         </p>
     </div>
 </section>
+
+<!-- RAW DATA (moved to end) -->
+<section class="section" id="raw-data" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag blue">📋 Raw data</div>
+        <h2 class="section-title">All the data, all the tables</h2>
+    </div>
+    <!-- RAW DATA -->
+    <h3 class="section-subhead">📋 Raw data — all models, hardware, and subscriptions</h3>
+    <div id="tab-data" class="tab-content">
+        <div class="data-table-section">
+            <h3>🤖 Models <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableModels"><thead><tr><th>Model</th><th>Provider</th><th>Release</th><th>Card</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>📊 Benchmarks <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableBenchmarks"><thead><tr><th>Model</th><th>AA Intelligence</th><th>Arena Text ELO</th><th>Arena Code ELO</th><th>SWE-bench</th><th>Aider</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔌 API Pricing <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableApi"><thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>tok/s</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🖥️ Local Performance <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableLocal"><thead><tr><th>Model</th><th>Hardware</th><th>Tok/s</th><th>Quant</th><th>VRAM</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>💳 Subscriptions <span style="color:var(--red);font-size:0.7rem;font-weight:400">(⚠️ Estimated)</span> <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/week</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="data-table-section">
+            <h3>🔧 Hardware <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" target="_blank">Edit on GitHub ↗</a></h3>
+            <table class="data-table" id="tableHardware"><thead><tr><th>Hardware</th><th>Price</th><th>VRAM</th><th>Year</th><th>Source</th></tr></thead><tbody></tbody></table>
+        </div>
+    </div>
+</section>
+
 </div><!-- /container (wraps #how + #explore + #benchmarks + #subscription-method) -->
 
 <!-- DATA ACCESS + CONTRIBUTE -->
@@ -1516,12 +1529,14 @@
 </div>
 </div>
 
-<div class="footer container">
+</main>
+
+<footer class="footer container">
     Supported by <a href="https://desktopcommander.app" target="_blank"><strong>Desktop Commander</strong></a> ·
     <a href="https://github.com/desktop-commander/llm-value-comparison" target="_blank">GitHub</a> ·
     <a href="https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7" target="_blank">Original article</a> ·
     <a href="https://github.com/desktop-commander/llm-value-comparison/blob/master/LICENSE" target="_blank">Apache 2.0</a>
-</div>
+</footer>
 
 <script>
 let DATA = { models:{}, hardware:{}, benchmarks:{} };
@@ -1779,6 +1794,13 @@ function init(){
   document.getElementById('cmpA').addEventListener('change', renderCompare);
   document.getElementById('cmpB').addEventListener('change', renderCompare);
   setCompareDefaults();
+
+  // Tabs are unpacked — render all sections explicitly on load
+  requestAnimationFrame(() => {
+    renderCompare();
+    updateChart();
+    updateSubTokensChart();
+  });
   // scroll animations
   const obs = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -2243,14 +2265,13 @@ function renderCompare() {
 }
 
 // Global tab switch function (called from hero question cards)
-// Can optionally set compare models: switchTab('compare', 'model-a-id', 'model-b-id')
+// Now that tabs are unpacked, this just scrolls to the target section.
 function switchTab(tabName, modelA, modelB) {
-  setTimeout(() => {
-    if (modelA && document.getElementById('cmpA')) document.getElementById('cmpA').value = modelA;
-    if (modelB && document.getElementById('cmpB')) document.getElementById('cmpB').value = modelB;
-    const tab = document.querySelector(`.tab[data-tab="${tabName}"]`);
-    if (tab) tab.click();
-  }, 100);
+  if (modelA && document.getElementById('cmpA')) { document.getElementById('cmpA').value = modelA; renderCompare(); }
+  if (modelB && document.getElementById('cmpB')) { document.getElementById('cmpB').value = modelB; renderCompare(); }
+  const sectionMap = { calculator: 'ranking-section', compare: 'explore', chart: 'explore', data: 'raw-data' };
+  const target = document.getElementById(sectionMap[tabName] || tabName);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Find best model in each category and set compare defaults + update hero card
@@ -2298,17 +2319,6 @@ function setCompareDefaults() {
 
 loadData();
 </script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max","date":"2026-04-16","daily":29018257,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","daily":29018257,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","daily":29018257,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","daily":29018257,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","daily":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","daily":29018257,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","daily":1193388,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","daily":18799878,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","daily":15784935,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","daily":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","daily":8586860,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","daily":9810176,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","daily":39622342,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","daily":1897269,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","weekly":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","weekly":60108025,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","weekly":68671233,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","weekly":277356400,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","weekly":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","weekly":60108025,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","weekly":68671233,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","weekly":277356400,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":12}];</script>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","weekly":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","weekly":60108025,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","weekly":68671233,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","weekly":277356400,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":12}];</script>
 <!-- SEO: Pre-rendered 2026-04-16 from 34 models -->
 <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
 <h2>Best Value AI Models — 2026-04-16</h2>
