@@ -1,7 +1,7 @@
 {
   "tool": "claude-code",
   "version": "2.1.107 (Claude Code)",
-  "plan": "Claude Max",
+  "plan": "Claude Max 20x",
   "model": "Sonnet 4.5",
   "timestamp": "2026-04-16T04:56:49Z",
   "task": "doubly-linked-list-with-tests",

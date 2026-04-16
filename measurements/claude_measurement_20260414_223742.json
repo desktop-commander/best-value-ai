@@ -1,7 +1,7 @@
 {
   "tool": "claude-code",
   "version": "2.0.36 (Claude Code)",
-  "plan": "Claude Max",
+  "plan": "Claude Max 20x",
   "model": "Sonnet 4.5",
   "timestamp": "2026-04-14T19:38:37Z",
   "task": "doubly-linked-list-with-tests",
@@ -17,13 +17,13 @@
     "session_pct_used": 14,
     "weekly_all_pct_used": 39,
     "model": "Sonnet 4.5",
-    "plan": "Claude Max"
+    "plan": "Claude Max 20x"
   },
   "quota_after": {
     "session_pct_used": 14,
     "weekly_all_pct_used": 39,
     "model": "Sonnet 4.5",
-    "plan": "Claude Max"
+    "plan": "Claude Max 20x"
   },
   "quota_consumed": {
     "session_pct": 0,
