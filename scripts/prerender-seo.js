@@ -80,8 +80,8 @@ Object.values(models).forEach(model => {
   // Subscriptions
   if (model.subscriptions) {
     Object.values(model.subscriptions).forEach(sub => {
-      if (!sub.tokensPerDay) return;
-      const val = (sub.tokensPerDay * 365 * YEARS * (np/100)) / (sub.monthlyPrice * 12 * YEARS);
+      if (!sub.tokensPerWeek) return;
+      const val = (sub.tokensPerWeek * 4 * (np/100)) / sub.monthlyPrice;
       results.push({ model: model.name, type: 'Subscription', val, score: np,
         detail: `${sub.name} · $${sub.monthlyPrice}/mo`, subName: sub.name });
     });
@@ -262,16 +262,17 @@ for (const f of measFiles) {
 }
 
 // Build table HTML — show best measurement per plan
-let measHtml = '<table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Quota used</th><th>5h window</th><th>Daily est</th><th>Confidence</th></tr></thead><tbody>';
+let measHtml = '<table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Quota used</th><th>5h window</th><th>Weekly est</th><th>Confidence</th></tr></thead><tbody>';
 for (const [plan, ms] of Object.entries(measByPlan).sort()) {
   ms.sort((a, b) => b.delta - a.delta);
   const b = ms[0];
   const conf = b.delta >= 20 ? '🟢 high' : b.delta >= 10 ? '🟡 medium' : '🔴 low';
   const h5 = b.est5h ? `${(b.est5h/1e6).toFixed(1)}M` : '—';
   const daily = b.estDaily ? `${(b.estDaily/1e6).toFixed(1)}M` : '—';
+  const weekly = b.estWeekly ? `${(b.estWeekly/1e6).toFixed(0)}M` : '—';
   const dt = b.ts ? b.ts.split('T')[0] : '?';
   const tool = b.tool === 'codex-cli' ? 'Codex' : b.tool === 'claude-code' ? 'Claude' : b.tool;
-  measHtml += `<tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">${plan}</td><td>${tool}</td><td>${dt}</td><td>${b.runs || '?'}</td><td>5h:${b.d5}% wk:${b.dw}%</td><td>${h5}</td><td>${daily}</td><td>${conf}</td></tr>`;
+  measHtml += `<tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">${plan}</td><td>${tool}</td><td>${dt}</td><td>${b.runs || '?'}</td><td>5h:${b.d5}% wk:${b.dw}%</td><td>${h5}</td><td>${weekly}</td><td>${conf}</td></tr>`;
 }
 measHtml += '</tbody></table>';
 

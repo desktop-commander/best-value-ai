@@ -29,18 +29,18 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127799
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
         "monthlyPrice": 200,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800
       }
     }
   },
@@ -78,10 +78,10 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "low",
         "notes": "Estimated ~100 messages/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
-        "source": "https://a16z.com/state-of-ai/"
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000
       }
     }
   },
@@ -160,10 +160,10 @@
       "gemini_advanced": {
         "name": "Gemini Advanced",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "low",
         "notes": "Estimated 100 prompts/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
-        "source": "https://a16z.com/state-of-ai/"
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000
       }
     },
     "_aa_synced": "2026-04-08"
@@ -282,26 +282,26 @@
       "chatgpt_plus": {
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
-        "tokensPerDay": 1897269,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883
       },
       "chatgpt_pro": {
         "name": "ChatGPT Pro",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
-        "tokensPerDay": 8586860,
         "confidence": "high",
         "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
-        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed."
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025
       }
     }
   },
@@ -446,10 +446,10 @@
       "chatgpt_pro": {
         "name": "ChatGPT Pro",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       }
     }
   },
@@ -543,18 +543,18 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127799
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
         "monthlyPrice": 200,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800
       }
     },
     "_aa_synced": "2026-04-08"
@@ -597,10 +597,10 @@
       "gemini_advanced": {
         "name": "Google AI Ultra",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "low",
         "notes": "Priority access. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
-        "source": "https://a16z.com/state-of-ai/"
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000
       }
     }
   },
@@ -679,26 +679,26 @@
       "chatgpt_plus": {
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
-        "tokensPerDay": 1897269,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883
       },
       "chatgpt_pro": {
         "name": "ChatGPT Pro",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
-        "tokensPerDay": 8586860,
         "confidence": "high",
         "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
-        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed."
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025
       }
     },
     "_aa_synced": "2026-04-08"
@@ -738,18 +738,18 @@
       "claude_max_5x": {
         "name": "Claude Max 5×",
         "monthlyPrice": 100,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127799
       },
       "claude_max_20x": {
         "name": "Claude Max 20×",
         "monthlyPrice": 200,
-        "tokensPerDay": 29018257,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800
       }
     },
     "_aa_synced": "2026-04-08"
@@ -789,10 +789,10 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "medium",
         "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing"
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000
       }
     },
     "_aa_synced": "2026-04-08"
@@ -836,10 +836,10 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "medium",
         "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing"
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000
       }
     },
     "_aa_synced": "2026-04-03"
@@ -883,10 +883,10 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "tokensPerDay": 640000,
         "confidence": "medium",
         "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing"
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000
       }
     },
     "_aa_synced": "2026-04-03"
@@ -926,26 +926,26 @@
       "chatgpt_plus": {
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
-        "tokensPerDay": 1897269,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883
       },
       "chatgpt_pro": {
         "name": "ChatGPT Pro",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
-        "tokensPerDay": 8586860,
         "confidence": "high",
         "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
-        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed."
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025
       }
     },
     "_aa_synced": "2026-04-08"
@@ -985,10 +985,10 @@
       "chatgpt_pro": {
         "name": "ChatGPT Pro (Codex)",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       }
     },
     "_aa_synced": "2026-04-08"
@@ -1029,26 +1029,26 @@
       "chatgpt_plus": {
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
-        "tokensPerDay": 1897269,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json"
+        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883
       },
       "chatgpt_pro": {
         "name": "ChatGPT Pro",
         "monthlyPrice": 200,
-        "tokensPerDay": 9500000,
         "confidence": "low",
         "notes": "Estimated as 5x Plus (measured Plus = 1900000/day). Pro $100 is officially 5x Plus. With current 2x boost (ending May 31, 2026) effective is 10x.",
-        "source": "https://developers.openai.com/codex/pricing"
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000
       },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
-        "tokensPerDay": 8586860,
         "confidence": "high",
         "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
-        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed."
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025
       }
     },
     "_aa_synced": "2026-04-03"
@@ -1088,10 +1088,10 @@
       "google_ai_ultra": {
         "name": "Google AI Ultra",
         "monthlyPrice": 250,
-        "tokensPerDay": 6400000,
         "confidence": "low",
         "notes": "Google AI Ultra (/mo). Estimated ~1000 msgs/day avg turn 6,400 tokens.",
-        "source": "https://one.google.com/about/plans"
+        "source": "https://one.google.com/about/plans",
+        "tokensPerWeek": 44800000
       }
     },
     "_aa_synced": "2026-04-08"

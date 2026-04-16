@@ -113,8 +113,9 @@ for (const [plan, ms] of Object.entries(byPlan)) {
   for (const m of ms) {
     const marker = m === best ? '  ★' : '   ';
     const daily = m.estDaily ? `${(m.estDaily/1e6).toFixed(1)}M/day` : 'no daily est';
+    const weekly = m.estWeekly ? `${(m.estWeekly/1e6).toFixed(1)}M/wk` : '';
     const h5 = m.est5h ? `${(m.est5h/1e6).toFixed(1)}M/5h` : '';
-    console.log(`${marker} ${m.file} | Δ5h=${m.consumed5h}% Δwk=${m.consumedWeekly}% | ${daily} ${h5} | ${m.confidence}`);
+    console.log(`${marker} ${m.file} | Δ5h=${m.consumed5h}% Δwk=${m.consumedWeekly}% | ${weekly || daily} ${h5} | ${m.confidence}`);
   }
   console.log();
 }
@@ -132,10 +133,8 @@ for (const [plan, best] of Object.entries(bestPerPlan)) {
     console.log(`  ⚠ No mapping for plan "${plan}" — add to PLAN_MAP`);
     continue;
   }
-  if (!best.estDaily) {
-    console.log(`  ⚠ ${plan}: no daily estimate (best measurement only has 5h data)`);
-    // If we have 5h but not weekly, we can't set tokensPerDay reliably
-    // because weekly is the binding constraint
+  if (!best.estWeekly) {
+    console.log(`  ⚠ ${plan}: no weekly estimate (need weekly % delta for reliable measurement)`);
     continue;
   }
   
@@ -145,12 +144,12 @@ for (const [plan, best] of Object.entries(bestPerPlan)) {
   for (const [modelId, model] of Object.entries(models)) {
     if (!model.subscriptions?.[subId]) continue;
     const sub = model.subscriptions[subId];
-    const old = sub.tokensPerDay;
+    const old = sub.tokensPerWeek;
     
     if (DRY_RUN) {
-      console.log(`  [dry-run] ${modelId}/${subId}: ${old.toLocaleString()} → ${best.estDaily.toLocaleString()} (${best.confidence})`);
+      console.log(`  [dry-run] ${modelId}/${subId}: ${(old||0).toLocaleString()} → ${best.estWeekly.toLocaleString()} (${best.confidence})`);
     } else {
-      sub.tokensPerDay = best.estDaily;
+      sub.tokensPerWeek = best.estWeekly;
       sub.confidence = best.confidence;
       sub.source = `https://github.com/desktop-commander/llm-value-comparison/blob/master/${best.source}`;
       sub.notes = `Measured ${best.timestamp?.split('T')[0]} via ${best.tool}. ${best.numRuns || '?'} runs, ${best.totalTokens?.toLocaleString()} tokens, ${best.consumed5h}% 5h / ${best.consumedWeekly}% weekly consumed.`;
@@ -158,7 +157,7 @@ for (const [plan, best] of Object.entries(bestPerPlan)) {
     updated++;
     updates++;
   }
-  console.log(`  ${plan} → ${subId}: ${best.estDaily.toLocaleString()}/day (${best.confidence}) — updated ${updated} models`);
+  console.log(`  ${plan} → ${subId}: ${best.estWeekly.toLocaleString()}/week (${best.confidence}) — updated ${updated} models`);
 }
 
 if (!DRY_RUN && updates > 0) {
