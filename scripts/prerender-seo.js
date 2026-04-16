@@ -83,7 +83,7 @@ Object.values(models).forEach(model => {
       if (!sub.tokensPerWeek) return;
       const val = (sub.tokensPerWeek * 4 * (np/100)) / sub.monthlyPrice;
       results.push({ model: model.name, type: 'Subscription', val, score: np,
-        detail: `${sub.name} · $${sub.monthlyPrice}/mo`, subName: sub.name });
+        detail: `${sub.name} · $${sub.monthlyPrice}/mo${sub.estimated ? ' · 📐 est.' : ''}`, subName: sub.name, estimated: sub.estimated });
     });
   }
 
