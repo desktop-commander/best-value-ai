@@ -311,6 +311,78 @@
         .use-case-card strong { color: var(--text); }
         .use-case-card em { font-style: italic; color: var(--text); }
 
+        /* ── NEWSLETTER ── */
+        .newsletter-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 18px; padding: 2rem 2.25rem;
+            display: grid; grid-template-columns: 1.15fr 1fr;
+            gap: 2.5rem; align-items: center;
+            max-width: 900px; margin: 0 auto;
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .newsletter-card.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 700px) {
+            .newsletter-card { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1.25rem; }
+        }
+        .newsletter-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.6rem; font-weight: 800;
+            letter-spacing: -0.02em; line-height: 1.1;
+            color: var(--text); margin-bottom: 0.5rem;
+        }
+        .newsletter-lead {
+            font-size: 0.92rem; color: var(--text);
+            font-weight: 500; margin-bottom: 0.85rem;
+        }
+        .newsletter-bullets {
+            list-style: none; padding: 0; margin: 0 0 1rem 0;
+            font-size: 0.82rem; color: var(--muted); line-height: 1.7;
+        }
+        .newsletter-bullets li { padding: 0; }
+        .newsletter-fineprint {
+            font-size: 0.72rem; color: var(--faint); margin: 0;
+        }
+        .newsletter-fineprint a { color: var(--muted); text-decoration: underline; }
+        .newsletter-fineprint a:hover { color: var(--blue); }
+
+        /* HubSpot form embed — inherit page styling */
+        .newsletter-form .hs-form-frame { background: transparent !important; }
+        .newsletter-form form { background: transparent !important; }
+        .newsletter-form input[type="email"],
+        .newsletter-form input[type="text"] {
+            background: var(--surface2) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 8px !important;
+            padding: 0.65rem 0.85rem !important;
+            font-size: 0.88rem !important;
+            color: var(--text) !important;
+            width: 100% !important;
+            font-family: inherit !important;
+        }
+        .newsletter-form input:focus {
+            outline: none !important;
+            border-color: var(--blue) !important;
+        }
+        .newsletter-form label { color: var(--text) !important; font-size: 0.78rem !important; }
+        .newsletter-form .hs-form-booleancheckbox label { font-size: 0.78rem !important; color: var(--muted) !important; }
+        .newsletter-form input[type="submit"] {
+            background: var(--blue) !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 0.7rem 1.25rem !important;
+            font-weight: 600 !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            font-size: 0.88rem !important;
+            width: 100% !important;
+            margin-top: 0.35rem !important;
+            transition: opacity 0.15s ease !important;
+        }
+        .newsletter-form input[type="submit"]:hover { opacity: 0.9 !important; }
+        .newsletter-form .hs-error-msgs { color: var(--red) !important; font-size: 0.72rem !important; }
+        .newsletter-form .submitted-message { color: var(--green) !important; font-size: 0.9rem !important; text-align: center; padding: 1rem 0; }
+
         .formula-card h4 {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 0.95rem; font-weight: 700;
@@ -1110,6 +1182,28 @@
     </div>
 </section>
 <!-- /USE-CASE SEO SECTIONS -->
+
+<!-- NEWSLETTER -->
+<section class="section" id="subscribe" style="scroll-margin-top:60px">
+    <div class="newsletter-card fade-up">
+        <div class="newsletter-copy">
+            <div class="tag blue" style="margin-bottom:0.75rem">📬 Monthly update</div>
+            <h2 class="newsletter-title">Stay on top of AI value</h2>
+            <p class="newsletter-lead">When the numbers change, you'll know.</p>
+            <ul class="newsletter-bullets">
+                <li>🏆 New models entering the top 10</li>
+                <li>📏 New hardware and subscription measurements</li>
+                <li>📉 Major price shifts that move the winners</li>
+            </ul>
+            <p class="newsletter-fineprint">Monthly, unsubscribe anytime. <a href="https://legal.desktopcommander.app/website_privacy_policy" target="_blank" rel="noopener">Privacy policy</a>.</p>
+        </div>
+        <div class="newsletter-form">
+            <script src="https://js-eu1.hsforms.net/forms/embed/146727725.js" defer></script>
+            <div class="hs-form-frame" data-region="eu1" data-form-id="d6f4b6a5-e19f-47e9-849f-aaf50e7c76aa" data-portal-id="146727725"></div>
+        </div>
+    </div>
+</section>
+<!-- /NEWSLETTER -->
 
 <!-- FULL DATA -->
 <section class="section" id="explore" style="scroll-margin-top:60px">
