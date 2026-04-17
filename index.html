@@ -993,7 +993,9 @@
     <div class="section-header fade-up">
         <div class="tag purple">📐 How we calculate this</div>
         <h2 class="section-title">One number. Three categories.</h2>
-        <p>Not all tokens are equal — a token from a smarter model is worth more. We multiply raw token volume by quality score and divide by cost. The result: <strong>quality-adjusted tokens per dollar</strong> — one metric that puts a $3,500 GPU, a $20/month plan, and a $0.07/M API on the same axis.</p>
+        <p>Not all tokens are equal — a token from a smarter model is worth more than a token from a weaker one. To capture that, we multiply raw token volume by a <strong>quality score</strong> and divide by cost.</p>
+        <p style="margin-top:0.6rem">Quality is a z-score-normalized blend of three public benchmarks: <strong>Arena text ELO</strong> (human preference on general tasks), <strong>Arena code ELO</strong> (human preference on coding), and <strong>Artificial Analysis Intelligence Index</strong> (composite of 10 academic evals — MMLU-Pro, GPQA, LiveCodeBench, and others). The result is expressed as a 0–100 percentage.</p>
+        <p style="margin-top:0.6rem">The result: <strong>quality-adjusted tokens per dollar</strong> — one metric that puts a $3,500 GPU, a $20/month plan, and a $0.07/M API on the same axis.</p>
     </div>
     <div class="formula-grid">
         <div class="formula-card fc-local">

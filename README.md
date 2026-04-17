@@ -16,7 +16,7 @@ A tool to calculate and compare **quality-adjusted tokens per dollar** across th
 2. **💳 Subscription** — Monthly fee, daily token limits (⚠️ estimated)
 3. **🔌 API** — Pay per token
 
-The core insight: not all tokens are equal. A token from a smarter model is worth more. We multiply raw token counts by model quality to get a fair comparison across completely different pricing models.
+The core insight: not all tokens are equal. A token from a smarter model is worth more. We multiply raw token counts by a **quality score** — a z-score-normalized blend of Arena text ELO, Arena code ELO, and Artificial Analysis Intelligence Index — to get a fair comparison across completely different pricing models.
 
 ## Use the data
 

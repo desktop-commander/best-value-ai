@@ -37,7 +37,7 @@ All three formulas produce "quality-adjusted tokens per dollar" and are directly
 - **Local**: `tokens_per_second × 3600 × hours_per_day × 365 × years × quality_percent / hardware_price`
 - **API**: `1,000,000 × quality_percent / blended_price_per_million`
 
-Quality is a z-score normalized composite of Arena ELO (text and coding) and Artificial Analysis Intelligence Index.
+Quality is a z-score normalized blend of three public benchmarks: Arena text ELO (human preference on general tasks), Arena code ELO (human preference on coding), and the Artificial Analysis Intelligence Index (composite of 10 academic evals including MMLU-Pro, GPQA, and LiveCodeBench). Expressed as a 0–100 percentage.
 
 ## Data sources
 
