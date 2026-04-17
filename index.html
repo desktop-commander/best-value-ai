@@ -511,10 +511,6 @@
         .data-table tr:hover td { background: var(--surface2); }
         .data-table a { color: var(--blue); text-decoration: none; }
         .data-table a:hover { text-decoration: underline; }
-        .conf-low    { color: var(--red);    font-weight: 600; }
-        .conf-medium { color: var(--amber);  font-weight: 600; }
-        .conf-high   { color: var(--green);  font-weight: 600; }
-
         /* ── FOOTER ── */
         .footer {
             padding: 2.5rem 0; text-align: center;
@@ -1451,7 +1447,7 @@
     <!-- Measurement results table — populated by prerender -->
     <div id="measurementResults" class="fade-up" style="max-width:750px;margin:1.5rem auto 0">
         <h4 style="font-size:0.85rem;color:var(--text);margin-bottom:0.75rem;text-align:center">📊 Our measurements</h4>
-        <table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Quota used</th><th>5h window</th><th>Weekly est</th><th>Confidence</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Business</td><td>Codex</td><td>2026-04-15</td><td>5</td><td>5h:21% wk:4%</td><td>11.4M</td><td>60M</td><td>🟢 high</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Claude Max 20x</td><td>Claude</td><td>2026-04-16</td><td>30</td><td>5h:0% wk:1%</td><td>—</td><td>203M</td><td>🔴 low</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Plus</td><td>Codex</td><td>2026-04-13</td><td>?</td><td>5h:12% wk:6%</td><td>—</td><td>13M</td><td>🟡 medium</td></tr></tbody></table>
+        <table style="width:100%;border-collapse:collapse;font-size:0.72rem;color:var(--text)"><thead><tr style="border-bottom:1px solid var(--border);text-align:left"><th style="padding:0.35rem">Plan</th><th>Tool</th><th>Date</th><th>Runs</th><th>Quota used</th><th>5h window</th><th>Weekly est</th></tr></thead><tbody><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Business</td><td>Codex</td><td>2026-04-15</td><td>5</td><td>5h:21% wk:4%</td><td>11.4M</td><td>60M</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Claude Max 20x</td><td>Claude</td><td>2026-04-16</td><td>30</td><td>5h:0% wk:1%</td><td>—</td><td>203M</td></tr><tr style="border-bottom:1px solid var(--border)"><td style="padding:0.35rem;font-weight:600">Plus</td><td>Codex</td><td>2026-04-13</td><td>?</td><td>5h:12% wk:6%</td><td>—</td><td>13M</td></tr></tbody></table>
         <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Quota used = how much of the 5-hour and weekly limits our test consumed. Higher % = more reliable estimate. <a href="https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
     </div>
     <!-- /measurementResults -->
@@ -1459,7 +1455,7 @@
     <div class="fade-up" style="max-width:700px;margin:1rem auto 0;text-align:center">
         <p style="font-size:0.78rem;color:var(--muted)">
             <strong>Help improve this data.</strong> Run <code>bash scripts/measure-codex-quota.sh</code> on your plan and
-            <a href="https://github.com/desktop-commander/llm-value-comparison/issues/new" target="_blank" style="color:var(--blue)">submit your results</a>.
+            <a href="https://github.com/desktop-commander/llm-value-comparison/issues" target="_blank" style="color:var(--blue)">submit your results</a>.
         </p>
     </div>
 </section>
@@ -1491,7 +1487,7 @@
         </div>
         <div class="data-table-section">
             <h3>💳 Subscriptions <span style="color:var(--red);font-size:0.7rem;font-weight:400">(⚠️ Estimated)</span> <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json" target="_blank">Edit on GitHub ↗</a></h3>
-            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/week</th><th>Confidence</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
+            <table class="data-table" id="tableSubs"><thead><tr><th>Model</th><th>Plan</th><th>$/mo</th><th>Tok/week</th><th>Notes</th><th>Source</th></tr></thead><tbody></tbody></table>
         </div>
         <div class="data-table-section">
             <h3>🔧 Hardware <a class="edit-link" href="https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json" target="_blank">Edit on GitHub ↗</a></h3>
@@ -1920,8 +1916,7 @@ function renderDataTables(){
   h='';
   Object.values(DATA.models).filter(m=>m.subscriptions).forEach(m=>{
     Object.entries(m.subscriptions).forEach(([,sub])=>{
-      const cc=sub.confidence==='low'?'conf-low':sub.confidence==='medium'?'conf-medium':'conf-high';
-      h+=`<tr><td>${m.name}</td><td>${sub.name}</td><td>$${sub.monthlyPrice}</td><td>${sub.tokensPerWeek?fmt(sub.tokensPerWeek):'?'}</td><td class="${cc}">${sub.confidence||'low'}</td><td style="max-width:170px;font-size:0.7rem">${sub.notes||''}</td><td><a href="${sub.source}" target="_blank">↗</a></td></tr>`;
+      h+=`<tr><td>${m.name}</td><td>${sub.name}</td><td>$${sub.monthlyPrice}</td><td>${sub.tokensPerWeek?fmt(sub.tokensPerWeek):'?'}</td><td style="max-width:170px;font-size:0.7rem">${sub.notes||''}</td><td><a href="${sub.source}" target="_blank">↗</a></td></tr>`;
     });
   });
   document.querySelector('#tableSubs tbody').innerHTML=h;

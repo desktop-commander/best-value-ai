@@ -80,7 +80,7 @@ Create a JSON file with your measurement:
 
 Submit via:
 - **Pull Request** to `measurements/` directory
-- **GitHub Issue** at https://github.com/desktop-commander/llm-value-comparison/issues/new
+- **GitHub Issue** at https://github.com/desktop-commander/llm-value-comparison/issues
 
 ## 2. Add local benchmark data
 
