@@ -1,6 +1,6 @@
-# Best Value AI: Local vs Subscription vs API
+# Best Value AI
 
-**Quality-adjusted tokens per dollar — one number to compare local hardware, subscriptions, and API pricing.**
+**Where should you get your AI tokens from — local GPU, pay-per-token API, or flat-fee subscription?**
 
 🔗 **Live tool:** https://desktop-commander.github.io/best-value-ai/
 📖 **Article:** [Local LLMs Are Finally Beating the Cloud! — But Are They?](https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7)
@@ -8,15 +8,21 @@
 
 ---
 
-## What is this?
+## What this answers
 
-A tool to calculate and compare **quality-adjusted tokens per dollar** across three ways to access LLMs:
+Most LLM leaderboards rank models. This tool asks a different question: **given a model, which way of getting tokens is cheapest?** The answer depends on your hardware, your usage, and which plan you already pay for.
 
-1. **🖥️ Local** — One-time hardware cost, unlimited usage
-2. **💳 Subscription** — Monthly fee, daily token limits (⚠️ estimated)
-3. **🔌 API** — Pay per token
+We compare three sources of AI tokens on a single axis — **quality-adjusted tokens per dollar**:
 
-The core insight: not all tokens are equal. A token from a smarter model is worth more. We multiply raw token counts by a **quality score** — a z-score-normalized blend of Arena text ELO, Arena code ELO, and Artificial Analysis Intelligence Index — to get a fair comparison across completely different pricing models.
+1. **🖥️ Local hardware** — one-time cost, unlimited usage (capped by your GPU)
+2. **💳 Subscription** — flat monthly fee (ChatGPT Plus/Pro/Business, Claude Pro/Max 5×/20×, etc.), capped by quota
+3. **🔌 API** — pay per token, unlimited scale
+
+The same model via Claude Max 20× at $200/mo, via the API at $15/MTok, and via local hardware on an RTX 4090 give wildly different tokens-per-dollar depending on how much you actually use. This tool puts all three on one ranking.
+
+## Why "quality-adjusted"?
+
+Not all tokens are equal — a token from a smarter model is worth more than a token from a weaker one. We multiply raw token counts by a **quality score** — a z-score-normalized blend of Arena text ELO, Arena code ELO, and Artificial Analysis Intelligence Index — so a $0.50/MTok tiny model doesn't beat Claude Opus just because it's cheaper.
 
 ## Use the data
 
