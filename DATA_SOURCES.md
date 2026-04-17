@@ -82,9 +82,9 @@ This gives us **real-world inference benchmarks** across a long tail of hardware
 
 ```bash
 # One-time setup
-mkdir -p ~/.config/llm-value-comparison
-echo "your_aa_key_here" > ~/.config/llm-value-comparison/aa_api_key
-chmod 600 ~/.config/llm-value-comparison/aa_api_key
+mkdir -p ~/.config/best-value-ai
+echo "your_aa_key_here" > ~/.config/best-value-ai/aa_api_key
+chmod 600 ~/.config/best-value-ai/aa_api_key
 
 # Get AA key at: https://artificialanalysis.ai/login
 

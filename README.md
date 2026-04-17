@@ -1,8 +1,8 @@
-# LLM Value Comparison: Local vs Subscription vs API
+# Best Value AI: Local vs Subscription vs API
 
 **Quality-adjusted tokens per dollar — one number to compare local hardware, subscriptions, and API pricing.**
 
-🔗 **Live tool:** https://desktop-commander.github.io/llm-value-comparison/
+🔗 **Live tool:** https://desktop-commander.github.io/best-value-ai/
 📖 **Article:** [Local LLMs Are Finally Beating the Cloud! — But Are They?](https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7)
 🏠 **Supported by:** [Desktop Commander](https://desktopcommander.app) — model-agnostic AI that works with local models, API keys, and subscriptions.
 
@@ -24,11 +24,11 @@ All data is open JSON — fetch directly, no API key needed:
 
 | File | URL |
 |------|-----|
-| Models (pricing, benchmarks, local perf, subscriptions) | [`models.json`](https://desktop-commander.github.io/llm-value-comparison/data/models.json) |
-| Hardware (GPUs, Macs, prices) | [`hardware.json`](https://desktop-commander.github.io/llm-value-comparison/data/hardware.json) |
-| Benchmark definitions | [`benchmarks.json`](https://desktop-commander.github.io/llm-value-comparison/data/benchmarks.json) |
+| Models (pricing, benchmarks, local perf, subscriptions) | [`models.json`](https://desktop-commander.github.io/best-value-ai/data/models.json) |
+| Hardware (GPUs, Macs, prices) | [`hardware.json`](https://desktop-commander.github.io/best-value-ai/data/hardware.json) |
+| Benchmark definitions | [`benchmarks.json`](https://desktop-commander.github.io/best-value-ai/data/benchmarks.json) |
 
-**Attribution:** If you use this data, please credit: *"Data from [LLM Value Comparison](https://desktop-commander.github.io/llm-value-comparison/), supported by [Desktop Commander](https://desktopcommander.app)"*
+**Attribution:** If you use this data, please credit: *"Data from [Best Value AI](https://desktop-commander.github.io/best-value-ai/), supported by [Desktop Commander](https://desktopcommander.app)"*
 
 ## Features
 
@@ -43,7 +43,7 @@ All data is open JSON — fetch directly, no API key needed:
 
 We use **z-score normalized** Arena ELO + AA Intelligence Index as the quality metric. These are the only two benchmarks that remain comparable across model generations (2023→2026). Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but not used in the main value calculation — they can't fairly compare GPT-3.5-era models with GPT-5.4-era models.
 
-See the [Benchmarks section](https://desktop-commander.github.io/llm-value-comparison/#benchmarks) on the live site for the full explanation.
+See the [Benchmarks section](https://desktop-commander.github.io/best-value-ai/#benchmarks) on the live site for the full explanation.
 
 ## Data sources
 
@@ -90,7 +90,7 @@ python3 -m http.server 8888
 
 ```bash
 # One-time: get a free API key at https://artificialanalysis.ai/login
-echo "your_key" > ~/.config/llm-value-comparison/aa_api_key
+echo "your_key" > ~/.config/best-value-ai/aa_api_key
 
 # Sync model data (API pricing, benchmarks, Arena ELO)
 node scripts/sync-from-aa.js

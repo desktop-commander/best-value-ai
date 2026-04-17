@@ -49,7 +49,7 @@ const APPLE_FALLBACK = {
 
 function fetch(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 LLM-Value-Comparison/1.0' } }, res => {
+    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 Best-Value-AI/1.0' } }, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         return fetch(res.headers.location).then(resolve, reject);
       }

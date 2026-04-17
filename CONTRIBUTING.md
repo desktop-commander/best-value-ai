@@ -1,4 +1,4 @@
-# Contributing to LLM Value Comparison
+# Contributing to Best Value AI
 
 This project needs community data to stay accurate. There are several ways to contribute:
 
@@ -12,8 +12,8 @@ The most valuable contribution. Providers don't publish exact token limits — w
 
 **Quick start:**
 ```bash
-git clone https://github.com/desktop-commander/llm-value-comparison.git
-cd llm-value-comparison
+git clone https://github.com/desktop-commander/best-value-ai.git
+cd best-value-ai
 bash scripts/measure-codex-quota.sh
 ```
 
@@ -80,7 +80,7 @@ Create a JSON file with your measurement:
 
 Submit via:
 - **Pull Request** to `measurements/` directory
-- **GitHub Issue** at https://github.com/desktop-commander/llm-value-comparison/issues
+- **GitHub Issue** at https://github.com/desktop-commander/best-value-ai/issues
 
 ## 2. Add local benchmark data
 

@@ -53,4 +53,4 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-Sitemap: https://desktop-commander.github.io/llm-value-comparison/sitemap.xml
+Sitemap: https://desktop-commander.github.io/best-value-ai/sitemap.xml

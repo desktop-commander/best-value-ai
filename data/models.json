@@ -31,7 +31,7 @@
         "monthlyPrice": 100,
         "confidence": "low",
         "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
@@ -40,7 +40,7 @@
         "monthlyPrice": 200,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
         "estimated": false
       }
@@ -212,14 +212,14 @@
       },
       "rtx_500_ada_laptop": {
         "tokensPerSec": 2.3,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 2,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 2 msgs. DB variant: glm-4.7-flash:latest"
       },
       "amd_780m_igpu": {
         "tokensPerSec": 0.9,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: glm-4.7-flash:latest"
@@ -302,7 +302,7 @@
         "monthlyPrice": 20,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
         "tokensPerWeek": 13280883,
         "estimated": false
       },
@@ -319,7 +319,7 @@
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "high",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
         "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
         "tokensPerWeek": 60108025,
         "estimated": false
@@ -567,7 +567,7 @@
         "monthlyPrice": 100,
         "confidence": "low",
         "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
@@ -576,7 +576,7 @@
         "monthlyPrice": 200,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
         "estimated": false
       }
@@ -706,7 +706,7 @@
         "monthlyPrice": 20,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
         "tokensPerWeek": 13280883,
         "estimated": false
       },
@@ -723,7 +723,7 @@
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "high",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
         "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
         "tokensPerWeek": 60108025,
         "estimated": false
@@ -768,7 +768,7 @@
         "monthlyPrice": 100,
         "confidence": "low",
         "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
@@ -777,7 +777,7 @@
         "monthlyPrice": 200,
         "confidence": "low",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
         "estimated": false
       }
@@ -961,7 +961,7 @@
         "monthlyPrice": 20,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
         "tokensPerWeek": 13280883,
         "estimated": false
       },
@@ -978,7 +978,7 @@
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "high",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
         "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
         "tokensPerWeek": 60108025,
         "estimated": false
@@ -1068,7 +1068,7 @@
         "monthlyPrice": 20,
         "confidence": "medium",
         "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_plus_20260413.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
         "tokensPerWeek": 13280883,
         "estimated": false
       },
@@ -1085,7 +1085,7 @@
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "high",
-        "source": "https://github.com/desktop-commander/llm-value-comparison/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
         "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
         "tokensPerWeek": 60108025,
         "estimated": false
@@ -1487,14 +1487,14 @@
       },
       "mac_m3_max_128gb": {
         "tokensPerSec": 4.4,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 4,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 4 msgs. DB variant: qwen3.5:35b-a3b-coding-nvfp4"
       },
       "mac_m1_max_64gb": {
         "tokensPerSec": 14.2,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 5,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 5 msgs. DB variant: qwen/qwen3.5-35b-a3b"
@@ -1558,35 +1558,35 @@
       },
       "rx_7900_xtx": {
         "tokensPerSec": 2.9,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 6,
         "_estimated": false,
         "notes": "DC production data: 6 messages, Ryzen 9 3900X, Windows"
       },
       "rtx_4060": {
         "tokensPerSec": 6.5,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 6,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 6 msgs. DB variant: qwen3.5:latest"
       },
       "rtx_3060": {
         "tokensPerSec": 0.5,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 8,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 8 msgs. aggregated from 2 DB model variants: jaahas/qwen3.5-uncensored:latest, qwen3.5:27b-20k"
       },
       "mac_m1_max_64gb": {
         "tokensPerSec": 1.2,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 5,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 5 msgs. DB variant: qwen3.5-27b-ultra-uncensored-heretic-v1"
       },
       "rtx_4060_laptop": {
         "tokensPerSec": 0.1,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: Qwen:latest"
@@ -1681,7 +1681,7 @@
     "local": {
       "rtx_4090": {
         "tokensPerSec": 19.5,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: gemma4:latest"
@@ -1710,42 +1710,42 @@
         "tokensPerSec": 21.9,
         "quantization": "cloud (mixed)",
         "vramRequired": 64,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 2,
         "_estimated": false,
         "notes": "DC production data: 2 messages, i9-9980HK, macOS"
       },
       "rtx_500_ada_laptop": {
         "tokensPerSec": 14.6,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: gemma4:latest"
       },
       "mac_m1_pro": {
         "tokensPerSec": 6.2,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 8,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 8 msgs. aggregated from 2 DB model variants: gemma4:latest, gemma4:latest"
       },
       "mac_m2_8gb": {
         "tokensPerSec": 2.1,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 7,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 7 msgs. DB variant: gemma4:latest"
       },
       "rtx_2000_ada": {
         "tokensPerSec": 2.1,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 3,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 3 msgs. DB variant: gemma4:latest"
       },
       "mac_m2_pro": {
         "tokensPerSec": 0.7,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 2,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 2 msgs. DB variant: gemma4:latest"
@@ -1778,7 +1778,7 @@
     "local": {
       "rtx_4090": {
         "tokensPerSec": 1.2,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: gemma-4-26b-a4b-it"
@@ -1805,56 +1805,56 @@
       },
       "mac_m1_max_64gb": {
         "tokensPerSec": 6.4,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 5,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 5 msgs. DB variant: google/gemma-4-26b-a4b"
       },
       "rtx_3080_ti": {
         "tokensPerSec": 5.6,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 1,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 1 msgs. DB variant: google/gemma-4-26b-a4b"
       },
       "rtx_4060": {
         "tokensPerSec": 8.7,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 5,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 5 msgs. DB variant: bjoernb/gemma4-e4b-think:latest"
       },
       "rtx_5070": {
         "tokensPerSec": 9.4,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 15,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 15 msgs. DB variant: gemma4:e4b"
       },
       "intel_uhd_615_laptop": {
         "tokensPerSec": 10.1,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 4,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 4 msgs. DB variant: gemma4:26b"
       },
       "rtx_5060_ti": {
         "tokensPerSec": 11.5,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 10,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 10 msgs. DB variant: gemma4:e4b"
       },
       "mac_m4_pro": {
         "tokensPerSec": 4.9,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 4,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 4 msgs. DB variant: gemma4:e4b"
       },
       "gtx_1660_super": {
         "tokensPerSec": 1.2,
-        "source": "https://github.com/desktop-commander/llm-value-comparison#dc-production-data",
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-production-data",
         "_dcMsgs": 2,
         "_estimated": false,
         "notes": "DC production data (2026-04-17): 2 msgs. DB variant: google/gemma-4-e4b"

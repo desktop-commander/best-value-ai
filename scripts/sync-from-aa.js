@@ -5,7 +5,7 @@
  *
  * SETUP:
  * 1. Get a free API key at https://artificialanalysis.ai/login
- * 2. Store it in ~/.config/llm-value-comparison/aa_api_key
+ * 2. Store it in ~/.config/best-value-ai/aa_api_key
  *    (one line, just the key, no quotes)
  * 3. Run: node scripts/sync-from-aa.js
  *
@@ -39,16 +39,16 @@ const OPENROUTER_API = 'https://openrouter.ai/api/v1/models';
 
 // --- Load API key ---
 function loadApiKey() {
-  const keyFile = path.join(os.homedir(), '.config', 'llm-value-comparison', 'aa_api_key');
+  const keyFile = path.join(os.homedir(), '.config', 'best-value-ai', 'aa_api_key');
   if (!fs.existsSync(keyFile)) {
     console.error(`
 ERROR: API key not found at ${keyFile}
 
 To fix:
   1. Get a free API key at https://artificialanalysis.ai/login
-  2. mkdir -p ~/.config/llm-value-comparison
-  3. echo "your_key_here" > ~/.config/llm-value-comparison/aa_api_key
-  4. chmod 600 ~/.config/llm-value-comparison/aa_api_key
+  2. mkdir -p ~/.config/best-value-ai
+  3. echo "your_key_here" > ~/.config/best-value-ai/aa_api_key
+  4. chmod 600 ~/.config/best-value-ai/aa_api_key
 `);
     process.exit(1);
   }

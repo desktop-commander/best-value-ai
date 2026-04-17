@@ -151,7 +151,7 @@ for (const [plan, best] of Object.entries(bestPerPlan)) {
     } else {
       sub.tokensPerWeek = best.estWeekly;
       sub.confidence = best.confidence;
-      sub.source = `https://github.com/desktop-commander/llm-value-comparison/blob/master/${best.source}`;
+      sub.source = `https://github.com/desktop-commander/best-value-ai/blob/master/${best.source}`;
       sub.notes = `Measured ${best.timestamp?.split('T')[0]} via ${best.tool}. ${best.numRuns || '?'} runs, ${best.totalTokens?.toLocaleString()} tokens, ${best.consumed5h}% 5h / ${best.consumedWeekly}% weekly consumed.`;
     }
     updated++;

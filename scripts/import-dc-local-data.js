@@ -16,7 +16,7 @@ const dataset = JSON.parse(fs.readFileSync(path.join(REPO, 'data/dc-local-benchm
 
 console.log(`Dataset pulled ${dataset.meta.pulled_at}: ${dataset.rows.length} rows`);
 
-const SOURCE = 'https://github.com/desktop-commander/llm-value-comparison#dc-production-data';
+const SOURCE = 'https://github.com/desktop-commander/best-value-ai#dc-production-data';
 
 // ── GPU → hardware.json ID map ──────────────────────────────────────────────
 // Keys are the exact DB strings (from metadata->hardwareInfo->gpu->model).

@@ -83,4 +83,4 @@ files.forEach(file => {
 });
 
 console.log('To improve accuracy, run the measurement multiple times');
-console.log('and share results at: https://github.com/desktop-commander/llm-value-comparison/issues');
+console.log('and share results at: https://github.com/desktop-commander/best-value-ai/issues');

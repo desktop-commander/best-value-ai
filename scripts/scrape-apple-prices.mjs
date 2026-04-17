@@ -31,7 +31,7 @@ try {
 const https = await import('https');
 function httpGet(url) {
   return new Promise((resolve, reject) => {
-    https.default.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 LLM-Value-Comparison/1.0' } }, res => {
+    https.default.get(url, { headers: { 'User-Agent': 'Mozilla/5.0 Best-Value-AI/1.0' } }, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         return httpGet(res.headers.location).then(resolve, reject);
       }

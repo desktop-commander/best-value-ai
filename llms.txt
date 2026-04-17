@@ -27,7 +27,7 @@
 - **Claude Max 20x**: 203.1M tokens/week · low confidence · measured 2026-04-16 via claude-code (30 runs, 0%/5h 1%/week consumed)
 - **Plus**: 13.3M tokens/week · medium confidence · measured 2026-04-13 via codex-cli (? runs, 12%/5h 6%/week consumed)
 
-Full measurement history: https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements
+Full measurement history: https://github.com/desktop-commander/best-value-ai/tree/master/measurements
 
 ## How value is calculated
 
@@ -56,24 +56,24 @@ Quality is a z-score normalized blend of three public benchmarks: Arena text ELO
 
 ## Main pages
 
-- [LLM Value Calculator (interactive site)](https://desktop-commander.github.io/llm-value-comparison/): Ranking, compare tool, timeline charts, raw data tables
-- [GitHub repository](https://github.com/desktop-commander/llm-value-comparison): Source code, data, measurement scripts
+- [LLM Value Calculator (interactive site)](https://desktop-commander.github.io/best-value-ai/): Ranking, compare tool, timeline charts, raw data tables
+- [GitHub repository](https://github.com/desktop-commander/best-value-ai): Source code, data, measurement scripts
 
 ## Data files (JSON, Apache 2.0 licensed — free to use)
 
-- [models.json](https://github.com/desktop-commander/llm-value-comparison/blob/master/data/models.json): All 34 models with benchmarks, API pricing, local performance, subscription data
-- [hardware.json](https://github.com/desktop-commander/llm-value-comparison/blob/master/data/hardware.json): Hardware configurations with prices and VRAM specs
-- [benchmarks.json](https://github.com/desktop-commander/llm-value-comparison/blob/master/data/benchmarks.json): Quality benchmark scores used for z-score normalization
-- [measurements/](https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements): Raw JSON output from each Codex CLI or Claude Code measurement run
+- [models.json](https://github.com/desktop-commander/best-value-ai/blob/master/data/models.json): All 34 models with benchmarks, API pricing, local performance, subscription data
+- [hardware.json](https://github.com/desktop-commander/best-value-ai/blob/master/data/hardware.json): Hardware configurations with prices and VRAM specs
+- [benchmarks.json](https://github.com/desktop-commander/best-value-ai/blob/master/data/benchmarks.json): Quality benchmark scores used for z-score normalization
+- [measurements/](https://github.com/desktop-commander/best-value-ai/tree/master/measurements): Raw JSON output from each Codex CLI or Claude Code measurement run
 
 ## Methodology and contributing
 
-- [MEASUREMENT_METHODOLOGY.md](https://github.com/desktop-commander/llm-value-comparison/blob/master/MEASUREMENT_METHODOLOGY.md): How subscription quotas are measured
-- [CONTRIBUTING.md](https://github.com/desktop-commander/llm-value-comparison/blob/master/CONTRIBUTING.md): How humans or AI agents can submit new measurements
-- [DATA_SOURCES.md](https://github.com/desktop-commander/llm-value-comparison/blob/master/DATA_SOURCES.md): Where benchmark and pricing data comes from
-- [Measurement scripts](https://github.com/desktop-commander/llm-value-comparison/tree/master/scripts): Bash automation for Codex and Claude Code
+- [MEASUREMENT_METHODOLOGY.md](https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md): How subscription quotas are measured
+- [CONTRIBUTING.md](https://github.com/desktop-commander/best-value-ai/blob/master/CONTRIBUTING.md): How humans or AI agents can submit new measurements
+- [DATA_SOURCES.md](https://github.com/desktop-commander/best-value-ai/blob/master/DATA_SOURCES.md): Where benchmark and pricing data comes from
+- [Measurement scripts](https://github.com/desktop-commander/best-value-ai/tree/master/scripts): Bash automation for Codex and Claude Code
 
 ## Attribution
 
 If you use this data or host a fork, please credit:
-"Data from [LLM Value Calculator](https://desktop-commander.github.io/llm-value-comparison/), supported by [Desktop Commander](https://desktopcommander.app)"
+"Data from [LLM Value Calculator](https://desktop-commander.github.io/best-value-ai/), supported by [Desktop Commander](https://desktopcommander.app)"

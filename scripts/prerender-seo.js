@@ -295,7 +295,7 @@ if (measStart !== -1 && measEnd !== -1) {
   const measReplacement = `<div id="measurementResults" class="fade-up" style="max-width:750px;margin:1.5rem auto 0">
         <h4 style="font-size:0.85rem;color:var(--text);margin-bottom:0.75rem;text-align:center">📊 Our measurements</h4>
         ${measHtml}
-        <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Quota used = how much of the 5-hour and weekly limits our test consumed. Higher % = more reliable estimate. <a href="https://github.com/desktop-commander/llm-value-comparison/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
+        <p style="font-size:0.68rem;color:var(--muted);margin-top:0.5rem;text-align:center">Quota used = how much of the 5-hour and weekly limits our test consumed. Higher % = more reliable estimate. <a href="https://github.com/desktop-commander/best-value-ai/tree/master/measurements" target="_blank" style="color:var(--blue)">Raw data →</a></p>
     </div>
     <!-- /measurementResults -->`;
   html = html.substring(0, measStart) + measReplacement + html.substring(measEnd + '<!-- /measurementResults -->'.length);
@@ -334,8 +334,8 @@ fs.writeFileSync(path.join(REPO, 'index.html'), html);
 
 // Generate llms.txt — single source of truth is models.json + measurements
 // Follows https://llmstxt.org/ spec: H1 title, blockquote summary, linked sections
-const BASE_URL = 'https://desktop-commander.github.io/llm-value-comparison';
-const REPO_URL = 'https://github.com/desktop-commander/llm-value-comparison';
+const BASE_URL = 'https://desktop-commander.github.io/best-value-ai';
+const REPO_URL = 'https://github.com/desktop-commander/best-value-ai';
 
 const top10Lines = results.slice(0, 10).map((r, i) => {
   return `${i + 1}. **${r.model}** (${r.type}) — ${fmt(r.val)} tok/$ · ${r.detail}`;
