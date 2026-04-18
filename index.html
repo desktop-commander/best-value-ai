@@ -250,26 +250,34 @@
 
         /* ── FLOATING TOC ──
            Two presentations:
-           • Desktop (≥1280px): always-visible vertical list on the right edge
-           • Mobile/tablet (<1280px): collapsed floating pill bottom-right,
-             expands into a bottom sheet when tapped
-           Active section tracked via IntersectionObserver in both. */
+           • Desktop (≥1440px): always-visible vertical list on the right edge
+           • Below 1440px: collapsed floating pill bottom-right, expands
+             into a bottom sheet when tapped
+           Active section tracked via IntersectionObserver in both.
+           Breakpoint is 1440px (not 1280) so the sidebar doesn't overlap
+           the 1120px content container — see detailed comments at each
+           media query block below. */
         .toc-float {
             position: fixed;
             z-index: 150;
             font-size: 0.78rem;
             line-height: 1.5;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s;
+        }
+        /* .toc-float.hidden is added by JS near footer to fade out */
+        .toc-float.hidden {
+            opacity: 0;
             pointer-events: none;
         }
-        .toc-float.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
 
-        /* --- Desktop layout: vertical list on right edge --- */
-        @media (min-width: 1280px) {
+        /* --- Desktop layout: vertical list on right edge.
+               Breakpoint 1440px, not 1280px: the content container is 1120px
+               centered, so we need viewport ≥ 1120 + 2×(~160px sidebar width
+               + padding) to avoid the sidebar overlapping content. At 1440px+
+               there's genuine room beyond the container. Below that we fall
+               through to the FAB + bottom sheet presentation. */
+        @media (min-width: 1440px) {
             .toc-float {
                 right: 1.5rem;
                 top: 50%;
@@ -311,8 +319,11 @@
             .toc-float__close { display: none; }
         }
 
-        /* --- Mobile/tablet layout: FAB + bottom sheet --- */
-        @media (max-width: 1279px) {
+        /* --- Mobile/tablet/small-desktop layout: FAB + bottom sheet.
+               Covers everything below 1440px (the sidebar breakpoint).
+               Small-desktop (1280-1439) gets FAB because the content
+               container + sidebar would overlap otherwise. */
+        @media (max-width: 1439px) {
             .toc-float { right: 1rem; bottom: 1rem; }
             .toc-float__label { display: none; }
             .toc-float__fab {
@@ -1216,16 +1227,8 @@
 
 <nav class="nav">
     <a class="nav-brand" href="#" style="display:flex;align-items:center;gap:0.5rem"><img src="favicon-source.png" alt="" width="26" height="26" style="border-radius:6px"><span><em>LLM</em> Value</span></a>
-    <div class="nav-links">
-        <a href="#winners">🏆 Best value</a>
-        <a href="#how">📐 Method</a>
-        <a href="#use-cases">🎯 By use case</a>
-        <a href="#use-with-agent">🤖 For agents</a>
-        <a href="#explore">📊 Compare</a>
-        <a href="#benchmarks">📏 Benchmarks</a>
-        <a href="#subscription-method">💳 Measurements</a>
-        <a href="#raw-data">📋 Data</a>
-    </div>
+    <!-- Section navigation is handled by the sidebar TOC (see <aside class="toc-float">).
+         Top nav stays minimal: brand + GitHub CTA only. -->
     <div class="nav-right">
         <a class="nav-cta" href="https://github.com/desktop-commander/best-value-ai" target="_blank">
             <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-3px;margin-right:4px"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
@@ -2805,13 +2808,15 @@ loadData();
   }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
   sections.forEach(s => io.observe(s));
 
-  // --- Show/hide TOC on scroll (applies to both desktop list and mobile FAB)
+  // --- Show/hide TOC on scroll (applies to both desktop list and mobile FAB).
+  // Visible from page load — the sidebar IS the section nav now. Fades out
+  // in the last 200px of scroll so it doesn't overlap the SEO block / end
+  // of page where there's nothing left to navigate to.
   function updateVisibility() {
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    const pastHero = y > 500;
     const nearBottom = y > max - 200;
-    toc.classList.toggle('visible', pastHero && !nearBottom);
+    toc.classList.toggle('hidden', nearBottom);
   }
   updateVisibility();
   window.addEventListener('scroll', updateVisibility, { passive: true });
@@ -2833,9 +2838,9 @@ loadData();
   if (fab) fab.addEventListener('click', openPanel);
   if (closeBtn) closeBtn.addEventListener('click', closePanel);
   if (backdrop) backdrop.addEventListener('click', closePanel);
-  // Close when user picks a section (mobile only — desktop has no sheet to close)
+  // Close when user picks a section (FAB-mode only — desktop list has no sheet to close)
   links.forEach(a => a.addEventListener('click', () => {
-    if (window.innerWidth < 1280) closePanel();
+    if (window.innerWidth < 1440) closePanel();
   }));
   // Escape key
   document.addEventListener('keydown', (e) => {
