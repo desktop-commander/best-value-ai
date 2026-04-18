@@ -27,18 +27,18 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
-        "confidence": "low",
+        "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
@@ -563,18 +563,18 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
-        "confidence": "low",
+        "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
@@ -764,18 +764,18 @@
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5×",
+        "name": "Claude Max 5\u00d7",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20×",
+        "name": "Claude Max 20\u00d7",
         "monthlyPrice": 200,
-        "confidence": "low",
+        "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
         "tokensPerWeek": 203127800,
@@ -1268,7 +1268,7 @@
         "tokensPerSec": 18,
         "quantization": "TQ1_0",
         "vramRequired": 128,
-        "notes": "MoE — aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "notes": "MoE \u2014 aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
         "source": "https://openbenchmarking.org/test/pts/llama-cpp"
       }
     },
@@ -1310,7 +1310,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE — requires 128GB+ unified memory.",
+        "notes": "MoE \u2014 requires 128GB+ unified memory.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       }
@@ -1353,7 +1353,7 @@
         "tokensPerSec": 10,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Extremely large — needs 128GB+ unified memory with heavy quantization.",
+        "notes": "MoE 1T/32B active. Extremely large \u2014 needs 128GB+ unified memory with heavy quantization.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       },
@@ -1361,7 +1361,7 @@
         "tokensPerSec": 8,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Estimated — community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "notes": "MoE 1T/32B active. Estimated \u2014 community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -1408,7 +1408,7 @@
         "tokensPerSec": 15,
         "quantization": "Q4_K_M",
         "vramRequired": 80,
-        "notes": "Requires 2× RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "notes": "Requires 2\u00d7 RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions",
         "_estimated": true
       },
@@ -1424,7 +1424,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 110,
-        "notes": "Estimated — 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "notes": "Estimated \u2014 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -1467,14 +1467,14 @@
         "tokensPerSec": 122,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE — only 3B active params per token. Fits in single 24GB GPU.",
+        "notes": "MoE \u2014 only 3B active params per token. Fits in single 24GB GPU.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "rtx_3090": {
         "tokensPerSec": 110,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE — only 3B active params per token.",
+        "notes": "MoE \u2014 only 3B active params per token.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "mac_m3_max_64gb": {
@@ -1538,7 +1538,7 @@
         "tokensPerSec": 58,
         "quantization": "Q4_K_M",
         "vramRequired": 16,
-        "notes": "Dense 27B. Community reports 55–65 t/s at Q4_K_M on RTX 4090.",
+        "notes": "Dense 27B. Community reports 55\u201365 t/s at Q4_K_M on RTX 4090.",
         "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
       },
       "rtx_3090": {
@@ -1630,7 +1630,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE — 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "notes": "MoE \u2014 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
         "_estimated": true
       },
@@ -1638,7 +1638,7 @@
         "tokensPerSec": 42,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE — 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "notes": "MoE \u2014 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
       },
       "framework_desktop_128gb": {
@@ -1793,7 +1793,7 @@
         "tokensPerSec": 85,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE — only 4B active. Extremely fast for its capability level.",
+        "notes": "MoE \u2014 only 4B active. Extremely fast for its capability level.",
         "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
       },
       "rtx_3090": {

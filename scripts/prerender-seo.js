@@ -345,10 +345,14 @@ const measurementLines = Object.entries(measByPlan)
   .sort()
   .map(([plan, ms]) => {
     const best = [...ms].sort((a, b) => b.delta - a.delta)[0];
-    const conf = best.delta >= 20 ? 'high' : best.delta >= 10 ? 'medium' : 'low';
+    // Precision tier based on how much of the quota was consumed during the
+    // measurement run. Higher consumption = tighter extrapolation. This is
+    // NOT the same as the `confidence` field in models.json (which is about
+    // whether a plan is directly measured vs extrapolated from another plan).
+    const precision = best.delta >= 20 ? 'tight extrapolation' : best.delta >= 10 ? 'moderate extrapolation' : 'wide extrapolation';
     const weekly = best.estWeekly ? `${(best.estWeekly / 1e6).toFixed(1)}M tokens/week` : 'no weekly estimate';
     const dt = best.ts ? best.ts.split('T')[0] : 'unknown date';
-    return `- **${plan}**: ${weekly} · ${conf} confidence · measured ${dt} via ${best.tool} (${best.runs || '?'} runs, ${best.d5}%/5h ${best.dw}%/week consumed)`;
+    return `- **${plan}**: ${weekly} · ${precision} · measured ${dt} via ${best.tool} (${best.runs || '?'} runs, ${best.d5}%/5h ${best.dw}%/week consumed)`;
   }).join('\n');
 
 const llmsTxt = `# LLM Value Calculator

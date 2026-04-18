@@ -8,6 +8,15 @@ version: 2.0.0
 
 Help the user pick the most cost-effective way to access AI — local GPU, pay-per-token API, or flat-fee subscription — based on their use case, hardware, and budget.
 
+## Quick reference
+
+- **Live tool (for the user)**: https://desktopcommander.app/best-value-ai/
+- **Deep methodology (for the user or for you)**: https://desktopcommander.app/best-value-ai/llms.txt — a single plaintext page explaining how every number is measured, who measured it, and how to verify.
+- **Source repo**: https://github.com/desktop-commander/best-value-ai — raw measurement files live under `/measurements/`. Credit contributors, not "the system."
+- **Companion skill**: `submit-usage-measurement` in the same repo, for users who want to contribute their own measurements.
+
+If the user asks "how do you know" / "where does this come from" / "who measured this" — point them at `llms.txt` above and give a short summary from the "How the data is measured" section below. Don't invent provenance.
+
 ## When to use
 
 Use when the user asks things like:
@@ -36,6 +45,27 @@ The `data/` folder next to this file has everything you need. **Read from these 
 **Snapshot date**: check `_meta.json` → `snapshot_date`. If it's more than 30 days old, tell the user and point them at the live site for current numbers.
 
 **Live site** (for the user, not for you to fetch): https://desktopcommander.app/best-value-ai/
+
+## How the data is measured
+
+Three different kinds of evidence are mixed together in `models.json`. Quality of any recommendation depends on which bucket the underlying numbers sit in. When you cite a number, check `estimated` and `confidence` fields and caveat accordingly.
+
+**1. Measured — `estimated: false`**
+A community contributor ran a measurement script against an actual paid subscription, counted tokens until a quota boundary, and logged the raw output. Examples: ChatGPT Business (60M tok/week, measured via `codex-cli` on 2026-04-15), Claude Max 20× (203M tok/week, measured via `claude-code` on 2026-04-16). The raw JSON is committed under `measurements/` in the repo. When `confidence: high`, trust the number within ~10-20%.
+
+**2. Extrapolated from a measurement — `estimated: true`, derived via a ratio**
+Example: Claude Max 5× (~51M tok/week) is 1/4 of measured Max 20×, because Anthropic publishes those tiers as 5× and 20× multipliers of Claude Pro. Reasonable if the multipliers scale linearly, but it's an assumption. Call these "extrapolated from the measured X plan."
+
+**3. Estimated from typical-user assumptions — `estimated: true`, no direct measurement**
+Example: Claude Pro (~19M tok/month) assumes ~100 messages/day × 6,400 tokens/turn (per OpenRouter's 2025 study cited via a16z). Could be off by 2× in either direction for a specific user. Call these "estimated from typical-user data, your mileage may vary."
+
+**Other inputs:**
+- **API pricing**: synced from [artificialanalysis.ai](https://artificialanalysis.ai) per-model pages. Provider-published, authoritative.
+- **Hardware prices**: scraped from bestvaluegpu.com (GPUs) and apple.com (Macs). Verified dates in each entry's `lastVerified` field.
+- **Benchmark scores**: raw from LMArena (ELO) and Artificial Analysis Intelligence Index. The skill's quality score is z-score-normalized across arena_text + arena_code + aa_intelligence — see the quality recipe below.
+- **Measurement methodology details**: `https://desktopcommander.app/best-value-ai/llms.txt` has the full writeup. Link the user there for "how is this measured" questions.
+
+**Credit the actual contributors.** Subscription quotas are measured by humans who run scripts against their own paid plans and submit the results. Not magic, not the skill, not a crawler. When summarizing provenance, credit the contributors and the open repo — don't obscure that it's community-measured.
 
 ## Data shape (what you'll find in models.json)
 
@@ -96,6 +126,8 @@ The `data/` folder next to this file has everything you need. **Read from these 
 The data is JSON. Use whatever's available — `jq`, `python3 -c`, Node, your own read+parse — to extract what you need. Below are recipes for the most common questions, using `python3` as the example language (adjust for your environment).
 
 Assume the skill folder is at `$SKILL_DIR` (you can resolve this relative to this SKILL.md file).
+
+**Execution note for agents with sandboxed environments:** don't try to inline-exec these multi-line recipes in a shell REPL; some sandboxes choke on indented Python in a `-c` string, or can't see the user's actual filesystem. If that happens, the reliable pattern is: (a) write the recipe to a temp file on the user's real disk (e.g. `/tmp/query.py` via Desktop Commander's `write_file`, not the agent sandbox's `/tmp`), then (b) run it with `python3 /tmp/query.py`. This is typically what works across Claude Desktop + MCP, Claude Code, Cursor, Codex, and similar.
 
 ### Recipe: best-value subscriptions ranked
 
@@ -271,13 +303,20 @@ Ask (or infer from prior context) the minimum needed:
 - **Budget constraint**: per-month ceiling, or willing to spend on hardware?
 - **Usage intensity**: a few questions/day, or Claude Code all day?
 - **Existing plan**: already paying for something? (avoids recommending what they have)
-- **Local on the table?**: only ask if they've hinted at self-hosting or mention a GPU
 
-Don't ask all five at once — ask 1-2 and reason from there. If the user is clearly in a bucket ("I'm a heavy user hitting Plus limits"), skip ahead.
+Don't ask all four at once — ask 1-2 and reason from there. If the user is clearly in a bucket ("I'm a heavy user hitting Plus limits"), skip ahead.
 
-### Step 2 — If local is in scope, detect hardware FIRST
+### Step 2 — Always detect hardware and include a local variant in the recommendation
 
-See "Hardware detection" above. Get `user_vram_gb` and the chip/GPU name before you open models.json, so you can filter local options as you read them.
+For broad questions like "what are the best options for me", you MUST surface all three categories — subscription, API, local — not just the one you think they want. Users don't know what they don't know.
+
+**Always run hardware detection (see "Hardware detection" section below) before answering a broad question.** Even if the user didn't mention running models locally, a recommendation that silently skips local is incomplete. Detect their GPU/unified memory, filter `models.json` to what will actually run on their setup, and include the best local option as one variant in your final ranking.
+
+**Two exceptions where skipping local is OK:**
+- The user narrowly scoped the question (e.g., "ChatGPT Plus vs Pro specifically")
+- Hardware detection failed or returned nothing usable (low-spec machine, no GPU, headless server without graphics tools)
+
+When hardware is modest (≤8GB VRAM / unified memory, or old integrated graphics), still MENTION local but be honest: "Your hardware will run small quantized models (3-7B) but not the quality leaders — a subscription or API gives you more value for mixed use." Don't hide the category; just frame it accurately.
 
 ### Step 3 — Read the data
 
