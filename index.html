@@ -260,7 +260,7 @@
         .toc-float {
             position: fixed;
             z-index: 150;
-            font-size: 0.78rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             opacity: 1;
             transition: opacity 0.3s;
@@ -289,31 +289,37 @@
             .toc-float__fab { display: none; }
             .toc-float__panel { display: block; }
             .toc-float__label {
-                font-size: 0.64rem;
-                font-weight: 600;
+                font-size: 0.72rem;
+                font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 color: var(--muted);
-                padding-left: 0.85rem;
-                margin-bottom: 0.6rem;
+                padding-left: 1rem;
+                margin-bottom: 0.75rem;
             }
-            .toc-float ul { list-style: none; padding: 0; margin: 0; border-left: 1.5px solid var(--border); }
+            .toc-float ul { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--border); }
             .toc-float li { margin: 0; }
             .toc-float a {
                 display: block;
-                padding: 0.3rem 0 0.3rem 0.85rem;
-                color: var(--muted);
+                padding: 0.45rem 0 0.45rem 1rem;
+                color: var(--text);
+                opacity: 0.7;
                 text-decoration: none;
-                border-left: 1.5px solid transparent;
-                margin-left: -1.5px;
-                transition: color 0.15s, border-color 0.15s;
+                border-left: 2px solid transparent;
+                margin-left: -2px;
+                transition: color 0.15s, opacity 0.15s, border-color 0.15s, background 0.15s;
                 white-space: nowrap;
             }
-            .toc-float a:hover { color: var(--text); }
+            .toc-float a:hover {
+                opacity: 1;
+                background: rgba(0,0,0,0.03);
+            }
             .toc-float a.active {
-                color: var(--text);
+                color: var(--blue);
+                opacity: 1;
                 border-left-color: var(--blue);
                 font-weight: 600;
+                background: var(--blue-bg);
             }
             .toc-float__backdrop { display: none; }
             .toc-float__close { display: none; }
@@ -327,10 +333,10 @@
             .toc-float { right: 1rem; bottom: 1rem; }
             .toc-float__label { display: none; }
             .toc-float__fab {
-                display: flex; align-items: center; gap: 0.4rem;
+                display: flex; align-items: center; gap: 0.5rem;
                 background: var(--text); color: var(--bg);
                 border: none; border-radius: 999px;
-                padding: 0.6rem 0.9rem; font-size: 0.8rem; font-weight: 600;
+                padding: 0.7rem 1.1rem; font-size: 0.88rem; font-weight: 600;
                 cursor: pointer;
                 box-shadow: 0 4px 16px rgba(0,0,0,0.18);
                 font-family: inherit;
@@ -368,14 +374,21 @@
             .toc-float__panel li { margin: 0; }
             .toc-float__panel a {
                 display: block;
-                padding: 0.75rem 0.5rem;
+                padding: 0.75rem 0.75rem;
                 color: var(--text); text-decoration: none;
                 font-size: 0.95rem; font-weight: 500;
                 border-bottom: 1px solid var(--border);
+                border-left: 3px solid transparent;
+                margin-left: -0.75rem;
+                padding-left: 0.75rem;
+                transition: background 0.15s, border-color 0.15s;
             }
             .toc-float__panel li:last-child a { border-bottom: none; }
             .toc-float__panel a.active {
-                color: var(--blue); font-weight: 600;
+                color: var(--blue);
+                font-weight: 600;
+                border-left-color: var(--blue);
+                background: var(--blue-bg);
             }
             .toc-float__panel h4 {
                 font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
@@ -1241,7 +1254,7 @@
 <aside class="toc-float" id="tocFloat" aria-label="Page sections" data-open="false">
     <button type="button" class="toc-float__fab" id="tocFab" aria-expanded="false" aria-controls="tocPanel">
         <span aria-hidden="true">☰</span>
-        <span>Sections</span>
+        <span>On this page</span>
     </button>
     <div class="toc-float__panel" id="tocPanel" role="dialog" aria-label="Page sections">
         <button type="button" class="toc-float__close" id="tocClose" aria-label="Close">&times;</button>
