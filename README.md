@@ -2,7 +2,7 @@
 
 **Where should you get your AI tokens from — local GPU, pay-per-token API, or flat-fee subscription?**
 
-🔗 **Live tool:** https://desktop-commander.github.io/best-value-ai/
+🔗 **Live tool:** https://desktopcommander.app/best-value-ai/
 📖 **Article:** [Local LLMs Are Finally Beating the Cloud! — But Are They?](https://wonderwhy-er.medium.com/local-llms-are-finally-beating-the-cloud-but-are-they-51fc0ad0dbd7)
 🏠 **Supported by:** [Desktop Commander](https://desktopcommander.app) — model-agnostic AI that works with local models, API keys, and subscriptions.
 
@@ -30,11 +30,11 @@ All data is open JSON — fetch directly, no API key needed:
 
 | File | URL |
 |------|-----|
-| Models (pricing, benchmarks, local perf, subscriptions) | [`models.json`](https://desktop-commander.github.io/best-value-ai/data/models.json) |
-| Hardware (GPUs, Macs, prices) | [`hardware.json`](https://desktop-commander.github.io/best-value-ai/data/hardware.json) |
-| Benchmark definitions | [`benchmarks.json`](https://desktop-commander.github.io/best-value-ai/data/benchmarks.json) |
+| Models (pricing, benchmarks, local perf, subscriptions) | [`models.json`](https://desktopcommander.app/best-value-ai/data/models.json) |
+| Hardware (GPUs, Macs, prices) | [`hardware.json`](https://desktopcommander.app/best-value-ai/data/hardware.json) |
+| Benchmark definitions | [`benchmarks.json`](https://desktopcommander.app/best-value-ai/data/benchmarks.json) |
 
-**Attribution:** If you use this data, please credit: *"Data from [Best Value AI](https://desktop-commander.github.io/best-value-ai/), supported by [Desktop Commander](https://desktopcommander.app)"*
+**Attribution:** If you use this data, please credit: *"Data from [Best Value AI](https://desktopcommander.app/best-value-ai/), supported by [Desktop Commander](https://desktopcommander.app)"*
 
 ## Use from AI agents
 
@@ -78,7 +78,7 @@ npx skills add desktop-commander/best-value-ai --skill submit-usage-measurement
 
 We use **z-score normalized** Arena ELO + AA Intelligence Index as the quality metric. These are the only two benchmarks that remain comparable across model generations (2023→2026). Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but not used in the main value calculation — they can't fairly compare GPT-3.5-era models with GPT-5.4-era models.
 
-See the [Benchmarks section](https://desktop-commander.github.io/best-value-ai/#benchmarks) on the live site for the full explanation.
+See the [Benchmarks section](https://desktopcommander.app/best-value-ai/#benchmarks) on the live site for the full explanation.
 
 ## Data sources
 
