@@ -1,0 +1,15 @@
+{
+  "snapshot_date": "2026-04-18",
+  "source": "https://desktopcommander.app/best-value-ai/",
+  "live_data_urls": {
+    "models": "https://desktopcommander.app/best-value-ai/data/models.json",
+    "hardware": "https://desktopcommander.app/best-value-ai/data/hardware.json",
+    "benchmarks": "https://desktopcommander.app/best-value-ai/data/benchmarks.json"
+  },
+  "staleness_policy": "If snapshot is more than 30 days old, warn the user and suggest they re-install the skill or check the live site for current data. Subscription quotas and local hardware prices change slowly; API prices change a few times a year; benchmark definitions are near-static.",
+  "notes": [
+    "Subscription quotas marked estimated:true are extrapolated, not measured. Confidence 'low' means the number is a rough estimate and should be caveated.",
+    "Benchmark scores are raw per-benchmark values. To produce a single 'quality' number, see the quality-score recipe in SKILL.md (z-score normalization across arena_text, arena_code, and aa_intelligence).",
+    "Internal model keys (e.g. 'claude-opus-4') are stable identifiers. Display names are in the 'name' field — always use .name for user-facing output."
+  ]
+}

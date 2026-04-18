@@ -1,0 +1,1866 @@
+{
+  "claude-opus-4": {
+    "name": "Claude Opus 4",
+    "provider": "Anthropic",
+    "releaseDate": "2025-05-14",
+    "modelCard": "https://www.anthropic.com/news/claude-4",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1412,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1400,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 70.7,
+        "source": "https://aider.chat/docs/leaderboards/"
+      }
+    },
+    "api": {
+      "inputPer1M": 15,
+      "outputPer1M": 75,
+      "source": "https://www.anthropic.com/pricing",
+      "provider": "Anthropic"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "confidence": "low",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "tokensPerWeek": 50781950,
+        "estimated": true
+      },
+      "claude_max_20x": {
+        "name": "Claude Max 20×",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800,
+        "estimated": false
+      }
+    }
+  },
+  "claude-sonnet-4": {
+    "name": "Claude Sonnet 4",
+    "provider": "Anthropic",
+    "releaseDate": "2025-05-14",
+    "modelCard": "https://www.anthropic.com/news/claude-4",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1389,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1370,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 56.4,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "livebench": {
+        "score": 72,
+        "source": "https://livebench.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 3,
+      "outputPer1M": 15,
+      "source": "https://www.anthropic.com/pricing",
+      "provider": "Anthropic"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "confidence": "low",
+        "notes": "Estimated ~100 messages/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    }
+  },
+  "deepseek-v3": {
+    "name": "DeepSeek V3.1",
+    "provider": "DeepSeek",
+    "releaseDate": "2025-08-01",
+    "modelCard": "https://github.com/deepseek-ai/DeepSeek-V3",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1395,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1350,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 48.4,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 16.5,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.56,
+      "outputPer1M": 1.68,
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "provider": "DeepSeek"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 15,
+        "quantization": "Q4_K_M",
+        "vramRequired": 80,
+        "notes": "Requires multi-GPU or heavy offloading (671B params)",
+        "source": "https://github.com/ggerganov/llama.cpp/discussions"
+      }
+    },
+    "subscriptions": null
+  },
+  "gemini-2.5-pro": {
+    "name": "Gemini 2.5 Pro",
+    "provider": "Google",
+    "releaseDate": "2025-03-25",
+    "modelCard": "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1448,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1202,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 72.9,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 34.6,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.25,
+      "outputPer1M": 10,
+      "source": "https://artificialanalysis.ai/models/gemini-2-5-pro",
+      "provider": "Google",
+      "tokensPerSecAPI": 120.7
+    },
+    "local": null,
+    "subscriptions": {
+      "gemini_advanced": {
+        "name": "Gemini Advanced",
+        "monthlyPrice": 20,
+        "confidence": "low",
+        "notes": "Estimated 100 prompts/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "glm-4.7-flash": {
+    "name": "GLM-4.7 Flash",
+    "provider": "Z.ai",
+    "releaseDate": "2026-01-19",
+    "modelCard": "https://huggingface.co/zai-org/GLM-4.7-Flash",
+    "benchmarks": {
+      "gpqa_diamond": {
+        "score": 75.2,
+        "source": "https://huggingface.co/zai-org/GLM-4.7-Flash"
+      },
+      "swe_bench": {
+        "score": 59.2,
+        "source": "https://huggingface.co/zai-org/GLM-4.7-Flash"
+      },
+      "aa_intelligence": {
+        "score": 30.1,
+        "source": "https://artificialanalysis.ai/"
+      },
+      "arena_text": {
+        "score": 1369,
+        "source": "https://arena.ai/leaderboard/text"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.07,
+      "outputPer1M": 0.4,
+      "source": "https://artificialanalysis.ai/models/glm-4-7-flash",
+      "provider": "Z.ai",
+      "tokensPerSecAPI": 81.8
+    },
+    "local": {
+      "mac_m4_48gb": {
+        "tokensPerSec": 16,
+        "quantization": "unknown",
+        "vramRequired": 48,
+        "notes": "User test on MacBook M4 48GB.",
+        "source": "user-reported"
+      },
+      "rtx_500_ada_laptop": {
+        "tokensPerSec": 2.3,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 2,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 2 msgs. DB variant: glm-4.7-flash:latest"
+      },
+      "amd_780m_igpu": {
+        "tokensPerSec": 0.9,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: glm-4.7-flash:latest"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "gpt-oss-120b": {
+    "name": "GPT-OSS 120B",
+    "provider": "OpenAI",
+    "releaseDate": "2025-08-05",
+    "modelCard": "https://openai.com/index/introducing-gpt-oss/",
+    "benchmarks": {
+      "gpqa_diamond": {
+        "score": 80,
+        "source": "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-max-ai-pcs-deliver-exceptional-intelligence.html"
+      },
+      "mmlu": {
+        "score": 90,
+        "source": "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-max-ai-pcs-deliver-exceptional-intelligence.html"
+      },
+      "arena_text": {
+        "score": 1354,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_intelligence": {
+        "score": 33.3,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": null,
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 33,
+        "quantization": "MXFP4 (GGUF)",
+        "notes": "Community benchmark on Framework Desktop; Vulkan backend, LM Studio/llama.cpp.",
+        "source": "https://community.frame.work/t/tracking-will-the-ai-max-395-128gb-be-able-to-run-gpt-oss-120b/73280"
+      }
+    },
+    "subscriptions": null
+  },
+  "gpt-4o": {
+    "name": "GPT-4o",
+    "provider": "OpenAI",
+    "releaseDate": "2024-05-13",
+    "modelCard": "https://openai.com/index/hello-gpt-4o/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1443,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1310,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 23.1,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "mmlu": {
+        "score": 88.7,
+        "source": "https://openai.com/index/hello-gpt-4o/"
+      },
+      "aa_intelligence": {
+        "score": 17.3,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 2.5,
+      "outputPer1M": 10,
+      "source": "https://openai.com/api/pricing/",
+      "provider": "OpenAI"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883,
+        "estimated": false
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      },
+      "chatgpt_business": {
+        "name": "ChatGPT Business",
+        "monthlyPrice": 30,
+        "confidence": "high",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025,
+        "estimated": false
+      }
+    }
+  },
+  "llama-3.1-70b": {
+    "name": "Llama 3.1 70B",
+    "provider": "Meta",
+    "releaseDate": "2024-07-23",
+    "modelCard": "https://ai.meta.com/blog/meta-llama-3-1/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1293,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1180,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "mmlu": {
+        "score": 86,
+        "source": "https://ai.meta.com/blog/meta-llama-3-1/"
+      },
+      "aider_polyglot": {
+        "score": 32.5,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 12.5,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.6,
+      "outputPer1M": 0.6,
+      "source": "https://www.together.ai/pricing",
+      "provider": "Together.ai"
+    },
+    "local": {
+      "rtx_3090": {
+        "tokensPerSec": 25,
+        "quantization": "Q4_K_M",
+        "vramRequired": 40,
+        "notes": "Requires 2x RTX 3090 or offloading to RAM",
+        "source": "https://github.com/ggerganov/llama.cpp/discussions/4225"
+      },
+      "rtx_4090": {
+        "tokensPerSec": 45,
+        "quantization": "Q4_K_M",
+        "vramRequired": 40,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions"
+      },
+      "mac_m3_max_128gb": {
+        "tokensPerSec": 18,
+        "quantization": "Q4_K_M",
+        "vramRequired": 45,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
+      }
+    },
+    "subscriptions": null
+  },
+  "llama-3.1-8b": {
+    "name": "Llama 3.1 8B",
+    "provider": "Meta",
+    "releaseDate": "2024-07-23",
+    "modelCard": "https://ai.meta.com/blog/meta-llama-3-1/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1211,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1080,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "mmlu": {
+        "score": 69.4,
+        "source": "https://ai.meta.com/blog/meta-llama-3-1/"
+      },
+      "aa_intelligence": {
+        "score": 11.8,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.18,
+      "outputPer1M": 0.18,
+      "source": "https://www.together.ai/pricing",
+      "provider": "Together.ai"
+    },
+    "local": {
+      "rtx_3090": {
+        "tokensPerSec": 120,
+        "quantization": "Q4_K_M",
+        "vramRequired": 6,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions/4225"
+      },
+      "rtx_4090": {
+        "tokensPerSec": 216,
+        "quantization": "Q4_K_M",
+        "vramRequired": 6,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 85,
+        "quantization": "Q4_K_M",
+        "vramRequired": 6,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
+      }
+    },
+    "subscriptions": null
+  },
+  "o3": {
+    "name": "o3",
+    "provider": "OpenAI",
+    "releaseDate": "2025-04-16",
+    "modelCard": "https://openai.com/o3",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1431,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1420,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 76.9,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 38.4,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 10,
+      "outputPer1M": 40,
+      "source": "https://openai.com/api/pricing/",
+      "provider": "OpenAI"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      }
+    }
+  },
+  "qwen-3-32b": {
+    "name": "Qwen QwQ-32B",
+    "provider": "Alibaba",
+    "releaseDate": "2025-04-29",
+    "modelCard": "https://huggingface.co/Qwen/QwQ-32B",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1336,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1200,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 40,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 19.7,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.2,
+      "outputPer1M": 1.2,
+      "source": "https://www.together.ai/pricing",
+      "provider": "Together.ai"
+    },
+    "local": {
+      "rtx_3090": {
+        "tokensPerSec": 45,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions"
+      },
+      "rtx_4090": {
+        "tokensPerSec": 81,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 35,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
+      }
+    },
+    "subscriptions": null
+  },
+  "claude-opus-4-5": {
+    "name": "Claude Opus 4.5",
+    "provider": "Anthropic",
+    "releaseDate": "2025-11-24",
+    "modelCard": "https://www.anthropic.com/news/claude-opus-4-5",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1468,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1465,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 89.4,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "swe_bench": {
+        "score": 80.9,
+        "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 43.1,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      }
+    },
+    "api": {
+      "inputPer1M": 5,
+      "outputPer1M": 25,
+      "source": "https://artificialanalysis.ai/models/claude-opus-4-5",
+      "provider": "Anthropic",
+      "tokensPerSecAPI": 52.6
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "confidence": "low",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "tokensPerWeek": 50781950,
+        "estimated": true
+      },
+      "claude_max_20x": {
+        "name": "Claude Max 20×",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800,
+        "estimated": false
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "gemini-3-pro": {
+    "name": "Gemini 3 Pro",
+    "provider": "Google",
+    "releaseDate": "2025-11-18",
+    "modelCard": "https://blog.google/products/gemini/gemini-3-pro/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1486,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1438,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 75,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "swe_bench": {
+        "score": 76.2,
+        "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 48.4,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 2,
+      "outputPer1M": 12,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "provider": "Google"
+    },
+    "local": null,
+    "subscriptions": {
+      "gemini_advanced": {
+        "name": "Google AI Ultra",
+        "monthlyPrice": 20,
+        "confidence": "low",
+        "notes": "Priority access. Avg turn 6,400 tokens (OpenRouter 2025 Study).",
+        "source": "https://a16z.com/state-of-ai/",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    }
+  },
+  "gemini-3-flash": {
+    "name": "Gemini 3 Flash",
+    "provider": "Google",
+    "releaseDate": "2025-12-17",
+    "modelCard": "https://blog.google/products/gemini/gemini-3-flash/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1474,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1436,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 72,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "swe_bench": {
+        "score": 78,
+        "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 35,
+        "source": "https://artificialanalysis.ai/"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.5,
+      "outputPer1M": 3,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "provider": "Google"
+    },
+    "local": null,
+    "subscriptions": null
+  },
+  "gpt-5-2": {
+    "name": "GPT-5.2",
+    "provider": "OpenAI",
+    "releaseDate": "2025-12-11",
+    "modelCard": "https://openai.com/index/introducing-gpt-5-2/",
+    "benchmarks": {
+      "arena_text": {
+        "score": 1440,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1403,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "aider_polyglot": {
+        "score": 88,
+        "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "swe_bench": {
+        "score": 80,
+        "source": "https://www.swebench.com/"
+      },
+      "aa_intelligence": {
+        "score": 51.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.75,
+      "outputPer1M": 14,
+      "source": "https://artificialanalysis.ai/models/gpt-5-2",
+      "provider": "OpenAI",
+      "tokensPerSecAPI": 68
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883,
+        "estimated": false
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      },
+      "chatgpt_business": {
+        "name": "ChatGPT Business",
+        "monthlyPrice": 30,
+        "confidence": "high",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025,
+        "estimated": false
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "claude-opus-4-6": {
+    "id": "claude-opus-4-6",
+    "name": "Claude Opus 4.6 (Non-reasoning, High Effort)",
+    "provider": "Anthropic",
+    "releaseDate": "2026-02-05",
+    "modelCard": "https://artificialanalysis.ai/models/claude-opus-4-6",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 46.5,
+        "source": "https://artificialanalysis.ai/"
+      },
+      "gpqa_diamond": {
+        "score": 84,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "arena_text": {
+        "score": 1497,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1543,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 5,
+      "outputPer1M": 25,
+      "tokensPerSecAPI": 46.1,
+      "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "confidence": "low",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
+        "tokensPerWeek": 50781950,
+        "estimated": true
+      },
+      "claude_max_20x": {
+        "name": "Claude Max 20×",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260416_075211.json",
+        "tokensPerWeek": 203127800,
+        "estimated": false
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "claude-sonnet-4-6": {
+    "id": "claude-sonnet-4-6",
+    "name": "Claude Sonnet 4.6 (Non-reasoning, High Effort)",
+    "provider": "Anthropic",
+    "releaseDate": "2026-02-17",
+    "modelCard": "https://artificialanalysis.ai/models/claude-sonnet-4-6",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 44.4,
+        "source": "https://artificialanalysis.ai/"
+      },
+      "gpqa_diamond": {
+        "score": 79.9,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "arena_text": {
+        "score": 1462,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1521,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 3,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 47.9,
+      "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "claude-4-5-haiku": {
+    "id": "claude-4-5-haiku",
+    "name": "Claude 4.5 Haiku (Non-reasoning)",
+    "provider": "Anthropic",
+    "releaseDate": "2025-10-15",
+    "modelCard": "https://artificialanalysis.ai/models/claude-4-5-haiku",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 31.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "gpqa_diamond": {
+        "score": 64.6,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "livecodebench": {
+        "score": 51.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "arena_text": {
+        "score": 1407,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1312,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 1,
+      "outputPer1M": 5,
+      "tokensPerSecAPI": 98.7,
+      "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-03"
+  },
+  "claude-4-5-sonnet": {
+    "id": "claude-4-5-sonnet",
+    "name": "Claude 4.5 Sonnet (Non-reasoning)",
+    "provider": "Anthropic",
+    "releaseDate": "2025-09-29",
+    "modelCard": "https://artificialanalysis.ai/models/claude-4-5-sonnet",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "gpqa_diamond": {
+        "score": 72.7,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "livecodebench": {
+        "score": 59,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "arena_text": {
+        "score": 1452,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1386,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 3,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 46.3,
+      "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+    },
+    "local": null,
+    "subscriptions": {
+      "claude_pro": {
+        "name": "Claude Pro",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
+        "source": "https://www.anthropic.com/pricing",
+        "tokensPerWeek": 4480000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-03"
+  },
+  "gpt-5-4": {
+    "id": "gpt-5-4",
+    "name": "GPT-5.4 (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2026-03-05",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-4",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 57.2,
+        "source": "https://artificialanalysis.ai/"
+      },
+      "gpqa_diamond": {
+        "score": 92,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "arena_text": {
+        "score": 1466,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1457,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 2.5,
+      "outputPer1M": 15,
+      "tokensPerSecAPI": 84.7,
+      "source": "https://artificialanalysis.ai/models/gpt-5-4"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883,
+        "estimated": false
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      },
+      "chatgpt_business": {
+        "name": "ChatGPT Business",
+        "monthlyPrice": 30,
+        "confidence": "high",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025,
+        "estimated": false
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "gpt-5-3-codex": {
+    "id": "gpt-5-3-codex",
+    "name": "GPT-5.3 Codex (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2026-02-05",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-3-codex",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 54,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "gpqa_diamond": {
+        "score": 91.5,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "arena_text": {
+        "score": 1456,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1407,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.75,
+      "outputPer1M": 14,
+      "tokensPerSecAPI": 75.5,
+      "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro (Codex)",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "gpt-5-2-codex": {
+    "id": "gpt-5-2-codex",
+    "name": "GPT-5.2 Codex (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2025-12-11",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-2-codex",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "gpqa_diamond": {
+        "score": 89.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "arena_text": {
+        "score": 1420,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      },
+      "arena_code": {
+        "score": 1335,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.75,
+      "outputPer1M": 14,
+      "tokensPerSecAPI": 99.6,
+      "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Measured 2026-04-13 via codex-cli. ? runs, undefined tokens, 12% 5h / 6% weekly consumed.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_plus_20260413.json",
+        "tokensPerWeek": 13280883,
+        "estimated": false
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      },
+      "chatgpt_business": {
+        "name": "ChatGPT Business",
+        "monthlyPrice": 30,
+        "confidence": "high",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "notes": "Measured 2026-04-15 via codex-cli. 5 runs, 2,404,321 tokens, 21% 5h / 4% weekly consumed.",
+        "tokensPerWeek": 60108025,
+        "estimated": false
+      }
+    },
+    "_aa_synced": "2026-04-03"
+  },
+  "gemini-3-1-pro": {
+    "id": "gemini-3-1-pro",
+    "name": "Gemini 3.1 Pro Preview",
+    "provider": "Google",
+    "releaseDate": "2026-02-19",
+    "modelCard": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 57.2,
+        "source": "https://artificialanalysis.ai/"
+      },
+      "gpqa_diamond": {
+        "score": 94.1,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "arena_text": {
+        "score": 1493,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1456,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 2,
+      "outputPer1M": 12,
+      "tokensPerSecAPI": 129.4,
+      "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+    },
+    "local": null,
+    "subscriptions": {
+      "google_ai_ultra": {
+        "name": "Google AI Ultra",
+        "monthlyPrice": 250,
+        "confidence": "low",
+        "notes": "Google AI Ultra (/mo). Estimated ~1000 msgs/day avg turn 6,400 tokens.",
+        "source": "https://one.google.com/about/plans",
+        "tokensPerWeek": 44800000,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-08"
+  },
+  "glm-5": {
+    "id": "glm-5",
+    "name": "GLM-5 (Reasoning)",
+    "provider": "Z AI",
+    "releaseDate": "2026-02-11",
+    "modelCard": "https://huggingface.co/THUDM/GLM-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49.8,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "gpqa_diamond": {
+        "score": 82,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "arena_text": {
+        "score": 1456,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1441,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 1,
+      "outputPer1M": 3.2,
+      "tokensPerSecAPI": 68.7,
+      "source": "https://artificialanalysis.ai/models/glm-5"
+    },
+    "local": {
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 8,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "744B MoE, 40B active params. Requires 128GB+ unified memory. MIT license.",
+        "source": "https://huggingface.co/THUDM/GLM-5"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "glm-4.7": {
+    "id": "glm-4.7",
+    "name": "GLM-4.7 (Reasoning)",
+    "provider": "Z AI",
+    "releaseDate": "2025-12-22",
+    "modelCard": "https://artificialanalysis.ai/models/glm-4-7",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 42.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "gpqa_diamond": {
+        "score": 85.9,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "livecodebench": {
+        "score": 89.4,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "arena_text": {
+        "score": 1443,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1439,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.6,
+      "outputPer1M": 2.2,
+      "tokensPerSecAPI": 74.6,
+      "source": "https://artificialanalysis.ai/models/glm-4-7"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 45,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "notes": "Estimated from GLM-4.7 architecture (similar to 30-40B dense models).",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 30,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "minimax-m2.5": {
+    "id": "minimax-m2.5",
+    "name": "MiniMax-M2.5",
+    "provider": "MiniMax",
+    "releaseDate": "2026-02-12",
+    "modelCard": "https://artificialanalysis.ai/models/minimax-m2-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 41.9,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "gpqa_diamond": {
+        "score": 84.8,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "arena_text": {
+        "score": 1404,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1396,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 1.2,
+      "tokensPerSecAPI": 72.5,
+      "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+    },
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 18,
+        "quantization": "TQ1_0",
+        "vramRequired": 128,
+        "notes": "MoE — aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "source": "https://openbenchmarking.org/test/pts/llama-cpp"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "minimax-m2.7": {
+    "id": "minimax-m2.7",
+    "name": "MiniMax-M2.7",
+    "provider": "MiniMax",
+    "releaseDate": "2026-03-18",
+    "modelCard": "https://artificialanalysis.ai/models/minimax-m2-7",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 49.6,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "gpqa_diamond": {
+        "score": 87.4,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "arena_text": {
+        "score": 1403,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1428,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 1.2,
+      "tokensPerSecAPI": 43,
+      "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+    },
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 12,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE — requires 128GB+ unified memory.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "kimi-k2.5": {
+    "id": "kimi-k2.5",
+    "name": "Kimi K2.5 (Reasoning)",
+    "provider": "Kimi",
+    "releaseDate": "2026-01-27",
+    "modelCard": "https://artificialanalysis.ai/models/kimi-k2-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 46.8,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "gpqa_diamond": {
+        "score": 87.9,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "arena_text": {
+        "score": 1452,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1429,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.6,
+      "outputPer1M": 3,
+      "tokensPerSecAPI": 31.6,
+      "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+    },
+    "local": {
+      "framework_desktop_128gb": {
+        "tokensPerSec": 10,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE 1T/32B active. Extremely large — needs 128GB+ unified memory with heavy quantization.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      },
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 8,
+        "quantization": "Q4_K_M",
+        "vramRequired": 128,
+        "notes": "MoE 1T/32B active. Estimated — community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "deepseek-v3.2": {
+    "id": "deepseek-v3.2",
+    "name": "DeepSeek V3.2 (Non-reasoning)",
+    "provider": "DeepSeek",
+    "releaseDate": "2025-12-01",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v3-2",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 32.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "gpqa_diamond": {
+        "score": 75.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "livecodebench": {
+        "score": 59.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "arena_text": {
+        "score": 1424,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1327,
+        "source": "https://arena.ai/leaderboard/code"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.28,
+      "outputPer1M": 0.42,
+      "tokensPerSecAPI": 47.3,
+      "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 15,
+        "quantization": "Q4_K_M",
+        "vramRequired": 80,
+        "notes": "Requires 2× RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "framework_desktop_128gb": {
+        "tokensPerSec": 14,
+        "quantization": "Q4_K_M",
+        "vramRequired": 110,
+        "notes": "Full unified memory run. Estimated from V3.1 on same hardware class.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 12,
+        "quantization": "Q4_K_M",
+        "vramRequired": 110,
+        "notes": "Estimated — 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "qwen3.5-35b-a3b": {
+    "id": "qwen3.5-35b-a3b",
+    "name": "Qwen3.5 35B A3B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "gpqa_diamond": {
+        "score": 84.5,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "arena_code": {
+        "score": 1247,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1397,
+        "source": "https://arena.ai/leaderboard/text"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.25,
+      "outputPer1M": 2,
+      "tokensPerSecAPI": 133.2,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 122,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "MoE — only 3B active params per token. Fits in single 24GB GPU.",
+        "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 110,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "MoE — only 3B active params per token.",
+        "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 65,
+        "quantization": "Q4_K_M",
+        "vramRequired": 22,
+        "notes": "Estimated from M3 Ultra 8-bit results scaled for M3 Max bandwidth.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
+        "_estimated": true
+      },
+      "mac_m3_max_128gb": {
+        "tokensPerSec": 4.4,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 4,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 4 msgs. DB variant: qwen3.5:35b-a3b-coding-nvfp4"
+      },
+      "mac_m1_max_64gb": {
+        "tokensPerSec": 14.2,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 5,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 5 msgs. DB variant: qwen/qwen3.5-35b-a3b"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "qwen3.5-27b": {
+    "id": "qwen3.5-27b",
+    "name": "Qwen3.5 27B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-27b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 42.1,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "gpqa_diamond": {
+        "score": 85.8,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "arena_code": {
+        "score": 1344,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1404,
+        "source": "https://arena.ai/leaderboard/text"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.3,
+      "outputPer1M": 2.4,
+      "tokensPerSecAPI": 90.2,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 58,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "Dense 27B. Community reports 55–65 t/s at Q4_K_M on RTX 4090.",
+        "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 48,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "Dense 27B. Scaled from 4090 for 3090 bandwidth.",
+        "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms",
+        "_estimated": true
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 22,
+        "quantization": "Q4_K_M",
+        "vramRequired": 16,
+        "notes": "MLX 8-bit benchmark on M3 Ultra 512GB gives 21.3 t/s; M3 Max 64GB similar.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
+      },
+      "rx_7900_xtx": {
+        "tokensPerSec": 2.9,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 6,
+        "_estimated": false,
+        "notes": "DC telemetry data: 6 messages, Ryzen 9 3900X, Windows"
+      },
+      "rtx_4060": {
+        "tokensPerSec": 6.5,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 6,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 6 msgs. DB variant: qwen3.5:latest"
+      },
+      "rtx_3060": {
+        "tokensPerSec": 0.5,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 8,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 8 msgs. aggregated from 2 DB model variants: jaahas/qwen3.5-uncensored:latest, qwen3.5:27b-20k"
+      },
+      "mac_m1_max_64gb": {
+        "tokensPerSec": 1.2,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 5,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 5 msgs. DB variant: qwen3.5-27b-ultra-uncensored-heretic-v1"
+      },
+      "rtx_4060_laptop": {
+        "tokensPerSec": 0.1,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: Qwen:latest"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "qwen3.5-122b-a10b": {
+    "id": "qwen3.5-122b-a10b",
+    "name": "Qwen3.5 122B A10B (Reasoning)",
+    "provider": "Alibaba",
+    "releaseDate": "2026-02-24",
+    "modelCard": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 41.6,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "gpqa_diamond": {
+        "score": 85.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "arena_code": {
+        "score": 1362,
+        "source": "https://arena.ai/leaderboard/code"
+      },
+      "arena_text": {
+        "score": 1417,
+        "source": "https://arena.ai/leaderboard/text"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.4,
+      "outputPer1M": 3.2,
+      "tokensPerSecAPI": 130.8,
+      "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+    },
+    "local": {
+      "mac_m4_max_128gb": {
+        "tokensPerSec": 55,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE — 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
+        "_estimated": true
+      },
+      "mac_m3_max_128gb": {
+        "tokensPerSec": 42,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE — 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
+      },
+      "framework_desktop_128gb": {
+        "tokensPerSec": 38,
+        "quantization": "Q4_K_M",
+        "vramRequired": 75,
+        "notes": "MoE. DGX Spark (similar unified memory architecture) reports ~38 t/s at Q4.",
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
+        "_estimated": true
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "gemma-4-31b": {
+    "name": "Gemma 4 31B",
+    "provider": "Google",
+    "releaseDate": "2026-02-01",
+    "modelCard": "https://huggingface.co/google/gemma-4-31b-it",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 39.2,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "arena_text": {
+        "score": 1451,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1290,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      }
+    },
+    "api": {
+      "inputPer1M": 0.14,
+      "outputPer1M": 0.4,
+      "source": "https://openrouter.ai/google/gemma-4-31b-it"
+    },
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 19.5,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: gemma4:latest"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 28,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://huggingface.co/google/gemma-4-31b-it"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 28,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://till-freitag.com/en/blog/open-source-llm-comparison",
+        "_estimated": true
+      },
+      "mac_m4_48gb": {
+        "tokensPerSec": 32,
+        "quantization": "Q4_K_M",
+        "vramRequired": 20,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
+        "_estimated": true
+      },
+      "macbook_pro_2019_i9": {
+        "tokensPerSec": 21.9,
+        "quantization": "cloud (mixed)",
+        "vramRequired": 64,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 2,
+        "_estimated": false,
+        "notes": "DC telemetry data: 2 messages, i9-9980HK, macOS"
+      },
+      "rtx_500_ada_laptop": {
+        "tokensPerSec": 14.6,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: gemma4:latest"
+      },
+      "mac_m1_pro": {
+        "tokensPerSec": 6.2,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 8,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 8 msgs. aggregated from 2 DB model variants: gemma4:latest, gemma4:latest"
+      },
+      "mac_m2_8gb": {
+        "tokensPerSec": 2.1,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 7,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 7 msgs. DB variant: gemma4:latest"
+      },
+      "rtx_2000_ada": {
+        "tokensPerSec": 2.1,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 3,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 3 msgs. DB variant: gemma4:latest"
+      },
+      "mac_m2_pro": {
+        "tokensPerSec": 0.7,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 2,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 2 msgs. DB variant: gemma4:latest"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-08"
+  },
+  "gemma-4-26b-a4b": {
+    "name": "Gemma 4 26B A4B",
+    "provider": "Google",
+    "releaseDate": "2026-02-01",
+    "modelCard": "https://huggingface.co/google/gemma-4-26b-a4b-it",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 26.1,
+        "source": "https://artificialanalysis.ai/models/gemma-4-26b-a4b-it"
+      },
+      "arena_text": {
+        "score": 1438,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1270,
+        "source": "https://lmarena.ai/leaderboard",
+        "_estimated": true
+      }
+    },
+    "api": null,
+    "local": {
+      "rtx_4090": {
+        "tokensPerSec": 1.2,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: gemma-4-26b-a4b-it"
+      },
+      "mac_m3_max_64gb": {
+        "tokensPerSec": 45,
+        "quantization": "Q4_K_M",
+        "vramRequired": 8,
+        "source": "https://huggingface.co/google/gemma-4-26b-a4b-it"
+      },
+      "rtx_5090": {
+        "tokensPerSec": 85,
+        "quantization": "Q4_K_M",
+        "vramRequired": 8,
+        "notes": "MoE — only 4B active. Extremely fast for its capability level.",
+        "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
+      },
+      "rtx_3090": {
+        "tokensPerSec": 48,
+        "quantization": "Q4_K_M",
+        "vramRequired": 8,
+        "source": "https://github.com/ggml-org/llama.cpp/discussions",
+        "_estimated": true
+      },
+      "mac_m1_max_64gb": {
+        "tokensPerSec": 6.4,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 5,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 5 msgs. DB variant: google/gemma-4-26b-a4b"
+      },
+      "rtx_3080_ti": {
+        "tokensPerSec": 5.6,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 1,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 1 msgs. DB variant: google/gemma-4-26b-a4b"
+      },
+      "rtx_4060": {
+        "tokensPerSec": 8.7,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 5,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 5 msgs. DB variant: bjoernb/gemma4-e4b-think:latest"
+      },
+      "rtx_5070": {
+        "tokensPerSec": 9.4,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 15,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 15 msgs. DB variant: gemma4:e4b"
+      },
+      "intel_uhd_615_laptop": {
+        "tokensPerSec": 10.1,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 4,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 4 msgs. DB variant: gemma4:26b"
+      },
+      "rtx_5060_ti": {
+        "tokensPerSec": 11.5,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 10,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 10 msgs. DB variant: gemma4:e4b"
+      },
+      "mac_m4_pro": {
+        "tokensPerSec": 4.9,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 4,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 4 msgs. DB variant: gemma4:e4b"
+      },
+      "gtx_1660_super": {
+        "tokensPerSec": 1.2,
+        "source": "https://github.com/desktop-commander/best-value-ai#dc-telemetry-data",
+        "_dcMsgs": 2,
+        "_estimated": false,
+        "notes": "DC telemetry data (2026-04-17): 2 msgs. DB variant: google/gemma-4-e4b"
+      }
+    },
+    "subscriptions": null,
+    "_aa_synced": "2026-04-03"
+  }
+}

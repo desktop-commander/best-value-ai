@@ -424,6 +424,31 @@ If you use this data or host a fork, please credit:
 fs.writeFileSync(path.join(REPO, 'llms.txt'), llmsTxt);
 console.log(`  ✓ Generated llms.txt: ${llmsTxt.split('\n').length} lines`);
 
+// ── Sync data snapshot into the ai-value-advisor skill ──
+// The skill ships with a bundled copy of models.json, hardware.json, and
+// benchmarks.json so agents can work offline without curl'ing the site.
+// Regenerate the snapshot on every prerender run so the bundled data stays
+// in sync with what the live site serves. Also bumps snapshot_date in _meta.json.
+const SKILL_DATA_DIR = path.join(REPO, 'skills', 'ai-value-advisor', 'data');
+if (fs.existsSync(path.dirname(SKILL_DATA_DIR))) {
+  fs.mkdirSync(SKILL_DATA_DIR, { recursive: true });
+  const dataFiles = ['models.json', 'hardware.json', 'benchmarks.json'];
+  for (const f of dataFiles) {
+    fs.copyFileSync(path.join(REPO, 'data', f), path.join(SKILL_DATA_DIR, f));
+  }
+  // Update _meta.json — preserve existing fields, only bump the date
+  const metaPath = path.join(SKILL_DATA_DIR, '_meta.json');
+  let meta = {};
+  if (fs.existsSync(metaPath)) {
+    try { meta = JSON.parse(fs.readFileSync(metaPath, 'utf-8')); } catch { meta = {}; }
+  }
+  meta.snapshot_date = today;
+  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2) + '\n');
+  console.log(`  ✓ Synced skill data snapshot: ${dataFiles.length} files + _meta.json (snapshot_date=${today})`);
+} else {
+  console.log(`  ⚠ skills/ folder not present — skipping ai-value-advisor data sync`);
+}
+
 console.log(`Pre-rendered SEO content into index.html:`);
 console.log(`  ✓ Ranked list: ${top20.length} models pre-rendered (was "Loading…")`);
 console.log(`  ✓ Winners: Local=${bestLocal?.model || 'none'}, Sub=${bestSub?.model || 'none'}, API=${bestApi?.model || 'none'}`);

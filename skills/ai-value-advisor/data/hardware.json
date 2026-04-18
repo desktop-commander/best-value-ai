@@ -1,0 +1,302 @@
+{
+  "rtx_3090": {
+    "name": "RTX 3090",
+    "price": 975.36,
+    "vram": 24,
+    "year": 2020,
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-3090-price-history-and-specs/",
+    "notes": "Discontinued. Used $975.36. Retail: $1488, Used: $975.36. Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "rtx_4090": {
+    "name": "RTX 4090",
+    "price": 1599,
+    "vram": 24,
+    "year": 2022,
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-4090-price-history-and-specs/",
+    "notes": "MSRP $1599. Retail: $2755, Used: $2450. Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "rtx_5090": {
+    "name": "RTX 5090",
+    "price": 1999,
+    "vram": 32,
+    "year": 2025,
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-5090-price-history-and-specs/",
+    "notes": "MSRP $1999. Retail: $3899, Used: $2862. Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m3_max_64gb": {
+    "name": "Mac M3 Max 64GB",
+    "price": 1153,
+    "vram": 64,
+    "year": 2023,
+    "source": "https://swappa.com/prices/macbook-pro-2023-16",
+    "notes": "MacBook Pro 2023 16\" M3 Max (Swappa used). Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m3_max_128gb": {
+    "name": "Mac M3 Max 128GB",
+    "price": 5500,
+    "vram": 128,
+    "year": 2023,
+    "source": "https://www.apple.com/shop/buy-mac/macbook-pro",
+    "notes": "MacBook Pro 16\" M3 Max 128GB. apple.com configured price. Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m4_48gb": {
+    "name": "Mac M4 48GB",
+    "price": 2699,
+    "vram": 48,
+    "year": 2024,
+    "notes": "MacBook Pro 16\" base config. Scraped from apple.com. Checked 2026-04-11.",
+    "source": "https://www.apple.com/shop/buy-mac/macbook-pro",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m4_max_128gb": {
+    "name": "Mac M4 Max 128GB",
+    "price": 4999,
+    "vram": 128,
+    "year": 2024,
+    "source": "https://www.apple.com/shop/buy-mac/macbook-pro",
+    "notes": "MacBook Pro 16\" M4 Max 128GB. apple.com configured price. Checked 2026-04-11.",
+    "lastVerified": "2026-04-11"
+  },
+  "framework_desktop_128gb": {
+    "name": "Framework Desktop (Ryzen AI Max+ 395, 128GB)",
+    "price": 3170,
+    "vram": 128,
+    "year": 2025,
+    "notes": "Converted from €2700 at ~1.1738 USD/EUR (30-day avg).",
+    "source": "https://wise.com/us/currency-converter/eur-to-usd-rate?amount=2700"
+  },
+  "dual_rtx_3090": {
+    "name": "2× RTX 3090",
+    "price": 3000,
+    "vram": 48,
+    "year": 2020,
+    "notes": "Two RTX 3090s for larger models",
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090-3090ti/"
+  },
+  "rtx_5070": {
+    "name": "RTX 5070",
+    "price": 549,
+    "vram": 12,
+    "year": 2025,
+    "notes": "MSRP $549. Retail: $635, Used: $565. Checked 2026-04-11.",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-5070-price-history-and-specs/",
+    "lastVerified": "2026-04-11"
+  },
+  "rtx_4060": {
+    "name": "RTX 4060",
+    "price": 299,
+    "vram": 8,
+    "year": 2023,
+    "notes": "MSRP $299. Retail: $339, Used: $265.99. Checked 2026-04-11.",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-4060-price-history-and-specs/",
+    "lastVerified": "2026-04-11"
+  },
+  "rtx_4060_laptop": {
+    "name": "RTX 4060 Laptop (full system)",
+    "price": 1100,
+    "vram": 8,
+    "year": 2023,
+    "notes": "Full laptop system price. GPU-only cost not separable.",
+    "source": "https://www.nvidia.com/en-us/geforce/laptops/"
+  },
+  "rtx_3080_ti": {
+    "name": "RTX 3080 Ti (used)",
+    "price": 449,
+    "vram": 12,
+    "year": 2021,
+    "notes": "Discontinued. Used $449. Retail: $1797, Used: $449. Checked 2026-04-11.",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rtx-3080-ti-price-history-and-specs/",
+    "lastVerified": "2026-04-11"
+  },
+  "rtx_a3000_laptop": {
+    "name": "RTX A3000 Laptop (full system)",
+    "price": 1500,
+    "vram": 6,
+    "year": 2021,
+    "notes": "Workstation laptop with RTX A3000. Full system price estimate.",
+    "source": "https://www.nvidia.com/en-us/design-visualization/rtx-a3000/"
+  },
+  "rx_7900_xtx": {
+    "name": "AMD RX 7900 XTX",
+    "price": 999,
+    "vram": 24,
+    "year": 2022,
+    "notes": "MSRP $999. Retail: $1334, Used: $824.95. Checked 2026-04-11.",
+    "source": "https://bestvaluegpu.com/history/new-and-used-rx-7900-xtx-price-history-and-specs/",
+    "lastVerified": "2026-04-11"
+  },
+  "macbook_pro_2019_i9": {
+    "name": "MacBook Pro 2019 i9 64GB (full system)",
+    "price": 320,
+    "vram": 64,
+    "year": 2019,
+    "notes": "MacBook Pro 2019 16\" i9 (Swappa used). Checked 2026-04-11.",
+    "source": "https://swappa.com/prices/macbook-pro-2019-16",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m1_max_64gb": {
+    "name": "Mac M1 Max 64GB (full system)",
+    "price": 1284,
+    "vram": 64,
+    "year": 2021,
+    "notes": "MacBook Pro 2021 16\" M1 Max (Swappa used). Checked 2026-04-11.",
+    "source": "https://swappa.com/prices/macbook-pro-2021-16",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m2_8gb": {
+    "name": "Mac M2 8GB (full system)",
+    "price": 800,
+    "vram": 8,
+    "year": 2022,
+    "notes": "MacBook Air M2 8GB. Refurbished/sale price. Very limited for LLM inference. Checked 2026-04-11.",
+    "source": "https://www.apple.com/shop/buy-mac/macbook-air",
+    "lastVerified": "2026-04-11"
+  },
+  "mac_m4_24gb": {
+    "name": "Mac M4 24GB (full system)",
+    "price": 1699,
+    "vram": 24,
+    "year": 2024,
+    "notes": "MacBook Pro 14\" base config. Scraped from apple.com. Checked 2026-04-11.",
+    "source": "https://www.apple.com/shop/buy-mac/macbook-pro",
+    "lastVerified": "2026-04-11"
+  },
+  "intel_iris_xe_laptop": {
+    "name": "Intel Iris Xe Laptop 16GB (full system)",
+    "price": 600,
+    "vram": 16,
+    "year": 2022,
+    "notes": "Budget laptop with i7-1355U. CPU-only inference, integrated GPU. Estimated system price.",
+    "source": "https://www.intel.com/content/www/us/en/products/platforms/details/alder-lake-p.html"
+  },
+  "intel_uhd_615_laptop": {
+    "name": "Intel UHD 615 Laptop 16GB (full system)",
+    "price": 300,
+    "vram": 16,
+    "year": 2018,
+    "notes": "Very old/cheap laptop with Core m3-8100Y. CPU-only inference. Used price estimate.",
+    "source": "https://www.intel.com/content/www/us/en/products/platforms/details/amber-lake-y.html"
+  },
+  "rtx_5060_ti": {
+    "name": "RTX 5060 Ti",
+    "price": 430,
+    "vram": 16,
+    "year": 2025,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/"
+  },
+  "rtx_4070": {
+    "name": "RTX 4070",
+    "price": 550,
+    "vram": 12,
+    "year": 2023,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070/"
+  },
+  "rtx_3080": {
+    "name": "RTX 3080",
+    "price": 400,
+    "vram": 10,
+    "year": 2020,
+    "notes": "Used market price",
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080-3080ti/"
+  },
+  "rtx_3060": {
+    "name": "RTX 3060",
+    "price": 280,
+    "vram": 12,
+    "year": 2021,
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3060-3060ti/"
+  },
+  "gtx_1660_super": {
+    "name": "GTX 1660 SUPER (used)",
+    "price": 120,
+    "vram": 6,
+    "year": 2019,
+    "notes": "Used market price; very limited for modern LLMs",
+    "source": "https://www.nvidia.com/en-us/geforce/graphics-cards/16-series/gtx-1660-super/"
+  },
+  "rtx_2000_ada": {
+    "name": "RTX 2000 Ada Generation",
+    "price": 650,
+    "vram": 16,
+    "year": 2024,
+    "notes": "Professional workstation card",
+    "source": "https://www.nvidia.com/en-us/design-visualization/rtx-2000-ada/"
+  },
+  "rtx_4070_laptop": {
+    "name": "RTX 4070 Laptop (full system)",
+    "price": 1500,
+    "vram": 8,
+    "year": 2023,
+    "notes": "Laptop GPU, shared system RAM",
+    "source": "https://www.nvidia.com/en-us/geforce/laptops/"
+  },
+  "rtx_500_ada_laptop": {
+    "name": "RTX 500 Ada Laptop (full system)",
+    "price": 1800,
+    "vram": 4,
+    "year": 2024,
+    "notes": "Mobile workstation card",
+    "source": "https://www.nvidia.com/en-us/design-visualization/rtx-500-ada-laptop/"
+  },
+  "amd_780m_igpu": {
+    "name": "AMD Radeon 780M (iGPU, full system)",
+    "price": 900,
+    "vram": 8,
+    "year": 2023,
+    "notes": "Integrated GPU on Ryzen 7040/8000 series; uses shared system RAM",
+    "source": "https://www.amd.com/en/products/apu/amd-ryzen-7-7840u"
+  },
+  "mac_m4_pro": {
+    "name": "Mac M4 Pro 24GB (full system)",
+    "price": 1999,
+    "vram": 24,
+    "year": 2024,
+    "notes": "Unified memory",
+    "source": "https://www.apple.com/shop/buy-mac/mac-mini"
+  },
+  "mac_m2_ultra": {
+    "name": "Mac M2 Ultra 64GB (full system)",
+    "price": 3999,
+    "vram": 64,
+    "year": 2023,
+    "notes": "Mac Studio or Mac Pro, unified memory",
+    "source": "https://www.apple.com/shop/refurbished/mac/mac-studio"
+  },
+  "mac_m2_pro": {
+    "name": "Mac M2 Pro 16GB (full system)",
+    "price": 1499,
+    "vram": 16,
+    "year": 2023,
+    "notes": "MacBook Pro or Mac mini",
+    "source": "https://www.apple.com/shop/refurbished/mac"
+  },
+  "mac_m1_pro": {
+    "name": "Mac M1 Pro 16GB (full system)",
+    "price": 1399,
+    "vram": 16,
+    "year": 2021,
+    "notes": "14/16-inch MacBook Pro, unified memory",
+    "source": "https://www.apple.com/shop/refurbished/mac/macbook-pro"
+  },
+  "mac_m1_8gb": {
+    "name": "Mac M1 8GB (full system)",
+    "price": 699,
+    "vram": 8,
+    "year": 2020,
+    "notes": "MacBook Air, MacBook Pro 13\", Mac mini",
+    "source": "https://www.apple.com/shop/refurbished/mac"
+  },
+  "intel_uhd_laptop": {
+    "name": "Intel UHD Graphics Laptop (full system)",
+    "price": 450,
+    "vram": 16,
+    "year": 2019,
+    "notes": "Generic Intel UHD integrated GPU, shared system RAM",
+    "source": "https://www.intel.com/content/www/us/en/products/details/processors/core.html"
+  }
+}
