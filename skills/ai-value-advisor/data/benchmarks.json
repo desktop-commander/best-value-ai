@@ -100,5 +100,115 @@
     "recommended": false,
     "stable": false,
     "warning": "Saturated benchmark"
+  },
+  "aa_coding_index": {
+    "name": "AA Coding Index",
+    "description": "Artificial Analysis composite coding score. Aggregates coding-focused evaluations (LiveCodeBench, SciCode, Terminal-Bench, SWE-Bench-family) into one score.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "aa_math_index": {
+    "name": "AA Math Index",
+    "description": "Artificial Analysis composite math score. Aggregates math evaluations including AIME and MATH-500.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "hle": {
+    "name": "Humanity's Last Exam",
+    "description": "2,500 expert-authored questions spanning dozens of fields, designed to resist guessing and memorization. Frontier models still score below 50%.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://lastexam.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "scicode": {
+    "name": "SciCode",
+    "description": "Scientific coding benchmark. Tests ability to implement scientific algorithms and problems across physics, math, chemistry, biology.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://scicode-bench.github.io/",
+    "recommended": true,
+    "stable": true
+  },
+  "aa_lcr": {
+    "name": "AA-LCR (Long-Context Reasoning)",
+    "description": "Artificial Analysis long-context reasoning benchmark. Tests multi-step reasoning over long inputs — closer to agentic real-world tasks than single-turn QA.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "tau2_bench": {
+    "name": "τ²-Bench (Telecom)",
+    "description": "Dual-control conversational benchmark simulating telecom support. Both agent and simulated user must coordinate actions to resolve issues — tests agentic behavior.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/evaluations/tau2-bench-telecom",
+    "recommended": true,
+    "stable": true
+  },
+  "terminalbench_hard": {
+    "name": "Terminal-Bench Hard",
+    "description": "Agentic terminal benchmark. Tests multi-step command-line task completion — software engineering, sysadmin, data processing. Frontier models score <65%.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://www.tbench.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "ifbench": {
+    "name": "IFBench (Instruction Following)",
+    "description": "Measures how precisely models follow complex multi-constraint instructions. Direct proxy for reliability in real workflows.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
+  },
+  "mmlu_pro": {
+    "name": "MMLU-Pro",
+    "description": "Harder, contamination-resistant successor to MMLU. 10 answer options, reasoning-heavy questions. Not yet saturated.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://huggingface.co/datasets/TIGER-Lab/MMLU-Pro",
+    "recommended": true,
+    "stable": true
+  },
+  "livecodebench": {
+    "name": "LiveCodeBench",
+    "description": "Contamination-resistant coding benchmark drawn from ongoing programming contests. Problems added monthly after model training cutoffs.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://livecodebench.github.io/",
+    "recommended": true,
+    "stable": true
+  },
+  "aime_25": {
+    "name": "AIME 2025",
+    "description": "American Invitational Mathematics Examination 2025 problems. Fresh problems chosen to avoid contamination with pretraining data.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
   }
 }

@@ -39,10 +39,18 @@ const OPENROUTER_API = 'https://openrouter.ai/api/v1/models';
 
 // --- Load API key ---
 function loadApiKey() {
-  const keyFile = path.join(os.homedir(), '.config', 'best-value-ai', 'aa_api_key');
-  if (!fs.existsSync(keyFile)) {
-    console.error(`
-ERROR: API key not found at ${keyFile}
+  const candidates = [
+    path.join(os.homedir(), '.config', 'best-value-ai', 'aa_api_key'),
+    path.join(os.homedir(), '.config', 'llm-value-comparison', 'aa_api_key'), // legacy path
+  ];
+  for (const keyFile of candidates) {
+    if (fs.existsSync(keyFile)) {
+      return fs.readFileSync(keyFile, 'utf8').trim();
+    }
+  }
+  console.error(`
+ERROR: API key not found. Tried:
+${candidates.map(c => `  - ${c}`).join('\n')}
 
 To fix:
   1. Get a free API key at https://artificialanalysis.ai/login
@@ -50,9 +58,7 @@ To fix:
   3. echo "your_key_here" > ~/.config/best-value-ai/aa_api_key
   4. chmod 600 ~/.config/best-value-ai/aa_api_key
 `);
-    process.exit(1);
-  }
-  return fs.readFileSync(keyFile, 'utf8').trim();
+  process.exit(1);
 }
 
 // --- Models we want to track (slug patterns from AA) ---
@@ -86,10 +92,20 @@ const SLUG_TO_OUR_ID = {
   'claude-opus-4-6':          'claude-opus-4-6',
   'claude-sonnet-4-6':        'claude-sonnet-4-6',
   'claude-opus-4-5':          'claude-opus-4-5',
-  'claude-opus-4-5':          'claude-opus-4-5',
+  'claude-4-opus':            'claude-opus-4',
+  'claude-4-sonnet':          'claude-sonnet-4',
+  'claude-4-5-haiku':         'claude-4-5-haiku',
+  'claude-4-5-sonnet':        'claude-4-5-sonnet',
+  'gpt-4o':                   'gpt-4o',
+  'o3':                       'o3',
+  'gpt-5-2-codex':            'gpt-5-2-codex',
+  'gpt-oss-120b':             'gpt-oss-120b',
+  'deepseek-v3':              'deepseek-v3',
   'gemini-3-1-pro-preview':   'gemini-3-1-pro',
   'gemini-3-pro-preview':     'gemini-3-pro',
+  'gemini-3-pro':             'gemini-3-pro',
   'gemini-3-flash-preview':   'gemini-3-flash',
+  'gemini-3-flash':           'gemini-3-flash',
   'llama-3-1-instruct-70b':   'llama-3.1-70b',
   'llama-3-1-instruct-8b':    'llama-3.1-8b',
   'qwq-32b':                  'qwen-3-32b',
@@ -111,6 +127,39 @@ const SLUG_TO_OUR_ID = {
   'gemma-4-26b-a4b-it':       'gemma-4-26b-a4b',
 };
 
+// --- Evaluation field mapping ---
+// AA API field -> { ourKey, scale }
+// scale: 'index' = as-is (already 0-100), 'pct' = multiply by 100 (was 0-1)
+const AA_EVAL_MAP = {
+  artificial_analysis_intelligence_index: { key: 'aa_intelligence', scale: 'index' },
+  artificial_analysis_coding_index:       { key: 'aa_coding_index', scale: 'index' },
+  artificial_analysis_math_index:         { key: 'aa_math_index',   scale: 'index' },
+  gpqa:                                    { key: 'gpqa_diamond',    scale: 'pct' },
+  hle:                                     { key: 'hle',             scale: 'pct' },
+  scicode:                                 { key: 'scicode',         scale: 'pct' },
+  lcr:                                     { key: 'aa_lcr',          scale: 'pct' },
+  tau2:                                    { key: 'tau2_bench',      scale: 'pct' },
+  terminalbench_hard:                      { key: 'terminalbench_hard', scale: 'pct' },
+  ifbench:                                 { key: 'ifbench',         scale: 'pct' },
+  mmlu_pro:                                { key: 'mmlu_pro',        scale: 'pct' },
+  livecodebench:                           { key: 'livecodebench',   scale: 'pct' },
+  aime_25:                                 { key: 'aime_25',         scale: 'pct' },
+};
+
+function buildBenchmarksFromEvals(ev, slug) {
+  const out = {};
+  const src = `https://artificialanalysis.ai/models/${slug}`;
+  for (const [aaField, cfg] of Object.entries(AA_EVAL_MAP)) {
+    const v = ev[aaField];
+    if (v == null) continue;
+    const score = cfg.scale === 'pct'
+      ? parseFloat((v * 100).toFixed(1))
+      : parseFloat(v.toFixed(1));
+    out[cfg.key] = { score, source: src };
+  }
+  return out;
+}
+
 // --- Convert AA model to our format ---
 function aaToOurFormat(aa) {
   const slug = aa.slug;
@@ -124,22 +173,7 @@ function aaToOurFormat(aa) {
     provider: aa.model_creator?.name || 'Unknown',
     releaseDate: aa.release_date || 'unknown',
     modelCard: `https://artificialanalysis.ai/models/${slug}`,
-    benchmarks: {
-      ...(ev.artificial_analysis_intelligence_index != null && {
-        aa_intelligence: {
-          score: parseFloat(ev.artificial_analysis_intelligence_index.toFixed(1)),
-          source: `https://artificialanalysis.ai/models/${slug}`
-        }
-      }),
-      ...(ev.gpqa != null && {
-        gpqa_diamond: {
-          score: parseFloat((ev.gpqa * 100).toFixed(1)),
-          source: `https://artificialanalysis.ai/models/${slug}`
-        }
-      }),
-      // Note: arena_text and arena_code are added separately in the main loop
-    // after fetching from the Arena leaderboard APIs
-    },
+    benchmarks: buildBenchmarksFromEvals(ev, slug),
     api: (p.price_1m_input_tokens != null && p.price_1m_input_tokens > 0) ? {
       inputPer1M: p.price_1m_input_tokens,
       outputPer1M: p.price_1m_output_tokens,
@@ -223,13 +257,11 @@ async function main() {
       };
     }
 
-    // Update AA benchmark score
-    if (ev.artificial_analysis_intelligence_index != null) {
+    // Update AA benchmark scores (all sub-evaluations from Intelligence Index v4.0)
+    const freshBenchmarks = buildBenchmarksFromEvals(ev, aaSlug);
+    if (Object.keys(freshBenchmarks).length > 0) {
       existing[ourId].benchmarks = existing[ourId].benchmarks || {};
-      existing[ourId].benchmarks.aa_intelligence = {
-        score: parseFloat(ev.artificial_analysis_intelligence_index.toFixed(1)),
-        source: `https://artificialanalysis.ai/models/${aaSlug}`
-      };
+      Object.assign(existing[ourId].benchmarks, freshBenchmarks);
     }
 
     // Update Arena ELO — write to arena_text and arena_code keys (stable benchmarks)

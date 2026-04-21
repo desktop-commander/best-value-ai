@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prerender": "node scripts/prerender-seo.js",
-    "sync-aa": "node scripts/sync-from-aa.js",
-    "sync-arena": "node scripts/sync-from-arena.js",
+    "sync-aa": "node scripts/sync-from-aa.mjs",
+    "sync-arena": "node scripts/sync-from-arena.mjs",
     "sync-hardware": "node scripts/sync-hardware-prices.js",
     "sync-measurements": "node scripts/update-sub-from-measurements.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Heatmap preview — Best Value AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f4f0; --surface: #ffffff; --surface2: #fafaf8;
+  --border: #e2e0da; --border2: #d0cdc5;
+  --text: #18181a; --muted: #6b6b72; --faint: #9b9ba4;
+  --green: #1a9e5c; --blue: #2557d6; --red: #d63b2f; --amber: #b45309;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; }
+h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
+  font-size: 2rem; margin: 0 0 8px; }
+p.lede { color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+.meta { color: var(--faint); font-size: 13px; margin-bottom: 24px; }
+.meta code { background: var(--surface2); padding: 2px 6px; border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+.prototype-banner { background: #fff8e1; border: 1px solid #e0c879;
+  padding: 10px 14px; border-radius: 6px; margin: 0 0 24px;
+  font-size: 13px; color: #6b5a1e; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="prototype-banner">
+<strong>Prototype — not linked from the main site.</strong>
+Standalone page for iterating on the heatmap before merging into index.html.
+</div>
+<h1>Model × Benchmark heatmap</h1>
+<p class="lede">One row per model, one column per benchmark. Cell color is per-column z-score: green = top, red = bottom, hatched = no data. Hover a cell for raw score and rank.</p>
+<div class="meta" id="meta">Loading…</div>
+<div id="heatmap"></div>
+</div>
+<div id="tooltip"></div>
+<style>
+.heatmap-scroll { overflow-x: auto; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px; }
+table.heatmap { border-collapse: separate; border-spacing: 0;
+  font-size: 12px; width: 100%; min-width: 900px; }
+table.heatmap th, table.heatmap td { padding: 0; text-align: center;
+  vertical-align: middle; }
+table.heatmap thead th { position: sticky; top: 0; z-index: 2;
+  background: var(--surface2); border-bottom: 1px solid var(--border2);
+  padding: 8px 4px; font-weight: 600; color: var(--text);
+  font-family: 'DM Sans', sans-serif; white-space: nowrap; font-size: 11px; }
+table.heatmap thead th.col-label { writing-mode: vertical-rl;
+  transform: rotate(180deg); height: 140px;
+  min-width: 36px; max-width: 36px; padding: 8px 2px; cursor: help; }
+table.heatmap thead th.model-col { writing-mode: horizontal-tb;
+  transform: none; text-align: left; padding: 8px 12px;
+  min-width: 220px; height: 140px; vertical-align: bottom; }
+table.heatmap tbody td.model-cell { text-align: left; padding: 6px 12px;
+  font-weight: 500; color: var(--text);
+  border-bottom: 1px solid var(--border); background: var(--surface);
+  white-space: nowrap; position: sticky; left: 0; z-index: 1; }
+table.heatmap tbody td.model-cell .model-name { display: block; }
+table.heatmap tbody td.model-cell .model-sub { display: block;
+  font-size: 11px; color: var(--faint); font-weight: 400; }
+table.heatmap tbody td.score-cell { border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  min-width: 36px; height: 36px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  cursor: help; color: var(--text); }
+table.heatmap tbody td.score-cell.empty { background: repeating-linear-gradient(
+  45deg, #f5f4f0, #f5f4f0 4px, #eceae4 4px, #eceae4 8px);
+  color: transparent; }
+table.heatmap tbody tr:hover td.model-cell { background: var(--surface2); }
+.z-m3 { background: #c4e9d5; }
+.z-m2 { background: #d7f0e0; }
+.z-m1 { background: #e9f6ec; }
+.z-0  { background: #f5f4f0; }
+.z-p1 { background: #fbe8e4; }
+.z-p2 { background: #f5c9c2; }
+.z-p3 { background: #eca89d; }
+#tooltip { position: fixed; pointer-events: none; background: #18181a;
+  color: #fff; padding: 8px 10px; border-radius: 4px; font-size: 12px;
+  z-index: 100; display: none; max-width: 280px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-family: 'DM Sans', sans-serif; line-height: 1.4; }
+#tooltip .t-head { font-weight: 600; margin-bottom: 2px; }
+#tooltip .t-score { font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; margin: 2px 0; }
+#tooltip .t-rank { color: #aaa; font-size: 11px; }
+#tooltip .t-desc { color: #bbb; font-size: 11px; margin-top: 6px; }
+.legend { display: flex; align-items: center; gap: 8px;
+  margin-top: 16px; font-size: 12px; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; }
+.legend-scale { display: inline-flex; border: 1px solid var(--border);
+  border-radius: 3px; overflow: hidden; }
+.legend-scale span { display: inline-block; width: 28px; height: 14px; }
+</style>
+<script>
+(async function() {
+  const [modelsRes, bmsRes] = await Promise.all([
+    fetch('data/models.json'),
+    fetch('data/benchmarks.json'),
+  ]);
+  const models = await modelsRes.json();
+  const benchmarks = await bmsRes.json();
+
+  const modelIds = Object.keys(models);
+
+  // Pick columns that have at least 4 data points
+  const colCoverage = {};
+  for (const bKey of Object.keys(benchmarks)) {
+    let c = 0;
+    for (const mId of modelIds) {
+      const s = ((models[mId].benchmarks || {})[bKey] || {}).score;
+      if (s != null) c++;
+    }
+    colCoverage[bKey] = c;
+  }
+  const stableCols = ['arena_text', 'arena_code'];
+  const compositeCols = ['aa_intelligence', 'aa_coding_index', 'aa_math_index'];
+  const subCols = Object.keys(benchmarks)
+    .filter(k => !stableCols.includes(k) && !compositeCols.includes(k))
+    .filter(k => colCoverage[k] >= 4)
+    .sort((a, b) => colCoverage[b] - colCoverage[a]);
+  const cols = [
+    ...stableCols,
+    ...compositeCols.filter(k => colCoverage[k] >= 4),
+    ...subCols
+  ];
+
+  function zScore(values) {
+    const nums = values.filter(v => v != null);
+    if (nums.length < 2) return values.map(() => null);
+    const mean = nums.reduce((a, b) => a + b, 0) / nums.length;
+    const variance = nums.reduce((s, v) => s + (v - mean) ** 2, 0) / nums.length;
+    const sd = Math.sqrt(variance);
+    if (sd === 0) return values.map(() => 0);
+    return values.map(v => v == null ? null : (v - mean) / sd);
+  }
+
+  const scoreMatrix = {}, zMatrix = {}, rankMatrix = {};
+  for (const bKey of cols) {
+    const vals = modelIds.map(mId => {
+      const s = ((models[mId].benchmarks || {})[bKey] || {}).score;
+      return s == null ? null : s;
+    });
+    scoreMatrix[bKey] = vals;
+    zMatrix[bKey] = zScore(vals);
+    const indexed = modelIds.map((mId, i) => ({ mId, val: vals[i] })).filter(x => x.val != null);
+    indexed.sort((a, b) => b.val - a.val);
+    const ranks = {};
+    indexed.forEach((x, i) => ranks[x.mId] = { rank: i + 1, total: indexed.length });
+    rankMatrix[bKey] = ranks;
+  }
+
+  function rowKey(mId) {
+    const b = (models[mId] || {}).benchmarks || {};
+    const ai = b.aa_intelligence && b.aa_intelligence.score;
+    if (ai != null) return ai;
+    const at = b.arena_text && b.arena_text.score;
+    if (at != null) return (at - 1100) * 0.05;
+    return -1000;
+  }
+  const sortedModelIds = [...modelIds].sort((a, b) => rowKey(b) - rowKey(a));
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  }
+  function zClass(z) {
+    if (z == null) return 'z-0';
+    if (z >=  1.5) return 'z-m3';
+    if (z >=  0.5) return 'z-m2';
+    if (z >=  0.15) return 'z-m1';
+    if (z <= -1.5) return 'z-p3';
+    if (z <= -0.5) return 'z-p2';
+    if (z <= -0.15) return 'z-p1';
+    return 'z-0';
+  }
+  function formatScore(v, bKey) {
+    if (bKey === 'arena_text' || bKey === 'arena_code') return Math.round(v);
+    if (v >= 100) return Math.round(v);
+    return v.toFixed(1);
+  }
+
+  // Build header
+  const thead = [
+    '<tr>',
+    '<th class="model-col">Model</th>',
+    ...cols.map(b => {
+      const def = benchmarks[b] || {};
+      const name = def.name || b;
+      return `<th class="col-label" data-bkey="${esc(b)}">${esc(name)}</th>`;
+    }),
+    '</tr>'
+  ].join('');
+
+  // Build body — O(rows × cols) using precomputed index
+  const idxOf = {};
+  modelIds.forEach((m, i) => idxOf[m] = i);
+  const tbody = sortedModelIds.map(mId => {
+    const m = models[mId];
+    const providerClean = (m.provider || '').replace(/,? Inc\.?$/, '');
+    const i = idxOf[mId];
+    const cells = cols.map(bKey => {
+      const sc = scoreMatrix[bKey][i];
+      if (sc == null) {
+        return `<td class="score-cell empty" data-bkey="${esc(bKey)}" data-mid="${esc(mId)}">·</td>`;
+      }
+      const z = zMatrix[bKey][i];
+      const cls = zClass(z);
+      const displayed = formatScore(sc, bKey);
+      return `<td class="score-cell ${cls}" data-bkey="${esc(bKey)}" data-mid="${esc(mId)}" data-score="${sc}">${displayed}</td>`;
+    }).join('');
+    return `<tr><td class="model-cell"><span class="model-name">${esc(m.name)}</span><span class="model-sub">${esc(providerClean)}</span></td>${cells}</tr>`;
+  }).join('');
+
+  document.getElementById('heatmap').innerHTML = `
+    <div class="heatmap-scroll">
+      <table class="heatmap">
+        <thead>${thead}</thead>
+        <tbody>${tbody}</tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span>Worse</span>
+      <span class="legend-scale">
+        <span class="z-p3"></span><span class="z-p2"></span><span class="z-p1"></span>
+        <span class="z-0"></span>
+        <span class="z-m1"></span><span class="z-m2"></span><span class="z-m3"></span>
+      </span>
+      <span>Better</span>
+      <span style="margin-left:20px;">Hatched = no data</span>
+    </div>
+  `;
+
+  const totalCells = sortedModelIds.length * cols.length;
+  let filled = 0;
+  for (const mId of sortedModelIds) for (const bKey of cols) {
+    if (((models[mId].benchmarks || {})[bKey] || {}).score != null) filled++;
+  }
+  document.getElementById('meta').innerHTML =
+    `${sortedModelIds.length} models × ${cols.length} benchmarks — ` +
+    `${filled} of ${totalCells} cells filled (${(filled/totalCells*100).toFixed(0)}%). ` +
+    `Data from <code>data/models.json</code>, synced from Artificial Analysis + LMArena.`;
+
+  const tooltip = document.getElementById('tooltip');
+  function showTooltip(target) {
+    const bKey = target.getAttribute('data-bkey');
+    const mId = target.getAttribute('data-mid');
+    const def = benchmarks[bKey] || {};
+    const score = target.getAttribute('data-score');
+    const rank = (rankMatrix[bKey] || {})[mId];
+    const isEmpty = target.classList.contains('empty');
+    let html = `<div class="t-head">${esc(def.name || bKey)}</div>`;
+    html += `<div style="color:#ccc; font-size:11px;">${esc(models[mId].name)}</div>`;
+    if (isEmpty) html += `<div class="t-score">no data</div>`;
+    else {
+      html += `<div class="t-score">${score}</div>`;
+      if (rank) html += `<div class="t-rank">rank #${rank.rank} of ${rank.total} measured</div>`;
+    }
+    if (def.description) html += `<div class="t-desc">${esc(def.description)}</div>`;
+    tooltip.innerHTML = html;
+    tooltip.style.display = 'block';
+    const rect = target.getBoundingClientRect();
+    const tt = tooltip.getBoundingClientRect();
+    let left = rect.right + 8, top = rect.top;
+    if (left + tt.width > window.innerWidth - 8) left = rect.left - tt.width - 8;
+    if (top + tt.height > window.innerHeight - 8) top = window.innerHeight - tt.height - 8;
+    tooltip.style.left = Math.max(8, left) + 'px';
+    tooltip.style.top = Math.max(8, top) + 'px';
+  }
+  function hideTooltip() { tooltip.style.display = 'none'; }
+
+  document.querySelectorAll('.score-cell').forEach(cell => {
+    cell.addEventListener('mouseenter', () => showTooltip(cell));
+    cell.addEventListener('mouseleave', hideTooltip);
+  });
+  document.querySelectorAll('th.col-label').forEach(th => {
+    th.addEventListener('mouseenter', () => {
+      const bKey = th.getAttribute('data-bkey');
+      const def = benchmarks[bKey] || {};
+      tooltip.innerHTML =
+        `<div class="t-head">${esc(def.name || bKey)}</div>` +
+        `<div class="t-desc">${esc(def.description || '')}</div>`;
+      tooltip.style.display = 'block';
+      const rect = th.getBoundingClientRect();
+      tooltip.style.left = rect.left + 'px';
+      tooltip.style.top = (rect.bottom + 8) + 'px';
+    });
+    th.addEventListener('mouseleave', hideTooltip);
+  });
+})().catch(err => {
+  console.error('Heatmap render failed:', err);
+  const m = document.getElementById('meta');
+  if (m) m.innerHTML = '<span style="color:#d63b2f">Error loading heatmap: ' + String(err) + '</span>';
+});
+</script>
+</body>
+</html>

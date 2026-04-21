@@ -16,27 +16,68 @@
       "aider_polyglot": {
         "score": 70.7,
         "source": "https://aider.chat/docs/leaderboards/"
+      },
+      "aa_intelligence": {
+        "score": 33,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "aa_math_index": {
+        "score": 36.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "gpqa_diamond": {
+        "score": 70.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "hle": {
+        "score": 5.9,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "scicode": {
+        "score": 40.9,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "aa_lcr": {
+        "score": 36,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "ifbench": {
+        "score": 43.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "mmlu_pro": {
+        "score": 86,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "livecodebench": {
+        "score": 54.2,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
+      },
+      "aime_25": {
+        "score": 36.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-opus"
       }
     },
     "api": {
       "inputPer1M": 15,
       "outputPer1M": 75,
-      "source": "https://www.anthropic.com/pricing",
-      "provider": "Anthropic"
+      "source": "https://artificialanalysis.ai/models/claude-4-opus",
+      "provider": "Anthropic",
+      "tokensPerSecAPI": 37.4
     },
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
@@ -44,7 +85,8 @@
         "tokensPerWeek": 203127800,
         "estimated": false
       }
-    }
+    },
+    "_aa_synced": "2026-04-21"
   },
   "claude-sonnet-4": {
     "name": "Claude Sonnet 4",
@@ -67,13 +109,66 @@
       "livebench": {
         "score": 72,
         "source": "https://livebench.ai/"
+      },
+      "aa_intelligence": {
+        "score": 33,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "aa_coding_index": {
+        "score": 30.6,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "aa_math_index": {
+        "score": 38,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "gpqa_diamond": {
+        "score": 68.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "hle": {
+        "score": 4,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "scicode": {
+        "score": 37.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "aa_lcr": {
+        "score": 44.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "tau2_bench": {
+        "score": 52.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "terminalbench_hard": {
+        "score": 27.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "ifbench": {
+        "score": 45.4,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "mmlu_pro": {
+        "score": 83.7,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "livecodebench": {
+        "score": 44.9,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
+      },
+      "aime_25": {
+        "score": 38,
+        "source": "https://artificialanalysis.ai/models/claude-4-sonnet"
       }
     },
     "api": {
       "inputPer1M": 3,
       "outputPer1M": 15,
-      "source": "https://www.anthropic.com/pricing",
-      "provider": "Anthropic"
+      "source": "https://artificialanalysis.ai/models/claude-4-sonnet",
+      "provider": "Anthropic",
+      "tokensPerSecAPI": 50.8
     },
     "local": null,
     "subscriptions": {
@@ -86,7 +181,8 @@
         "tokensPerWeek": 4480000,
         "estimated": true
       }
-    }
+    },
+    "_aa_synced": "2026-04-21"
   },
   "deepseek-v3": {
     "name": "DeepSeek V3.1",
@@ -108,14 +204,63 @@
       },
       "aa_intelligence": {
         "score": 16.5,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "aa_coding_index": {
+        "score": 16.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "aa_math_index": {
+        "score": 26,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "gpqa_diamond": {
+        "score": 55.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "hle": {
+        "score": 3.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "scicode": {
+        "score": 35.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "aa_lcr": {
+        "score": 29,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "tau2_bench": {
+        "score": 22.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "terminalbench_hard": {
+        "score": 6.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "ifbench": {
+        "score": 34.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "mmlu_pro": {
+        "score": 75.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "livecodebench": {
+        "score": 35.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
+      },
+      "aime_25": {
+        "score": 26,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3"
       }
     },
     "api": {
-      "inputPer1M": 0.56,
-      "outputPer1M": 1.68,
-      "source": "https://api-docs.deepseek.com/quick_start/pricing",
-      "provider": "DeepSeek"
+      "inputPer1M": 0.4,
+      "outputPer1M": 0.89,
+      "source": "https://artificialanalysis.ai/models/deepseek-v3",
+      "provider": "DeepSeek",
+      "tokensPerSecAPI": null
     },
     "local": {
       "rtx_4090": {
@@ -126,7 +271,8 @@
         "source": "https://github.com/ggerganov/llama.cpp/discussions"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-21"
   },
   "gemini-2.5-pro": {
     "name": "Gemini 2.5 Pro",
@@ -136,11 +282,11 @@
     "benchmarks": {
       "arena_text": {
         "score": 1448,
-        "source": "https://arena.ai/leaderboard/text"
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1202,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1203,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 72.9,
@@ -149,6 +295,54 @@
       "aa_intelligence": {
         "score": 34.6,
         "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "aa_coding_index": {
+        "score": 31.9,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "aa_math_index": {
+        "score": 87.7,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "gpqa_diamond": {
+        "score": 84.4,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "hle": {
+        "score": 21.1,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "scicode": {
+        "score": 42.8,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "aa_lcr": {
+        "score": 66,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "tau2_bench": {
+        "score": 54.1,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "terminalbench_hard": {
+        "score": 26.5,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "ifbench": {
+        "score": 48.7,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "mmlu_pro": {
+        "score": 86.2,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "livecodebench": {
+        "score": 80.1,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
+      },
+      "aime_25": {
+        "score": 87.7,
+        "source": "https://artificialanalysis.ai/models/gemini-2-5-pro"
       }
     },
     "api": {
@@ -156,7 +350,7 @@
       "outputPer1M": 10,
       "source": "https://artificialanalysis.ai/models/gemini-2-5-pro",
       "provider": "Google",
-      "tokensPerSecAPI": 120.7
+      "tokensPerSecAPI": 127
     },
     "local": null,
     "subscriptions": {
@@ -170,7 +364,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "glm-4.7-flash": {
     "name": "GLM-4.7 Flash",
@@ -179,8 +373,8 @@
     "modelCard": "https://huggingface.co/zai-org/GLM-4.7-Flash",
     "benchmarks": {
       "gpqa_diamond": {
-        "score": 75.2,
-        "source": "https://huggingface.co/zai-org/GLM-4.7-Flash"
+        "score": 58.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
       },
       "swe_bench": {
         "score": 59.2,
@@ -188,11 +382,39 @@
       },
       "aa_intelligence": {
         "score": 30.1,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
       },
       "arena_text": {
         "score": 1369,
         "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_coding_index": {
+        "score": 25.9,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "hle": {
+        "score": 7.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "scicode": {
+        "score": 33.7,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "aa_lcr": {
+        "score": 35,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "tau2_bench": {
+        "score": 98.8,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "terminalbench_hard": {
+        "score": 22,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
+      },
+      "ifbench": {
+        "score": 60.8,
+        "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
       }
     },
     "api": {
@@ -200,7 +422,7 @@
       "outputPer1M": 0.4,
       "source": "https://artificialanalysis.ai/models/glm-4-7-flash",
       "provider": "Z.ai",
-      "tokensPerSecAPI": 81.8
+      "tokensPerSecAPI": 91.7
     },
     "local": {
       "mac_m4_48gb": {
@@ -226,7 +448,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gpt-oss-120b": {
     "name": "GPT-OSS 120B",
@@ -235,8 +457,8 @@
     "modelCard": "https://openai.com/index/introducing-gpt-oss/",
     "benchmarks": {
       "gpqa_diamond": {
-        "score": 80,
-        "source": "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-max-ai-pcs-deliver-exceptional-intelligence.html"
+        "score": 78.2,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
       },
       "mmlu": {
         "score": 90,
@@ -248,10 +470,59 @@
       },
       "aa_intelligence": {
         "score": 33.3,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "aa_coding_index": {
+        "score": 28.6,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "aa_math_index": {
+        "score": 93.4,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "hle": {
+        "score": 18.5,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "scicode": {
+        "score": 38.9,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "aa_lcr": {
+        "score": 50.7,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "tau2_bench": {
+        "score": 65.8,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "terminalbench_hard": {
+        "score": 23.5,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "ifbench": {
+        "score": 69,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "mmlu_pro": {
+        "score": 80.8,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "livecodebench": {
+        "score": 87.8,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+      },
+      "aime_25": {
+        "score": 93.4,
+        "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
       }
     },
-    "api": null,
+    "api": {
+      "inputPer1M": 0.15,
+      "outputPer1M": 0.6,
+      "tokensPerSecAPI": 213.9,
+      "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
+    },
     "local": {
       "framework_desktop_128gb": {
         "tokensPerSec": 33,
@@ -260,7 +531,8 @@
         "source": "https://community.frame.work/t/tracking-will-the-ai-max-395-128gb-be-able-to-run-gpt-oss-120b/73280"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-21"
   },
   "gpt-4o": {
     "name": "GPT-4o",
@@ -286,14 +558,63 @@
       },
       "aa_intelligence": {
         "score": 17.3,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "aa_coding_index": {
+        "score": 16.7,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "aa_math_index": {
+        "score": 6,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "gpqa_diamond": {
+        "score": 54.3,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "hle": {
+        "score": 3.3,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "scicode": {
+        "score": 33.3,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "aa_lcr": {
+        "score": 0,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "tau2_bench": {
+        "score": 25.1,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "terminalbench_hard": {
+        "score": 8.3,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "ifbench": {
+        "score": 34.3,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "mmlu_pro": {
+        "score": 74.8,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "livecodebench": {
+        "score": 30.9,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
+      },
+      "aime_25": {
+        "score": 6,
+        "source": "https://artificialanalysis.ai/models/gpt-4o"
       }
     },
     "api": {
       "inputPer1M": 2.5,
       "outputPer1M": 10,
-      "source": "https://openai.com/api/pricing/",
-      "provider": "OpenAI"
+      "source": "https://artificialanalysis.ai/models/gpt-4o",
+      "provider": "OpenAI",
+      "tokensPerSecAPI": 174.1
     },
     "local": null,
     "subscriptions": {
@@ -324,7 +645,8 @@
         "tokensPerWeek": 60108025,
         "estimated": false
       }
-    }
+    },
+    "_aa_synced": "2026-04-21"
   },
   "llama-3.1-70b": {
     "name": "Llama 3.1 70B",
@@ -350,14 +672,63 @@
       },
       "aa_intelligence": {
         "score": 12.5,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "aa_coding_index": {
+        "score": 10.9,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "aa_math_index": {
+        "score": 4,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "gpqa_diamond": {
+        "score": 40.9,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "hle": {
+        "score": 4.6,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "scicode": {
+        "score": 26.7,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "aa_lcr": {
+        "score": 6.3,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "tau2_bench": {
+        "score": 15.2,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "terminalbench_hard": {
+        "score": 3,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "ifbench": {
+        "score": 34.4,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "mmlu_pro": {
+        "score": 67.6,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "livecodebench": {
+        "score": 23.2,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
+      },
+      "aime_25": {
+        "score": 4,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b"
       }
     },
     "api": {
-      "inputPer1M": 0.6,
-      "outputPer1M": 0.6,
-      "source": "https://www.together.ai/pricing",
-      "provider": "Together.ai"
+      "inputPer1M": 0.56,
+      "outputPer1M": 0.56,
+      "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b",
+      "provider": "Together.ai",
+      "tokensPerSecAPI": 31.1
     },
     "local": {
       "rtx_3090": {
@@ -380,7 +751,8 @@
         "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-21"
   },
   "llama-3.1-8b": {
     "name": "Llama 3.1 8B",
@@ -402,14 +774,63 @@
       },
       "aa_intelligence": {
         "score": 11.8,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "aa_coding_index": {
+        "score": 4.9,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "aa_math_index": {
+        "score": 4.3,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "gpqa_diamond": {
+        "score": 25.9,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "hle": {
+        "score": 5.1,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "scicode": {
+        "score": 13.2,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "aa_lcr": {
+        "score": 15.7,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "tau2_bench": {
+        "score": 16.4,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "terminalbench_hard": {
+        "score": 0.8,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "ifbench": {
+        "score": 28.6,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "mmlu_pro": {
+        "score": 47.6,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "livecodebench": {
+        "score": 11.6,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
+      },
+      "aime_25": {
+        "score": 4.3,
+        "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b"
       }
     },
     "api": {
-      "inputPer1M": 0.18,
-      "outputPer1M": 0.18,
-      "source": "https://www.together.ai/pricing",
-      "provider": "Together.ai"
+      "inputPer1M": 0.1,
+      "outputPer1M": 0.1,
+      "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b",
+      "provider": "Together.ai",
+      "tokensPerSecAPI": 167
     },
     "local": {
       "rtx_3090": {
@@ -431,7 +852,8 @@
         "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-21"
   },
   "o3": {
     "name": "o3",
@@ -453,14 +875,63 @@
       },
       "aa_intelligence": {
         "score": 38.4,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "aa_coding_index": {
+        "score": 38.4,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "aa_math_index": {
+        "score": 88.3,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "gpqa_diamond": {
+        "score": 82.7,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "hle": {
+        "score": 20,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "scicode": {
+        "score": 41,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "aa_lcr": {
+        "score": 69.3,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "tau2_bench": {
+        "score": 80.7,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "terminalbench_hard": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "ifbench": {
+        "score": 71.4,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "mmlu_pro": {
+        "score": 85.3,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "livecodebench": {
+        "score": 80.8,
+        "source": "https://artificialanalysis.ai/models/o3"
+      },
+      "aime_25": {
+        "score": 88.3,
+        "source": "https://artificialanalysis.ai/models/o3"
       }
     },
     "api": {
-      "inputPer1M": 10,
-      "outputPer1M": 40,
-      "source": "https://openai.com/api/pricing/",
-      "provider": "OpenAI"
+      "inputPer1M": 2,
+      "outputPer1M": 8,
+      "source": "https://artificialanalysis.ai/models/o3",
+      "provider": "OpenAI",
+      "tokensPerSecAPI": 93.9
     },
     "local": null,
     "subscriptions": {
@@ -473,7 +944,8 @@
         "tokensPerWeek": 66500000,
         "estimated": true
       }
-    }
+    },
+    "_aa_synced": "2026-04-21"
   },
   "qwen-3-32b": {
     "name": "Qwen QwQ-32B",
@@ -495,14 +967,51 @@
       },
       "aa_intelligence": {
         "score": 19.7,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "aa_math_index": {
+        "score": 29,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "gpqa_diamond": {
+        "score": 59.3,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "hle": {
+        "score": 8.2,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "scicode": {
+        "score": 35.8,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "aa_lcr": {
+        "score": 25,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "ifbench": {
+        "score": 38.8,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "mmlu_pro": {
+        "score": 76.4,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "livecodebench": {
+        "score": 63.1,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
+      },
+      "aime_25": {
+        "score": 29,
+        "source": "https://artificialanalysis.ai/models/qwq-32b"
       }
     },
     "api": {
-      "inputPer1M": 1.2,
-      "outputPer1M": 1.2,
-      "source": "https://www.together.ai/pricing",
-      "provider": "Together.ai"
+      "inputPer1M": 0.66,
+      "outputPer1M": 1,
+      "source": "https://artificialanalysis.ai/models/qwq-32b",
+      "provider": "Together.ai",
+      "tokensPerSecAPI": 32.3
     },
     "local": {
       "rtx_3090": {
@@ -524,7 +1033,8 @@
         "source": "https://github.com/ggerganov/llama.cpp/discussions/4167"
       }
     },
-    "subscriptions": null
+    "subscriptions": null,
+    "_aa_synced": "2026-04-21"
   },
   "claude-opus-4-5": {
     "name": "Claude Opus 4.5",
@@ -533,12 +1043,12 @@
     "modelCard": "https://www.anthropic.com/news/claude-opus-4-5",
     "benchmarks": {
       "arena_text": {
-        "score": 1468,
-        "source": "https://arena.ai/leaderboard/text"
+        "score": 1469,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1465,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1468,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 89.4,
@@ -551,6 +1061,54 @@
       "aa_intelligence": {
         "score": 43.1,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "aa_coding_index": {
+        "score": 42.9,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "aa_math_index": {
+        "score": 62.7,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "gpqa_diamond": {
+        "score": 81,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "hle": {
+        "score": 12.9,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "scicode": {
+        "score": 47,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "aa_lcr": {
+        "score": 65.3,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "tau2_bench": {
+        "score": 86.3,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "terminalbench_hard": {
+        "score": 40.9,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "ifbench": {
+        "score": 43,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "mmlu_pro": {
+        "score": 88.9,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "livecodebench": {
+        "score": 73.8,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
+      },
+      "aime_25": {
+        "score": 62.7,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-5"
       }
     },
     "api": {
@@ -558,21 +1116,21 @@
       "outputPer1M": 25,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-5",
       "provider": "Anthropic",
-      "tokensPerSecAPI": 52.6
+      "tokensPerSecAPI": 62.3
     },
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
@@ -581,7 +1139,7 @@
         "estimated": false
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gemini-3-pro": {
     "name": "Gemini 3 Pro",
@@ -690,6 +1248,54 @@
       "aa_intelligence": {
         "score": 51.3,
         "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "aa_coding_index": {
+        "score": 48.7,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "aa_math_index": {
+        "score": 99,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "gpqa_diamond": {
+        "score": 90.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "hle": {
+        "score": 35.4,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "scicode": {
+        "score": 52.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "aa_lcr": {
+        "score": 72.7,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "tau2_bench": {
+        "score": 84.8,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "terminalbench_hard": {
+        "score": 47,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "ifbench": {
+        "score": 75.4,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "mmlu_pro": {
+        "score": 87.4,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "livecodebench": {
+        "score": 88.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
+      },
+      "aime_25": {
+        "score": 99,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2"
       }
     },
     "api": {
@@ -697,7 +1303,7 @@
       "outputPer1M": 14,
       "source": "https://artificialanalysis.ai/models/gpt-5-2",
       "provider": "OpenAI",
-      "tokensPerSecAPI": 68
+      "tokensPerSecAPI": 78.2
     },
     "local": null,
     "subscriptions": {
@@ -729,7 +1335,7 @@
         "estimated": false
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "claude-opus-4-6": {
     "id": "claude-opus-4-6",
@@ -740,40 +1346,68 @@
     "benchmarks": {
       "aa_intelligence": {
         "score": 46.5,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       },
       "gpqa_diamond": {
         "score": 84,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       },
       "arena_text": {
-        "score": 1497,
-        "source": "https://arena.ai/leaderboard/text"
+        "score": 1496,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1543,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1544,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 47.6,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "hle": {
+        "score": 18.6,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "scicode": {
+        "score": 45.7,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "aa_lcr": {
+        "score": 58.3,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "tau2_bench": {
+        "score": 84.8,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "terminalbench_hard": {
+        "score": 48.5,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
+      },
+      "ifbench": {
+        "score": 44.6,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       }
     },
     "api": {
       "inputPer1M": 5,
       "outputPer1M": 25,
-      "tokensPerSecAPI": 46.1,
+      "tokensPerSecAPI": 48.4,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
     },
     "local": null,
     "subscriptions": {
       "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
+        "name": "Claude Max 5×",
         "monthlyPrice": 100,
         "confidence": "low",
-        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured \u2014 help by running the measurement script on a Max 5x plan.",
+        "notes": "Estimated as 5/20 of measured Claude Max 20x (5x Pro vs 20x Pro quota ratio). Not directly measured — help by running the measurement script on a Max 5x plan.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
         "tokensPerWeek": 50781950,
         "estimated": true
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "notes": "Measured 2026-04-16 via claude-code. 30 runs, 2,031,278 tokens, 0% 5h / 1% weekly consumed.",
@@ -782,7 +1416,7 @@
         "estimated": false
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "claude-sonnet-4-6": {
     "id": "claude-sonnet-4-6",
@@ -793,25 +1427,53 @@
     "benchmarks": {
       "aa_intelligence": {
         "score": 44.4,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
       },
       "gpqa_diamond": {
         "score": 79.9,
         "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
       },
       "arena_text": {
-        "score": 1462,
-        "source": "https://arena.ai/leaderboard/text"
+        "score": 1463,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1521,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1525,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 46.4,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "hle": {
+        "score": 13.2,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "scicode": {
+        "score": 46.9,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "aa_lcr": {
+        "score": 57.7,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "tau2_bench": {
+        "score": 79.5,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "terminalbench_hard": {
+        "score": 46.2,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
+      },
+      "ifbench": {
+        "score": 41.2,
+        "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
       }
     },
     "api": {
       "inputPer1M": 3,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 47.9,
+      "tokensPerSecAPI": 56.5,
       "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
     },
     "local": null,
@@ -826,7 +1488,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "claude-4-5-haiku": {
     "id": "claude-4-5-haiku",
@@ -854,12 +1516,52 @@
       "arena_code": {
         "score": 1312,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 29.6,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "aa_math_index": {
+        "score": 39,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "hle": {
+        "score": 4.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "scicode": {
+        "score": 34.4,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "aa_lcr": {
+        "score": 43.7,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "tau2_bench": {
+        "score": 32.5,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "terminalbench_hard": {
+        "score": 27.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "ifbench": {
+        "score": 42,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "mmlu_pro": {
+        "score": 80,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
+      },
+      "aime_25": {
+        "score": 39,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
       }
     },
     "api": {
       "inputPer1M": 1,
       "outputPer1M": 5,
-      "tokensPerSecAPI": 98.7,
+      "tokensPerSecAPI": 114,
       "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
     },
     "local": null,
@@ -874,7 +1576,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-21"
   },
   "claude-4-5-sonnet": {
     "id": "claude-4-5-sonnet",
@@ -902,12 +1604,52 @@
       "arena_code": {
         "score": 1386,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 33.5,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "aa_math_index": {
+        "score": 37,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "hle": {
+        "score": 7.1,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "scicode": {
+        "score": 42.8,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "aa_lcr": {
+        "score": 51.3,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "tau2_bench": {
+        "score": 70.5,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "terminalbench_hard": {
+        "score": 28.8,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "ifbench": {
+        "score": 42.7,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "mmlu_pro": {
+        "score": 86,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
+      },
+      "aime_25": {
+        "score": 37,
+        "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
       }
     },
     "api": {
       "inputPer1M": 3,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 46.3,
+      "tokensPerSecAPI": 53.3,
       "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
     },
     "local": null,
@@ -922,7 +1664,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-21"
   },
   "gpt-5-4": {
     "id": "gpt-5-4",
@@ -932,8 +1674,8 @@
     "modelCard": "https://artificialanalysis.ai/models/gpt-5-4",
     "benchmarks": {
       "aa_intelligence": {
-        "score": 57.2,
-        "source": "https://artificialanalysis.ai/"
+        "score": 56.8,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
       },
       "gpqa_diamond": {
         "score": 92,
@@ -946,12 +1688,40 @@
       "arena_code": {
         "score": 1457,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 57.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "hle": {
+        "score": 41.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "scicode": {
+        "score": 56.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "aa_lcr": {
+        "score": 74,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "tau2_bench": {
+        "score": 87.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "terminalbench_hard": {
+        "score": 57.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
+      },
+      "ifbench": {
+        "score": 73.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-4"
       }
     },
     "api": {
       "inputPer1M": 2.5,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 84.7,
+      "tokensPerSecAPI": 82.9,
       "source": "https://artificialanalysis.ai/models/gpt-5-4"
     },
     "local": null,
@@ -984,7 +1754,7 @@
         "estimated": false
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gpt-5-3-codex": {
     "id": "gpt-5-3-codex",
@@ -994,7 +1764,7 @@
     "modelCard": "https://artificialanalysis.ai/models/gpt-5-3-codex",
     "benchmarks": {
       "aa_intelligence": {
-        "score": 54,
+        "score": 53.6,
         "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
       },
       "gpqa_diamond": {
@@ -1008,12 +1778,40 @@
       "arena_code": {
         "score": 1407,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 53.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "hle": {
+        "score": 39.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "scicode": {
+        "score": 53.2,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "aa_lcr": {
+        "score": 74,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "tau2_bench": {
+        "score": 86,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "terminalbench_hard": {
+        "score": 53,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
+      },
+      "ifbench": {
+        "score": 75.4,
+        "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
       }
     },
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "tokensPerSecAPI": 75.5,
+      "tokensPerSecAPI": 91.3,
       "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
     },
     "local": null,
@@ -1028,7 +1826,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gpt-5-2-codex": {
     "id": "gpt-5-2-codex",
@@ -1053,12 +1851,40 @@
       "arena_code": {
         "score": 1335,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 43,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "hle": {
+        "score": 33.5,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "scicode": {
+        "score": 54.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "aa_lcr": {
+        "score": 75.7,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "tau2_bench": {
+        "score": 92.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "terminalbench_hard": {
+        "score": 37.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
+      },
+      "ifbench": {
+        "score": 77.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
       }
     },
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "tokensPerSecAPI": 99.6,
+      "tokensPerSecAPI": 108,
       "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
     },
     "local": null,
@@ -1091,7 +1917,7 @@
         "estimated": false
       }
     },
-    "_aa_synced": "2026-04-03"
+    "_aa_synced": "2026-04-21"
   },
   "gemini-3-1-pro": {
     "id": "gemini-3-1-pro",
@@ -1102,7 +1928,7 @@
     "benchmarks": {
       "aa_intelligence": {
         "score": 57.2,
-        "source": "https://artificialanalysis.ai/"
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
       },
       "gpqa_diamond": {
         "score": 94.1,
@@ -1115,12 +1941,40 @@
       "arena_code": {
         "score": 1456,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 55.5,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "hle": {
+        "score": 44.7,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "scicode": {
+        "score": 58.9,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "aa_lcr": {
+        "score": 72.7,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "tau2_bench": {
+        "score": 95.6,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "terminalbench_hard": {
+        "score": 53.8,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
+      },
+      "ifbench": {
+        "score": 77.1,
+        "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
       }
     },
     "api": {
       "inputPer1M": 2,
       "outputPer1M": 12,
-      "tokensPerSecAPI": 129.4,
+      "tokensPerSecAPI": 129.5,
       "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
     },
     "local": null,
@@ -1135,7 +1989,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "glm-5": {
     "id": "glm-5",
@@ -1153,18 +2007,46 @@
         "source": "https://artificialanalysis.ai/models/glm-5"
       },
       "arena_text": {
-        "score": 1456,
-        "source": "https://arena.ai/leaderboard/text"
+        "score": 1457,
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1441,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1436,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 44.2,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "hle": {
+        "score": 27.2,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "scicode": {
+        "score": 46.2,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "aa_lcr": {
+        "score": 63.3,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "tau2_bench": {
+        "score": 98.2,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "terminalbench_hard": {
+        "score": 43.2,
+        "source": "https://artificialanalysis.ai/models/glm-5"
+      },
+      "ifbench": {
+        "score": 72.3,
+        "source": "https://artificialanalysis.ai/models/glm-5"
       }
     },
     "api": {
       "inputPer1M": 1,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 68.7,
+      "tokensPerSecAPI": 65,
       "source": "https://artificialanalysis.ai/models/glm-5"
     },
     "local": {
@@ -1177,7 +2059,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "glm-4.7": {
     "id": "glm-4.7",
@@ -1200,17 +2082,57 @@
       },
       "arena_text": {
         "score": 1443,
-        "source": "https://arena.ai/leaderboard/text"
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1439,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1440,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 36.3,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "aa_math_index": {
+        "score": 95,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "hle": {
+        "score": 25.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "scicode": {
+        "score": 45.1,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "aa_lcr": {
+        "score": 64,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "tau2_bench": {
+        "score": 95.9,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "terminalbench_hard": {
+        "score": 31.8,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "ifbench": {
+        "score": 67.9,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "mmlu_pro": {
+        "score": 85.6,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
+      },
+      "aime_25": {
+        "score": 95,
+        "source": "https://artificialanalysis.ai/models/glm-4-7"
       }
     },
     "api": {
       "inputPer1M": 0.6,
       "outputPer1M": 2.2,
-      "tokensPerSecAPI": 74.6,
+      "tokensPerSecAPI": 108.5,
       "source": "https://artificialanalysis.ai/models/glm-4-7"
     },
     "local": {
@@ -1231,7 +2153,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "minimax-m2.5": {
     "id": "minimax-m2.5",
@@ -1253,14 +2175,42 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1396,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1385,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 37.4,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "hle": {
+        "score": 19.1,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "scicode": {
+        "score": 42.6,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "aa_lcr": {
+        "score": 66,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "tau2_bench": {
+        "score": 95.3,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "terminalbench_hard": {
+        "score": 34.8,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
+      },
+      "ifbench": {
+        "score": 71.6,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-5"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 72.5,
+      "tokensPerSecAPI": 60.6,
       "source": "https://artificialanalysis.ai/models/minimax-m2-5"
     },
     "local": {
@@ -1268,12 +2218,12 @@
         "tokensPerSec": 18,
         "quantization": "TQ1_0",
         "vramRequired": 128,
-        "notes": "MoE \u2014 aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "notes": "MoE — aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
         "source": "https://openbenchmarking.org/test/pts/llama-cpp"
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "minimax-m2.7": {
     "id": "minimax-m2.7",
@@ -1295,14 +2245,42 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1428,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1416,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 41.9,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "hle": {
+        "score": 28.1,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "scicode": {
+        "score": 47,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "aa_lcr": {
+        "score": 68.7,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "tau2_bench": {
+        "score": 84.8,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "terminalbench_hard": {
+        "score": 39.4,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
+      },
+      "ifbench": {
+        "score": 75.7,
+        "source": "https://artificialanalysis.ai/models/minimax-m2-7"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 43,
+      "tokensPerSecAPI": 44.5,
       "source": "https://artificialanalysis.ai/models/minimax-m2-7"
     },
     "local": {
@@ -1310,13 +2288,13 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE \u2014 requires 128GB+ unified memory.",
+        "notes": "MoE — requires 128GB+ unified memory.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "kimi-k2.5": {
     "id": "kimi-k2.5",
@@ -1340,12 +2318,40 @@
       "arena_code": {
         "score": 1429,
         "source": "https://arena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 39.5,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "hle": {
+        "score": 29.4,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "scicode": {
+        "score": 49,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "aa_lcr": {
+        "score": 65.3,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "tau2_bench": {
+        "score": 95.9,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "terminalbench_hard": {
+        "score": 34.8,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
+      },
+      "ifbench": {
+        "score": 70.2,
+        "source": "https://artificialanalysis.ai/models/kimi-k2-5"
       }
     },
     "api": {
       "inputPer1M": 0.6,
       "outputPer1M": 3,
-      "tokensPerSecAPI": 31.6,
+      "tokensPerSecAPI": 31.7,
       "source": "https://artificialanalysis.ai/models/kimi-k2-5"
     },
     "local": {
@@ -1353,7 +2359,7 @@
         "tokensPerSec": 10,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Extremely large \u2014 needs 128GB+ unified memory with heavy quantization.",
+        "notes": "MoE 1T/32B active. Extremely large — needs 128GB+ unified memory with heavy quantization.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       },
@@ -1361,13 +2367,13 @@
         "tokensPerSec": 8,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Estimated \u2014 community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "notes": "MoE 1T/32B active. Estimated — community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "deepseek-v3.2": {
     "id": "deepseek-v3.2",
@@ -1393,14 +2399,54 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1327,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1331,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "aa_coding_index": {
+        "score": 34.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "aa_math_index": {
+        "score": 59,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "hle": {
+        "score": 10.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "scicode": {
+        "score": 38.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "aa_lcr": {
+        "score": 39,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "tau2_bench": {
+        "score": 78.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "terminalbench_hard": {
+        "score": 32.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "ifbench": {
+        "score": 49,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "mmlu_pro": {
+        "score": 83.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
+      },
+      "aime_25": {
+        "score": 59,
+        "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
       }
     },
     "api": {
       "inputPer1M": 0.28,
       "outputPer1M": 0.42,
-      "tokensPerSecAPI": 47.3,
+      "tokensPerSecAPI": 29.7,
       "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
     },
     "local": {
@@ -1408,7 +2454,7 @@
         "tokensPerSec": 15,
         "quantization": "Q4_K_M",
         "vramRequired": 80,
-        "notes": "Requires 2\u00d7 RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "notes": "Requires 2× RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions",
         "_estimated": true
       },
@@ -1424,13 +2470,13 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 110,
-        "notes": "Estimated \u2014 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "notes": "Estimated — 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "qwen3.5-35b-a3b": {
     "id": "qwen3.5-35b-a3b",
@@ -1448,18 +2494,46 @@
         "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
       },
       "arena_code": {
-        "score": 1247,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1248,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "arena_text": {
         "score": 1397,
         "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_coding_index": {
+        "score": 30.3,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "hle": {
+        "score": 19.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "scicode": {
+        "score": 37.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "aa_lcr": {
+        "score": 62.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "tau2_bench": {
+        "score": 89.2,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "terminalbench_hard": {
+        "score": 26.5,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
+      },
+      "ifbench": {
+        "score": 72.5,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
       }
     },
     "api": {
       "inputPer1M": 0.25,
       "outputPer1M": 2,
-      "tokensPerSecAPI": 133.2,
+      "tokensPerSecAPI": 150.3,
       "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
     },
     "local": {
@@ -1467,14 +2541,14 @@
         "tokensPerSec": 122,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token. Fits in single 24GB GPU.",
+        "notes": "MoE — only 3B active params per token. Fits in single 24GB GPU.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "rtx_3090": {
         "tokensPerSec": 110,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token.",
+        "notes": "MoE — only 3B active params per token.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "mac_m3_max_64gb": {
@@ -1501,7 +2575,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "qwen3.5-27b": {
     "id": "qwen3.5-27b",
@@ -1519,18 +2593,46 @@
         "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
       },
       "arena_code": {
-        "score": 1344,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1346,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "arena_text": {
         "score": 1404,
         "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_coding_index": {
+        "score": 34.9,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "hle": {
+        "score": 22.2,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "scicode": {
+        "score": 39.5,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "aa_lcr": {
+        "score": 67.3,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "tau2_bench": {
+        "score": 93.9,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "terminalbench_hard": {
+        "score": 32.6,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
+      },
+      "ifbench": {
+        "score": 75.6,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
       }
     },
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 2.4,
-      "tokensPerSecAPI": 90.2,
+      "tokensPerSecAPI": 91.4,
       "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
     },
     "local": {
@@ -1538,7 +2640,7 @@
         "tokensPerSec": 58,
         "quantization": "Q4_K_M",
         "vramRequired": 16,
-        "notes": "Dense 27B. Community reports 55\u201365 t/s at Q4_K_M on RTX 4090.",
+        "notes": "Dense 27B. Community reports 55–65 t/s at Q4_K_M on RTX 4090.",
         "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
       },
       "rtx_3090": {
@@ -1593,7 +2695,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "qwen3.5-122b-a10b": {
     "id": "qwen3.5-122b-a10b",
@@ -1611,18 +2713,46 @@
         "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
       },
       "arena_code": {
-        "score": 1362,
-        "source": "https://arena.ai/leaderboard/code"
+        "score": 1363,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "arena_text": {
         "score": 1417,
         "source": "https://arena.ai/leaderboard/text"
+      },
+      "aa_coding_index": {
+        "score": 34.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "hle": {
+        "score": 23.4,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "scicode": {
+        "score": 42,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "aa_lcr": {
+        "score": 66.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "tau2_bench": {
+        "score": 93.6,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "terminalbench_hard": {
+        "score": 31.1,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
+      },
+      "ifbench": {
+        "score": 75.7,
+        "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
       }
     },
     "api": {
       "inputPer1M": 0.4,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 130.8,
+      "tokensPerSecAPI": 160.9,
       "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
     },
     "local": {
@@ -1630,7 +2760,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "notes": "MoE — 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
         "_estimated": true
       },
@@ -1638,7 +2768,7 @@
         "tokensPerSec": 42,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "notes": "MoE — 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
       },
       "framework_desktop_128gb": {
@@ -1651,7 +2781,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gemma-4-31b": {
     "name": "Gemma 4 31B",
@@ -1665,12 +2795,44 @@
       },
       "arena_text": {
         "score": 1451,
-        "source": "https://arena.ai/leaderboard/text"
+        "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
         "score": 1290,
         "source": "https://lmarena.ai/leaderboard",
         "_estimated": true
+      },
+      "aa_coding_index": {
+        "score": 38.7,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "gpqa_diamond": {
+        "score": 85.7,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "hle": {
+        "score": 22.7,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "scicode": {
+        "score": 43.4,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "aa_lcr": {
+        "score": 62,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "tau2_bench": {
+        "score": 59.9,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "terminalbench_hard": {
+        "score": 36.4,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
+      },
+      "ifbench": {
+        "score": 75.6,
+        "source": "https://artificialanalysis.ai/models/gemma-4-31b"
       }
     },
     "api": {
@@ -1752,7 +2914,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-08"
+    "_aa_synced": "2026-04-21"
   },
   "gemma-4-26b-a4b": {
     "name": "Gemma 4 26B A4B",
@@ -1793,7 +2955,7 @@
         "tokensPerSec": 85,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE \u2014 only 4B active. Extremely fast for its capability level.",
+        "notes": "MoE — only 4B active. Extremely fast for its capability level.",
         "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
       },
       "rtx_3090": {
