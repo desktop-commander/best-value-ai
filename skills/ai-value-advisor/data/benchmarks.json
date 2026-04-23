@@ -210,5 +210,35 @@
     "source": "https://artificialanalysis.ai/",
     "recommended": true,
     "stable": true
+  },
+  "gdpval_aa": {
+    "name": "GDPval-AA",
+    "description": "Artificial Analysis' ELO-based evaluation of OpenAI's GDPval benchmark: 1,320 real-world occupational tasks across 44 professions, graded by domain experts. The highest-weight benchmark in AA Intelligence Index v4.0 (16.7%).",
+    "maxScore": null,
+    "type": "elo",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/evaluations/gdpval-aa",
+    "recommended": true,
+    "stable": true
+  },
+  "aa_omniscience": {
+    "name": "AA-Omniscience",
+    "description": "Knowledge + hallucination benchmark. 6,000 questions across 42 topics; rewards correct answers, penalizes hallucinations, no penalty for abstaining. Signed index from -100 to +100.",
+    "maxScore": 100,
+    "type": "index",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/evaluations/aa-omniscience",
+    "recommended": true,
+    "stable": true
+  },
+  "critpt": {
+    "name": "CritPt",
+    "description": "Critical-reasoning benchmark introduced in AA Intelligence Index v4.0. Frontier-discriminating — top models still score well under 20%.",
+    "maxScore": 100,
+    "type": "percentage",
+    "higherIsBetter": true,
+    "source": "https://artificialanalysis.ai/",
+    "recommended": true,
+    "stable": true
   }
 }

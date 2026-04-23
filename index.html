@@ -1284,6 +1284,36 @@
             border-color: var(--green);
             background: var(--green-bg);
         }
+
+        /* ── Model × Benchmark heatmap (#by-benchmark) ── */
+        #heatmapContainer { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+        #heatmapContainer table.heatmap { border-collapse: separate; border-spacing: 0; font-size: 12px; width: 100%; min-width: 900px; }
+        #heatmapContainer table.heatmap th, #heatmapContainer table.heatmap td { padding: 0; text-align: center; vertical-align: middle; }
+        #heatmapContainer table.heatmap thead th { position: sticky; top: 0; z-index: 2; background: var(--surface2); border-bottom: 1px solid var(--border2); padding: 8px 4px; font-weight: 600; color: var(--text); font-family: 'DM Sans', sans-serif; white-space: nowrap; font-size: 11px; }
+        #heatmapContainer table.heatmap thead th.col-label { writing-mode: vertical-rl; transform: rotate(180deg); height: 150px; min-width: 36px; max-width: 36px; padding: 8px 2px; cursor: help; }
+        #heatmapContainer table.heatmap thead th.col-label .col-coverage { opacity: 0.55; font-size: 10px; font-weight: 400; margin-top: 4px; }
+        #heatmapContainer table.heatmap thead th.model-col { writing-mode: horizontal-tb; transform: none; text-align: left; padding: 8px 12px; min-width: 220px; height: 150px; vertical-align: bottom; }
+        #heatmapContainer table.heatmap tbody td.model-cell { text-align: left; padding: 6px 12px; font-weight: 500; color: var(--text); border-bottom: 1px solid var(--border); background: var(--surface); white-space: nowrap; position: sticky; left: 0; z-index: 1; }
+        #heatmapContainer table.heatmap tbody td.model-cell .model-name { display: block; }
+        #heatmapContainer table.heatmap tbody td.model-cell .model-sub { display: block; font-size: 11px; color: var(--faint); font-weight: 400; }
+        #heatmapContainer table.heatmap tbody td.score-cell { border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); min-width: 36px; height: 36px; font-family: 'JetBrains Mono', monospace; font-size: 10px; cursor: help; color: var(--text); }
+        #heatmapContainer table.heatmap tbody td.score-cell.empty { background: repeating-linear-gradient(45deg, #f5f4f0, #f5f4f0 4px, #eceae4 4px, #eceae4 8px); color: transparent; }
+        #heatmapContainer table.heatmap tbody tr:hover td.model-cell { background: var(--surface2); }
+        #heatmapContainer .hm-z-m3 { background: #c4e9d5; }
+        #heatmapContainer .hm-z-m2 { background: #d7f0e0; }
+        #heatmapContainer .hm-z-m1 { background: #e9f6ec; }
+        #heatmapContainer .hm-z-0  { background: #f5f4f0; }
+        #heatmapContainer .hm-z-p1 { background: #fbe8e4; }
+        #heatmapContainer .hm-z-p2 { background: #f5c9c2; }
+        #heatmapContainer .hm-z-p3 { background: #eca89d; }
+        #heatmapContainer .hm-legend { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 0 4px; font-size: 12px; color: var(--muted); font-family: 'DM Sans', sans-serif; flex-wrap: wrap; }
+        #heatmapContainer .hm-legend-scale { display: inline-flex; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+        #heatmapContainer .hm-legend-scale span { display: inline-block; width: 28px; height: 14px; }
+        #heatmapTooltip { position: fixed; pointer-events: none; background: #18181a; color: #fff; padding: 8px 10px; border-radius: 4px; font-size: 12px; z-index: 100; display: none; max-width: 280px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: 'DM Sans', sans-serif; line-height: 1.4; }
+        #heatmapTooltip .hm-tt-head { font-weight: 600; margin-bottom: 2px; }
+        #heatmapTooltip .hm-tt-score { font-family: 'JetBrains Mono', monospace; font-size: 13px; margin: 2px 0; }
+        #heatmapTooltip .hm-tt-rank { color: #aaa; font-size: 11px; }
+        #heatmapTooltip .hm-tt-desc { color: #bbb; font-size: 11px; margin-top: 6px; }
     </style>
 </head>
 <body>
@@ -1316,6 +1346,7 @@
             <li><a href="#use-with-agent">🤖 For agents</a></li>
             <li><a href="#explore">📊 Compare</a></li>
             <li><a href="#benchmarks">📏 Benchmarks</a></li>
+            <li><a href="#by-benchmark">🧭 Matrix</a></li>
             <li><a href="#subscription-method">💳 Measurements</a></li>
             <li><a href="#raw-data">📋 Data</a></li>
         </ul>
@@ -1625,161 +1656,161 @@
     <span class="rank-num" style="color:#7033d8">#1</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
     <span class="rank-name" title="ChatGPT Business → GPT-5.2">ChatGPT Business → GPT-5.2</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:100%;background:#7033d8;opacity:0.9">5.5M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:100%;background:#7033d8;opacity:0.9">4.9M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Business · $30/mo (69.1%)</span>
+    <span class="rank-detail">ChatGPT Business · $30/mo (61.3%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#7033d8">#2</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
     <span class="rank-name" title="ChatGPT Business → GPT-5.4 (xhigh)">ChatGPT Business → GPT-5.4 (xhigh)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:93.47762737152725%;background:#7033d8;opacity:0.9">5.2M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:97.18791934136527%;background:#7033d8;opacity:0.9">4.8M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Business · $30/mo (64.6%)</span>
+    <span class="rank-detail">ChatGPT Business · $30/mo (59.5%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#7033d8">#3</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
     <span class="rank-name" title="ChatGPT Business → GPT-5.2 Codex (xhigh)">ChatGPT Business → GPT-5.2 Codex (xhigh)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:82.83738004567142%;background:#7033d8;opacity:0.9">4.6M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:76.7172135474204%;background:#7033d8;opacity:0.9">3.8M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Business · $30/mo (57.2%)</span>
+    <span class="rank-detail">ChatGPT Business · $30/mo (47.0%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#4</span>
-    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
-    <span class="rank-name" title="Qwen3.5 35B A3B (Reasoning)">Qwen3.5 35B A3B (Reasoning)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:59.51323519482605%;background:#1a9e5c;opacity:0.9">3.3M</div></div>
-    <span class="rank-val-out" style="color:#1a9e5c"></span>
-    <span class="rank-detail">110 tok/s · RTX 3090 (46.3%)</span>
-  </div>
-<div class="rank-row">
-    <span class="rank-num" style="color:#9b9ba4">#5</span>
     <span class="rank-type" style="color:#2557d6">🔌 API</span>
     <span class="rank-name" title="GLM-4.7 Flash">GLM-4.7 Flash</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:48.62641878881431%;background:#2557d6;opacity:0.9">2.7M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:54.85540355583519%;background:#2557d6;opacity:0.9">2.7M</div></div>
     <span class="rank-val-out" style="color:#2557d6"></span>
     <span class="rank-detail">$0.15/M blended (41.1%)</span>
   </div>
 <div class="rank-row">
+    <span class="rank-num" style="color:#9b9ba4">#5</span>
+    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
+    <span class="rank-name" title="Qwen3.5 35B A3B (Reasoning)">Qwen3.5 35B A3B (Reasoning)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:46.57238917745492%;background:#1a9e5c;opacity:0.9">2.3M</div></div>
+    <span class="rank-val-out" style="color:#1a9e5c"></span>
+    <span class="rank-detail">110 tok/s · RTX 3090 (32.1%)</span>
+  </div>
+<div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#6</span>
-    <span class="rank-type" style="color:#2557d6">🔌 API</span>
-    <span class="rank-name" title="Gemma 4 31B">Gemma 4 31B</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:42.52543948166112%;background:#2557d6;opacity:0.9">2.4M</div></div>
-    <span class="rank-val-out" style="color:#2557d6"></span>
-    <span class="rank-detail">$0.21/M blended (48.3%)</span>
+    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
+    <span class="rank-name" title="Claude Max 20× → Claude Opus 4.5">Claude Max 20× → Claude Opus 4.5</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:41.92853731130044%;background:#7033d8;opacity:0.9">2.1M</div></div>
+    <span class="rank-val-out" style="color:#7033d8"></span>
+    <span class="rank-detail">Claude Max 20× · $200/mo (50.7%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#7</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="Claude Max 20× → Claude Opus 4.5">Claude Max 20× → Claude Opus 4.5</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:42.416118309959224%;background:#7033d8;opacity:0.9">2.3M</div></div>
+    <span class="rank-name" title="Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort)">Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:41.043807280941294%;background:#7033d8;opacity:0.9">2.0M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">Claude Max 20× · $200/mo (57.8%)</span>
+    <span class="rank-detail">Claude Max 20× · $200/mo (49.6%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#8</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort)">Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:40.595429319193755%;background:#7033d8;opacity:0.9">2.2M</div></div>
+    <span class="rank-name" title="Claude Max 20× → Claude Opus 4">Claude Max 20× → Claude Opus 4</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:36.68089496935383%;background:#7033d8;opacity:0.9">1.8M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">Claude Max 20× · $200/mo (55.3%)</span>
+    <span class="rank-detail">Claude Max 20× · $200/mo (44.3%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#9</span>
-    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
-    <span class="rank-name" title="Qwen3.5 35B A3B (Reasoning)">Qwen3.5 35B A3B (Reasoning)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:40.26217037759006%;background:#1a9e5c;opacity:0.9">2.2M</div></div>
-    <span class="rank-val-out" style="color:#1a9e5c"></span>
-    <span class="rank-detail">122 tok/s · RTX 4090 (46.3%)</span>
+    <span class="rank-type" style="color:#2557d6">🔌 API</span>
+    <span class="rank-name" title="Gemma 4 31B">Gemma 4 31B</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:33.68136898473825%;background:#2557d6;opacity:0.9">1.7M</div></div>
+    <span class="rank-val-out" style="color:#2557d6"></span>
+    <span class="rank-detail">$0.21/M blended (33.9%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#10</span>
     <span class="rank-type" style="color:#2557d6">🔌 API</span>
     <span class="rank-name" title="GPT-OSS 120B">GPT-OSS 120B</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:39.0561977753395%;background:#2557d6;opacity:0.9">2.2M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:33.42650796701449%;background:#2557d6;opacity:0.9">1.6M</div></div>
     <span class="rank-val-out" style="color:#2557d6"></span>
-    <span class="rank-detail">$0.26/M blended (56.8%)</span>
+    <span class="rank-detail">$0.26/M blended (43.1%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#11</span>
-    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
-    <span class="rank-name" title="Gemma 4 31B">Gemma 4 31B</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:37.629930024980055%;background:#1a9e5c;opacity:0.9">2.1M</div></div>
-    <span class="rank-val-out" style="color:#1a9e5c"></span>
-    <span class="rank-detail">21.9 tok/s · MacBook Pro 2019 i9 64GB (full system) (48.3%)</span>
+    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
+    <span class="rank-name" title="ChatGPT Business → GPT-4o">ChatGPT Business → GPT-4o</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:33.28639307521378%;background:#7033d8;opacity:0.9">1.6M</div></div>
+    <span class="rank-val-out" style="color:#7033d8"></span>
+    <span class="rank-detail">ChatGPT Business · $30/mo (20.4%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#12</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="ChatGPT Business → GPT-4o">ChatGPT Business → GPT-4o</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:36.945847403330006%;background:#7033d8;opacity:0.9">2.0M</div></div>
+    <span class="rank-name" title="ChatGPT Plus → GPT-5.2">ChatGPT Plus → GPT-5.2</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:33.14253712378672%;background:#7033d8;opacity:0.9">1.6M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Business · $30/mo (25.5%)</span>
+    <span class="rank-detail">ChatGPT Plus · $20/mo (61.3%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#13</span>
     <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="ChatGPT Plus → GPT-5.2">ChatGPT Plus → GPT-5.2</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:33.14253712378672%;background:#7033d8;opacity:0.9">1.8M</div></div>
+    <span class="rank-name" title="ChatGPT Plus → GPT-5.4 (xhigh)">ChatGPT Plus → GPT-5.4 (xhigh)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:32.21054224754788%;background:#7033d8;opacity:0.9">1.6M</div></div>
     <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Plus · $20/mo (69.1%)</span>
+    <span class="rank-detail">ChatGPT Plus · $20/mo (59.5%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#14</span>
-    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="Claude Max 20× → Claude Opus 4">Claude Max 20× → Claude Opus 4</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:32.51567657346267%;background:#7033d8;opacity:0.9">1.8M</div></div>
-    <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">Claude Max 20× · $200/mo (44.3%)</span>
+    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
+    <span class="rank-name" title="Qwen3.5 35B A3B (Reasoning)">Qwen3.5 35B A3B (Reasoning)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:31.507369105639533%;background:#1a9e5c;opacity:0.9">1.5M</div></div>
+    <span class="rank-val-out" style="color:#1a9e5c"></span>
+    <span class="rank-detail">122 tok/s · RTX 4090 (32.1%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#15</span>
-    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="ChatGPT Plus → GPT-5.4 (xhigh)">ChatGPT Plus → GPT-5.4 (xhigh)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:30.980857354043433%;background:#7033d8;opacity:0.9">1.7M</div></div>
-    <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Plus · $20/mo (64.6%)</span>
+    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
+    <span class="rank-name" title="Gemma 4 31B">Gemma 4 31B</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:29.803984943831225%;background:#1a9e5c;opacity:0.9">1.5M</div></div>
+    <span class="rank-val-out" style="color:#1a9e5c"></span>
+    <span class="rank-detail">21.9 tok/s · MacBook Pro 2019 i9 64GB (full system) (33.9%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#16</span>
-    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
-    <span class="rank-name" title="Qwen3.5 35B A3B (Reasoning)">Qwen3.5 35B A3B (Reasoning)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:29.74882827545265%;background:#1a9e5c;opacity:0.9">1.6M</div></div>
-    <span class="rank-val-out" style="color:#1a9e5c"></span>
-    <span class="rank-detail">65 tok/s · Mac M3 Max 64GB (46.3%)</span>
+    <span class="rank-type" style="color:#2557d6">🔌 API</span>
+    <span class="rank-name" title="Llama 3.1 8B">Llama 3.1 8B</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:27.406049327993777%;background:#2557d6;opacity:0.9">1.3M</div></div>
+    <span class="rank-val-out" style="color:#2557d6"></span>
+    <span class="rank-detail">$0.10/M blended (13.5%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#17</span>
-    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
-    <span class="rank-name" title="Qwen3.5 27B (Reasoning)">Qwen3.5 27B (Reasoning)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:28.88094220414344%;background:#1a9e5c;opacity:0.9">1.6M</div></div>
-    <span class="rank-val-out" style="color:#1a9e5c"></span>
-    <span class="rank-detail">48 tok/s · RTX 3090 (51.5%)</span>
+    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
+    <span class="rank-name" title="ChatGPT Plus → GPT-5.2 Codex (xhigh)">ChatGPT Plus → GPT-5.2 Codex (xhigh)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:25.426030980288537%;background:#7033d8;opacity:0.9">1.2M</div></div>
+    <span class="rank-val-out" style="color:#7033d8"></span>
+    <span class="rank-detail">ChatGPT Plus · $20/mo (47.0%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#18</span>
     <span class="rank-type" style="color:#2557d6">🔌 API</span>
     <span class="rank-name" title="DeepSeek V3.2 (Non-reasoning)">DeepSeek V3.2 (Non-reasoning)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:27.92163702115551%;background:#2557d6;opacity:0.9">1.5M</div></div>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:24.197646941180192%;background:#2557d6;opacity:0.9">1.2M</div></div>
     <span class="rank-val-out" style="color:#2557d6"></span>
-    <span class="rank-detail">$0.32/M blended (48.7%)</span>
+    <span class="rank-detail">$0.32/M blended (37.4%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#19</span>
-    <span class="rank-type" style="color:#7033d8">💳 Sub</span>
-    <span class="rank-name" title="ChatGPT Plus → GPT-5.2 Codex (xhigh)">ChatGPT Plus → GPT-5.2 Codex (xhigh)</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:27.454409434008937%;background:#7033d8;opacity:0.9">1.5M</div></div>
-    <span class="rank-val-out" style="color:#7033d8"></span>
-    <span class="rank-detail">ChatGPT Plus · $20/mo (57.2%)</span>
+    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
+    <span class="rank-name" title="Qwen3.5 27B (Reasoning)">Qwen3.5 27B (Reasoning)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:23.548093827619276%;background:#1a9e5c;opacity:0.9">1.2M</div></div>
+    <span class="rank-val-out" style="color:#1a9e5c"></span>
+    <span class="rank-detail">48 tok/s · RTX 3090 (37.2%)</span>
   </div>
 <div class="rank-row">
     <span class="rank-num" style="color:#9b9ba4">#20</span>
-    <span class="rank-type" style="color:#2557d6">🔌 API</span>
+    <span class="rank-type" style="color:#1a9e5c">🖥️ Local</span>
     <span class="rank-name" title="Llama 3.1 8B">Llama 3.1 8B</span>
-    <div class="rank-bar-wrap"><div class="rank-bar" style="width:24.29401564083778%;background:#2557d6;opacity:0.9">1.3M</div></div>
-    <span class="rank-val-out" style="color:#2557d6"></span>
-    <span class="rank-detail">$0.10/M blended (13.5%)</span>
+    <div class="rank-bar-wrap"><div class="rank-bar" style="width:23.35007743180039%;background:#1a9e5c;opacity:0.9">1.1M</div></div>
+    <span class="rank-val-out" style="color:#1a9e5c"></span>
+    <span class="rank-detail">216 tok/s · RTX 4090 (13.5%)</span>
   </div>
 </div><!-- /rank-list -->
         </div><!-- /results-section -->
@@ -1937,6 +1968,19 @@
         <p class="bfn-note">Both scores are z-score normalized: <code>(score − mean) / std × 15 + 50</code>, centering each at 50 on its own distribution. This ensures Arena ELO and AA Intelligence contribute equally to the average — without normalization, Arena's larger numbers would dominate. The two normalized scores are then averaged. If only one is available for a model, that single score is used. Task-specific benchmarks (SWE-bench, Aider, etc.) are shown in raw data but <strong>not used in the main value calculation</strong> — they can't fairly compare across model generations.</p>
     </div>
 </section>
+
+<!-- BY-BENCHMARK MATRIX -->
+<section class="section" id="by-benchmark" style="scroll-margin-top:60px">
+    <div class="section-header fade-up">
+        <div class="tag amber">🧭 Model × Benchmark matrix</div>
+        <h2 class="section-title">Which models are good at what?</h2>
+        <p style="font-size:0.95rem;color:var(--muted);max-width:720px;margin-top:0.25rem">The single-number rankings above blend quality into one score. But models win on different axes — math, coding, long-context reasoning, agentic work. This matrix shows each model's score across benchmarks, color-coded per column by z-score: green = top, red = bottom, hatched = no data.</p>
+    </div>
+    <div class="fade-up" id="heatmapMeta" style="font-size:0.8rem;color:var(--faint);text-align:center;margin-bottom:0.75rem">Loading matrix…</div>
+    <div class="fade-up" id="heatmapContainer"></div>
+    <div id="heatmapTooltip"></div>
+</section>
+<!-- /BY-BENCHMARK MATRIX -->
 
 <!-- SUBSCRIPTION MEASUREMENT -->
 <section class="section" id="subscription-method" style="scroll-margin-top:60px">
@@ -2256,10 +2300,187 @@ function initSelects(){
   });
 }
 
+// ── Model × Benchmark heatmap (#by-benchmark) ──
+function renderHeatmap() {
+  const container = document.getElementById('heatmapContainer');
+  const metaEl = document.getElementById('heatmapMeta');
+  const tooltip = document.getElementById('heatmapTooltip');
+  if (!container || !metaEl) return;
+  try {
+    const models = DATA.models, benchmarks = DATA.benchmarks;
+    const modelIds = Object.keys(models);
+    // Pick columns with at least 4 data points
+    const colCoverage = {};
+    for (const bKey of Object.keys(benchmarks)) {
+      let c = 0;
+      for (const mId of modelIds) {
+        const s = ((models[mId].benchmarks || {})[bKey] || {}).score;
+        if (s != null) c++;
+      }
+      colCoverage[bKey] = c;
+    }
+    const stableCols = ['arena_text', 'arena_code'];
+    const compositeCols = ['aa_intelligence', 'aa_coding_index', 'aa_math_index'];
+    const subCols = Object.keys(benchmarks)
+      .filter(k => !stableCols.includes(k) && !compositeCols.includes(k))
+      .filter(k => colCoverage[k] >= 4)
+      .sort((a, b) => colCoverage[b] - colCoverage[a]);
+    const cols = [
+      ...stableCols.filter(k => colCoverage[k] >= 4),
+      ...compositeCols.filter(k => colCoverage[k] >= 4),
+      ...subCols
+    ];
+    function zScore(values) {
+      const nums = values.filter(v => v != null);
+      if (nums.length < 2) return values.map(() => null);
+      const mean = nums.reduce((a, b) => a + b, 0) / nums.length;
+      const variance = nums.reduce((s, v) => s + (v - mean) ** 2, 0) / nums.length;
+      const sd = Math.sqrt(variance);
+      if (sd === 0) return values.map(() => 0);
+      return values.map(v => v == null ? null : (v - mean) / sd);
+    }
+    const scoreMatrix = {}, zMatrix = {}, rankMatrix = {};
+    for (const bKey of cols) {
+      const vals = modelIds.map(mId => {
+        const s = ((models[mId].benchmarks || {})[bKey] || {}).score;
+        return s == null ? null : s;
+      });
+      scoreMatrix[bKey] = vals;
+      zMatrix[bKey] = zScore(vals);
+      const indexed = modelIds.map((mId, i) => ({ mId, val: vals[i] })).filter(x => x.val != null);
+      indexed.sort((a, b) => b.val - a.val);
+      const ranks = {};
+      indexed.forEach((x, i) => ranks[x.mId] = { rank: i + 1, total: indexed.length });
+      rankMatrix[bKey] = ranks;
+    }
+    function rowKey(mId) {
+      const b = (models[mId] || {}).benchmarks || {};
+      const ai = b.aa_intelligence && b.aa_intelligence.score;
+      if (ai != null) return ai;
+      const at = b.arena_text && b.arena_text.score;
+      if (at != null) return (at - 1100) * 0.05;
+      return -1000;
+    }
+    const sortedModelIds = [...modelIds].sort((a, b) => rowKey(b) - rowKey(a));
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+    function zClass(z) {
+      if (z == null) return 'hm-z-0';
+      if (z >=  1.5)  return 'hm-z-m3';
+      if (z >=  0.5)  return 'hm-z-m2';
+      if (z >=  0.15) return 'hm-z-m1';
+      if (z <= -1.5)  return 'hm-z-p3';
+      if (z <= -0.5)  return 'hm-z-p2';
+      if (z <= -0.15) return 'hm-z-p1';
+      return 'hm-z-0';
+    }
+    function formatScore(v, bKey) {
+      if (bKey === 'arena_text' || bKey === 'arena_code') return Math.round(v);
+      if (v >= 100) return Math.round(v);
+      return v.toFixed(1);
+    }
+    const thead = ['<tr>', '<th class="model-col">Model</th>',
+      ...cols.map(b => {
+        const def = benchmarks[b] || {};
+        const name = def.name || b;
+        return `<th class="col-label" data-bkey="${esc(b)}">${esc(name)}</th>`;
+      }), '</tr>'].join('');
+    const idxOf = {};
+    modelIds.forEach((m, i) => idxOf[m] = i);
+    const tbody = sortedModelIds.map(mId => {
+      const m = models[mId];
+      const providerClean = (m.provider || '').replace(/,? Inc\.?$/, '');
+      const i = idxOf[mId];
+      const cells = cols.map(bKey => {
+        const sc = scoreMatrix[bKey][i];
+        if (sc == null) {
+          return `<td class="score-cell empty" data-bkey="${esc(bKey)}" data-mid="${esc(mId)}">·</td>`;
+        }
+        const z = zMatrix[bKey][i];
+        const cls = zClass(z);
+        const displayed = formatScore(sc, bKey);
+        return `<td class="score-cell ${cls}" data-bkey="${esc(bKey)}" data-mid="${esc(mId)}" data-score="${sc}">${displayed}</td>`;
+      }).join('');
+      return `<tr><td class="model-cell"><span class="model-name">${esc(m.name)}</span><span class="model-sub">${esc(providerClean)}</span></td>${cells}</tr>`;
+    }).join('');
+    container.innerHTML = `
+      <table class="heatmap">
+        <thead>${thead}</thead>
+        <tbody>${tbody}</tbody>
+      </table>
+      <div class="hm-legend">
+        <span>Worse</span>
+        <span class="hm-legend-scale">
+          <span class="hm-z-p3"></span><span class="hm-z-p2"></span><span class="hm-z-p1"></span>
+          <span class="hm-z-0"></span>
+          <span class="hm-z-m1"></span><span class="hm-z-m2"></span><span class="hm-z-m3"></span>
+        </span>
+        <span>Better</span>
+        <span style="margin-left:20px;">Hatched = no data</span>
+      </div>`;
+    const totalCells = sortedModelIds.length * cols.length;
+    let filled = 0;
+    for (const mId of sortedModelIds) for (const bKey of cols) {
+      if (((models[mId].benchmarks || {})[bKey] || {}).score != null) filled++;
+    }
+    metaEl.innerHTML =
+      `${sortedModelIds.length} models × ${cols.length} benchmarks — ` +
+      `${filled} of ${totalCells} cells filled (${(filled/totalCells*100).toFixed(0)}%). ` +
+      `Data synced from Artificial Analysis + LMArena.`;
+    function showTooltip(target) {
+      const bKey = target.getAttribute('data-bkey');
+      const mId = target.getAttribute('data-mid');
+      const def = benchmarks[bKey] || {};
+      const score = target.getAttribute('data-score');
+      const rank = (rankMatrix[bKey] || {})[mId];
+      const isEmpty = target.classList.contains('empty');
+      let html = `<div class="hm-tt-head">${esc(def.name || bKey)}</div>`;
+      html += `<div style="color:#ccc; font-size:11px;">${esc(models[mId].name)}</div>`;
+      if (isEmpty) html += `<div class="hm-tt-score">no data</div>`;
+      else {
+        html += `<div class="hm-tt-score">${score}</div>`;
+        if (rank) html += `<div class="hm-tt-rank">rank #${rank.rank} of ${rank.total} measured</div>`;
+      }
+      if (def.description) html += `<div class="hm-tt-desc">${esc(def.description)}</div>`;
+      tooltip.innerHTML = html;
+      tooltip.style.display = 'block';
+      const rect = target.getBoundingClientRect();
+      const tt = tooltip.getBoundingClientRect();
+      let left = rect.right + 8, top = rect.top;
+      if (left + tt.width > window.innerWidth - 8) left = rect.left - tt.width - 8;
+      if (top + tt.height > window.innerHeight - 8) top = window.innerHeight - tt.height - 8;
+      tooltip.style.left = Math.max(8, left) + 'px';
+      tooltip.style.top = Math.max(8, top) + 'px';
+    }
+    function hideTooltip() { tooltip.style.display = 'none'; }
+    container.querySelectorAll('.score-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', () => showTooltip(cell));
+      cell.addEventListener('mouseleave', hideTooltip);
+    });
+    container.querySelectorAll('th.col-label').forEach(th => {
+      th.addEventListener('mouseenter', () => {
+        const bKey = th.getAttribute('data-bkey');
+        const def = benchmarks[bKey] || {};
+        tooltip.innerHTML =
+          `<div class="hm-tt-head">${esc(def.name || bKey)}</div>` +
+          `<div class="hm-tt-desc">${esc(def.description || '')}</div>`;
+        tooltip.style.display = 'block';
+        const rect = th.getBoundingClientRect();
+        tooltip.style.left = rect.left + 'px';
+        tooltip.style.top = (rect.bottom + 8) + 'px';
+      });
+      th.addEventListener('mouseleave', hideTooltip);
+    });
+  } catch (err) {
+    console.error('Heatmap render failed:', err);
+    metaEl.innerHTML = '<span style="color:#d63b2f">Error loading heatmap: ' + String(err) + '</span>';
+  }
+}
+
 function init(){
   computeWinners();
   initSelects();
   renderDataTables();
+  renderHeatmap();
 
   document.querySelectorAll('.tab').forEach(tab=>{
     tab.addEventListener('click',()=>{
@@ -2987,7 +3208,7 @@ loadData();
 <!-- SEO: Pre-rendered 2026-04-23 from 34 models -->
 <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
 <h2>Best Value AI Models — 2026-04-23</h2>
-<p>Comparing 34 AI models across API pricing, subscriptions, and local hardware.</p><p>Best API value: GLM-4.7 Flash at $0.15/M blended — 2.7M quality-adjusted tokens per dollar.</p><p>Best subscription value: ChatGPT Business — 5.5M quality-adjusted tokens per dollar.</p><p>Best local value: Qwen3.5 35B A3B (Reasoning) (110 tok/s · RTX 3090) — 3.3M quality-adjusted tokens per dollar.</p><h3>Top 10 AI Models by Value (Quality-Adjusted Tokens per Dollar)</h3><ol><li>ChatGPT Business → GPT-5.2 (Subscription) — 5.5M tok/$ — ChatGPT Business · $30/mo</li><li>ChatGPT Business → GPT-5.4 (xhigh) (Subscription) — 5.2M tok/$ — ChatGPT Business · $30/mo</li><li>ChatGPT Business → GPT-5.2 Codex (xhigh) (Subscription) — 4.6M tok/$ — ChatGPT Business · $30/mo</li><li>Qwen3.5 35B A3B (Reasoning) (Local) — 3.3M tok/$ — 110 tok/s · RTX 3090</li><li>GLM-4.7 Flash (API) — 2.7M tok/$ — $0.15/M blended</li><li>Gemma 4 31B (API) — 2.4M tok/$ — $0.21/M blended</li><li>Claude Max 20× → Claude Opus 4.5 (Subscription) — 2.3M tok/$ — Claude Max 20× · $200/mo</li><li>Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort) (Subscription) — 2.2M tok/$ — Claude Max 20× · $200/mo</li><li>Qwen3.5 35B A3B (Reasoning) (Local) — 2.2M tok/$ — 122 tok/s · RTX 4090</li><li>GPT-OSS 120B (API) — 2.2M tok/$ — $0.26/M blended</li></ol><h3>All Models Compared</h3><p>Claude Opus 4, Claude Sonnet 4, DeepSeek V3.1, Gemini 2.5 Pro, GLM-4.7 Flash, GPT-OSS 120B, GPT-4o, Llama 3.1 70B, Llama 3.1 8B, o3, Qwen QwQ-32B, Claude Opus 4.5, Gemini 3 Pro, Gemini 3 Flash, GPT-5.2, Claude Opus 4.6 (Non-reasoning, High Effort), Claude Sonnet 4.6 (Non-reasoning, High Effort), Claude 4.5 Haiku (Non-reasoning), Claude 4.5 Sonnet (Non-reasoning), GPT-5.4 (xhigh), GPT-5.3 Codex (xhigh), GPT-5.2 Codex (xhigh), Gemini 3.1 Pro Preview, GLM-5 (Reasoning), GLM-4.7 (Reasoning), MiniMax-M2.5, MiniMax-M2.7, Kimi K2.5 (Reasoning), DeepSeek V3.2 (Non-reasoning), Qwen3.5 35B A3B (Reasoning), Qwen3.5 27B (Reasoning), Qwen3.5 122B A10B (Reasoning), Gemma 4 31B, Gemma 4 26B A4B</p></div>
+<p>Comparing 34 AI models across API pricing, subscriptions, and local hardware.</p><p>Best API value: GLM-4.7 Flash at $0.15/M blended — 2.7M quality-adjusted tokens per dollar.</p><p>Best subscription value: ChatGPT Business — 4.9M quality-adjusted tokens per dollar.</p><p>Best local value: Qwen3.5 35B A3B (Reasoning) (110 tok/s · RTX 3090) — 2.3M quality-adjusted tokens per dollar.</p><h3>Top 10 AI Models by Value (Quality-Adjusted Tokens per Dollar)</h3><ol><li>ChatGPT Business → GPT-5.2 (Subscription) — 4.9M tok/$ — ChatGPT Business · $30/mo</li><li>ChatGPT Business → GPT-5.4 (xhigh) (Subscription) — 4.8M tok/$ — ChatGPT Business · $30/mo</li><li>ChatGPT Business → GPT-5.2 Codex (xhigh) (Subscription) — 3.8M tok/$ — ChatGPT Business · $30/mo</li><li>GLM-4.7 Flash (API) — 2.7M tok/$ — $0.15/M blended</li><li>Qwen3.5 35B A3B (Reasoning) (Local) — 2.3M tok/$ — 110 tok/s · RTX 3090</li><li>Claude Max 20× → Claude Opus 4.5 (Subscription) — 2.1M tok/$ — Claude Max 20× · $200/mo</li><li>Claude Max 20× → Claude Opus 4.6 (Non-reasoning, High Effort) (Subscription) — 2.0M tok/$ — Claude Max 20× · $200/mo</li><li>Claude Max 20× → Claude Opus 4 (Subscription) — 1.8M tok/$ — Claude Max 20× · $200/mo</li><li>Gemma 4 31B (API) — 1.7M tok/$ — $0.21/M blended</li><li>GPT-OSS 120B (API) — 1.6M tok/$ — $0.26/M blended</li></ol><h3>All Models Compared</h3><p>Claude Opus 4, Claude Sonnet 4, DeepSeek V3.1, Gemini 2.5 Pro, GLM-4.7 Flash, GPT-OSS 120B, GPT-4o, Llama 3.1 70B, Llama 3.1 8B, o3, Qwen QwQ-32B, Claude Opus 4.5, Gemini 3 Pro, Gemini 3 Flash, GPT-5.2, Claude Opus 4.6 (Non-reasoning, High Effort), Claude Sonnet 4.6 (Non-reasoning, High Effort), Claude 4.5 Haiku (Non-reasoning), Claude 4.5 Sonnet (Non-reasoning), GPT-5.4 (xhigh), GPT-5.3 Codex (xhigh), GPT-5.2 Codex (xhigh), Gemini 3.1 Pro Preview, GLM-5 (Reasoning), GLM-4.7 (Reasoning), MiniMax-M2.5, MiniMax-M2.7, Kimi K2.5 (Reasoning), DeepSeek V3.2 (Non-reasoning), Qwen3.5 35B A3B (Reasoning), Qwen3.5 27B (Reasoning), Qwen3.5 122B A10B (Reasoning), Gemma 4 31B, Gemma 4 26B A4B</p></div>
 <script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Plus","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","date":"2026-04-14","weekly":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","date":"2026-04-15","weekly":60108025,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","date":"2026-04-15","weekly":68671233,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","date":"2026-04-15","weekly":277356400,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":12}];</script>
 </body>
 </html>
