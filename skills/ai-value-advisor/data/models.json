@@ -198,11 +198,18 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "confidence": "low",
-        "notes": "Estimated ~100 messages/day. Per OpenRouter 2025 study, avg turn is 6,400 tokens (6k in / 400 out).",
-        "source": "https://a16z.com/state-of-ai/",
-        "tokensPerWeek": 4480000,
-        "estimated": true
+        "confidence": "high",
+        "notes": "Measured 2026-04-24 21:39 via claude-code --model sonnet on Sonnet 4.6 on Claude Pro. Multi-flip method, 3 flips in batches 4/7/11, per-1% deltas 168K + 224K (mean 196K/1%). 34% of 5h session consumed, 3% of weekly consumed. Clean run with no same-batch flip pileup. First proper Pro + Sonnet measurement. Source: claude_measurement_20260424_213954.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_213954.json",
+        "tokensPerWeek": 19639400,
+        "estimated": false,
+        "measuredOnModel": "Sonnet 4.6",
+        "measurementFiles": 1,
+        "measurementBestFile": "claude_measurement_20260424_213954.json",
+        "measurementTaskRuns": 33,
+        "measurementDelta5h": 34,
+        "measurementDeltaWeekly": 3,
+        "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
         "name": "Claude Max 20\u00d7",
@@ -1736,11 +1743,18 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "confidence": "medium",
-        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing",
-        "tokensPerWeek": 4480000,
-        "estimated": true
+        "confidence": "high",
+        "notes": "Measured 2026-04-24 21:39 via claude-code --model sonnet on Sonnet 4.6 on Claude Pro. Multi-flip method, 3 flips in batches 4/7/11, per-1% deltas 168K + 224K (mean 196K/1%). 34% of 5h session consumed, 3% of weekly consumed. Clean run with no same-batch flip pileup. First proper Pro + Sonnet measurement. Source: claude_measurement_20260424_213954.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_213954.json",
+        "tokensPerWeek": 19639400,
+        "estimated": false,
+        "measuredOnModel": "Sonnet 4.6",
+        "measurementFiles": 1,
+        "measurementBestFile": "claude_measurement_20260424_213954.json",
+        "measurementTaskRuns": 33,
+        "measurementDelta5h": 34,
+        "measurementDeltaWeekly": 3,
+        "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
         "name": "Claude Max 20\u00d7",
@@ -1952,11 +1966,18 @@
       "claude_pro": {
         "name": "Claude Pro",
         "monthlyPrice": 20,
-        "confidence": "medium",
-        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing",
-        "tokensPerWeek": 4480000,
-        "estimated": true
+        "confidence": "high",
+        "notes": "Measured 2026-04-24 21:39 via claude-code --model sonnet on Sonnet 4.6 on Claude Pro. Multi-flip method, 3 flips in batches 4/7/11, per-1% deltas 168K + 224K (mean 196K/1%). 34% of 5h session consumed, 3% of weekly consumed. Clean run with no same-batch flip pileup. First proper Pro + Sonnet measurement. Source: claude_measurement_20260424_213954.json",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_213954.json",
+        "tokensPerWeek": 19639400,
+        "estimated": false,
+        "measuredOnModel": "Sonnet 4.6",
+        "measurementFiles": 1,
+        "measurementBestFile": "claude_measurement_20260424_213954.json",
+        "measurementTaskRuns": 33,
+        "measurementDelta5h": 34,
+        "measurementDeltaWeekly": 3,
+        "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
         "name": "Claude Max 20\u00d7",
