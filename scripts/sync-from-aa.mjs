@@ -69,7 +69,7 @@ const PRIORITY_SLUGS = [
   'claude-opus-4-6', 'claude-sonnet-4-6', 'claude-4-5-haiku',
   'claude-opus-4-5', 'claude-4-5-sonnet',
   // OpenAI
-  'gpt-5-4', 'gpt-5-3-codex', 'gpt-5-2', 'gpt-5-2-codex',
+  'gpt-5-5', 'gpt-5-4', 'gpt-5-3-codex', 'gpt-5-2', 'gpt-5-2-codex',
   'gpt-4o', 'o3',
   // Google
   'gemini-3-1-pro-preview', 'gemini-3-pro-preview', 'gemini-3-flash-preview', 'gemini-2-5-pro',
@@ -101,6 +101,7 @@ const SLUG_TO_OUR_ID = {
   'claude-4-5-sonnet':        'claude-4-5-sonnet',
   'gpt-4o':                   'gpt-4o',
   'o3':                       'o3',
+  'gpt-5-5':                  'gpt-5-5',
   'gpt-5-2-codex':            'gpt-5-2-codex',
   'gpt-oss-120b':             'gpt-oss-120b',
   'deepseek-v3':              'deepseek-v3',

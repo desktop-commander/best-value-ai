@@ -1,0 +1,84 @@
+{
+  "tool": "codex-cli",
+  "version": "0.124.0",
+  "plan": "Plus",
+  "account": "wonderwhy.er@gmail.com (Plus)",
+  "target_meter": "weekly_pct_left",
+  "target_flips_requested": 3,
+  "requested_model_alias": "gpt-5.5",
+  "captured_model": "gpt-5.5 (reasoning xhigh, summaries auto)",
+  "model": "gpt-5.5 (reasoning xhigh, summaries auto)",
+  "timestamp": "2026-04-24T17:07:00Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 11,
+  "parallel": 1,
+  "duration_seconds": null,
+  "tokens": {
+    "input": 1975650,
+    "cached": 1632640,
+    "output": 45238,
+    "total": 2020888
+  },
+  "quota_before": {
+    "5h_pct_left": 100,
+    "weekly_pct_left": 92,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.5 (reasoning xhigh, summaries auto)"
+  },
+  "quota_after": {
+    "5h_pct_left": 85,
+    "weekly_pct_left": 89,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.5 (reasoning xhigh, summaries auto)"
+  },
+  "quota_consumed": {
+    "5h_pct": 15,
+    "weekly_pct": 3,
+    "target_meter_pct": 3
+  },
+  "meter_flips": [
+    {
+      "flip_index": 1,
+      "meter_value": 91,
+      "cumulative_tokens": 112525,
+      "runs": 1,
+      "batch": null
+    },
+    {
+      "flip_index": 2,
+      "meter_value": 90,
+      "cumulative_tokens": 955782,
+      "runs": 6,
+      "batch": null
+    },
+    {
+      "flip_index": 3,
+      "meter_value": 89,
+      "cumulative_tokens": 2020888,
+      "runs": 11,
+      "batch": null
+    }
+  ],
+  "estimates": {
+    "weekly_tokens": 67362933,
+    "daily_tokens": 9623276,
+    "target_meter_mean_tokens_per_1pct": 954182,
+    "target_meter_median_tokens_per_1pct": 954182,
+    "target_meter_estimate_mean": 95418150,
+    "target_meter_estimate_median": 95418150,
+    "target_meter_flip_count": 2,
+    "target_meter_flip_deltas": [
+      843257,
+      1065106
+    ],
+    "target_meter_all_flip_deltas": [
+      112525,
+      843257,
+      1065106
+    ],
+    "target_meter_ignored_first_flip": true
+  },
+  "_reconstructed_note": "Rebuilt from /tmp/codex_run_20260424_194218_*.jsonl + /tmp/codex_mid_20260424_194218_*.txt because the original script run exited without writing the final measurements/ file. All raw tokens/flips came from the script's intermediate artifacts; only num_runs, duration_seconds, and exact timestamp are approximated."
+}

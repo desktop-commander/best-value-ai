@@ -3741,5 +3741,94 @@
       }
     },
     "_aa_synced": "2026-04-23"
+  },
+  "gpt-5-5": {
+    "id": "gpt-5-5",
+    "name": "GPT-5.5 (xhigh)",
+    "provider": "OpenAI",
+    "releaseDate": "2026-04-23",
+    "modelCard": "https://artificialanalysis.ai/models/gpt-5-5",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 60.2,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "aa_coding_index": {
+        "score": 59.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "gpqa_diamond": {
+        "score": 93.5,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "hle": {
+        "score": 44.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "ifbench": {
+        "score": 75.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "aa_lcr": {
+        "score": 74.3,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "scicode": {
+        "score": 56.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "tau2_bench": {
+        "score": 93.9,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "terminalbench_hard": {
+        "score": 60.6,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      }
+    },
+    "api": {
+      "inputPer1M": 5,
+      "outputPer1M": 30,
+      "tokensPerSecAPI": null,
+      "source": "https://artificialanalysis.ai/models/gpt-5-5"
+    },
+    "local": null,
+    "subscriptions": {
+      "chatgpt_plus": {
+        "name": "ChatGPT Plus",
+        "monthlyPrice": 20,
+        "confidence": "medium",
+        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.5 xhigh on Plus. Multi-flip method, 2 usable 1% crossings (843K and 1,065K tokens per 1%). File reconstructed from /tmp artifacts after original script exited before writing output. A cleaner 5-flip rerun is recommended to tighten the estimate.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_194218.json",
+        "tokensPerWeek": 95418150,
+        "estimated": false,
+        "measuredOnModel": "gpt-5.5 (reasoning xhigh, summaries auto)",
+        "measurementFiles": 1,
+        "measurementBestFile": "codex_measurement_20260424_194218.json",
+        "measurementTaskRuns": 11,
+        "measurementDelta5h": 15,
+        "measurementDeltaWeekly": 3,
+        "measurement_method": "multi-flip (3 weekly-% crossings, first discarded; 2 usable deltas)"
+      },
+      "chatgpt_pro": {
+        "name": "ChatGPT Pro",
+        "monthlyPrice": 200,
+        "confidence": "low",
+        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
+        "source": "https://developers.openai.com/codex/pricing",
+        "tokensPerWeek": 66500000,
+        "estimated": true
+      },
+      "chatgpt_business": {
+        "name": "ChatGPT Business",
+        "monthlyPrice": 30,
+        "confidence": "low",
+        "notes": "Business quota on GPT-5.5 not yet directly measured. Placeholder uses GPT-5.4 measurement (60M tok/wk). Given 5.5 doubled per-token price, actual 5.5 Business quota is likely ~30M tok/wk.",
+        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260415_110603.json",
+        "tokensPerWeek": 60108025,
+        "estimated": true
+      }
+    },
+    "_aa_synced": "2026-04-24"
   }
 }
