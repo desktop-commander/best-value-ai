@@ -1,0 +1,40 @@
+{
+  "tool": "codex-cli",
+  "version": "codex-cli 0.120.0",
+  "plan": "Plus",
+  "account": "wonderwhy.er@gmail.com (Plus)",
+  "target_meter": "weekly_pct_left",
+  "target_flips_requested": 3,
+  "model": "gpt-5.5 (reasoning xhigh, summaries auto)",
+  "timestamp": "2026-04-24T10:43:25Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 40,
+  "duration_seconds": 2936,
+  "tokens": {
+    "input": 0,
+    "cached": 0,
+    "output": 0,
+    "total": 0
+  },
+  "quota_before": {
+    "5h_pct_left": 73,
+    "weekly_pct_left": 92,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.5 (reasoning xhigh, summaries auto)"
+  },
+  "quota_after": {
+    "5h_pct_left": 73,
+    "weekly_pct_left": 92,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.5 (reasoning xhigh, summaries auto)"
+  },
+  "quota_consumed": {
+    "5h_pct": 0,
+    "weekly_pct": 0,
+    "target_meter_pct": 0
+  },
+  "meter_flips": [],
+  "estimates": {}
+}

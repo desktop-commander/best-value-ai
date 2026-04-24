@@ -42,9 +42,12 @@ function norm(score, bmId) {
 
 function getScore(model) {
   if (!model.benchmarks) return null;
-  const stableIds = Object.entries(benchmarks).filter(([,b]) => b.stable).map(([id]) => id);
+  // Blend only the benchmarks that norm() actually z-score-normalizes.
+  // Pooling 17 "stable" benchmarks as raw percentages alongside normalized ones produces wrong rankings:
+  // older models with more completed benchmarks (MMLU-Pro, AIME 25 etc. retired from v4) inflate above newer ones.
+  const blendIds = ['arena_text', 'arena_code', 'aa_intelligence'];
   let t = 0, c = 0;
-  stableIds.forEach(id => {
+  blendIds.forEach(id => {
     if (model.benchmarks[id]) { t += norm(model.benchmarks[id].score, id); c++; }
   });
   return c > 0 ? t / c : null;

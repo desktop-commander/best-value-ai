@@ -4,22 +4,22 @@
 
 ## Current winners
 
-- **Best subscription**: GPT-5.2 via ChatGPT Plus · $20/mo — 23.2M tok/$
-- **Best API**: GLM-4.7 Flash — 2.7M tok/$ at $0.15/M blended
-- **Best local**: Qwen3.5 35B A3B (Reasoning) on 110 tok/s · RTX 3090 — 2.3M tok/$
+- **Best subscription**: GPT-5.4 (xhigh) via ChatGPT Plus · $20/mo — 24.7M tok/$
+- **Best API**: GLM-4.7 Flash — 2.8M tok/$ at $0.15/M blended
+- **Best local**: Qwen3.5 35B A3B (Reasoning) on 110 tok/s · RTX 3090 — 2.9M tok/$
 
 ## Top 10 models by quality-adjusted value per dollar
 
-1. **GPT-5.2** (Subscription) — 23.2M tok/$ · ChatGPT Plus · $20/mo
-2. **GPT-5.4 (xhigh)** (Subscription) — 22.5M tok/$ · ChatGPT Plus · $20/mo
-3. **GPT-5.2 Codex (xhigh)** (Subscription) — 17.8M tok/$ · ChatGPT Plus · $20/mo
-4. **GPT-4o** (Subscription) — 7.7M tok/$ · ChatGPT Plus · $20/mo
-5. **GPT-5.2** (Subscription) — 4.9M tok/$ · ChatGPT Business · $30/mo
-6. **GPT-5.4 (xhigh)** (Subscription) — 4.7M tok/$ · ChatGPT Business · $30/mo
-7. **GPT-5.2 Codex (xhigh)** (Subscription) — 3.7M tok/$ · ChatGPT Business · $30/mo
-8. **Claude Sonnet 4.6 (Non-reasoning, High Effort)** (Subscription) — 3.6M tok/$ · Claude Max 20× · $200/mo
-9. **Claude Sonnet 4** (Subscription) — 3.2M tok/$ · Claude Max 20× · $200/mo
-10. **Claude 4.5 Sonnet (Non-reasoning)** (Subscription) — 3.1M tok/$ · Claude Max 20× · $200/mo
+1. **GPT-5.4 (xhigh)** (Subscription) — 24.7M tok/$ · ChatGPT Plus · $20/mo
+2. **GPT-5.2** (Subscription) — 22.1M tok/$ · ChatGPT Plus · $20/mo
+3. **GPT-5.2 Codex (xhigh)** (Subscription) — 19.8M tok/$ · ChatGPT Plus · $20/mo
+4. **GPT-4o** (Subscription) — 14.9M tok/$ · ChatGPT Plus · $20/mo
+5. **GPT-5.4 (xhigh)** (Subscription) — 5.2M tok/$ · ChatGPT Business · $30/mo
+6. **Claude Sonnet 4.6 (Non-reasoning, High Effort)** (Subscription) — 4.9M tok/$ · Claude Max 20× · $200/mo
+7. **GPT-5.2** (Subscription) — 4.7M tok/$ · ChatGPT Business · $30/mo
+8. **GPT-5.2 Codex (xhigh)** (Subscription) — 4.2M tok/$ · ChatGPT Business · $30/mo
+9. **Claude 4.5 Sonnet (Non-reasoning)** (Subscription) — 4.0M tok/$ · Claude Max 20× · $200/mo
+10. **Claude Sonnet 4** (Subscription) — 3.6M tok/$ · Claude Max 20× · $200/mo
 
 ## Empirical subscription measurements
 
