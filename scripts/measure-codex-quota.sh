@@ -184,7 +184,7 @@ for batch in $(seq 1 $MAX_BATCHES); do
         # edits to linked_list.py (codex writes files to cwd)
         RUN_DIR="/tmp/codex_run_${TS}_${RUN_NUM}_dir"
         mkdir -p "$RUN_DIR"
-        (cd "$RUN_DIR" && echo "$PROMPT" | $CODEX exec $MODEL_ARGS --json - > "$JF" 2> "$EF" || true) &
+        (cd "$RUN_DIR" && echo "$PROMPT" | $CODEX exec $MODEL_ARGS --skip-git-repo-check --json - > "$JF" 2> "$EF" || true) &
     done
     wait
 
