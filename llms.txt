@@ -24,8 +24,7 @@
 ## Empirical subscription measurements
 
 - **Business**: 60.1M tokens/week · tight extrapolation · measured 2026-04-15 via codex-cli (5 runs, 21%/5h 4%/week consumed)
-- **Claude Max 20x**: 203.1M tokens/week · wide extrapolation · measured 2026-04-16 via claude-code (30 runs, 0%/5h 1%/week consumed)
-- **Claude Max**: 184.2M tokens/week · wide extrapolation · measured 2026-04-24 via claude-code (200 runs, 0%/5h 3%/week consumed)
+- **Claude Max 20x**: 184.2M tokens/week · wide extrapolation · measured 2026-04-24 via claude-code (200 runs, 0%/5h 3%/week consumed)
 - **Claude Pro**: 15.6M tokens/week · wide extrapolation · measured 2026-04-24 via claude-code (20 runs, 0%/5h 8%/week consumed)
 - **Plus**: 197.6M tokens/week · tight extrapolation · measured 2026-04-24 via codex-cli (9 runs, 21%/5h 3%/week consumed)
 

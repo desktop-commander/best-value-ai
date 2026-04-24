@@ -267,6 +267,7 @@ for (const f of measFiles) {
     let plan = d.plan || 'unknown';
     const pm = plan.match(/\((\w+)\)$/); if (pm) plan = pm[1];
     const pm2 = plan.match(/^(\w[\w\s]*?)\s*\(/); if (pm2) plan = pm2[1];
+    if (plan === 'Claude Max') plan = 'Claude Max 20x';
     const est = d.estimates || {};
     const d5 = d.quota_consumed?.['5h_pct'] || 0;
     const dw = d.quota_consumed?.weekly_pct || d.quota_consumed?.weekly_all_pct || 0;
@@ -317,6 +318,7 @@ for (const f of measFiles) {
     let plan = d.plan || 'unknown';
     const pm = plan.match(/\((\w+)\)$/); if (pm) plan = pm[1];
     const pm2 = plan.match(/^(\w[\w\s]*?)\s*\(/); if (pm2) plan = pm2[1];
+    if (plan === 'Claude Max') plan = 'Claude Max 20x';
     const est = d.estimates || {};
     const weekly = est.weekly_tokens;
     const session = est.session_tokens || est['5h_tokens'];
