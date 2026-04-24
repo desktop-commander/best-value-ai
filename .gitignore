@@ -2,3 +2,7 @@
 node_modules/
 # Keep measurement JSONs in git for historical tracking
 # measurements/*.json
+
+# Measurement script test artifacts (not part of the public repo)
+__pycache__/
+linked_list.py

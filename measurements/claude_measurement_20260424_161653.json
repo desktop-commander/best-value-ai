@@ -1,0 +1,82 @@
+{
+  "tool": "claude-code",
+  "version": "2.1.119 (Claude Code)",
+  "plan": "Claude Pro",
+  "requested_model_alias": "opus",
+  "captured_model": "Opus 4.7",
+  "target_meter": "weekly_all_pct_used",
+  "target_flips_requested": 3,
+  "model": "Opus 4.7",
+  "timestamp": "2026-04-24T13:18:42Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 20,
+  "duration_seconds": 69,
+  "tokens": {
+    "input": 1177790,
+    "cached": 1177665,
+    "output": 69875,
+    "total": 1247665
+  },
+  "quota_before": {
+    "session_pct_used": 0,
+    "weekly_all_pct_used": 0,
+    "requested_model_alias": "opus",
+    "model": "Opus 4.7",
+    "plan": "Claude Pro"
+  },
+  "quota_after": {
+    "session_pct_used": 100,
+    "weekly_all_pct_used": 8,
+    "requested_model_alias": "opus",
+    "model": "Opus 4.7",
+    "plan": "Claude Pro"
+  },
+  "quota_consumed": {
+    "session_pct": 100,
+    "weekly_all_pct": 8,
+    "target_meter_pct": 8
+  },
+  "meter_flips": [
+    {
+      "flip_index": 1,
+      "meter_value": 1,
+      "cumulative_tokens": 1247665,
+      "runs": 20,
+      "batch": 1
+    },
+    {
+      "flip_index": 2,
+      "meter_value": 2,
+      "cumulative_tokens": 1247665,
+      "runs": 20,
+      "batch": 1
+    },
+    {
+      "flip_index": 3,
+      "meter_value": 3,
+      "cumulative_tokens": 1247665,
+      "runs": 20,
+      "batch": 1
+    }
+  ],
+  "estimates": {
+    "session_tokens": 1247665,
+    "weekly_tokens": 15595812,
+    "daily_tokens": 2227973,
+    "target_meter_mean_tokens_per_1pct": 0,
+    "target_meter_median_tokens_per_1pct": 0,
+    "target_meter_estimate_mean": 0,
+    "target_meter_estimate_median": 0,
+    "target_meter_flip_count": 2,
+    "target_meter_flip_deltas": [
+      0,
+      0
+    ],
+    "target_meter_all_flip_deltas": [
+      1247665,
+      0,
+      0
+    ],
+    "target_meter_ignored_first_flip": true
+  }
+}

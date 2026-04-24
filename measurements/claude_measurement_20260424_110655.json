@@ -1,0 +1,84 @@
+{
+  "tool": "claude-code",
+  "version": "2.1.119 (Claude Code)",
+  "plan": "Claude Max",
+  "requested_model_alias": "sonnet",
+  "captured_model": "Sonnet 4.6",
+  "target_meter": "weekly_all_pct_used",
+  "target_flips_requested": 3,
+  "model": "Sonnet 4.6",
+  "timestamp": "2026-04-24T08:20:27Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 260,
+  "duration_seconds": 530,
+  "tokens": {
+    "input": 7702140,
+    "cached": 7701488,
+    "output": 461292,
+    "total": 8163432
+  },
+  "quota_before": {
+    "session_pct_used": 25,
+    "weekly_all_pct_used": 4,
+    "weekly_sonnet_pct_used": 0,
+    "requested_model_alias": "sonnet",
+    "model": "Sonnet 4.6",
+    "plan": "Claude Max"
+  },
+  "quota_after": {
+    "session_pct_used": 41,
+    "weekly_all_pct_used": 7,
+    "weekly_sonnet_pct_used": 4,
+    "requested_model_alias": "sonnet",
+    "model": "Sonnet 4.6",
+    "plan": "Claude Max"
+  },
+  "quota_consumed": {
+    "session_pct": 16,
+    "weekly_all_pct": 3,
+    "target_meter_pct": 3
+  },
+  "meter_flips": [
+    {
+      "flip_index": 1,
+      "meter_value": 5,
+      "cumulative_tokens": 406799,
+      "runs": 20,
+      "batch": 1
+    },
+    {
+      "flip_index": 2,
+      "meter_value": 6,
+      "cumulative_tokens": 4284008,
+      "runs": 160,
+      "batch": 8
+    },
+    {
+      "flip_index": 3,
+      "meter_value": 7,
+      "cumulative_tokens": 8163432,
+      "runs": 260,
+      "batch": 13
+    }
+  ],
+  "estimates": {
+    "session_tokens": 51021450,
+    "weekly_tokens": 272114400,
+    "daily_tokens": 38873485,
+    "target_meter_mean_tokens_per_1pct": 3878316,
+    "target_meter_median_tokens_per_1pct": 3878316,
+    "target_meter_estimate_mean": 387831650,
+    "target_meter_estimate_median": 387831650,
+    "target_meter_flip_count": 2,
+    "target_meter_flip_deltas": [
+      3877209,
+      3879424
+    ],
+    "target_meter_all_flip_deltas": [
+      406799,
+      3877209,
+      3879424
+    ],
+    "target_meter_ignored_first_flip": true
+  }
+}

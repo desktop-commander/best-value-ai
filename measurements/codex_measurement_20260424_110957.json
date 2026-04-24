@@ -1,0 +1,78 @@
+{
+  "tool": "codex-cli",
+  "version": "codex-cli 0.120.0",
+  "plan": "Plus",
+  "account": "wonderwhy.er@gmail.com (Plus)",
+  "target_meter": "weekly_pct_left",
+  "target_flips_requested": 3,
+  "model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+  "timestamp": "2026-04-24T08:30:11Z",
+  "task": "doubly-linked-list-with-tests",
+  "num_runs": 9,
+  "duration_seconds": 880,
+  "tokens": {
+    "input": 5896939,
+    "cached": 5072384,
+    "output": 30543,
+    "total": 5927482
+  },
+  "quota_before": {
+    "5h_pct_left": 98,
+    "weekly_pct_left": 95,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.4 (reasoning xhigh, summaries auto)"
+  },
+  "quota_after": {
+    "5h_pct_left": 77,
+    "weekly_pct_left": 92,
+    "account": "wonderwhy.er@gmail.com (Plus)",
+    "plan": "Plus",
+    "model": "gpt-5.4 (reasoning xhigh, summaries auto)"
+  },
+  "quota_consumed": {
+    "5h_pct": 21,
+    "weekly_pct": 3,
+    "target_meter_pct": 3
+  },
+  "meter_flips": [
+    {
+      "flip_index": 1,
+      "meter_value": 94,
+      "cumulative_tokens": 2123483,
+      "runs": 3
+    },
+    {
+      "flip_index": 2,
+      "meter_value": 93,
+      "cumulative_tokens": 4020882,
+      "runs": 6
+    },
+    {
+      "flip_index": 3,
+      "meter_value": 92,
+      "cumulative_tokens": 5927482,
+      "runs": 9
+    }
+  ],
+  "estimates": {
+    "5h_tokens": 28226104,
+    "weekly_tokens": 197582733,
+    "daily_tokens": 28226104,
+    "target_meter_mean_tokens_per_1pct": 1902000,
+    "target_meter_median_tokens_per_1pct": 1902000,
+    "target_meter_estimate_mean": 190199950,
+    "target_meter_estimate_median": 190199950,
+    "target_meter_flip_count": 2,
+    "target_meter_flip_deltas": [
+      1897399,
+      1906600
+    ],
+    "target_meter_all_flip_deltas": [
+      2123483,
+      1897399,
+      1906600
+    ],
+    "target_meter_ignored_first_flip": true
+  }
+}

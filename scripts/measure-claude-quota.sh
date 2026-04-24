@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Fully automated Claude Code subscription quota measurement
 # Streams all progress to stdout. Final JSON result printed at end.
-# Usage: bash scripts/measure-claude-quota.sh [working_directory]
+# Usage: bash scripts/measure-claude-quota.sh [working_directory] [model_alias]
+# Model alias examples: opus, sonnet, haiku
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -11,10 +12,12 @@ mkdir -p "$RESULTS_DIR"
 TS=$(date +%Y%m%d_%H%M%S)
 RESULT_FILE="$RESULTS_DIR/claude_measurement_${TS}.json"
 WORK_DIR="${1:-$REPO_DIR}"
+MODEL_ALIAS="${2:-${MODEL_ALIAS:-default}}"
 SN="claude_m_$$"
 
 echo "=== Claude Code Quota Measurement · $TS ==="
 echo "Work dir: $WORK_DIR"
+echo "Requested model: $MODEL_ALIAS"
 
 # Preflight
 command -v tmux &>/dev/null || { echo "FAIL: tmux not found"; exit 1; }
@@ -22,13 +25,25 @@ command -v claude &>/dev/null || { echo "FAIL: claude not found"; exit 1; }
 VER=$(claude --version 2>/dev/null || echo "unknown")
 echo "Claude Code: $VER"
 
+# ── Function: launch Claude TUI with explicit model selection if requested ──
+launch_claude_session() {
+    local label="$1"
+    local cmd="claude"
+    if [ "$MODEL_ALIAS" != "default" ]; then
+        cmd="claude --model $MODEL_ALIAS"
+    fi
+
+    echo "$label: launching command: $cmd"
+    tmux new-session -d -s "$SN" -x 120 -y 50 "cd '$WORK_DIR' && $cmd"
+}
+
 # ── Function: capture /status Usage tab via tmux ──
 capture_status() {
     local label="$1" outfile="$2"
     echo ""
     echo "--- $label: launching tmux ---"
     tmux kill-session -t "$SN" 2>/dev/null || true
-    tmux new-session -d -s "$SN" -x 120 -y 50 "cd '$WORK_DIR' && claude"
+    launch_claude_session "$label"
 
     echo "$label: waiting 10s for TUI..."
     sleep 10
@@ -39,6 +54,7 @@ capture_status() {
         echo "$label: accepting trust dialog..."
         tmux send-keys -t "$SN" Enter
         sleep 5
+        screen=$(tmux capture-pane -t "$SN" -p)
     fi
 
     # Capture welcome screen for plan/model info before navigating away
@@ -109,13 +125,18 @@ m = re.search(r'Current week \(all models\).*?(\d+)%\s*used', text, re.DOTALL)
 if m: d['weekly_all_pct_used'] = int(m.group(1))
 m = re.search(r'Current week \(Sonnet only\).*?(\d+)%\s*used', text, re.DOTALL)
 if m: d['weekly_sonnet_pct_used'] = int(m.group(1))
+m = re.search(r'Current week \(Opus only\).*?(\d+)%\s*used', text, re.DOTALL)
+if m: d['weekly_opus_pct_used'] = int(m.group(1))
+d['requested_model_alias'] = '$MODEL_ALIAS'
 # Read plan/model from welcome screen
 wf = '/tmp/claude_welcome_${TS}.txt'
 if os.path.exists(wf):
     wt = open(wf).read()
-    # Welcome screen shows 'Sonnet 4.5 · Claude Max' or 'Opus 4.6 · Claude Pro'
-    m = re.search(r'((?:Sonnet|Opus|Haiku)\s+[\d.]+)\s*·\s*(Claude (?:Pro|Max))', wt)
-    if m: d['model'] = m.group(1); d['plan'] = m.group(2)
+    # Welcome screen shows 'Sonnet 4.6 · Claude Max' or 'Opus 4.7 · Claude Pro'
+    m = re.search(r'((?:Sonnet|Opus|Haiku)\s+[\d.]+)\s*·\s*(Claude (?:Pro|Max(?:\s*\d+x)?))', wt)
+    if m:
+        d['model'] = m.group(1)
+        d['plan'] = m.group(2)
 print(json.dumps(d))
 "
 }
@@ -137,13 +158,22 @@ echo "--- TASK: running parallel batches until quota moves ---"
 echo "Claude tasks use ~17K tokens each. Running in parallel to move the needle faster."
 PROMPT="Write a Python doubly-linked list with insert_head, insert_tail, delete_node, find, reverse, to_list. Include Node class, type hints, docstrings. Write exactly 10 pytest tests. Output only the code."
 TOTAL_IN=0; TOTAL_CACHED=0; TOTAL_OUT=0; TOTAL_DUR=0; RUNS=0
-MAX_BATCHES=${MAX_BATCHES:-20}
+MAX_BATCHES=${MAX_BATCHES:-40}
 PARALLEL=${PARALLEL:-10}
-MIN_PCT_CHANGE=${MIN_PCT_CHANGE:-1}
+TARGET_METER=${TARGET_METER:-weekly_all_pct_used}
+TARGET_FLIPS=${TARGET_FLIPS:-3}
+FLIPS_RECORDED=0
+FLIP_JSON_LINES=""
+LAST_METER_VALUE=$(echo "$BEFORE_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('$TARGET_METER', -1))")
 
-# Get BEFORE weekly % to compare against
-BEFORE_WEEKLY=$(echo "$BEFORE_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('weekly_all_pct_used', -1))")
-echo "Target: detect ≥${MIN_PCT_CHANGE}% weekly change from ${BEFORE_WEEKLY}%"
+if [ "$LAST_METER_VALUE" -lt 0 ] 2>/dev/null; then
+    echo "FAIL: target meter '$TARGET_METER' not found in Claude /status output"
+    exit 1
+fi
+
+echo "Target meter: $TARGET_METER"
+echo "Target flips: $TARGET_FLIPS"
+echo "Starting meter value: ${LAST_METER_VALUE}%"
 echo "Parallel: $PARALLEL tasks per batch, max $MAX_BATCHES batches"
 echo ""
 
@@ -157,7 +187,11 @@ for batch in $(seq 1 $MAX_BATCHES); do
     for j in $(seq 1 $PARALLEL); do
         RUN_NUM=$(( (batch-1)*PARALLEL + j ))
         JF="/tmp/claude_run_${TS}_${RUN_NUM}.json"
-        (echo "" | claude -p "$PROMPT" --output-format json > "$JF" 2>/dev/null) &
+        if [ "$MODEL_ALIAS" = "default" ]; then
+            (echo "" | claude -p "$PROMPT" --output-format json > "$JF" 2>/dev/null) &
+        else
+            (echo "" | claude --model "$MODEL_ALIAS" -p "$PROMPT" --output-format json > "$JF" 2>/dev/null) &
+        fi
         PIDS="$PIDS $!"
     done
 
@@ -201,17 +235,24 @@ except: print('0 0 0')
     MID="/tmp/claude_mid_${TS}_b${batch}.txt"
     capture_status "CHECK-b$batch" "$MID"
     MID_JSON=$(parse_status "$MID")
-    MID_WEEKLY=$(echo "$MID_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('weekly_all_pct_used', -1))")
-    DELTA=$((MID_WEEKLY - BEFORE_WEEKLY))
-    echo "    Weekly: ${BEFORE_WEEKLY}% → ${MID_WEEKLY}% (delta: ${DELTA}%)"
+    MID_TARGET=$(echo "$MID_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('$TARGET_METER', -1))")
+    DELTA=$((MID_TARGET - LAST_METER_VALUE))
+    echo "    ${TARGET_METER}: ${LAST_METER_VALUE}% → ${MID_TARGET}% (delta this check: ${DELTA}%)"
 
-    if [ "$DELTA" -ge "$MIN_PCT_CHANGE" ] 2>/dev/null; then
-        echo "    ✓ Quota moved by ${DELTA}% — enough for estimate!"
-        AFTER_JSON="$MID_JSON"
-        AFTER_CAPTURED=1
-        break
+    if [ "$MID_TARGET" -gt "$LAST_METER_VALUE" ] 2>/dev/null; then
+        for meter in $(seq $((LAST_METER_VALUE + 1)) "$MID_TARGET"); do
+            FLIPS_RECORDED=$((FLIPS_RECORDED + 1))
+            FLIP_JSON_LINES="${FLIP_JSON_LINES}{\"flip_index\":${FLIPS_RECORDED},\"meter_value\":${meter},\"cumulative_tokens\":${TOTAL},\"runs\":${RUNS},\"batch\":${batch}},"
+            echo "    ✓ recorded flip #${FLIPS_RECORDED}: ${meter}% at ${TOTAL} tokens"
+            if [ "$FLIPS_RECORDED" -ge "$TARGET_FLIPS" ] 2>/dev/null; then
+                AFTER_JSON="$MID_JSON"
+                AFTER_CAPTURED=1
+                break 2
+            fi
+        done
+        LAST_METER_VALUE=$MID_TARGET
     else
-        echo "    Not enough change yet, continuing..."
+        echo "    No new flip yet, continuing..."
     fi
     echo ""
 done
@@ -237,11 +278,16 @@ echo ""
 echo "--- CALCULATING ---"
 python3 << PYEOF
 import json
+import statistics
 from datetime import datetime, timezone
 
 before = json.loads('$BEFORE_JSON')
 after = json.loads('$AFTER_JSON')
 total = $TOTAL
+flip_lines = '''$FLIP_JSON_LINES'''.strip()
+flips = []
+if flip_lines:
+    flips = json.loads('[' + flip_lines.rstrip(',') + ']')
 
 est = {}
 
@@ -255,7 +301,7 @@ if bs is not None and as_ is not None:
     ds = as_ - bs
     print(f'Session delta: {bs}% -> {as_}% = {ds}% consumed')
     if ds > 0 and total > 0:
-        e = int(total / (ds/100))
+        e = int(total / (ds / 100))
         est['session_tokens'] = e
         print(f'Session estimate: {e:,} ({e/1e6:.1f}M)')
     else:
@@ -268,7 +314,7 @@ if bw is not None and aw is not None:
     dw = aw - bw
     print(f'Weekly delta: {bw}% -> {aw}% = {dw}% consumed')
     if dw > 0 and total > 0:
-        e = int(total / (dw/100))
+        e = int(total / (dw / 100))
         daily = e // 7
         est['weekly_tokens'] = e
         est['daily_tokens'] = daily
@@ -279,16 +325,65 @@ else:
     dw = None
     print('Weekly: missing data')
 
+target_before = before.get('$TARGET_METER')
+target_after = after.get('$TARGET_METER')
+target_delta = None
+if target_before is not None and target_after is not None:
+    target_delta = target_after - target_before
+
+all_flip_deltas = []
+prev_tokens = 0
+for flip in flips:
+    all_flip_deltas.append(flip['cumulative_tokens'] - prev_tokens)
+    prev_tokens = flip['cumulative_tokens']
+
+usable_flip_deltas = all_flip_deltas[1:] if len(all_flip_deltas) > 1 else []
+
+if usable_flip_deltas:
+    mean_delta = statistics.mean(usable_flip_deltas)
+    median_delta = statistics.median(usable_flip_deltas)
+    est['target_meter_mean_tokens_per_1pct'] = round(mean_delta)
+    est['target_meter_median_tokens_per_1pct'] = round(median_delta)
+    est['target_meter_estimate_mean'] = round(mean_delta * 100)
+    est['target_meter_estimate_median'] = round(median_delta * 100)
+    est['target_meter_flip_count'] = len(usable_flip_deltas)
+    est['target_meter_flip_deltas'] = usable_flip_deltas
+    est['target_meter_all_flip_deltas'] = all_flip_deltas
+    est['target_meter_ignored_first_flip'] = True
+    print(f'Target meter flips recorded: {len(all_flip_deltas)}')
+    print('Ignoring first flip delta because the starting position inside that 1% bucket is unknown')
+    print(f'Usable target meter flips: {len(usable_flip_deltas)}')
+    print(f'Mean tokens / 1%: {mean_delta:,.0f}')
+    print(f'Median tokens / 1%: {median_delta:,.0f}')
+elif all_flip_deltas:
+    est['target_meter_all_flip_deltas'] = all_flip_deltas
+    est['target_meter_ignored_first_flip'] = True
+    print('Only one flip recorded; after ignoring the first flip, no usable flip deltas remain')
+else:
+    print('No target meter flips recorded')
+
 result = {
-    'tool': 'claude-code', 'version': '$VER',
+    'tool': 'claude-code',
+    'version': '$VER',
     'plan': after.get('plan', before.get('plan', 'unknown')),
+    'requested_model_alias': '$MODEL_ALIAS',
+    'captured_model': after.get('model', before.get('model', 'unknown')),
+    'target_meter': '$TARGET_METER',
+    'target_flips_requested': $TARGET_FLIPS,
     'model': after.get('model', before.get('model', 'unknown')),
     'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     'task': 'doubly-linked-list-with-tests',
-    'num_runs': $RUNS, 'duration_seconds': $TOTAL_DUR,
+    'num_runs': $RUNS,
+    'duration_seconds': $TOTAL_DUR,
     'tokens': {'input': $TOTAL_IN, 'cached': $TOTAL_CACHED, 'output': $TOTAL_OUT, 'total': $TOTAL},
-    'quota_before': before, 'quota_after': after,
-    'quota_consumed': {'session_pct': ds, 'weekly_all_pct': dw},
+    'quota_before': before,
+    'quota_after': after,
+    'quota_consumed': {
+        'session_pct': ds,
+        'weekly_all_pct': dw,
+        'target_meter_pct': target_delta,
+    },
+    'meter_flips': flips,
     'estimates': est,
 }
 
