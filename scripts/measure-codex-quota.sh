@@ -130,6 +130,15 @@ TOTAL_IN=0; TOTAL_CACHED=0; TOTAL_OUT=0; TOTAL_DUR=0; RUNS=0
 NUM_RUNS=${NUM_RUNS:-30}
 TARGET_METER=${TARGET_METER:-weekly_pct_left}
 TARGET_FLIPS=${TARGET_FLIPS:-3}
+# PARALLEL controls how many `codex exec` calls run concurrently per batch.
+# Sequential (PARALLEL=1) is the safe default — matches old script behavior.
+# Suggested sizing based on plan quota (Codex uses % left, so flips are decrements):
+#   - Plus        ($20/mo, small weekly quota):  PARALLEL=3–5   (1 batch ≈ 0.5% of weekly)
+#   - Business    ($30/seat, medium):            PARALLEL=5–10
+#   - ChatGPT Pro ($200/mo, large):              PARALLEL=15–25
+# If a single batch consumes more than ~2% of weekly meter, flip-recording loses
+# resolution (multiple crossings collapse into one batch). Lower PARALLEL in that case.
+PARALLEL=${PARALLEL:-1}
 FLIPS_RECORDED=0
 FLIP_JSON_LINES=""
 LAST_METER_VALUE=$(echo "$BEFORE_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('$TARGET_METER', -1))")
@@ -141,21 +150,40 @@ fi
 
 echo "Target meter: $TARGET_METER"
 echo "Target flips: $TARGET_FLIPS"
+echo "Parallel: $PARALLEL concurrent tasks per batch, max $NUM_RUNS total runs"
 echo "Starting meter value: ${LAST_METER_VALUE}%"
 
 cd "$WORK_DIR"
-for i in $(seq 1 $NUM_RUNS); do
-    JF="/tmp/codex_run_${TS}_${i}.jsonl"
-    echo "  Run $i/$NUM_RUNS..."
+# Compute number of batches. NUM_RUNS is total-run budget; each batch consumes $PARALLEL runs.
+MAX_BATCHES=$(( (NUM_RUNS + PARALLEL - 1) / PARALLEL ))
+for batch in $(seq 1 $MAX_BATCHES); do
+    echo "  Batch $batch/$MAX_BATCHES ($PARALLEL concurrent runs)..."
     T0=$(date +%s)
-    echo "$PROMPT" | $CODEX exec $MODEL_ARGS --json - > "$JF" 2>/dev/null || true
+
+    # Spawn $PARALLEL codex exec calls in background
+    BATCH_JFS=()
+    for j in $(seq 1 $PARALLEL); do
+        RUN_NUM=$(( (batch - 1) * PARALLEL + j ))
+        if [ "$RUN_NUM" -gt "$NUM_RUNS" ]; then break; fi
+        JF="/tmp/codex_run_${TS}_${RUN_NUM}.jsonl"
+        BATCH_JFS+=("$JF")
+        # Unique temp dir per concurrent run so they don't clobber each other's
+        # edits to linked_list.py (codex writes files to cwd)
+        RUN_DIR="/tmp/codex_run_${TS}_${RUN_NUM}_dir"
+        mkdir -p "$RUN_DIR"
+        (cd "$RUN_DIR" && echo "$PROMPT" | $CODEX exec $MODEL_ARGS --json - > "$JF" 2>/dev/null || true) &
+    done
+    wait
+
     T1=$(date +%s)
     DUR=$((T1 - T0))
     TOTAL_DUR=$((TOTAL_DUR + DUR))
-    RUNS=$((RUNS + 1))
 
-    # Parse tokens
-    TOKS=$(python3 -c "
+    # Aggregate tokens across this batch's JSON-lines files
+    BATCH_IN=0; BATCH_CACHED=0; BATCH_OUT=0
+    for JF in "${BATCH_JFS[@]}"; do
+        [ -f "$JF" ] || continue
+        TOKS=$(python3 -c "
 import json
 i=c=o=0
 for l in open('$JF'):
@@ -169,25 +197,34 @@ for l in open('$JF'):
     except: pass
 print(i,c,o)
 ")
-    read ri rc ro <<< "$TOKS"
-    TOTAL_IN=$((TOTAL_IN + ri))
-    TOTAL_CACHED=$((TOTAL_CACHED + rc))
-    TOTAL_OUT=$((TOTAL_OUT + ro))
+        read ri rc ro <<< "$TOKS"
+        BATCH_IN=$((BATCH_IN + ri))
+        BATCH_CACHED=$((BATCH_CACHED + rc))
+        BATCH_OUT=$((BATCH_OUT + ro))
+        RUNS=$((RUNS + 1))
+    done
+    TOTAL_IN=$((TOTAL_IN + BATCH_IN))
+    TOTAL_CACHED=$((TOTAL_CACHED + BATCH_CACHED))
+    TOTAL_OUT=$((TOTAL_OUT + BATCH_OUT))
     TOTAL=$((TOTAL_IN + TOTAL_OUT))
-    echo "    ${DUR}s · in=$ri cached=$rc out=$ro · cumulative=${TOTAL}"
+    echo "    ${DUR}s · batch(in=$BATCH_IN cached=$BATCH_CACHED out=$BATCH_OUT) · cumulative=${TOTAL} · runs=${RUNS}"
 
     echo "    Checking /status..."
-    MID="/tmp/codex_mid_${TS}_${i}.txt"
-    capture_status "CHECK-$i" "$MID"
+    MID="/tmp/codex_mid_${TS}_b${batch}.txt"
+    capture_status "CHECK-b${batch}" "$MID"
     MID_JSON=$(parse_status "$MID")
     MID_TARGET=$(echo "$MID_JSON" | python3 -c "import json,sys; print(json.loads(sys.stdin.read()).get('$TARGET_METER', -1))")
     DELTA=$((LAST_METER_VALUE - MID_TARGET))
     echo "    ${TARGET_METER}: ${LAST_METER_VALUE}% → ${MID_TARGET}% (delta this check: ${DELTA}%)"
 
     if [ "$MID_TARGET" -lt "$LAST_METER_VALUE" ] 2>/dev/null; then
+        # Warn if a single batch crossed more than 1 threshold — flip resolution degrades
+        if [ "$DELTA" -gt 1 ]; then
+            echo "    ⚠ batch crossed ${DELTA} thresholds at once — consider lowering PARALLEL for better flip resolution"
+        fi
         for meter in $(seq $((LAST_METER_VALUE - 1)) -1 "$MID_TARGET"); do
             FLIPS_RECORDED=$((FLIPS_RECORDED + 1))
-            FLIP_JSON_LINES="${FLIP_JSON_LINES}{\"flip_index\":${FLIPS_RECORDED},\"meter_value\":${meter},\"cumulative_tokens\":${TOTAL},\"runs\":${RUNS}},"
+            FLIP_JSON_LINES="${FLIP_JSON_LINES}{\"flip_index\":${FLIPS_RECORDED},\"meter_value\":${meter},\"cumulative_tokens\":${TOTAL},\"runs\":${RUNS},\"batch\":${batch}},"
             echo "    ✓ recorded flip #${FLIPS_RECORDED}: ${meter}% left at ${TOTAL} tokens"
             if [ "$FLIPS_RECORDED" -ge "$TARGET_FLIPS" ] 2>/dev/null; then
                 AFTER_JSON="$MID_JSON"
@@ -314,6 +351,7 @@ result = {
     'timestamp': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
     'task': 'doubly-linked-list-with-tests',
     'num_runs': $RUNS,
+    'parallel': $PARALLEL,
     'duration_seconds': $TOTAL_DUR,
     'tokens': {'input': $TOTAL_IN, 'cached': $TOTAL_CACHED, 'output': $TOTAL_OUT, 'total': $TOTAL},
     'quota_before': before,
