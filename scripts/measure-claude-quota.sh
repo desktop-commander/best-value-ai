@@ -64,10 +64,10 @@ capture_status() {
     # Capture welcome screen for plan/model info before navigating away
     tmux capture-pane -t "$SN" -p > "/tmp/claude_welcome_${TS}.txt"
 
-    echo "$label: sending Escape..."
-    tmux send-keys -t "$SN" Escape
-    sleep 1
-
+    # Note: in older Claude Code versions we sent Escape here to clear any
+    # initial dialog before /status. In 2.1.119+ that appears to trigger an
+    # exit from the main prompt, killing the tmux pane. Going directly to
+    # /status from the welcome screen instead.
     echo "$label: sending /status Enter..."
     tmux send-keys -t "$SN" '/status'
     sleep 0.5
@@ -166,8 +166,11 @@ MAX_BATCHES=${MAX_BATCHES:-40}
 PARALLEL=${PARALLEL:-10}
 TARGET_METER=${TARGET_METER:-weekly_all_pct_used}
 TARGET_FLIPS=${TARGET_FLIPS:-3}
-# CACHE_BUST=1 prepends a unique nonce per run so prompt caching can't match
-# (Anthropic caches prompt prefix). Off by default — see notes in codex script.
+# CACHE_BUST=1 prepends a unique nonce per run. EMPIRICALLY: minimal effect
+# through Claude Code — verified Apr 25 2026 with cache_bust=1 hitting 99.99%
+# cache rate (vs 100% without). The cached portion is the CLI's system prompt
+# + tool definitions (~380K+ tokens), not the user's task. Same finding on
+# Codex side. Kept for completeness; logged in output JSON.
 CACHE_BUST=${CACHE_BUST:-0}
 FLIPS_RECORDED=0
 FLIP_JSON_LINES=""

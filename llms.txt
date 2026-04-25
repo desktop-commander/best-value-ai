@@ -1,6 +1,6 @@
 # LLM Value Calculator
 
-> Quality-adjusted tokens per dollar across local hardware, subscription plans, and API pricing for 37+ large language models. Unlike provider-published pricing, subscription token limits are empirically measured by running standardized tasks through Codex CLI and Claude Code and reading quota deltas before and after. All three access modes (local, subscription, API) are expressed on the same scale and directly comparable. Last updated: 2026-04-24.
+> Quality-adjusted tokens per dollar across local hardware, subscription plans, and API pricing for 37+ large language models. Unlike provider-published pricing, subscription token limits are empirically measured by running standardized tasks through Codex CLI and Claude Code and reading quota deltas before and after. All three access modes (local, subscription, API) are expressed on the same scale and directly comparable. Last updated: 2026-04-25.
 
 ## Current winners
 

@@ -151,11 +151,14 @@ TARGET_FLIPS=${TARGET_FLIPS:-3}
 # If a single batch consumes more than ~2% of weekly meter, flip-recording loses
 # resolution (multiple crossings collapse into one batch). Lower PARALLEL in that case.
 PARALLEL=${PARALLEL:-1}
-# CACHE_BUST=1 prepends a unique timestamp+nonce to each prompt so providers
-# can't match the cached prefix. Off by default — caching reflects best-case
-# realistic agent loops where the system prompt is fixed. Turn on for "worst
-# case" measurements that simulate fully varied prompts. Cost: each run burns
-# 5-10× more quota because every input token is full-price.
+# CACHE_BUST=1 prepends a unique nonce per run to attempt to invalidate the
+# provider's prompt cache. EMPIRICALLY: this has minimal effect through CLI
+# tools — confirmed Apr 25 2026 on both Codex and Claude Code. The cached
+# portion is the CLI's system prompt + tool definitions (~380K tokens of
+# harness), not the user's task description (~50-100 tokens). User prompts
+# can't reach the harness cache. Cache hit rate stays at 86-100% regardless
+# of this flag. Kept for completeness and in case future CLI versions expose
+# more cache control. The 'cache_bust' field is recorded in output JSON.
 CACHE_BUST=${CACHE_BUST:-0}
 FLIPS_RECORDED=0
 FLIP_JSON_LINES=""
