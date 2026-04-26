@@ -14,6 +14,101 @@ const models = JSON.parse(fs.readFileSync(path.join(REPO, 'data/models.json'), '
 const hardware = JSON.parse(fs.readFileSync(path.join(REPO, 'data/hardware.json'), 'utf-8'));
 const benchmarks = JSON.parse(fs.readFileSync(path.join(REPO, 'data/benchmarks.json'), 'utf-8'));
 
+// ─────────────────────────────────────────────────────────────────────────
+// Derive subscription rows for plans we don't directly measure
+// We don't measure ChatGPT Pro ($100, $200) or Claude Max 5×, but providers
+// publish multipliers vs their base plans. Whenever a base plan IS measured
+// for a given model, we synthesize the derived row from base × multiplier.
+//
+// The alternative — keeping static estimated rows in models.json — went out
+// of sync repeatedly (Pro stuck at 66.5M while Plus updated 13M → 190M).
+// Computing here means every prerender automatically refreshes derived rows
+// to match the latest base measurement.
+//
+// Source: OpenAI help center "About ChatGPT Pro tiers"
+// (https://help.openai.com/en/articles/9793128) and Anthropic plan docs.
+// Multipliers are vendor-stated, not empirically verified — flagged with
+// confidence: 'low' and clear "vendor-stated" notes.
+// ─────────────────────────────────────────────────────────────────────────
+const DERIVED_PLANS = [
+  {
+    plan_key: 'chatgpt_pro_100',
+    name: 'ChatGPT Pro $100',
+    monthlyPrice: 100,
+    base_plan: 'chatgpt_plus',
+    multiplier: 5,
+    multiplier_label: '5×',
+    source_url: 'https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers',
+    notes: 'Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI\'s "5×" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.',
+  },
+  {
+    plan_key: 'chatgpt_pro_200',
+    name: 'ChatGPT Pro $200',
+    monthlyPrice: 200,
+    base_plan: 'chatgpt_plus',
+    multiplier: 20,
+    multiplier_label: '20×',
+    source_url: 'https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers',
+    notes: 'Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if "20×" applies to a different dimension than tokens.',
+  },
+  {
+    plan_key: 'claude_max_5x',
+    name: 'Claude Max 5×',
+    monthlyPrice: 100,
+    base_plan: 'claude_max_20x',
+    multiplier: 5/20,
+    multiplier_label: '5/20',
+    source_url: 'https://www.anthropic.com/pricing',
+    notes: 'Anthropic\'s Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.',
+  },
+];
+
+let derivedCount = 0;
+for (const dp of DERIVED_PLANS) {
+  for (const [modelId, model] of Object.entries(models)) {
+    const subs = model.subscriptions;
+    if (!subs) continue;
+    const base = subs[dp.base_plan];
+    if (!base || !base.tokensPerWeek) continue;
+    // Skip if the base row is itself estimated — don't derive from estimates
+    if (base.estimated === true) continue;
+
+    const derivedTpw = Math.round(base.tokensPerWeek * dp.multiplier);
+    subs[dp.plan_key] = {
+      name: dp.name,
+      monthlyPrice: dp.monthlyPrice,
+      tokensPerWeek: derivedTpw,
+      estimated: true,
+      derived: true,
+      derived_from: {
+        base_plan: dp.base_plan,
+        base_tokens_per_week: base.tokensPerWeek,
+        base_measured_on_model: base.measuredOnModel || null,
+        multiplier: dp.multiplier,
+        multiplier_label: dp.multiplier_label,
+        source: dp.source_url,
+      },
+      confidence: 'low',
+      notes: dp.notes,
+      source: dp.source_url,
+    };
+    derivedCount++;
+  }
+}
+console.log(`  ✓ Derived ${derivedCount} subscription rows from base × vendor multipliers`);
+
+// Persist derived rows back to data/models.json so the client-side runtime
+// (which fetches this file directly) sees the same data the prerender does.
+// Source-of-truth rows (chatgpt_plus, chatgpt_business, claude_pro,
+// claude_max_20x) are always written by humans / measurement runs; derived
+// rows above are recomputed from those each prerender. So this file
+// roundtrips: human edits the base measurements, prerender refreshes
+// the derived rows, both get committed together.
+fs.writeFileSync(
+  path.join(REPO, 'data/models.json'),
+  JSON.stringify(models, null, 2)
+);
+
 // Replicate the scoring logic from index.html
 // Z-score normalization
 let arenaScores = [], aaScores = [];

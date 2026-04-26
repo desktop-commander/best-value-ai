@@ -4,22 +4,22 @@
 
 ## Current winners
 
-- **Best subscription**: GPT-5.4 (xhigh) via ChatGPT Plus · $20/mo — 24.5M tok/$
+- **Best subscription**: GPT-5.4 (xhigh) via ChatGPT Pro $200 · $200/mo · 📐 est. — 49.1M tok/$
 - **Best API**: GLM-4.7 Flash — 2.8M tok/$ at $0.15/M blended
 - **Best local**: Qwen3.5 35B A3B (Reasoning) on 110 tok/s · RTX 3090 — 2.9M tok/$
 
 ## Top 10 models by quality-adjusted value per dollar
 
-1. **GPT-5.4 (xhigh)** (Subscription) — 24.5M tok/$ · ChatGPT Plus · $20/mo
-2. **GPT-5.2** (Subscription) — 22.0M tok/$ · ChatGPT Plus · $20/mo
-3. **GPT-5.2 Codex (xhigh)** (Subscription) — 19.7M tok/$ · ChatGPT Plus · $20/mo
-4. **GPT-4o** (Subscription) — 14.9M tok/$ · ChatGPT Plus · $20/mo
-5. **GPT-5.5 (xhigh)** (Subscription) — 14.3M tok/$ · ChatGPT Plus · $20/mo
-6. **Claude Sonnet 4.6 (Non-reasoning, High Effort)** (Subscription) — 4.9M tok/$ · Claude Max 20× · $200/mo
-7. **Claude 4.5 Sonnet (Non-reasoning)** (Subscription) — 4.0M tok/$ · Claude Max 20× · $200/mo
-8. **GPT-5.4 (xhigh)** (Subscription) — 4.0M tok/$ · ChatGPT Business · $30/mo
-9. **GPT-5.2** (Subscription) — 3.6M tok/$ · ChatGPT Business · $30/mo
-10. **Claude Sonnet 4** (Subscription) — 3.5M tok/$ · Claude Max 20× · $200/mo
+1. **GPT-5.4 (xhigh)** (Subscription) — 49.1M tok/$ · ChatGPT Pro $200 · $200/mo · 📐 est.
+2. **GPT-5.2** (Subscription) — 43.9M tok/$ · ChatGPT Pro $200 · $200/mo · 📐 est.
+3. **GPT-5.2 Codex (xhigh)** (Subscription) — 39.4M tok/$ · ChatGPT Pro $200 · $200/mo · 📐 est.
+4. **GPT-4o** (Subscription) — 29.7M tok/$ · ChatGPT Pro $200 · $200/mo · 📐 est.
+5. **GPT-5.5 (xhigh)** (Subscription) — 28.6M tok/$ · ChatGPT Pro $200 · $200/mo · 📐 est.
+6. **GPT-5.4 (xhigh)** (Subscription) — 24.5M tok/$ · ChatGPT Plus · $20/mo
+7. **GPT-5.4 (xhigh)** (Subscription) — 24.5M tok/$ · ChatGPT Pro $100 · $100/mo · 📐 est.
+8. **GPT-5.2** (Subscription) — 22.0M tok/$ · ChatGPT Plus · $20/mo
+9. **GPT-5.2** (Subscription) — 22.0M tok/$ · ChatGPT Pro $100 · $100/mo · 📐 est.
+10. **GPT-5.2 Codex (xhigh)** (Subscription) — 19.7M tok/$ · ChatGPT Plus · $20/mo
 
 ## Empirical subscription measurements
 

@@ -67,20 +67,11 @@
     },
     "local": null,
     "subscriptions": {
-      "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
-        "monthlyPrice": 100,
-        "confidence": "low",
-        "notes": "Estimated as 5/20 \u00d7 measured Claude Max 20\u00d7 on Opus 4.7 (248M). Not directly measured.",
-        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
-        "tokensPerWeek": 62090412,
-        "estimated": true
-      },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_094106.json",
         "tokensPerWeek": 248361650,
         "estimated": false,
@@ -104,9 +95,27 @@
         "measurementTaskRuns": 20,
         "measurementDelta5h": 100,
         "measurementDeltaWeekly": 8,
-        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%\u21928% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch \u2014 known script limitation with large PARALLEL on small-quota plans)",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0\u2192100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
+        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%→8% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch — known script limitation with large PARALLEL on small-quota plans)",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0→100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_161653.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 62090413,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 248361650,
+          "base_measured_on_model": "Opus 4.7",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -212,7 +221,7 @@
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "tokensPerWeek": 387831650,
@@ -224,8 +233,26 @@
         "measurementDelta5h": 16,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)",
-        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
+        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_110655.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 96957913,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 387831650,
+          "base_measured_on_model": "Sonnet 4.6",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -704,7 +731,7 @@
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-4o, but actual measurement was on GPT-5.4 \u2014 older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
+        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-4o, but actual measurement was on GPT-5.4 — older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_110957.json",
         "tokensPerWeek": 190199950,
         "estimated": false,
@@ -716,21 +743,12 @@
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)"
       },
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "medium",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_230604.json",
-        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-4o), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 \u2014 mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
+        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-4o), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 — mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
         "tokensPerWeek": 46209600,
         "estimated": false,
         "measuredOnModel": "gpt-5.4 (reasoning xhigh, summaries auto)",
@@ -740,6 +758,42 @@
         "measurementDelta5h": 22,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
+      },
+      "chatgpt_pro_100": {
+        "name": "ChatGPT Pro $100",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 950999750,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 5,
+          "multiplier_label": "5×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI's \"5×\" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      "chatgpt_pro_200": {
+        "name": "ChatGPT Pro $200",
+        "monthlyPrice": 200,
+        "tokensPerWeek": 3803999000,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 20,
+          "multiplier_label": "20×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if \"20×\" applies to a different dimension than tokens.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -1042,17 +1096,7 @@
       "tokensPerSecAPI": 93.9
     },
     "local": null,
-    "subscriptions": {
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      }
-    },
+    "subscriptions": {},
     "_aa_synced": "2026-04-21"
   },
   "qwen-3-32b": {
@@ -1240,20 +1284,11 @@
     },
     "local": null,
     "subscriptions": {
-      "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
-        "monthlyPrice": 100,
-        "confidence": "low",
-        "notes": "Estimated as 5/20 \u00d7 measured Claude Max 20\u00d7 on Opus 4.7 (248M). Not directly measured.",
-        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
-        "tokensPerWeek": 62090412,
-        "estimated": true
-      },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_094106.json",
         "tokensPerWeek": 248361650,
         "estimated": false,
@@ -1277,9 +1312,27 @@
         "measurementTaskRuns": 20,
         "measurementDelta5h": 100,
         "measurementDeltaWeekly": 8,
-        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%\u21928% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch \u2014 known script limitation with large PARALLEL on small-quota plans)",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0\u2192100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
+        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%→8% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch — known script limitation with large PARALLEL on small-quota plans)",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0→100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_161653.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 62090413,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 248361650,
+          "base_measured_on_model": "Opus 4.7",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -1514,7 +1567,7 @@
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-5.2, but actual measurement was on GPT-5.4 \u2014 older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
+        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-5.2, but actual measurement was on GPT-5.4 — older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_110957.json",
         "tokensPerWeek": 190199950,
         "estimated": false,
@@ -1526,21 +1579,12 @@
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)"
       },
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "medium",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_230604.json",
-        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-5.2), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 \u2014 mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
+        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-5.2), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 — mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
         "tokensPerWeek": 46209600,
         "estimated": false,
         "measuredOnModel": "gpt-5.4 (reasoning xhigh, summaries auto)",
@@ -1550,6 +1594,42 @@
         "measurementDelta5h": 22,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
+      },
+      "chatgpt_pro_100": {
+        "name": "ChatGPT Pro $100",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 950999750,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 5,
+          "multiplier_label": "5×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI's \"5×\" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      "chatgpt_pro_200": {
+        "name": "ChatGPT Pro $200",
+        "monthlyPrice": 200,
+        "tokensPerWeek": 3803999000,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 20,
+          "multiplier_label": "20×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if \"20×\" applies to a different dimension than tokens.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -1626,20 +1706,11 @@
     },
     "local": null,
     "subscriptions": {
-      "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
-        "monthlyPrice": 100,
-        "confidence": "low",
-        "notes": "Estimated as 5/20 \u00d7 measured Claude Max 20\u00d7 on Opus 4.7 (248M). Not directly measured.",
-        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
-        "tokensPerWeek": 62090412,
-        "estimated": true
-      },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_094106.json",
         "tokensPerWeek": 248361650,
         "estimated": false,
@@ -1663,9 +1734,27 @@
         "measurementTaskRuns": 20,
         "measurementDelta5h": 100,
         "measurementDeltaWeekly": 8,
-        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%\u21928% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch \u2014 known script limitation with large PARALLEL on small-quota plans)",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0\u2192100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
+        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%→8% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch — known script limitation with large PARALLEL on small-quota plans)",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0→100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_161653.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 62090413,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 248361650,
+          "base_measured_on_model": "Opus 4.7",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -1759,7 +1848,7 @@
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "tokensPerWeek": 387831650,
@@ -1771,8 +1860,26 @@
         "measurementDelta5h": 16,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)",
-        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
+        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_110655.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 96957913,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 387831650,
+          "base_measured_on_model": "Sonnet 4.6",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -1982,7 +2089,7 @@
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
       },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
         "tokensPerWeek": 387831650,
@@ -1994,8 +2101,26 @@
         "measurementDelta5h": 16,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)",
-        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
+        "notes": "Measured 2026-04-24 via claude-code --model sonnet on Sonnet 4.6 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). Source: claude_measurement_20260424_110655.json. Supersedes the Apr 16 Sonnet 4.5 single-flip run which gave 203M.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_110655.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 96957913,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 387831650,
+          "base_measured_on_model": "Sonnet 4.6",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -2076,7 +2201,7 @@
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh. Multi-flip method (3 weekly-%-left crossings, first discarded). Per-1% tokens: 1,897,399 then 1,906,600 \u2014 tight agreement. Source: codex_measurement_20260424_110957.json. Supersedes the Apr 13 single-flip run which gave 13M.",
+        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh. Multi-flip method (3 weekly-%-left crossings, first discarded). Per-1% tokens: 1,897,399 then 1,906,600 — tight agreement. Source: codex_measurement_20260424_110957.json. Supersedes the Apr 13 single-flip run which gave 13M.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_110957.json",
         "tokensPerWeek": 190199950,
         "estimated": false,
@@ -2088,21 +2213,12 @@
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded due to unknown starting position within bucket)"
       },
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "medium",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_230604.json",
-        "notes": "Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 \u2014 mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
+        "notes": "Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 — mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
         "tokensPerWeek": 46209600,
         "estimated": false,
         "measuredOnModel": "gpt-5.4 (reasoning xhigh, summaries auto)",
@@ -2112,6 +2228,42 @@
         "measurementDelta5h": 22,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
+      },
+      "chatgpt_pro_100": {
+        "name": "ChatGPT Pro $100",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 950999750,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 5,
+          "multiplier_label": "5×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI's \"5×\" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      "chatgpt_pro_200": {
+        "name": "ChatGPT Pro $200",
+        "monthlyPrice": 200,
+        "tokensPerWeek": 3803999000,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 20,
+          "multiplier_label": "20×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if \"20×\" applies to a different dimension than tokens.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -2187,17 +2339,7 @@
       "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
     },
     "local": null,
-    "subscriptions": {
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro (Codex)",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      }
-    },
+    "subscriptions": {},
     "_aa_synced": "2026-04-21"
   },
   "gpt-5-2-codex": {
@@ -2277,7 +2419,7 @@
         "name": "ChatGPT Plus",
         "monthlyPrice": 20,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-5.2 Codex (xhigh), but actual measurement was on GPT-5.4 \u2014 older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
+        "notes": "Measured 2026-04-24 via codex-cli on gpt-5.4 xhigh on Plus. Multi-flip method. Note: this row shows ChatGPT Plus capacity on GPT-5.2 Codex (xhigh), but actual measurement was on GPT-5.4 — older Plus-tier models share the same weekly quota meter so the tokens/week figure applies, but quality is different.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_110957.json",
         "tokensPerWeek": 190199950,
         "estimated": false,
@@ -2289,21 +2431,12 @@
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-meter crossings, first flip discarded)"
       },
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "medium",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_230604.json",
-        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-5.2 Codex (xhigh)), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 \u2014 mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
+        "notes": "Business quota measured on GPT-5.4 (not directly on GPT-5.2 Codex (xhigh)), but weekly quota is per-account shared across models. Measured 2026-04-24 23:06 via codex-cli on gpt-5.4 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches (batches 1/3/4). Per-1% usable deltas: 356,526 and 567,666 — mean 462,096/1%. The 59% spread between the two deltas suggests the 3-flip sample is noisier than ideal; a 5-flip measurement would tighten the estimate. Coarse 3%-span gives 36.8M. Supersedes the contaminated 22:28 measurement (27M, multi-flip broken) and the Apr 15 single-flip measurement (60M, likely high-end outlier). Cache hit rate 80%.",
         "tokensPerWeek": 46209600,
         "estimated": false,
         "measuredOnModel": "gpt-5.4 (reasoning xhigh, summaries auto)",
@@ -2313,6 +2446,42 @@
         "measurementDelta5h": 22,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
+      },
+      "chatgpt_pro_100": {
+        "name": "ChatGPT Pro $100",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 950999750,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 5,
+          "multiplier_label": "5×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI's \"5×\" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      "chatgpt_pro_200": {
+        "name": "ChatGPT Pro $200",
+        "monthlyPrice": 200,
+        "tokensPerWeek": 3803999000,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 190199950,
+          "base_measured_on_model": "gpt-5.4 (reasoning xhigh, summaries auto)",
+          "multiplier": 20,
+          "multiplier_label": "20×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if \"20×\" applies to a different dimension than tokens.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
     "_aa_synced": "2026-04-21"
@@ -2664,7 +2833,7 @@
         "tokensPerSec": 18,
         "quantization": "TQ1_0",
         "vramRequired": 128,
-        "notes": "MoE \u2014 aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
+        "notes": "MoE — aggressive TQ1_0 quant needed to fit in 128GB. CPU BLAS benchmarks on OpenBenchmarking.",
         "source": "https://openbenchmarking.org/test/pts/llama-cpp"
       }
     },
@@ -2746,7 +2915,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE \u2014 requires 128GB+ unified memory.",
+        "notes": "MoE — requires 128GB+ unified memory.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       }
@@ -2829,7 +2998,7 @@
         "tokensPerSec": 10,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Extremely large \u2014 needs 128GB+ unified memory with heavy quantization.",
+        "notes": "MoE 1T/32B active. Extremely large — needs 128GB+ unified memory with heavy quantization.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/16578",
         "_estimated": true
       },
@@ -2837,7 +3006,7 @@
         "tokensPerSec": 8,
         "quantization": "Q4_K_M",
         "vramRequired": 128,
-        "notes": "MoE 1T/32B active. Estimated \u2014 community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
+        "notes": "MoE 1T/32B active. Estimated — community reports similar MoE models at 8-12 t/s on M4 Max 128GB.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -2936,7 +3105,7 @@
         "tokensPerSec": 15,
         "quantization": "Q4_K_M",
         "vramRequired": 80,
-        "notes": "Requires 2\u00d7 RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
+        "notes": "Requires 2× RTX 4090 (48GB total) or heavy CPU offloading. Single 4090 ~4-6 t/s with offload.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions",
         "_estimated": true
       },
@@ -2952,7 +3121,7 @@
         "tokensPerSec": 12,
         "quantization": "Q4_K_M",
         "vramRequired": 110,
-        "notes": "Estimated \u2014 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
+        "notes": "Estimated — 685B MoE fits in 128GB with aggressive quant. ~37B active params.",
         "source": "https://github.com/ggml-org/llama.cpp/discussions/4167",
         "_estimated": true
       }
@@ -3035,14 +3204,14 @@
         "tokensPerSec": 122,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token. Fits in single 24GB GPU.",
+        "notes": "MoE — only 3B active params per token. Fits in single 24GB GPU.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "rtx_3090": {
         "tokensPerSec": 110,
         "quantization": "Q4_K_M",
         "vramRequired": 22,
-        "notes": "MoE \u2014 only 3B active params per token.",
+        "notes": "MoE — only 3B active params per token.",
         "source": "https://agentnativedev.medium.com/qwen-3-5-35b-a3b-why-your-800-gpu-just-became-a-frontier-class-ai-workstation-63cc4d4ebac1"
       },
       "mac_m3_max_64gb": {
@@ -3146,7 +3315,7 @@
         "tokensPerSec": 58,
         "quantization": "Q4_K_M",
         "vramRequired": 16,
-        "notes": "Dense 27B. Community reports 55\u201365 t/s at Q4_K_M on RTX 4090.",
+        "notes": "Dense 27B. Community reports 55–65 t/s at Q4_K_M on RTX 4090.",
         "source": "https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms"
       },
       "rtx_3090": {
@@ -3278,7 +3447,7 @@
         "tokensPerSec": 55,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
+        "notes": "MoE — 10B active params. M5 Max 128GB gives 60.6 t/s; M4 Max estimated slightly lower.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of",
         "_estimated": true
       },
@@ -3286,7 +3455,7 @@
         "tokensPerSec": 42,
         "quantization": "Q4_K_M",
         "vramRequired": 75,
-        "notes": "MoE \u2014 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
+        "notes": "MoE — 10B active. Based on M3 Ultra 8-bit 42.5 t/s benchmark.",
         "source": "https://www.latent.space/p/ainews-the-high-return-activity-of"
       },
       "framework_desktop_128gb": {
@@ -3497,7 +3666,7 @@
         "tokensPerSec": 85,
         "quantization": "Q4_K_M",
         "vramRequired": 8,
-        "notes": "MoE \u2014 only 4B active. Extremely fast for its capability level.",
+        "notes": "MoE — only 4B active. Extremely fast for its capability level.",
         "source": "https://till-freitag.com/en/blog/open-source-llm-comparison"
       },
       "rtx_3090": {
@@ -3595,7 +3764,7 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       },
       "aa_lcr": {
-        "score": 67.0,
+        "score": 67,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       },
       "scicode": {
@@ -3603,7 +3772,7 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       },
       "tau2_bench": {
-        "score": 74.0,
+        "score": 74,
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       },
       "terminalbench_hard": {
@@ -3623,20 +3792,11 @@
     },
     "local": null,
     "subscriptions": {
-      "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
-        "monthlyPrice": 100,
-        "confidence": "low",
-        "notes": "Estimated as 5/20 \u00d7 measured Claude Max 20\u00d7 on Opus 4.7 (248M). Not directly measured.",
-        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
-        "tokensPerWeek": 62090412,
-        "estimated": true
-      },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_094106.json",
         "tokensPerWeek": 248361650,
         "estimated": false,
@@ -3660,9 +3820,27 @@
         "measurementTaskRuns": 20,
         "measurementDelta5h": 100,
         "measurementDeltaWeekly": 8,
-        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%\u21928% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch \u2014 known script limitation with large PARALLEL on small-quota plans)",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0\u2192100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
+        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%→8% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch — known script limitation with large PARALLEL on small-quota plans)",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0→100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_161653.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 62090413,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 248361650,
+          "base_measured_on_model": "Opus 4.7",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-23"
@@ -3723,20 +3901,11 @@
     },
     "local": null,
     "subscriptions": {
-      "claude_max_5x": {
-        "name": "Claude Max 5\u00d7",
-        "monthlyPrice": 100,
-        "confidence": "low",
-        "notes": "Estimated as 5/20 \u00d7 measured Claude Max 20\u00d7 on Opus 4.7 (248M). Not directly measured.",
-        "source": "https://github.com/desktop-commander/best-value-ai/blob/master/MEASUREMENT_METHODOLOGY.md",
-        "tokensPerWeek": 62090412,
-        "estimated": true
-      },
       "claude_max_20x": {
-        "name": "Claude Max 20\u00d7",
+        "name": "Claude Max 20×",
         "monthlyPrice": 200,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20\u00d7. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Max 20×. Multi-flip method (3 weekly-% crossings, first discarded). First real Opus-on-Max measurement; prior Opus rows used the Sonnet-derived 203M as a placeholder. Source: claude_measurement_20260424_094106.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_094106.json",
         "tokensPerWeek": 248361650,
         "estimated": false,
@@ -3760,9 +3929,27 @@
         "measurementTaskRuns": 20,
         "measurementDelta5h": 100,
         "measurementDeltaWeekly": 8,
-        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%\u21928% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch \u2014 known script limitation with large PARALLEL on small-quota plans)",
-        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0\u2192100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
+        "measurement_method": "coarse single-delta (20-parallel batch moved weekly 0%→8% in one step; multi-flip data invalidated by all 3 crossings occurring in same batch — known script limitation with large PARALLEL on small-quota plans)",
+        "notes": "Measured 2026-04-24 via claude-code --model opus on Opus 4.7 on Claude Pro. First real Pro measurement (Opus specifically). Coarse single-delta method: 1.25M tokens consumed 8% of weekly quota, extrapolated to ~15.6M tok/wk. Session meter went 0→100% confirming Pro has much tighter quota than Max. Sonnet-on-Pro measurement pending (weekly will reset Apr 28). Source: claude_measurement_20260424_161653.json.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/claude_measurement_20260424_161653.json"
+      },
+      "claude_max_5x": {
+        "name": "Claude Max 5×",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 62090413,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "claude_max_20x",
+          "base_tokens_per_week": 248361650,
+          "base_measured_on_model": "Opus 4.7",
+          "multiplier": 0.25,
+          "multiplier_label": "5/20",
+          "source": "https://www.anthropic.com/pricing"
+        },
+        "confidence": "low",
+        "notes": "Anthropic's Max plans are tiered as 5× and 20× Pro. We measure Max 20×; Max 5× is derived as 5/20 of the measured Max 20× number for the same model. Not directly measured.",
+        "source": "https://www.anthropic.com/pricing"
       }
     },
     "_aa_synced": "2026-04-23"
@@ -3835,20 +4022,11 @@
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded; 2 usable deltas)"
       },
-      "chatgpt_pro": {
-        "name": "ChatGPT Pro",
-        "monthlyPrice": 200,
-        "confidence": "low",
-        "notes": "Estimated as 5x Plus (not directly measured). ChatGPT Pro at $200/mo officially offers ~5x Plus quota. Help by running the measurement script on a Pro account.",
-        "source": "https://developers.openai.com/codex/pricing",
-        "tokensPerWeek": 66500000,
-        "estimated": true
-      },
       "chatgpt_business": {
         "name": "ChatGPT Business",
         "monthlyPrice": 30,
         "confidence": "high",
-        "notes": "Measured 2026-04-24 22:38 via codex-cli on gpt-5.5 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches, per-1% deltas of 181,969 + 181,421 + 179,883 \u2014 <1% spread across flips. Cache hit rate 67%.",
+        "notes": "Measured 2026-04-24 22:38 via codex-cli on gpt-5.5 xhigh on Business. Clean multi-flip: 3 flips in 3 separate batches, per-1% deltas of 181,969 + 181,421 + 179,883 — <1% spread across flips. Cache hit rate 67%.",
         "source": "https://github.com/desktop-commander/best-value-ai/blob/master/measurements/codex_measurement_20260424_223823.json",
         "tokensPerWeek": 18109100,
         "estimated": false,
@@ -3859,6 +4037,42 @@
         "measurementDelta5h": 21,
         "measurementDeltaWeekly": 3,
         "measurement_method": "multi-flip (3 weekly-% crossings, first discarded)"
+      },
+      "chatgpt_pro_100": {
+        "name": "ChatGPT Pro $100",
+        "monthlyPrice": 100,
+        "tokensPerWeek": 477090750,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 95418150,
+          "base_measured_on_model": "gpt-5.5 (reasoning xhigh, summaries auto)",
+          "multiplier": 5,
+          "multiplier_label": "5×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $100 plan launched Apr 2026. OpenAI states 5× higher weekly limits than Plus (10× Codex usage through May 31, 2026 as a launch promo). We have not measured Pro $100 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if OpenAI's \"5×\" applies to a dimension other than tokens (e.g. rate-limit slots, message count). Help us verify by running scripts/measure-codex-quota.sh on a Pro $100 account.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+      },
+      "chatgpt_pro_200": {
+        "name": "ChatGPT Pro $200",
+        "monthlyPrice": 200,
+        "tokensPerWeek": 1908363000,
+        "estimated": true,
+        "derived": true,
+        "derived_from": {
+          "base_plan": "chatgpt_plus",
+          "base_tokens_per_week": 95418150,
+          "base_measured_on_model": "gpt-5.5 (reasoning xhigh, summaries auto)",
+          "multiplier": 20,
+          "multiplier_label": "20×",
+          "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
+        },
+        "confidence": "low",
+        "notes": "Pro $200 plan. OpenAI states 20× higher weekly limits than Plus (with a 25× Codex 5-hour bonus through May 31, 2026). We have not measured Pro $200 directly — this row is derived from our Plus measurement × the vendor-stated multiplier. Real number could differ if \"20×\" applies to a different dimension than tokens.",
+        "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
     "_aa_synced": "2026-04-24"
