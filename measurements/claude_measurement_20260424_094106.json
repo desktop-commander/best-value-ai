@@ -12,10 +12,13 @@
   "num_runs": 200,
   "duration_seconds": 382,
   "tokens": {
-    "input": 5131909,
-    "cached": 5130909,
+    "fresh_input": 1000,
+    "cache_creation": 363555,
+    "cache_read": 4767354,
     "output": 395366,
-    "total": 5527275
+    "total": 5527275,
+    "input": 5131909,
+    "cached": 4767354
   },
   "quota_before": {
     "session_pct_used": 0,
@@ -80,5 +83,7 @@
       2198303
     ],
     "target_meter_ignored_first_flip": true
-  }
+  },
+  "schema_version": 2,
+  "accounting_note": "Recomputed Apr 26 2026 from per-run files. cache_creation kept separate from cache_read; legacy `cached` field corrected to mean cache_read only (was incorrectly cr+cc in earlier files)."
 }

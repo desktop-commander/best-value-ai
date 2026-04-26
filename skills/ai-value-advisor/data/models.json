@@ -1971,17 +1971,7 @@
       "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
     },
     "local": null,
-    "subscriptions": {
-      "claude_pro": {
-        "name": "Claude Pro",
-        "monthlyPrice": 20,
-        "confidence": "medium",
-        "notes": "Estimated ~100 msgs/day at 6400 tok avg. Claude Pro gives access to Sonnet models.",
-        "source": "https://www.anthropic.com/pricing",
-        "tokensPerWeek": 4480000,
-        "estimated": true
-      }
-    },
+    "subscriptions": {},
     "_aa_synced": "2026-04-21"
   },
   "claude-4-5-sonnet": {

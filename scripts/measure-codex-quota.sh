@@ -152,13 +152,15 @@ TARGET_FLIPS=${TARGET_FLIPS:-3}
 # resolution (multiple crossings collapse into one batch). Lower PARALLEL in that case.
 PARALLEL=${PARALLEL:-1}
 # CACHE_BUST=1 prepends a unique nonce per run to attempt to invalidate the
-# provider's prompt cache. EMPIRICALLY: this has minimal effect through CLI
-# tools — confirmed Apr 25 2026 on both Codex and Claude Code. The cached
-# portion is the CLI's system prompt + tool definitions (~380K tokens of
-# harness), not the user's task description (~50-100 tokens). User prompts
-# can't reach the harness cache. Cache hit rate stays at 86-100% regardless
-# of this flag. Kept for completeness and in case future CLI versions expose
-# more cache control. The 'cache_bust' field is recorded in output JSON.
+# provider's prompt cache. CORRECTED finding (Apr 26 2026, after fixing a
+# bookkeeping bug in the Claude side): on Codex, cache_bust has minimal
+# effect — cache hit rate stays around 86-88% with or without nonces. On
+# Claude Code, cache_bust drops cache_read from ~92% to ~77% — meaningful
+# but doesn't take cache to zero. The portion that stays cached even with
+# nonces is the CLI's own system prompt, tool definitions, and prior turns
+# in the same session — content the user prompt can't reach. Kept for
+# completeness and in case providers expose more cache control later.
+# The 'cache_bust' field is recorded in output JSON.
 CACHE_BUST=${CACHE_BUST:-0}
 FLIPS_RECORDED=0
 FLIP_JSON_LINES=""

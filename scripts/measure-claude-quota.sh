@@ -161,16 +161,27 @@ echo ""
 echo "--- TASK: running parallel batches until quota moves ---"
 echo "Claude tasks use ~17K tokens each. Running in parallel to move the needle faster."
 PROMPT="Write a Python doubly-linked list with insert_head, insert_tail, delete_node, find, reverse, to_list. Include Node class, type hints, docstrings. Write exactly 10 pytest tests. Output only the code."
-TOTAL_IN=0; TOTAL_CACHED=0; TOTAL_OUT=0; TOTAL_DUR=0; RUNS=0
+# Anthropic's pricing distinguishes 3 input buckets, NOT 2:
+#   input_tokens               = fresh tokens, full price (1×)
+#   cache_creation_input_tokens = new tokens being WRITTEN to cache, 1.25× input price
+#   cache_read_input_tokens    = pre-existing cache reused, 0.10× input price
+# Earlier versions of this script collapsed cache_creation+cache_read into a
+# single "cached" bucket, which is wrong: cache_creation is paid at FULL price
+# (with a 25% write premium), not the 10% read discount. We track all three
+# separately now so downstream API-equivalent calculations get the pricing
+# right.
+TOTAL_IN=0; TOTAL_CACHE_CREATION=0; TOTAL_CACHE_READ=0; TOTAL_OUT=0; TOTAL_DUR=0; RUNS=0
 MAX_BATCHES=${MAX_BATCHES:-40}
 PARALLEL=${PARALLEL:-10}
 TARGET_METER=${TARGET_METER:-weekly_all_pct_used}
 TARGET_FLIPS=${TARGET_FLIPS:-3}
-# CACHE_BUST=1 prepends a unique nonce per run. EMPIRICALLY: minimal effect
-# through Claude Code — verified Apr 25 2026 with cache_bust=1 hitting 99.99%
-# cache rate (vs 100% without). The cached portion is the CLI's system prompt
-# + tool definitions (~380K+ tokens), not the user's task. Same finding on
-# Codex side. Kept for completeness; logged in output JSON.
+# CACHE_BUST=1 prepends a unique nonce per run. CORRECTED finding (Apr 26
+# 2026) after fixing the cache_read/cache_creation bookkeeping: cache_bust
+# DOES affect Claude Code measurably. With the bug in place we saw
+# 99.99% → 99.99% which looked like no effect. With correct accounting,
+# Claude Code drops from ~92% cache_read to ~77% cache_read when nonces
+# are added. Codex side remains ~88% → ~88% (cache_bust appears not to
+# affect Codex meaningfully). Logged as cache_bust in output JSON.
 CACHE_BUST=${CACHE_BUST:-0}
 FLIPS_RECORDED=0
 FLIP_JSON_LINES=""
@@ -228,25 +239,31 @@ for batch in $(seq 1 $MAX_BATCHES); do
     for j in $(seq 1 $PARALLEL); do
         RUN_NUM=$(( (batch-1)*PARALLEL + j ))
         JF="/tmp/claude_run_${TS}_${RUN_NUM}.json"
+        # Pull the three Anthropic input buckets separately so we don't lose
+        # the distinction between full-price cache writes and discounted reads.
         TOKS=$(python3 -c "
 import json
 try:
     d=json.load(open('$JF'))
     u=d.get('usage',{})
-    inp=u.get('input_tokens',0)+u.get('cache_creation_input_tokens',0)+u.get('cache_read_input_tokens',0)
-    cached=u.get('cache_read_input_tokens',0)+u.get('cache_creation_input_tokens',0)
+    inp=u.get('input_tokens',0)
+    cc=u.get('cache_creation_input_tokens',0)
+    cr=u.get('cache_read_input_tokens',0)
     out=u.get('output_tokens',0)
-    print(inp, cached, out)
-except: print('0 0 0')
+    print(inp, cc, cr, out)
+except: print('0 0 0 0')
 " 2>/dev/null)
-        read ri rc ro <<< "$TOKS"
+        read ri rcc rcr ro <<< "$TOKS"
         TOTAL_IN=$((TOTAL_IN + ri))
-        TOTAL_CACHED=$((TOTAL_CACHED + rc))
+        TOTAL_CACHE_CREATION=$((TOTAL_CACHE_CREATION + rcc))
+        TOTAL_CACHE_READ=$((TOTAL_CACHE_READ + rcr))
         TOTAL_OUT=$((TOTAL_OUT + ro))
-        BATCH_TOTAL=$((BATCH_TOTAL + ri + ro))
+        # "Real input" the model saw is the sum of all three input buckets
+        run_input_total=$((ri + rcc + rcr))
+        BATCH_TOTAL=$((BATCH_TOTAL + run_input_total + ro))
         RUNS=$((RUNS + 1))
     done
-    TOTAL=$((TOTAL_IN + TOTAL_OUT))
+    TOTAL=$((TOTAL_IN + TOTAL_CACHE_CREATION + TOTAL_CACHE_READ + TOTAL_OUT))
     echo "    ${DUR}s · batch=$BATCH_TOTAL · total=$TOTAL · runs=$RUNS"
 
     # Check /status after each batch
@@ -275,9 +292,9 @@ except: print('0 0 0')
     fi
     echo ""
 done
-TOTAL=$((TOTAL_IN + TOTAL_OUT))
+TOTAL=$((TOTAL_IN + TOTAL_CACHE_CREATION + TOTAL_CACHE_READ + TOTAL_OUT))
 echo ""
-echo "TASK TOTALS: $RUNS runs · ${TOTAL} tokens (in=$TOTAL_IN cached=$TOTAL_CACHED out=$TOTAL_OUT) · ${TOTAL_DUR}s"
+echo "TASK TOTALS: $RUNS runs · ${TOTAL} tokens (input=$TOTAL_IN cache_creation=$TOTAL_CACHE_CREATION cache_read=$TOTAL_CACHE_READ output=$TOTAL_OUT) · ${TOTAL_DUR}s"
 
 # ═══════════════════════════════════════
 # STEP 3: AFTER (skip if already captured in loop)
@@ -396,7 +413,21 @@ result = {
     'parallel': $PARALLEL,
     'cache_bust': $CACHE_BUST,
     'duration_seconds': $TOTAL_DUR,
-    'tokens': {'input': $TOTAL_IN, 'cached': $TOTAL_CACHED, 'output': $TOTAL_OUT, 'total': $TOTAL},
+    'schema_version': 2,
+    'tokens': {
+        # NEW: three explicit Anthropic buckets (schema_version=2+)
+        'fresh_input': $TOTAL_IN,
+        'cache_creation': $TOTAL_CACHE_CREATION,
+        'cache_read': $TOTAL_CACHE_READ,
+        'output': $TOTAL_OUT,
+        'total': $TOTAL,
+        # LEGACY fields kept for backward compatibility with older parsers.
+        # 'input' = sum of all three input buckets (what the model actually saw)
+        # 'cached' = cache_read ONLY (what gets the 10% discount tier in API pricing)
+        # Older files had 'cached' = cache_creation + cache_read which was wrong.
+        'input': $((TOTAL_IN + TOTAL_CACHE_CREATION + TOTAL_CACHE_READ)),
+        'cached': $TOTAL_CACHE_READ
+    },
     'quota_before': before,
     'quota_after': after,
     'quota_consumed': {

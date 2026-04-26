@@ -31,5 +31,7 @@
   },
   "estimates": {
     "session_tokens": 20340900
-  }
+  },
+  "schema_version": 1,
+  "accounting_note": "Pre-Apr 26 2026 file with collapsed token accounting. tokens.cached in this file conflates cache_read + cache_creation. Per-run raw files no longer available so the split cannot be recovered. Use tokens.input + tokens.output for total billable tokens, but do NOT use tokens.cached for cache-hit-rate analysis or API-equivalent pricing \u2014 it overstates the discounted portion."
 }

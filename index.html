@@ -2070,17 +2070,33 @@
     <td style="padding:0.4rem;font-weight:600">Claude Max 20×</td>
     <td style="padding:0.4rem">Opus 4.7</td>
     <td style="padding:0.4rem;text-align:right">$200/mo</td>
-    <td style="padding:0.4rem;text-align:right">$1.80K/mo</td>
-    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">9.0×</td>
-    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">100%</td>
+    <td style="padding:0.4rem;text-align:right">$2.10K/mo</td>
+    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">10.5×</td>
+    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">93%</td>
+  </tr>
+<tr style="border-bottom:1px solid var(--border)">
+    <td style="padding:0.4rem;font-weight:600">Claude Pro</td>
+    <td style="padding:0.4rem">Opus 4.7</td>
+    <td style="padding:0.4rem;text-align:right">$20/mo</td>
+    <td style="padding:0.4rem;text-align:right">$198/mo</td>
+    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">9.9×</td>
+    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">81%</td>
   </tr>
 <tr style="border-bottom:1px solid var(--border)">
     <td style="padding:0.4rem;font-weight:600">Claude Max 20×</td>
     <td style="padding:0.4rem">Sonnet 4.6</td>
     <td style="padding:0.4rem;text-align:right">$200/mo</td>
-    <td style="padding:0.4rem;text-align:right">$1.33K/mo</td>
-    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">6.7×</td>
-    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">100%</td>
+    <td style="padding:0.4rem;text-align:right">$1.64K/mo</td>
+    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">8.2×</td>
+    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">92%</td>
+  </tr>
+<tr style="border-bottom:1px solid var(--border)">
+    <td style="padding:0.4rem;font-weight:600">Claude Pro</td>
+    <td style="padding:0.4rem">Sonnet 4.6</td>
+    <td style="padding:0.4rem;text-align:right">$20/mo</td>
+    <td style="padding:0.4rem;text-align:right">$162/mo</td>
+    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">8.1×</td>
+    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">77%</td>
   </tr>
 <tr style="border-bottom:1px solid var(--border)">
     <td style="padding:0.4rem;font-weight:600">ChatGPT Business</td>
@@ -2089,22 +2105,6 @@
     <td style="padding:0.4rem;text-align:right">$197/mo</td>
     <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">6.6×</td>
     <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">67%</td>
-  </tr>
-<tr style="border-bottom:1px solid var(--border)">
-    <td style="padding:0.4rem;font-weight:600">Claude Pro</td>
-    <td style="padding:0.4rem">Opus 4.7</td>
-    <td style="padding:0.4rem;text-align:right">$20/mo</td>
-    <td style="padding:0.4rem;text-align:right">$126/mo</td>
-    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">6.3×</td>
-    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">100%</td>
-  </tr>
-<tr style="border-bottom:1px solid var(--border)">
-    <td style="padding:0.4rem;font-weight:600">Claude Pro</td>
-    <td style="padding:0.4rem">Sonnet 4.6</td>
-    <td style="padding:0.4rem;text-align:right">$20/mo</td>
-    <td style="padding:0.4rem;text-align:right">$108/mo</td>
-    <td style="padding:0.4rem;text-align:right;font-weight:600;color:var(--green)">5.4×</td>
-    <td style="padding:0.4rem;text-align:right;color:var(--muted);font-size:0.68rem">100%</td>
   </tr>
 <tr style="border-bottom:1px solid var(--border)">
     <td style="padding:0.4rem;font-weight:600">Claude Max 20×</td>
@@ -2158,10 +2158,10 @@ multiplier = monthly_api_cost ÷ subscription_price</pre>
         <details style="background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1.1rem;margin-top:0.6rem">
             <summary style="cursor:pointer;font-weight:600;font-size:0.85rem">Important caveats</summary>
             <div style="font-size:0.78rem;color:var(--text);line-height:1.65;margin-top:0.75rem">
-                <p><strong>1. The high cache rate isn't artificial — it's how CLI tools work.</strong> Our task hits 67–100% cache, which initially looked like a measurement bias. We tested by running with unique nonces per call (CACHE_BUST=1) — cache rate didn't move. Why: the cached portion is the CLI's <em>system prompt + tool definitions</em> (~380K tokens of harness), not the user's task description (~50–100 tokens). User prompts can't invalidate the harness cache. <strong>Real Codex / Claude Code users see the same cache rates we measure.</strong> Confirmed on both providers.</p>
-                <p><strong>2. The multiplier compares Codex CLI usage to API-with-caching.</strong> A developer building the same agent loop via the API can use prompt caching (the same 10% discount we apply here) and pay roughly what we calculate. So the multiplier is <em>"running this CLI tool through your subscription vs paying for the same workload via API with caching enabled"</em>. A naïve API user who doesn't enable caching would pay ~10× more on the cached portion, making the subscription look even better — but that's not a fair comparison.</p>
+                <p><strong>1. High cache hit rates reflect real CLI usage, not a test artifact.</strong> Our task hits 67–93% cache reads. We tested whether this was inflated by repeating the same prompt: ran a session with unique nonces per call (CACHE_BUST=1). On Codex the cache rate barely moved (88% → 88%). On Claude Code it dropped from ~92% to ~77% — meaningful but still high. Most of what gets cached is the CLI's own system context (system prompt, tool definitions, prior turns), not the specific user task. <strong>Heavy CLI users will see cache rates roughly in this range too.</strong> Light users with very different prompts each session would see lower rates and worse subscription value than this multiplier suggests.</p>
+                <p><strong>2. The multiplier compares CLI-via-subscription to API-with-caching.</strong> A developer building the same agent loop directly against the API can enable prompt caching and pay roughly what we calculate. So the comparison is <em>"running this CLI through your subscription vs paying for the same workload via API with caching enabled"</em>. A naïve API user who doesn't enable caching would pay ~10× more on the cached portion, making the subscription look even better — but that's not a fair comparison.</p>
                 <p><strong>3. The multiplier assumes you fully utilize the quota.</strong> If you only use 10% of your Plus quota per month, you're getting 10% of the multiplier — possibly <em>worse</em> value than API metered billing. The subscription wins if you're a heavy user.</p>
-                <p><strong>4. Cache pricing convention.</strong> We use the 10% cached-input discount that both OpenAI and Anthropic apply to prompt-cached reads. This is publicly documented and consistent across the two providers we measure.</p>
+                <p><strong>4. Cache pricing convention.</strong> Anthropic exposes three input tiers — fresh input at full price, cache writes at 1.25× input price, cache reads at 0.10× input. OpenAI exposes two — fresh input and cached input at 0.10×. We bill all three Anthropic tiers correctly using the values reported by Claude Code's <code>usage</code> object. Cache writes at 1.25× input had been mislabelled as cache hits in earlier versions of our calculation; this was corrected on Apr 26, 2026, with measurable upward revisions to Claude multipliers.</p>
                 <p><strong>5. Subscription unit economics aren't part of this.</strong> These numbers are "what API would cost", not "what it costs the provider to run". Providers likely price quotas to match expected real usage; the multiplier is a value comparison from the user's side, not a margin claim about the provider.</p>
             </div>
         </details>

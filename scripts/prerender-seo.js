@@ -491,18 +491,54 @@ for (const f of measFiles) {
     const apiOut = modelObj.api.outputPer1M;
 
     const inputRaw = tokens.input || 0;
-    const cached = tokens.cached || 0;
     const output = tokens.output || 0;
-    const nonCached = Math.max(0, inputRaw - cached);
-    const cacheHitRate = inputRaw > 0 ? cached / inputRaw : 0;
+
+    // Pricing-aware token bucket extraction.
+    // Anthropic exposes 3 input buckets in usage: input_tokens (full price),
+    // cache_creation_input_tokens (full price + 25% write premium),
+    // cache_read_input_tokens (10% of input price). OpenAI exposes 2:
+    // input_tokens (which already includes cached), cached_input_tokens (10%).
+    //
+    // Newer measurement files (schema_version >= 2) carry the explicit splits.
+    // Older files only have the buggy collapsed `cached` field that conflated
+    // creation+read on the Claude side. For those we fall back to using the
+    // legacy field but flag accordingly.
+    let freshInput, cacheCreation, cacheRead;
+    if (tokens.cache_read !== undefined && tokens.cache_creation !== undefined) {
+      // schema v2 — explicit buckets
+      freshInput = tokens.fresh_input || 0;
+      cacheCreation = tokens.cache_creation || 0;
+      cacheRead = tokens.cache_read || 0;
+    } else {
+      // legacy — only have collapsed `cached`. Best we can do: treat it as cache_read.
+      // For Codex this is correct (no cache_creation concept). For old Claude files
+      // this slightly underestimates cost because some of the "cached" was actually
+      // cache_creation paid at full price. Acceptable: those measurements get
+      // recomputed when we re-run, and recent files use the new schema.
+      cacheRead = tokens.cached || 0;
+      cacheCreation = 0;
+      freshInput = Math.max(0, inputRaw - cacheRead);
+    }
+
+    const cacheHitRate = inputRaw > 0 ? cacheRead / inputRaw : 0;
 
     const scale = 100 / wkPct;
-    const wkNonCached = nonCached * scale;
-    const wkCached = cached * scale;
+    const wkFresh = freshInput * scale;
+    const wkCacheCreation = cacheCreation * scale;
+    const wkCacheRead = cacheRead * scale;
     const wkOutput = output * scale;
 
-    const wkApiCost = (wkNonCached / 1e6) * apiIn
-                    + (wkCached / 1e6) * apiIn * CACHED_DISCOUNT
+    // Anthropic prompt-caching pricing premiums (from public docs):
+    //   cache write: 1.25x input price (5-min TTL) or 2x (1-hr TTL).
+    //   cache read:  0.10x input price (10% discount tier).
+    // OpenAI: cached input = 0.10x input, no cache-write premium.
+    // We use 1.25x conservatively for both providers' write premium since that's
+    // the cheaper (5-min) tier most commonly observed. For Codex measurements,
+    // cacheCreation will be 0 so the premium term has no effect.
+    const CACHE_WRITE_PREMIUM = 1.25;
+    const wkApiCost = (wkFresh / 1e6) * apiIn
+                    + (wkCacheCreation / 1e6) * apiIn * CACHE_WRITE_PREMIUM
+                    + (wkCacheRead / 1e6) * apiIn * CACHED_DISCOUNT
                     + (wkOutput / 1e6) * apiOut;
     const monthlyApiCost = wkApiCost * WEEKS_PER_MONTH;
     const multiplier = monthlyApiCost / subPrice;
@@ -515,7 +551,10 @@ for (const f of measFiles) {
       modelId: mapEntry[1],
       subPrice,
       wkPct,
-      inputRaw, cached, output,
+      inputRaw, output,
+      // explicit buckets so downstream consumers can compute correctly
+      freshInput, cacheCreation, cacheRead,
+      cached: cacheRead,  // legacy alias = cache_read only (corrected meaning)
       cacheHitRate,
       apiIn, apiOut,
       wkApiCost,
