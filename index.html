@@ -1314,6 +1314,46 @@
         #heatmapTooltip .hm-tt-score { font-family: 'JetBrains Mono', monospace; font-size: 13px; margin: 2px 0; }
         #heatmapTooltip .hm-tt-rank { color: #aaa; font-size: 11px; }
         #heatmapTooltip .hm-tt-desc { color: #bbb; font-size: 11px; margin-top: 6px; }
+
+        /* ── SHARE-LINK BUTTONS ──
+           Auto-injected by the bottom JS into every section/chart-card/use-case-card
+           that has an id. Reveals on hover (desktop), always faintly visible on
+           mobile. Click copies a deep link with #anchor to clipboard. */
+        .share-btn {
+            position: absolute;
+            top: 0.7rem; right: 0.85rem;
+            z-index: 5;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.25rem 0.55rem;
+            font-size: 0.72rem;
+            line-height: 1;
+            color: var(--muted);
+            cursor: pointer;
+            font-family: inherit;
+            opacity: 0;
+            transition: opacity 0.15s, color 0.15s, border-color 0.15s, background 0.15s;
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            user-select: none;
+        }
+        .has-share-btn { position: relative; }
+        .has-share-btn:hover > .share-btn,
+        .share-btn:focus-visible,
+        .share-btn.copied {
+            opacity: 1;
+        }
+        .share-btn:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-bg); }
+        .share-btn.copied {
+            color: var(--green); border-color: var(--green); background: var(--green-bg);
+        }
+        .share-btn .share-icon { font-size: 0.85rem; line-height: 1; }
+        .share-btn .share-label { font-weight: 500; }
+        @media (max-width: 768px) {
+            .share-btn { opacity: 0.5; top: 0.5rem; right: 0.5rem; padding: 0.2rem 0.45rem; font-size: 0.65rem; }
+            .has-share-btn:hover > .share-btn { opacity: 1; }
+            .share-btn .share-label { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -1850,7 +1890,7 @@
     <!-- CHART -->
     <h3 class="section-subhead">📈 Timeline — how value has changed over time</h3>
     <div id="tab-chart" class="tab-content">
-        <div class="chart-card">
+        <div class="chart-card" id="value-timeline" style="scroll-margin-top:60px">
             <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Value over time by provider</h3>
             <div class="chart-controls">
                 <select id="chartBenchmark" aria-label="Benchmark for chart"></select>
@@ -1867,7 +1907,7 @@
         </div>
 
         <!-- Subscription tokens timeline -->
-        <div class="chart-card" style="margin-top:1.5rem">
+        <div class="chart-card" id="sub-tokens-timeline" style="margin-top:1.5rem;scroll-margin-top:60px">
             <h3 style="font-size:1.1rem;margin-bottom:0.5rem">Subscription tokens over time</h3>
             <p style="font-size:0.78rem;color:var(--muted);margin-top:-0.25rem;margin-bottom:0.75rem">How many tokens each plan gives you per day, based on our <a href="#subscription-method" style="color:var(--blue)">empirical measurements</a>.</p>
             <div class="chart-wrapper"><canvas id="subTokensChart"></canvas></div>
@@ -3367,10 +3407,138 @@ loadData();
 })();
 </script>
 
+<script>
+/* ── SHARE-LINK BUTTONS ──
+   For every section / chart-card / use-case-card / sub-section-with-id, inject
+   a small button in the top-right that copies a deep link with #anchor to
+   clipboard. Hover-revealed on desktop, faintly visible on mobile. Click/tap
+   shows "Copied!" feedback for ~1.5s.
+
+   Targets (selector OR self-id):
+   • <section> elements with id
+   • .chart-card[id]
+   • .use-case-card with child h3[id]
+   • h3[id="ranking-section"] (subsection in #explore that's worth its own link) */
+(function() {
+  function getAnchorId(el) {
+    if (el.id) return el.id;
+    // For use-case-card, the id lives on the inner h3
+    const innerHeadingWithId = el.querySelector(':scope > h3[id], :scope > h2[id]');
+    if (innerHeadingWithId) return innerHeadingWithId.id;
+    return null;
+  }
+
+  function buildShareUrl(anchorId) {
+    const u = new URL(window.location.href);
+    u.hash = anchorId;
+    // Strip query strings — anchors are the only thing that matters here
+    u.search = '';
+    return u.toString();
+  }
+
+  async function copyToClipboard(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (_) { /* fall through to legacy */ }
+    // Legacy fallback for older browsers / non-https origins
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0'; ta.style.pointerEvents = 'none';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (_) {}
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function flashCopied(btn) {
+    const labelEl = btn.querySelector('.share-label');
+    const iconEl = btn.querySelector('.share-icon');
+    const originalLabel = labelEl ? labelEl.textContent : null;
+    if (labelEl) labelEl.textContent = 'Copied!';
+    if (iconEl) iconEl.textContent = '✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      if (labelEl) labelEl.textContent = originalLabel;
+      if (iconEl) iconEl.textContent = '🔗';
+    }, 1500);
+  }
+
+  function makeShareButton(anchorId) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'share-btn';
+    btn.setAttribute('aria-label', 'Copy link to this section');
+    btn.title = 'Copy link to this section';
+    btn.dataset.anchor = anchorId;
+    btn.innerHTML = '<span class="share-icon" aria-hidden="true">🔗</span><span class="share-label">Link</span>';
+    btn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = buildShareUrl(anchorId);
+      const ok = await copyToClipboard(url);
+      if (ok) {
+        flashCopied(btn);
+        if (window.posthog && window.posthog.__loaded) {
+          window.posthog.capture('share_link_copied', { anchor: anchorId });
+        }
+      }
+    });
+    return btn;
+  }
+
+  function attach(el) {
+    // Skip if a share button already exists (re-runs safe)
+    if (el.querySelector(':scope > .share-btn')) return;
+    const anchorId = getAnchorId(el);
+    if (!anchorId) return;
+    el.classList.add('has-share-btn');
+    el.appendChild(makeShareButton(anchorId));
+  }
+
+  function init() {
+    const selectors = [
+      'section[id]',
+      '.chart-card[id]',
+      '.use-case-card',  // anchor on inner h3
+    ];
+    document.querySelectorAll(selectors.join(',')).forEach(attach);
+
+    // Also: the ranking subsection h3 is worth its own link target. Find its
+    // wrapper (closest .results-section or fallback to parent section) and
+    // attach the button there pointing at the h3's id.
+    const rankH3 = document.getElementById('ranking-section');
+    if (rankH3) {
+      const wrapper = rankH3.parentElement;
+      if (wrapper && !wrapper.classList.contains('has-share-btn')) {
+        // Avoid duplicate if wrapper is already handled by section selector
+        const existingId = wrapper.id;
+        if (!existingId) {
+          wrapper.classList.add('has-share-btn');
+          wrapper.style.position = wrapper.style.position || 'relative';
+          wrapper.appendChild(makeShareButton('ranking-section'));
+        }
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 <!-- SEO: Pre-rendered 2026-04-30 from 37 models -->
 <div id="seo-content" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
 <h2>Best Value AI Models — 2026-04-30</h2>
 <p>Comparing 37 AI models across API pricing, subscriptions, and local hardware.</p><p>Best API value: GLM-4.7 Flash at $0.15/M blended — 2.8M quality-adjusted tokens per dollar.</p><p>Best subscription value: ChatGPT Pro $200 — 49.1M quality-adjusted tokens per dollar.</p><p>Best local value: Qwen3.5 35B A3B (Reasoning) (110 tok/s · RTX 3090) — 2.9M quality-adjusted tokens per dollar.</p><h3>Top 10 AI Models by Value (Quality-Adjusted Tokens per Dollar)</h3><ol><li>ChatGPT Pro $200 → GPT-5.4 (xhigh) (Subscription) — 49.1M tok/$ — ChatGPT Pro $200 · $200/mo · 📐 est.</li><li>ChatGPT Pro $200 → GPT-5.2 (Subscription) — 43.9M tok/$ — ChatGPT Pro $200 · $200/mo · 📐 est.</li><li>ChatGPT Pro $200 → GPT-5.2 Codex (xhigh) (Subscription) — 39.4M tok/$ — ChatGPT Pro $200 · $200/mo · 📐 est.</li><li>ChatGPT Pro $200 → GPT-4o (Subscription) — 29.7M tok/$ — ChatGPT Pro $200 · $200/mo · 📐 est.</li><li>ChatGPT Plus → GPT-5.4 (xhigh) (Subscription) — 24.5M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro $100 → GPT-5.4 (xhigh) (Subscription) — 24.5M tok/$ — ChatGPT Pro $100 · $100/mo · 📐 est.</li><li>ChatGPT Plus → GPT-5.2 (Subscription) — 22.0M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro $100 → GPT-5.2 (Subscription) — 22.0M tok/$ — ChatGPT Pro $100 · $100/mo · 📐 est.</li><li>ChatGPT Plus → GPT-5.2 Codex (xhigh) (Subscription) — 19.7M tok/$ — ChatGPT Plus · $20/mo</li><li>ChatGPT Pro $100 → GPT-5.2 Codex (xhigh) (Subscription) — 19.7M tok/$ — ChatGPT Pro $100 · $100/mo · 📐 est.</li></ol><h3>All Models Compared</h3><p>Claude Opus 4, Claude Sonnet 4, DeepSeek V3.1, Gemini 2.5 Pro, GLM-4.7 Flash, GPT-OSS 120B, GPT-4o, Llama 3.1 70B, Llama 3.1 8B, o3, Qwen QwQ-32B, Claude Opus 4.5, Gemini 3 Pro, Gemini 3 Flash, GPT-5.2, Claude Opus 4.6 (Non-reasoning, High Effort), Claude Sonnet 4.6 (Non-reasoning, High Effort), Claude 4.5 Haiku (Non-reasoning), Claude 4.5 Sonnet (Non-reasoning), GPT-5.4 (xhigh), GPT-5.3 Codex (xhigh), GPT-5.2 Codex (xhigh), Gemini 3.1 Pro Preview, GLM-5 (Reasoning), GLM-4.7 (Reasoning), MiniMax-M2.5, MiniMax-M2.7, Kimi K2.5 (Reasoning), DeepSeek V3.2 (Non-reasoning), Qwen3.5 35B A3B (Reasoning), Qwen3.5 27B (Reasoning), Qwen3.5 122B A10B (Reasoning), Gemma 4 31B, Gemma 4 26B A4B, Claude Opus 4.7 (Non-reasoning, High Effort), Claude Opus 4.7 (Reasoning, Max Effort), GPT-5.5 (xhigh)</p></div>
-<script>window.MEASUREMENT_TIMELINE=[{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9,"weekly_method":"estimates_weekly_tokens"},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":2,"weekly_method":"estimates_weekly_tokens"},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":2,"weekly_method":"estimates_weekly_tokens"},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":6,"weekly_method":"estimates_weekly_tokens"},{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0,"weekly_method":null},{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0,"weekly_method":null},{"plan":"Business","model":"gpt-5.4","date":"2026-04-15","weekly":60108025,"session":null,"tool":"codex-cli","delta":4,"weekly_method":"estimates_weekly_tokens"},{"plan":"Business","model":"gpt-5.4","date":"2026-04-15","weekly":68671233,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"estimates_weekly_tokens"},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-15","weekly":277356400,"session":null,"tool":"codex-cli","delta":1,"weekly_method":"estimates_weekly_tokens"},{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1,"weekly_method":"estimates_weekly_tokens"},{"plan":"Claude Max 20x","model":"Opus 4.7","date":"2026-04-24","weekly":248361600,"session":30707083,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-24","weekly":387831600,"session":51021450,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Pro","model":"Opus 4.7","date":"2026-04-24","weekly":15595812,"session":1247665,"tool":"claude-code","delta":8,"weekly_method":"estimates_weekly_tokens"},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-24","weekly":19639400,"session":1814455,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-24","weekly":190200000,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-24","weekly":95418200,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Business","model":"gpt-5.4","date":"2026-04-24","weekly":21923800,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Business","model":"gpt-5.5","date":"2026-04-24","weekly":18065200,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Business","model":"gpt-5.4","date":"2026-04-24","weekly":46209600,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-25","weekly":17389800,"session":1565706,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Business","model":"gpt-5.4","date":"2026-04-25","weekly":31289900,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"estimates_weekly_tokens"},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-29","weekly":11387800,"session":1041945,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Pro","model":"Opus 4.7","date":"2026-04-29","weekly":10180000,"session":775815,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Max 20x","model":"Opus 4.7","date":"2026-04-29","weekly":162139500,"session":17190800,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-29","weekly":213671200,"session":null,"tool":"claude-code","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-29","weekly":36955000,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-30","weekly":null,"session":21937675,"tool":"claude-code","delta":0,"weekly_method":null},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-30","weekly":31656800,"session":null,"tool":"codex-cli","delta":3,"weekly_method":"per_1pct_x_100"}];</script>
+<script>window.MEASUREMENT_TIMELINE=[{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-14","weekly":null,"session":20340900,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-14","weekly":null,"session":20253300,"tool":"claude-code","delta":0},{"plan":"Claude Max 20x","model":"Sonnet 4.5","date":"2026-04-16","weekly":203127800,"session":25390975,"tool":"claude-code","delta":1},{"plan":"Claude Max 20x","model":"Opus 4.7","date":"2026-04-24","weekly":184242500,"session":30707083,"tool":"claude-code","delta":3},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-24","weekly":272114400,"session":51021450,"tool":"claude-code","delta":3},{"plan":"Claude Pro","model":"Opus 4.7","date":"2026-04-24","weekly":15595812,"session":1247665,"tool":"claude-code","delta":8},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-24","weekly":20563833,"session":1814455,"tool":"claude-code","delta":3},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-25","weekly":16700866,"session":1565706,"tool":"claude-code","delta":3},{"plan":"Claude Pro","model":"Sonnet 4.6","date":"2026-04-29","weekly":11461400,"session":1041945,"tool":"claude-code","delta":3},{"plan":"Claude Pro","model":"Opus 4.7","date":"2026-04-29","weekly":11895833,"session":775815,"tool":"claude-code","delta":3},{"plan":"Claude Max 20x","model":"Opus 4.7","date":"2026-04-29","weekly":189098800,"session":17190800,"tool":"claude-code","delta":3},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-29","weekly":202171933,"session":null,"tool":"claude-code","delta":3},{"plan":"Claude Max 20x","model":"Sonnet 4.6","date":"2026-04-30","weekly":null,"session":21937675,"tool":"claude-code","delta":0},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":8353722,"session":null,"tool":"codex-cli","delta":9},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":131599150,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":110494550,"session":null,"tool":"codex-cli","delta":10},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-14","weekly":null,"session":29365200,"tool":"codex-cli","delta":2},{"plan":"Business","model":"gpt-5.4","date":"2026-04-15","weekly":60108025,"session":11449147,"tool":"codex-cli","delta":21},{"plan":"Business","model":"gpt-5.4","date":"2026-04-15","weekly":68671233,"session":10300685,"tool":"codex-cli","delta":20},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-15","weekly":277356400,"session":34669550,"tool":"codex-cli","delta":8},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-24","weekly":197582733,"session":28226104,"tool":"codex-cli","delta":21},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-24","weekly":67362933,"session":null,"tool":"codex-cli","delta":15},{"plan":"Business","model":"gpt-5.4","date":"2026-04-24","weekly":26851266,"session":5753842,"tool":"codex-cli","delta":14},{"plan":"Business","model":"gpt-5.5","date":"2026-04-24","weekly":18109100,"session":2587014,"tool":"codex-cli","delta":21},{"plan":"Business","model":"gpt-5.4","date":"2026-04-24","weekly":36792866,"session":5017209,"tool":"codex-cli","delta":22},{"plan":"Business","model":"gpt-5.4","date":"2026-04-25","weekly":31289900,"session":7220746,"tool":"codex-cli","delta":13},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-29","weekly":31849633,"session":5971806,"tool":"codex-cli","delta":16},{"plan":"Plus","model":"gpt-5.5","date":"2026-04-30","weekly":40999266,"session":6473568,"tool":"codex-cli","delta":19},{"plan":"Plus","model":"gpt-5.4","date":"2026-04-13","weekly":13280883,"session":null,"tool":"codex-cli","delta":12}];</script>
 </body>
 </html>
