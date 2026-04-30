@@ -1,8 +1,6 @@
 ---
-name: submit-usage-measurement
-description: Use this skill when the user wants to contribute a subscription quota measurement to the Best Value AI dataset. Specifically — when they say "measure my Claude Max quota", "benchmark ChatGPT Business", "contribute data to best-value-ai", "submit a measurement", or "help me measure how many tokens I actually get on my plan". Runs the standardized measurement script for Claude Code or Codex CLI, captures token/quota data, validates the output, and opens a pull request to desktop-commander/best-value-ai.
-version: 1.0.0
----
+
+## name: submit-usage-measurement description: Use this skill when the user wants to contribute a subscription quota measurement to the Best Value AI dataset. Specifically — when they say "measure my Claude Max quota", "benchmark ChatGPT Business", "contribute data to best-value-ai", "submit a measurement", or "help me measure how many tokens I actually get on my plan". Runs the standardized measurement script for Claude Code or Codex CLI, captures token/quota data, validates the output, and opens a pull request to desktop-commander/best-value-ai. version: 1.0.0
 
 # Submit Usage Measurement
 
@@ -80,11 +78,13 @@ Ask for explicit go-ahead before running. This consumes their paid quota — don
 From the repo root:
 
 **For Claude Code:**
+
 ```
 bash scripts/measure-claude-quota.sh
 ```
 
 **For Codex / ChatGPT:**
+
 ```
 bash scripts/measure-codex-quota.sh
 ```
@@ -135,7 +135,7 @@ Fill in `[total]`, `[pct]`, `[number]` from the actual JSON.
 If the user doesn't have `gh` auth set up, don't force it. Fallback path:
 
 1. Show the contents of the generated JSON file to the user
-2. Tell them: "Open https://github.com/desktop-commander/best-value-ai/issues/new and paste this JSON as a new issue titled `[measurement] <plan> / <model>`. A maintainer will add it."
+2. Tell them: "Open <https://github.com/desktop-commander/best-value-ai/issues/new> and paste this JSON as a new issue titled `[measurement] <plan> / <model>`. A maintainer will add it."
 3. Do NOT attempt to bypass auth by making unauthenticated git operations — they will fail silently or produce orphan commits.
 
 ## Common issues

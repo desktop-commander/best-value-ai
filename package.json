@@ -4,7 +4,8 @@
   "description": "**Compare the value of Local Hardware vs Subscriptions vs API pricing**",
   "main": "index.js",
   "scripts": {
-    "prerender": "node scripts/prerender-seo.js",
+    "build-timeline": "node scripts/build-measurement-timeline.js",
+    "prerender": "npm run build-timeline && node scripts/prerender-seo.js",
     "sync-aa": "node scripts/sync-from-aa.mjs",
     "sync-arena": "node scripts/sync-from-arena.mjs",
     "sync-hardware": "node scripts/sync-hardware-prices.js",

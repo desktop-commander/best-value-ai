@@ -120,8 +120,8 @@ bash scripts/measure-claude-quota.sh /tmp/claude-scratch sonnet
 bash scripts/measure-claude-quota.sh /tmp/claude-scratch opus
 
 # Codex CLI — measure any OpenAI model exposed to your ChatGPT plan
-bash scripts/measure-codex-quota.sh /tmp/codex-scratch gpt-5.4
-bash scripts/measure-codex-quota.sh /tmp/codex-scratch gpt-5.5
+bash scripts/measure-codex-quota.sh /tmp/codex-scratch gpt-5.4 bash scripts/measure-codex-quota.sh /tmp/codex-scratch gpt-5.5
+
 ```
 
 If you omit the model, the script runs against whatever default the CLI has configured (but then you can't be sure which model actually got measured — pass the flag).
@@ -140,8 +140,8 @@ PlanClaude `PARALLEL`Codex `PARALLEL`Notes**Claude Pro** ($20/mo)2–3n/aSmall q
 
 **Cache-bust mode (**`CACHE_BUST=1`**):** prepends a unique nonce per run, attempting to invalidate prompt caching. The two providers behave differently — confirmed Apr 26 2026 with corrected token-bucket accounting:
 
-- **Codex:** cache_read stays at ~86–88% with or without nonces. Nonces don't reach whatever Codex caches.
-- **Claude Code:** cache_read drops from ~92% to ~77%. Nonces invalidate part of the cache (likely recent turns), but not the persistent system context.
+- **Codex:** cache_read stays at \~86–88% with or without nonces. Nonces don't reach whatever Codex caches.
+- **Claude Code:** cache_read drops from \~92% to \~77%. Nonces invalidate part of the cache (likely recent turns), but not the persistent system context.
 
 The portion that stays cached either way is the CLI's own system prompt + tool definitions + prior session turns — content the user prompt sits *after* in the prefix and can't invalidate by changing. Default is off (cache_bust=0) so measurements reflect what real users see; turn on to characterize sensitivity to prompt repetition specifically.
 
@@ -149,11 +149,13 @@ The portion that stays cached either way is the CLI's own system prompt + tool d
 
 ```bash
 # Claude Sonnet on Claude Pro — conservative (Pro has small quota)
+```
 TARGET_FLIPS=3 PARALLEL=3 \
   bash scripts/measure-claude-quota.sh /tmp/claude-scratch sonnet
 
 # Claude Opus on Max 20× — aggressive (Max has plenty of room)
 TARGET_FLIPS=3 PARALLEL=30 \
+```
   bash scripts/measure-claude-quota.sh /tmp/claude-scratch opus
 
 # GPT-5.5 on ChatGPT Plus — moderate (Plus moderate quota, 5.5 burns ~2× per token vs 5.4)
