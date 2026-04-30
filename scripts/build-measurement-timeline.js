@@ -105,8 +105,13 @@ function entryFromMeasurement(j) {
   const consumed = j.quota_consumed || {};
   const delta = consumed.weekly_all_pct || consumed.weekly_pct || 0;
 
-  // Skip entries with no usable estimate
-  if (!weekly && !session) return null;
+  // The chart's y-axis is "tokens/week (estimated)" — plotting session-only
+  // entries on the same axis is misleading (session is 5-hour bucket, weekly
+  // is 7-day bucket; they're not comparable units). Drop entries that don't
+  // have a usable weekly extrapolation. The runs themselves stay in
+  // measurements/ for the article and methodology references; they're just
+  // not chart-eligible.
+  if (!weekly) return null;
   if (!date) return null;
 
   return { plan, model, date, weekly, session, tool, delta, weekly_method };
