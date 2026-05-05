@@ -1,12 +1,12 @@
 # LLM Value Calculator
 
-> Quality-adjusted tokens per dollar across local hardware, subscription plans, and API pricing for 37+ large language models. Unlike provider-published pricing, subscription token limits are empirically measured by running standardized tasks through Codex CLI and Claude Code and reading quota deltas before and after. All three access modes (local, subscription, API) are expressed on the same scale and directly comparable. Last updated: 2026-04-30.
+> Quality-adjusted tokens per dollar across local hardware, subscription plans, and API pricing for 37+ large language models. Unlike provider-published pricing, subscription token limits are empirically measured by running standardized tasks through Codex CLI and Claude Code and reading quota deltas before and after. All three access modes (local, subscription, API) are expressed on the same scale and directly comparable. Last updated: 2026-05-05.
 
 ## Current winners
 
 - **Best subscription**: GPT-5.4 (xhigh) via ChatGPT Pro $200 · $200/mo · 📐 est. — 49.1M tok/$
 - **Best API**: GLM-4.7 Flash — 2.8M tok/$ at $0.15/M blended
-- **Best local**: Qwen3.5 35B A3B (Reasoning) on 110 tok/s · RTX 3090 — 2.9M tok/$
+- **Best local**: Qwen3.5 35B A3B (Reasoning) on 122 tok/s · RTX 4090 — 2.0M tok/$
 
 ## Top 10 models by quality-adjusted value per dollar
 
