@@ -1,0 +1,30 @@
+#!/bin/sh
+# Pre-commit hook: validate any SKILL.md files in the staged set.
+#
+# Activate by running once after cloning:
+#   git config core.hooksPath .githooks
+#
+# This runs scripts/validate-skills.mjs against staged SKILL.md paths.
+# If any fail, the commit is rejected with a readable message.
+
+set -e
+
+# Find SKILL.md files among files staged for commit (added, modified, copied,
+# renamed). `git diff --cached --name-only --diff-filter=ACMR` enumerates
+# them; grep filters down to anything under skills/ ending in SKILL.md.
+staged=$(git diff --cached --name-only --diff-filter=ACMR -- '*SKILL.md' || true)
+
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+# Resolve repo root so the validator runs from a known directory.
+repo_root=$(git rev-parse --show-toplevel)
+
+echo "Validating staged SKILL.md files..."
+echo
+
+# Pass each staged path through the validator. Validator exits non-zero on any
+# failure, which causes this hook to fail and aborts the commit.
+# shellcheck disable=SC2086
+node "$repo_root/scripts/validate-skills.mjs" $staged
