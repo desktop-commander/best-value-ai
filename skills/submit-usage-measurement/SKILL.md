@@ -1,6 +1,11 @@
 ---
-
-## name: submit-usage-measurement description: Use this skill when the user wants to contribute a subscription quota measurement to the Best Value AI dataset. Specifically — when they say "measure my Claude Max quota", "benchmark ChatGPT Business", "contribute data to best-value-ai", "submit a measurement", or "help me measure how many tokens I actually get on my plan". Runs the standardized measurement script for Claude Code or Codex CLI, captures token/quota data, validates the output, and opens a pull request to desktop-commander/best-value-ai. version: 1.0.0
+name: submit-usage-measurement
+description: Use this skill when the user wants to contribute a subscription quota measurement to the Best Value AI dataset. Specifically — when they say "measure my Claude Max quota", "benchmark ChatGPT Business", "contribute data to best-value-ai", "submit a measurement", or "help me measure how many tokens I actually get on my plan". Runs the standardized measurement script for Claude Code or Codex CLI, captures token/quota data, validates the output, and opens a pull request to desktop-commander/best-value-ai.
+license: Apache-2.0
+metadata:
+  author: desktop-commander
+  version: '1.0.0'
+---
 
 # Submit Usage Measurement
 

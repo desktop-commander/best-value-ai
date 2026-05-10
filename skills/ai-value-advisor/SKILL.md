@@ -1,6 +1,11 @@
 ---
-
-## name: ai-value-advisor description: Use this skill when the user is deciding how to pay for AI — comparing local GPUs, API pricing, or subscription plans like ChatGPT Plus/Pro/Business, Claude Pro/Max 5x/20x, or asking questions like "which AI gives me the most for my money", "is ChatGPT Pro worth it", "should I run a local LLM", "best LLM for coding on my hardware", or "what's the cheapest way to get Claude Sonnet". Provides data-driven recommendations using quality-adjusted tokens per dollar across 34+ models, 36 hardware configurations, and measured subscription quotas from desktopcommander.app/best-value-ai. version: 2.0.0
+name: ai-value-advisor
+description: Use this skill when the user is deciding how to pay for AI — comparing local GPUs, API pricing, or subscription plans like ChatGPT Plus/Pro/Business, Claude Pro/Max 5x/20x, or asking questions like "which AI gives me the most for my money", "is ChatGPT Pro worth it", "should I run a local LLM", "best LLM for coding on my hardware", or "what's the cheapest way to get Claude Sonnet". Provides data-driven recommendations using quality-adjusted tokens per dollar across 34+ models, 36 hardware configurations, and measured subscription quotas from desktopcommander.app/best-value-ai.
+license: Apache-2.0
+metadata:
+  author: desktop-commander
+  version: '2.0.0'
+---
 
 # AI Value Advisor
 
