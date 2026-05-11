@@ -103,6 +103,11 @@ const SLUG_MAPPINGS = {
   'claude-opus-4-7-thinking':   ['claude-opus-4-7-thinking'],
   'claude-sonnet-4-6':    ['claude-sonnet-4-6'],
   'gpt-5-4':              ['gpt-5.4', 'gpt-5.4-high'],
+  // gpt-5-5 in models.json is AA's "xhigh" effort tier (aa_intelligence 60.2).
+  // Arena doesn't have an "xhigh" — only high/default/instant. Mapping to
+  // Arena's "high" tier as the closest equivalent. Code variants use the
+  // (codex-harness) suffix on Arena.
+  'gpt-5-5':              ['gpt-5.5-high', 'gpt-5.5-high (codex-harness)'],
   'gpt-5-3-codex':        ['gpt-5.3-codex (codex-harness)', 'gpt-5.3-chat-latest'],
   'gpt-5-2':              ['gpt-5.2', 'gpt-5.2-chat-latest-20260210', 'gpt-5.2-high'],
   'gpt-5-2-codex':        ['gpt-5.2-codex'],

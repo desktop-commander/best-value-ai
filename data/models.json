@@ -4028,6 +4028,14 @@
       "critpt": {
         "score": 27.1,
         "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "arena_text": {
+        "score": 1484,
+        "source": "https://arena.ai/leaderboard/text"
+      },
+      "arena_code": {
+        "score": 1491,
+        "source": "https://arena.ai/leaderboard/code"
       }
     },
     "api": {
