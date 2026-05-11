@@ -59,11 +59,11 @@
       }
     },
     "api": {
-      "inputPer1M": 15,
+      "inputPer1M": 18.75,
       "outputPer1M": 75,
       "source": "https://artificialanalysis.ai/models/claude-4-opus",
       "provider": "Anthropic",
-      "tokensPerSecAPI": 37.4
+      "tokensPerSecAPI": 34.4
     },
     "local": null,
     "subscriptions": {
@@ -118,7 +118,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-sonnet-4": {
     "name": "Claude Sonnet 4",
@@ -196,11 +196,11 @@
       }
     },
     "api": {
-      "inputPer1M": 3,
+      "inputPer1M": 3.75,
       "outputPer1M": 15,
       "source": "https://artificialanalysis.ai/models/claude-4-sonnet",
       "provider": "Anthropic",
-      "tokensPerSecAPI": 50.8
+      "tokensPerSecAPI": 46.5
     },
     "local": null,
     "subscriptions": {
@@ -255,7 +255,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "deepseek-v3": {
     "name": "DeepSeek V3.1",
@@ -357,7 +357,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gemini-2.5-pro": {
     "name": "Gemini 2.5 Pro",
@@ -435,7 +435,7 @@
       "outputPer1M": 10,
       "source": "https://artificialanalysis.ai/models/gemini-2-5-pro",
       "provider": "Google",
-      "tokensPerSecAPI": 127
+      "tokensPerSecAPI": 134.5
     },
     "local": null,
     "subscriptions": {
@@ -449,7 +449,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "glm-4.7-flash": {
     "name": "GLM-4.7 Flash",
@@ -507,7 +507,7 @@
       "outputPer1M": 0.4,
       "source": "https://artificialanalysis.ai/models/glm-4-7-flash",
       "provider": "Z.ai",
-      "tokensPerSecAPI": 91.7
+      "tokensPerSecAPI": 90.4
     },
     "local": {
       "mac_m4_48gb": {
@@ -533,7 +533,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-oss-120b": {
     "name": "GPT-OSS 120B",
@@ -617,7 +617,7 @@
     "api": {
       "inputPer1M": 0.15,
       "outputPer1M": 0.6,
-      "tokensPerSecAPI": 213.9,
+      "tokensPerSecAPI": 216.4,
       "source": "https://artificialanalysis.ai/models/gpt-oss-120b"
     },
     "local": {
@@ -629,7 +629,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-4o": {
     "name": "GPT-4o",
@@ -723,7 +723,7 @@
       "outputPer1M": 10,
       "source": "https://artificialanalysis.ai/models/gpt-4o",
       "provider": "OpenAI",
-      "tokensPerSecAPI": 174.1
+      "tokensPerSecAPI": 158
     },
     "local": null,
     "subscriptions": {
@@ -796,7 +796,7 @@
         "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "llama-3.1-70b": {
     "name": "Llama 3.1 70B",
@@ -878,7 +878,7 @@
       "outputPer1M": 0.56,
       "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-70b",
       "provider": "Together.ai",
-      "tokensPerSecAPI": 31.1
+      "tokensPerSecAPI": 31.9
     },
     "local": {
       "rtx_3090": {
@@ -902,7 +902,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "llama-3.1-8b": {
     "name": "Llama 3.1 8B",
@@ -980,7 +980,7 @@
       "outputPer1M": 0.1,
       "source": "https://artificialanalysis.ai/models/llama-3-1-instruct-8b",
       "provider": "Together.ai",
-      "tokensPerSecAPI": 167
+      "tokensPerSecAPI": 203.3
     },
     "local": {
       "rtx_3090": {
@@ -1003,7 +1003,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "o3": {
     "name": "o3",
@@ -1093,11 +1093,11 @@
       "outputPer1M": 8,
       "source": "https://artificialanalysis.ai/models/o3",
       "provider": "OpenAI",
-      "tokensPerSecAPI": 93.9
+      "tokensPerSecAPI": 110.3
     },
     "local": null,
     "subscriptions": {},
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "qwen-3-32b": {
     "name": "Qwen QwQ-32B",
@@ -1163,7 +1163,7 @@
       "outputPer1M": 1,
       "source": "https://artificialanalysis.ai/models/qwq-32b",
       "provider": "Together.ai",
-      "tokensPerSecAPI": 32.3
+      "tokensPerSecAPI": 30.7
     },
     "local": {
       "rtx_3090": {
@@ -1186,7 +1186,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-opus-4-5": {
     "name": "Claude Opus 4.5",
@@ -1195,11 +1195,11 @@
     "modelCard": "https://www.anthropic.com/news/claude-opus-4-5",
     "benchmarks": {
       "arena_text": {
-        "score": 1469,
+        "score": 1468,
         "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1468,
+        "score": 1467,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aider_polyglot": {
@@ -1276,11 +1276,11 @@
       }
     },
     "api": {
-      "inputPer1M": 5,
+      "inputPer1M": 6.25,
       "outputPer1M": 25,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-5",
       "provider": "Anthropic",
-      "tokensPerSecAPI": 62.3
+      "tokensPerSecAPI": 53.6
     },
     "local": null,
     "subscriptions": {
@@ -1335,7 +1335,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gemini-3-pro": {
     "name": "Gemini 3 Pro",
@@ -1559,7 +1559,7 @@
       "outputPer1M": 14,
       "source": "https://artificialanalysis.ai/models/gpt-5-2",
       "provider": "OpenAI",
-      "tokensPerSecAPI": 78.2
+      "tokensPerSecAPI": 80.1
     },
     "local": null,
     "subscriptions": {
@@ -1632,7 +1632,7 @@
         "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-opus-4-6": {
     "id": "claude-opus-4-6",
@@ -1650,7 +1650,7 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
       },
       "arena_text": {
-        "score": 1496,
+        "score": 1498,
         "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
@@ -1699,9 +1699,9 @@
       }
     },
     "api": {
-      "inputPer1M": 5,
+      "inputPer1M": 6.25,
       "outputPer1M": 25,
-      "tokensPerSecAPI": 48.4,
+      "tokensPerSecAPI": 44,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-6"
     },
     "local": null,
@@ -1757,7 +1757,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-sonnet-4-6": {
     "id": "claude-sonnet-4-6",
@@ -1779,7 +1779,7 @@
         "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1525,
+        "score": 1524,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -1824,9 +1824,9 @@
       }
     },
     "api": {
-      "inputPer1M": 3,
+      "inputPer1M": 3.75,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 56.5,
+      "tokensPerSecAPI": 51.6,
       "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
     },
     "local": null,
@@ -1882,7 +1882,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-4-5-haiku": {
     "id": "claude-4-5-haiku",
@@ -1965,14 +1965,14 @@
       }
     },
     "api": {
-      "inputPer1M": 1,
+      "inputPer1M": 1.25,
       "outputPer1M": 5,
-      "tokensPerSecAPI": 114,
+      "tokensPerSecAPI": 100.2,
       "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
     },
     "local": null,
     "subscriptions": {},
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "claude-4-5-sonnet": {
     "id": "claude-4-5-sonnet",
@@ -2055,9 +2055,9 @@
       }
     },
     "api": {
-      "inputPer1M": 3,
+      "inputPer1M": 3.75,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 53.3,
+      "tokensPerSecAPI": 45.1,
       "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
     },
     "local": null,
@@ -2113,7 +2113,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-5-4": {
     "id": "gpt-5-4",
@@ -2182,7 +2182,7 @@
     "api": {
       "inputPer1M": 2.5,
       "outputPer1M": 15,
-      "tokensPerSecAPI": 82.9,
+      "tokensPerSecAPI": 96,
       "source": "https://artificialanalysis.ai/models/gpt-5-4"
     },
     "local": null,
@@ -2256,7 +2256,7 @@
         "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-5-3-codex": {
     "id": "gpt-5-3-codex",
@@ -2325,12 +2325,12 @@
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "tokensPerSecAPI": 91.3,
+      "tokensPerSecAPI": 96.4,
       "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
     },
     "local": null,
     "subscriptions": {},
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-5-2-codex": {
     "id": "gpt-5-2-codex",
@@ -2400,7 +2400,7 @@
     "api": {
       "inputPer1M": 1.75,
       "outputPer1M": 14,
-      "tokensPerSecAPI": 108,
+      "tokensPerSecAPI": 95.8,
       "source": "https://artificialanalysis.ai/models/gpt-5-2-codex"
     },
     "local": null,
@@ -2474,7 +2474,7 @@
         "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gemini-3-1-pro": {
     "id": "gemini-3-1-pro",
@@ -2543,7 +2543,7 @@
     "api": {
       "inputPer1M": 2,
       "outputPer1M": 12,
-      "tokensPerSecAPI": 129.5,
+      "tokensPerSecAPI": 130.7,
       "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
     },
     "local": null,
@@ -2558,7 +2558,7 @@
         "estimated": true
       }
     },
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "glm-5": {
     "id": "glm-5",
@@ -2627,7 +2627,7 @@
     "api": {
       "inputPer1M": 1,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 65,
+      "tokensPerSecAPI": 69.2,
       "source": "https://artificialanalysis.ai/models/glm-5"
     },
     "local": {
@@ -2640,7 +2640,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "glm-4.7": {
     "id": "glm-4.7",
@@ -2725,7 +2725,7 @@
     "api": {
       "inputPer1M": 0.6,
       "outputPer1M": 2.2,
-      "tokensPerSecAPI": 108.5,
+      "tokensPerSecAPI": 107.2,
       "source": "https://artificialanalysis.ai/models/glm-4-7"
     },
     "local": {
@@ -2746,7 +2746,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "minimax-m2.5": {
     "id": "minimax-m2.5",
@@ -2768,7 +2768,7 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1385,
+        "score": 1382,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2815,7 +2815,7 @@
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 60.6,
+      "tokensPerSecAPI": 91.1,
       "source": "https://artificialanalysis.ai/models/minimax-m2-5"
     },
     "local": {
@@ -2828,7 +2828,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "minimax-m2.7": {
     "id": "minimax-m2.7",
@@ -2850,7 +2850,7 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1416,
+        "score": 1407,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2897,7 +2897,7 @@
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 1.2,
-      "tokensPerSecAPI": 44.5,
+      "tokensPerSecAPI": 49.6,
       "source": "https://artificialanalysis.ai/models/minimax-m2-7"
     },
     "local": {
@@ -2911,7 +2911,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "kimi-k2.5": {
     "id": "kimi-k2.5",
@@ -2978,9 +2978,9 @@
       }
     },
     "api": {
-      "inputPer1M": 0.6,
-      "outputPer1M": 3,
-      "tokensPerSecAPI": 31.7,
+      "inputPer1M": 0.54,
+      "outputPer1M": 2.925,
+      "tokensPerSecAPI": 45.5,
       "source": "https://artificialanalysis.ai/models/kimi-k2-5"
     },
     "local": {
@@ -3002,7 +3002,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "deepseek-v3.2": {
     "id": "deepseek-v3.2",
@@ -3028,7 +3028,7 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1331,
+        "score": 1332,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -3085,9 +3085,9 @@
       }
     },
     "api": {
-      "inputPer1M": 0.28,
-      "outputPer1M": 0.42,
-      "tokensPerSecAPI": 29.7,
+      "inputPer1M": 0.5,
+      "outputPer1M": 1.6,
+      "tokensPerSecAPI": null,
       "source": "https://artificialanalysis.ai/models/deepseek-v3-2"
     },
     "local": {
@@ -3117,7 +3117,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "qwen3.5-35b-a3b": {
     "id": "qwen3.5-35b-a3b",
@@ -3135,7 +3135,7 @@
         "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
       },
       "arena_code": {
-        "score": 1248,
+        "score": 1249,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "arena_text": {
@@ -3186,7 +3186,7 @@
     "api": {
       "inputPer1M": 0.25,
       "outputPer1M": 2,
-      "tokensPerSecAPI": 150.3,
+      "tokensPerSecAPI": 115.9,
       "source": "https://artificialanalysis.ai/models/qwen3-5-35b-a3b"
     },
     "local": {
@@ -3228,7 +3228,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "qwen3.5-27b": {
     "id": "qwen3.5-27b",
@@ -3246,7 +3246,7 @@
         "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
       },
       "arena_code": {
-        "score": 1346,
+        "score": 1352,
         "source": "https://lmarena.ai/leaderboard/code"
       },
       "arena_text": {
@@ -3297,7 +3297,7 @@
     "api": {
       "inputPer1M": 0.3,
       "outputPer1M": 2.4,
-      "tokensPerSecAPI": 91.4,
+      "tokensPerSecAPI": 92.7,
       "source": "https://artificialanalysis.ai/models/qwen3-5-27b"
     },
     "local": {
@@ -3360,7 +3360,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "qwen3.5-122b-a10b": {
     "id": "qwen3.5-122b-a10b",
@@ -3429,7 +3429,7 @@
     "api": {
       "inputPer1M": 0.4,
       "outputPer1M": 3.2,
-      "tokensPerSecAPI": 160.9,
+      "tokensPerSecAPI": 161.6,
       "source": "https://artificialanalysis.ai/models/qwen3-5-122b-a10b"
     },
     "local": {
@@ -3458,7 +3458,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gemma-4-31b": {
     "name": "Gemma 4 31B",
@@ -3475,9 +3475,8 @@
         "source": "https://lmarena.ai/leaderboard"
       },
       "arena_code": {
-        "score": 1290,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1383,
+        "source": "https://lmarena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 38.7,
@@ -3603,7 +3602,7 @@
       }
     },
     "subscriptions": null,
-    "_aa_synced": "2026-04-21"
+    "_aa_synced": "2026-05-11"
   },
   "gemma-4-26b-a4b": {
     "name": "Gemma 4 26B A4B",
@@ -3770,14 +3769,30 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       },
       "arena_text": {
-        "score": 1494,
+        "score": 1491,
         "source": "https://lmarena.ai/leaderboard"
+      },
+      "arena_code": {
+        "score": 1560,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "gdpval_aa": {
+        "score": 1689.6,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
+      },
+      "aa_omniscience": {
+        "score": 14.2,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
+      },
+      "critpt": {
+        "score": 5.1,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
       }
     },
     "api": {
-      "inputPer1M": 5,
+      "inputPer1M": 6.25,
       "outputPer1M": 25,
-      "tokensPerSecAPI": 58.6,
+      "tokensPerSecAPI": 53.3,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-7-non-reasoning"
     },
     "local": null,
@@ -3833,7 +3848,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-23"
+    "_aa_synced": "2026-05-11"
   },
   "claude-opus-4-7-thinking": {
     "id": "claude-opus-4-7-thinking",
@@ -3879,14 +3894,30 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
       },
       "arena_text": {
-        "score": 1503,
+        "score": 1491,
         "source": "https://lmarena.ai/leaderboard"
+      },
+      "arena_code": {
+        "score": 1560,
+        "source": "https://lmarena.ai/leaderboard/code"
+      },
+      "gdpval_aa": {
+        "score": 1752.7,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
+      },
+      "aa_omniscience": {
+        "score": 26.2,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
+      },
+      "critpt": {
+        "score": 12,
+        "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
       }
     },
     "api": {
-      "inputPer1M": 5,
+      "inputPer1M": 6.25,
       "outputPer1M": 25,
-      "tokensPerSecAPI": 62.2,
+      "tokensPerSecAPI": 66.2,
       "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
     },
     "local": null,
@@ -3942,7 +3973,7 @@
         "source": "https://www.anthropic.com/pricing"
       }
     },
-    "_aa_synced": "2026-04-23"
+    "_aa_synced": "2026-05-11"
   },
   "gpt-5-5": {
     "id": "gpt-5-5",
@@ -3986,12 +4017,24 @@
       "terminalbench_hard": {
         "score": 60.6,
         "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "gdpval_aa": {
+        "score": 1774.2,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "aa_omniscience": {
+        "score": 20.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
+      },
+      "critpt": {
+        "score": 27.1,
+        "source": "https://artificialanalysis.ai/models/gpt-5-5"
       }
     },
     "api": {
       "inputPer1M": 5,
       "outputPer1M": 30,
-      "tokensPerSecAPI": null,
+      "tokensPerSecAPI": 62.9,
       "source": "https://artificialanalysis.ai/models/gpt-5-5"
     },
     "local": null,
@@ -4065,6 +4108,270 @@
         "source": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers"
       }
     },
-    "_aa_synced": "2026-04-24"
+    "_aa_synced": "2026-05-11"
+  },
+  "deepseek-v4-pro-reasoning": {
+    "id": "deepseek-v4-pro-reasoning",
+    "name": "DeepSeek V4 Pro (Reasoning, Max Effort)",
+    "provider": "DeepSeek",
+    "releaseDate": "2026-04-24",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v4-pro",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 51.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "aa_coding_index": {
+        "score": 47.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "gpqa_diamond": {
+        "score": 88.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "hle": {
+        "score": 35.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "scicode": {
+        "score": 50,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "aa_lcr": {
+        "score": 66.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "tau2_bench": {
+        "score": 96.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "terminalbench_hard": {
+        "score": 46.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "ifbench": {
+        "score": 76.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "gdpval_aa": {
+        "score": 1553.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "aa_omniscience": {
+        "score": -10,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "critpt": {
+        "score": 12.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.74,
+      "outputPer1M": 3.48,
+      "tokensPerSecAPI": 30.7,
+      "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-05-11"
+  },
+  "deepseek-v4-pro": {
+    "id": "deepseek-v4-pro",
+    "name": "DeepSeek V4 Pro (Non-reasoning)",
+    "provider": "DeepSeek",
+    "releaseDate": "2026-04-24",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 39.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "aa_coding_index": {
+        "score": 38.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "gpqa_diamond": {
+        "score": 71.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "hle": {
+        "score": 7.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "scicode": {
+        "score": 42.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "aa_lcr": {
+        "score": 45,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "tau2_bench": {
+        "score": 91.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "terminalbench_hard": {
+        "score": 36.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "ifbench": {
+        "score": 45.8,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "gdpval_aa": {
+        "score": 1480.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "aa_omniscience": {
+        "score": -30.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "critpt": {
+        "score": 0.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      }
+    },
+    "api": {
+      "inputPer1M": 1.74,
+      "outputPer1M": 3.48,
+      "tokensPerSecAPI": 30.3,
+      "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-05-11"
+  },
+  "deepseek-v4-flash-reasoning": {
+    "id": "deepseek-v4-flash-reasoning",
+    "name": "DeepSeek V4 Flash (Reasoning, Max Effort)",
+    "provider": "DeepSeek",
+    "releaseDate": "2026-04-24",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 46.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "aa_coding_index": {
+        "score": 38.7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "gpqa_diamond": {
+        "score": 89.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "hle": {
+        "score": 32.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "scicode": {
+        "score": 44.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "aa_lcr": {
+        "score": 63,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "tau2_bench": {
+        "score": 95,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "terminalbench_hard": {
+        "score": 35.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "ifbench": {
+        "score": 79.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "gdpval_aa": {
+        "score": 1388.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "aa_omniscience": {
+        "score": -22.9,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "critpt": {
+        "score": 7.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.14,
+      "outputPer1M": 0.28,
+      "tokensPerSecAPI": 66.2,
+      "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-05-11"
+  },
+  "deepseek-v4-flash": {
+    "id": "deepseek-v4-flash",
+    "name": "DeepSeek V4 Flash (Non-reasoning)",
+    "provider": "DeepSeek",
+    "releaseDate": "2026-04-24",
+    "modelCard": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning",
+    "benchmarks": {
+      "aa_intelligence": {
+        "score": 36.5,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "aa_coding_index": {
+        "score": 35.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "gpqa_diamond": {
+        "score": 71.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "hle": {
+        "score": 7,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "scicode": {
+        "score": 37.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "aa_lcr": {
+        "score": 33.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "tau2_bench": {
+        "score": 94.4,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "terminalbench_hard": {
+        "score": 34.1,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "ifbench": {
+        "score": 47.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "gdpval_aa": {
+        "score": 1395.6,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "aa_omniscience": {
+        "score": -44.2,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "critpt": {
+        "score": 0.3,
+        "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      }
+    },
+    "api": {
+      "inputPer1M": 0.14,
+      "outputPer1M": 0.28,
+      "tokensPerSecAPI": 66.5,
+      "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+    },
+    "local": null,
+    "subscriptions": null,
+    "_aa_synced": "2026-05-11"
   }
 }
