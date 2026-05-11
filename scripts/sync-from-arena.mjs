@@ -2,14 +2,18 @@
 /**
  * sync-from-arena.js
  * Scrapes the full Arena leaderboard from arena.ai/leaderboard/text and /code
- * using chrome-cli-proper to read live DOM data (no API needed).
+ * using chrome-cli-2 to read live DOM data (no API needed).
  *
  * SETUP:
  * 1. Open Chrome and navigate to:
  *    https://arena.ai/leaderboard/text
  *    https://arena.ai/leaderboard/code
  *    (wait for both pages to fully load)
- * 2. Run: node scripts/sync-from-arena.js
+ * 2. Run: node scripts/sync-from-arena.mjs
+ *
+ * chrome-cli-2 lives at /Users/eduardsruzga/work/chrome-cli-2/dist/cli.js
+ * and exposes `get_tabs` + `eval <code> [tabId]` instead of the old
+ * `find_tab` + `eval` shape used by chrome-cli-proper.
  */
 
 import fs from 'fs';
@@ -20,7 +24,7 @@ import { execSync, spawnSync } from 'child_process';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const MODELS_FILE = path.join(DATA_DIR, 'models.json');
-const CLI = '/Users/eduardsruzga/work/chrome-cli-proper/cli.js';
+const CLI = '/Users/eduardsruzga/work/chrome-cli-2/dist/cli.js';
 
 const ARENA_TEXT_URL = 'https://arena.ai/leaderboard/text';
 const ARENA_CODE_URL = 'https://arena.ai/leaderboard/code';
@@ -52,23 +56,39 @@ function runCLI(tabId, js) {
     maxBuffer: 10*1024*1024,
     encoding: 'utf8'
   });
-  const out = result.stdout || '';
+  const out = (result.stdout || '').trim();
   const err = result.stderr || '';
   if (result.error) throw result.error;
-  const match = out.match(/→ ([\s\S]+)/);
-  if (!match) throw new Error('No output from cli:\n' + out.substring(0,300) + '\n' + err.substring(0,200));
-  return JSON.parse(match[1].trim());
+  if (!out) throw new Error('No output from cli:\n' + err.substring(0,400));
+  // chrome-cli-2 eval returns a JSON-encoded string: the outer wrapper is JSON
+  // representing whatever the JS expression evaluated to. Our SCRAPE_JS returns
+  // a JSON string itself, so we unwrap twice: stdout -> inner string -> object.
+  let inner;
+  try { inner = JSON.parse(out); }
+  catch (e) { throw new Error('Could not parse cli stdout as JSON:\n' + out.substring(0,400) + '\n' + err.substring(0,200)); }
+  if (typeof inner !== 'string') return inner; // already an object
+  return JSON.parse(inner);
 }
 
 function getTabId(url) {
-  const out = execSync(`node '${CLI}' find_tab "${url}" 2>&1`, {maxBuffer: 1*1024*1024}).toString();
-  const match = out.match(/\[(\d+)\]/);
+  // chrome-cli-2 has no find_tab; list all tabs and match by URL prefix.
+  // Prefix match (not exact) so we tolerate ?utm, #anchor, trailing slashes etc.
+  const out = execSync(`node '${CLI}' get_tabs 2>&1`, {maxBuffer: 10*1024*1024}).toString();
+  let tabs;
+  try { tabs = JSON.parse(out); }
+  catch (e) {
+    console.error(`\n❌ Could not parse 'get_tabs' output:\n${out.substring(0,400)}`);
+    process.exit(1);
+  }
+  const match = tabs.find(t => (t.url || '').startsWith(url));
   if (!match) {
     console.error(`\n❌ Could not find Chrome tab for: ${url}`);
     console.error('   Please open this URL in Chrome first, wait for it to load, then re-run.');
+    console.error(`   Open tabs (${tabs.length}):`);
+    tabs.slice(0, 10).forEach(t => console.error(`     [${t.id}] ${t.url}`));
     process.exit(1);
   }
-  return parseInt(match[1]);
+  return match.id;
 }
 
 // Our model IDs -> Arena slug patterns (priority order)
@@ -94,6 +114,10 @@ const SLUG_MAPPINGS = {
   'gemini-3-1-pro':       ['gemini-3.1-pro-preview'],
   'deepseek-v3':          ['deepseek-v3-0324', 'deepseek-v3'],
   'deepseek-v3.2':        ['deepseek-v3.2'],
+  'deepseek-v4-pro':              ['deepseek-v4-pro-non-reasoning', 'deepseek-v4-pro'],
+  'deepseek-v4-pro-reasoning':    ['deepseek-v4-pro', 'deepseek-v4-pro-high', 'deepseek-v4-pro-max'],
+  'deepseek-v4-flash':            ['deepseek-v4-flash-non-reasoning', 'deepseek-v4-flash'],
+  'deepseek-v4-flash-reasoning':  ['deepseek-v4-flash', 'deepseek-v4-flash-high', 'deepseek-v4-flash-max'],
   'glm-4.7-flash':        ['glm-4.7-flash'],
   'glm-4.7':              ['glm-4.7'],
   'glm-5':                ['glm-5'],
