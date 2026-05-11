@@ -367,11 +367,11 @@
     "benchmarks": {
       "arena_text": {
         "score": 1448,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1203,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 72.9,
@@ -470,7 +470,7 @@
         "source": "https://artificialanalysis.ai/models/glm-4-7-flash"
       },
       "arena_text": {
-        "score": 1369,
+        "score": 1368,
         "source": "https://arena.ai/leaderboard/text"
       },
       "aa_coding_index": {
@@ -550,7 +550,7 @@
         "source": "https://www.amd.com/en/blogs/2026/amd-ryzen-ai-max-ai-pcs-deliver-exceptional-intelligence.html"
       },
       "arena_text": {
-        "score": 1354,
+        "score": 1353,
         "source": "https://arena.ai/leaderboard/text"
       },
       "aa_intelligence": {
@@ -1196,11 +1196,11 @@
     "benchmarks": {
       "arena_text": {
         "score": 1468,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1467,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
         "score": 89.4,
@@ -1418,7 +1418,7 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1436,
+        "score": 1437,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
@@ -1474,11 +1474,11 @@
     "modelCard": "https://openai.com/index/introducing-gpt-5-2/",
     "benchmarks": {
       "arena_text": {
-        "score": 1440,
+        "score": 1437,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1403,
+        "score": 1404,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aider_polyglot": {
@@ -1651,11 +1651,11 @@
       },
       "arena_text": {
         "score": 1498,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1544,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 47.6,
@@ -1775,12 +1775,12 @@
         "source": "https://artificialanalysis.ai/models/claude-sonnet-4-6"
       },
       "arena_text": {
-        "score": 1463,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1466,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1524,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 46.4,
@@ -1904,11 +1904,11 @@
         "source": "https://artificialanalysis.ai/models/claude-4-5-haiku"
       },
       "arena_text": {
-        "score": 1407,
+        "score": 1409,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1312,
+        "score": 1318,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -1994,7 +1994,7 @@
         "source": "https://artificialanalysis.ai/models/claude-4-5-sonnet"
       },
       "arena_text": {
-        "score": 1452,
+        "score": 1453,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
@@ -2131,11 +2131,11 @@
         "source": "https://artificialanalysis.ai/models/gpt-5-4"
       },
       "arena_text": {
-        "score": 1466,
+        "score": 1468,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1457,
+        "score": 1385,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2274,11 +2274,11 @@
         "source": "https://artificialanalysis.ai/models/gpt-5-3-codex"
       },
       "arena_text": {
-        "score": 1456,
+        "score": 1449,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1407,
+        "score": 1372,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2353,7 +2353,7 @@
         "_estimated": true
       },
       "arena_code": {
-        "score": 1335,
+        "score": 1334,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2492,11 +2492,11 @@
         "source": "https://artificialanalysis.ai/models/gemini-3-1-pro-preview"
       },
       "arena_text": {
-        "score": 1493,
+        "score": 1492,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1456,
+        "score": 1452,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -2577,11 +2577,11 @@
       },
       "arena_text": {
         "score": 1457,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1436,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 44.2,
@@ -2663,11 +2663,11 @@
       },
       "arena_text": {
         "score": 1443,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1440,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 36.3,
@@ -2764,12 +2764,12 @@
         "source": "https://artificialanalysis.ai/models/minimax-m2-5"
       },
       "arena_text": {
-        "score": 1404,
+        "score": 1395,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1382,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 37.4,
@@ -2846,12 +2846,12 @@
         "source": "https://artificialanalysis.ai/models/minimax-m2-7"
       },
       "arena_text": {
-        "score": 1403,
+        "score": 1407,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1407,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 41.9,
@@ -2929,11 +2929,11 @@
         "source": "https://artificialanalysis.ai/models/kimi-k2-5"
       },
       "arena_text": {
-        "score": 1452,
+        "score": 1449,
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1429,
+        "score": 1430,
         "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
@@ -3029,7 +3029,7 @@
       },
       "arena_code": {
         "score": 1332,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 34.6,
@@ -3136,7 +3136,7 @@
       },
       "arena_code": {
         "score": 1249,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "arena_text": {
         "score": 1397,
@@ -3247,10 +3247,10 @@
       },
       "arena_code": {
         "score": 1352,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "arena_text": {
-        "score": 1404,
+        "score": 1406,
         "source": "https://arena.ai/leaderboard/text"
       },
       "aa_coding_index": {
@@ -3379,10 +3379,10 @@
       },
       "arena_code": {
         "score": 1363,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "arena_text": {
-        "score": 1417,
+        "score": 1418,
         "source": "https://arena.ai/leaderboard/text"
       },
       "aa_coding_index": {
@@ -3472,11 +3472,11 @@
       },
       "arena_text": {
         "score": 1451,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1383,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "aa_coding_index": {
         "score": 38.7,
@@ -3619,9 +3619,8 @@
         "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1270,
-        "source": "https://lmarena.ai/leaderboard",
-        "_estimated": true
+        "score": 1360,
+        "source": "https://arena.ai/leaderboard/code"
       },
       "gdpval_aa": {
         "score": 1013.5,
@@ -3770,11 +3769,11 @@
       },
       "arena_text": {
         "score": 1491,
-        "source": "https://lmarena.ai/leaderboard"
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
         "score": 1560,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "source": "https://arena.ai/leaderboard/code"
       },
       "gdpval_aa": {
         "score": 1689.6,
@@ -3894,12 +3893,12 @@
         "source": "https://artificialanalysis.ai/models/claude-opus-4-7"
       },
       "arena_text": {
-        "score": 1491,
-        "source": "https://lmarena.ai/leaderboard"
+        "score": 1503,
+        "source": "https://arena.ai/leaderboard/text"
       },
       "arena_code": {
-        "score": 1560,
-        "source": "https://lmarena.ai/leaderboard/code"
+        "score": 1570,
+        "source": "https://arena.ai/leaderboard/code"
       },
       "gdpval_aa": {
         "score": 1752.7,
@@ -4164,6 +4163,10 @@
       "critpt": {
         "score": 12.9,
         "source": "https://artificialanalysis.ai/models/deepseek-v4-pro"
+      },
+      "arena_text": {
+        "score": 1463,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -4230,6 +4233,10 @@
       "critpt": {
         "score": 0.9,
         "source": "https://artificialanalysis.ai/models/deepseek-v4-pro-non-reasoning"
+      },
+      "arena_text": {
+        "score": 1463,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -4296,6 +4303,10 @@
       "critpt": {
         "score": 7.1,
         "source": "https://artificialanalysis.ai/models/deepseek-v4-flash"
+      },
+      "arena_text": {
+        "score": 1433,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
@@ -4362,6 +4373,10 @@
       "critpt": {
         "score": 0.3,
         "source": "https://artificialanalysis.ai/models/deepseek-v4-flash-non-reasoning"
+      },
+      "arena_text": {
+        "score": 1433,
+        "source": "https://arena.ai/leaderboard/text"
       }
     },
     "api": {
